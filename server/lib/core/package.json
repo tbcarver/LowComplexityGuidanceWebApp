@@ -1,0 +1,16 @@
+{
+  "name": "cua-core",
+  "version": "1.0.1",
+  "description": "Basic programming functionality of features not found in Node.js or the JavaScript language API",
+  "author": "Tyler Carver",
+  "scripts": {
+    "pack": "npm pack"
+  },
+  "files": [
+    "extensions",
+    "fs",
+    "system",
+    "web"
+  ],
+  "license": "MIT"
+}
