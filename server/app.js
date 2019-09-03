@@ -1,9 +1,11 @@
 
+require('dotenv').config();
+
 const express = require("express");
 const expressHandlebars = require("express-handlebars");
-
-const dotenv = require('dotenv');
-dotenv.load();
+const path = require("path");
+const directoryWalkerSync = require("./lib/core/fs/directoryWalkerSync");
+const templateViewRenderer = require("./lib/coreVendor/handlebars/templateViewRenderer");
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -17,25 +19,34 @@ const handlebars = expressHandlebars.create({
 
 app.engine("hbs", handlebars.engine);
 app.set("view engine", "hbs");
-app.set("views", "server/app/views")
+app.set("views", "server/app")
 
-app.use(express.static("./assets"));
-app.use("/vendor/bootstrap/4.3.1/", express.static("./node_modules/bootstrap/dist"));
-app.use("/vendor/font-awesome/4.7.0/", express.static("./node_modules/font-awesome"));
+app.use("/assets", express.static("./assets"));
+app.use("/assets/vendor/fontawesome-free/5.9.0/", express.static("./node_modules/@fortawesome/fontawesome-free/css"));
 
-app.use("/client", express.static("./client"));
+directoryWalkerSync.walkDirectory("./app", null, null, function(filePathName, stats) {
 
-app.get("/edit/:userId", express.static("./server/views/index.html"));
+    if (filePathName.endsWith(".controller.js")) {
 
-const challengesController = require("./app/challenges.controller");
-challengesController(app);
+        filePathName = path.resolve(filePathName);
+
+        var controller = require(filePathName);
+
+        if (controller && controller.initialize) {
+
+            controller.initialize(app);
+        }
+    }
+});
+
+app.use(templateViewRenderer);
 
 app.use(function(req, res) {
 
-	res.sendFile(__dirname + '/views/404.html');
+	res.sendFile(__dirname + '/assets/html/404.html');
 });
 
 app.listen(port, function() {
 
-	console.log(`User management app listening on port ${port}.`)
+	console.log(`Server listening on port ${port}.`)
 });
