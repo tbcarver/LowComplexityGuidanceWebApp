@@ -3,19 +3,34 @@
 
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width">
-
 	<link href="/assets/css/customizedBootstrap.css" rel="stylesheet" type="text/css">
-	<link href="/assets/vendor/fontawesome-free/5.9.0/all.min.css" rel="stylesheet" type="text/css" />
+	<link href="/assets/vendor/fontawesome-free/5.9.0/css/all.min.css" rel="stylesheet" type="text/css" />
 	<link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+
+	<script src="/assets/vendor/jquery/3.3.1/jquery.min.js"></script>
+	<script src="/assets/vendor/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
 	<title>{{title}}</title>
 </head>
 
-<body class="bg-dark text-light">
+<body>
+
+
 
 	{{> navbar.partial }}
 
 	{{{body}}}
+
+
+
+
+	<footer>
+		<div class="container">
+			<span class="attribution">
+				cucf guidance webapp
+			</span>
+		</div>
+	</footer>
 
 </body>
 

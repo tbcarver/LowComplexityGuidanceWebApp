@@ -1,40 +1,13 @@
 
-var homeController = {};
+function initialize(app) {
 
-homeController.initialize = function(app) {
-
-    app.get("/", function(request, response, next) {
-
-
-        var handlebars = require("handlebars");
-
-        var template = handlebars.compile("<h1>{{this}}</h1>");
-
-        var html = template("HELLOOOOOO");
-
-        response.send(html);
-
-
-
-
-
-        // response.view = homeController.load();
-        // next();
-    });
-
-    app.get("/index.html", function(request, response, next) {
-
-        response.view = homeController.load();
-        next();
-    });
+    app.get("/", getHome);
+    app.get("/index.html", getHome);
 }
 
-homeController.load = function() {
+function getHome(req, res) {
 
-    var view = {};
-
-    view.template = "home.template.hbs";
-    view.model = {
+    var model = {
         title: "my junky stuff",
         junk: {
             stuff: "my junky stuff"
@@ -42,8 +15,8 @@ homeController.load = function() {
         otherStuff: "asdfasdfasdfasdfdfs"
     }
 
-    return view;
+    res.render("home.template.hbs", model);
 };
 
 
-module.exports = homeController;
+module.exports.initialize = initialize;

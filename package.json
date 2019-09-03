@@ -20,6 +20,8 @@
     "popper.js": "^1.15.0"
   },
   "devDependencies": {
+    "@types/express": "^4.17.0",
+    "@types/node": "^8.10.49",
     "nodemon": "^1.18.9",
     "sass": "^1.21.0"
   }
