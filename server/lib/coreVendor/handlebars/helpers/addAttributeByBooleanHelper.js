@@ -21,4 +21,4 @@ addAttributeByBooleanHelper.helper = function(attributeName, attributeValue, boo
 }
 
 
-export { addAttributeByBooleanHelper }
+module.exports = addAttributeByBooleanHelper;

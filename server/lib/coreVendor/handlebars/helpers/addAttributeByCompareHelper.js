@@ -21,4 +21,4 @@ addAttributeByCompareHelper.helper = function(attributeName, attributeValue, tar
 }
 
 
-export { addAttributeByCompareHelper }
+module.exports = addAttributeByCompareHelper;

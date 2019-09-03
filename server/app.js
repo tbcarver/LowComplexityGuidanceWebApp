@@ -3,6 +3,7 @@ require('dotenv').config();
 
 const express = require("express");
 const expressHandlebars = require("express-handlebars");
+const addNameByCompareHelper = require("./lib/coreVendor/handlebars/helpers/addNameByCompareHelper");
 const path = require("path");
 const directoryWalkerSync = require("./lib/core/fs/directoryWalkerSync");
 
@@ -13,12 +14,15 @@ const handlebars = expressHandlebars.create({
     extname: ".hbs",
     layoutsDir: "server/app/layouts/",
     partialsDir: "server/app/partials/",
-    defaultLayout: "main.layout.hbs"
+    defaultLayout: "main.layout.hbs",
+    helpers: {
+        [addNameByCompareHelper.name]: addNameByCompareHelper.helper,
+    },
 });
 
 app.engine("hbs", handlebars.engine);
 app.set("view engine", "hbs");
-app.set("views", "server/app")
+app.set("views", "server/app");
 
 app.use("/assets", express.static("./assets"));
 app.use("/assets/vendor/bootstrap/4.3.1/", express.static("./node_modules/bootstrap/dist"));
@@ -47,6 +51,5 @@ app.use(function(req, res) {
 });
 
 app.listen(port, function() {
-
     console.log(`Server listening on port ${port}.`)
 });

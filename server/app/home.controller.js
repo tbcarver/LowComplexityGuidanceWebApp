@@ -9,10 +9,7 @@ function getHome(req, res) {
 
     var model = {
         title: "my junky stuff",
-        junk: {
-            stuff: "my junky stuff"
-        },
-        otherStuff: "asdfasdfasdfasdfdfs"
+        navbarLinkTitle: "Home"
     }
 
     res.render("home.template.hbs", model);
