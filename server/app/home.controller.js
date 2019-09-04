@@ -1,8 +1,8 @@
 
-function initialize(app) {
+function initialize(router) {
 
-    app.get("/", getHome);
-    app.get("/index.html", getHome);
+    router.get("/", getHome);
+    router.get("/index.html", getHome);
 }
 
 function getHome(req, res) {

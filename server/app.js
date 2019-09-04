@@ -2,14 +2,25 @@
 require('dotenv').config();
 
 var express = require("express");
+var session = require("express-session");
 var expressHandlebars = require("express-handlebars");
 var addNameByCompareHelper = require("./lib/coreVendor/handlebars/helpers/addNameByCompareHelper");
 var favicon = require('serve-favicon');
 var path = require("path");
 var directoryWalkerSync = require("./lib/core/fs/directoryWalkerSync");
 
+// TODO:
+// sessions and session store
+// passport
+
 var app = express();
 var port = process.env.PORT || 3000;
+
+app.use(session({
+    secret: 'any word will do',
+    resave: false,
+    saveUninitialized: false,
+}));
 
 var handlebars = expressHandlebars.create({
     extname: ".hbs",
