@@ -8,7 +8,7 @@ function initialize(app) {
 function getHome(req, res) {
 
     var model = {
-        title: "my junky stuff",
+        title: "conduit",
         navbarLinkTitle: "Home"
     }
 

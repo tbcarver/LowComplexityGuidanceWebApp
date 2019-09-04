@@ -1,16 +1,17 @@
 
 require('dotenv').config();
 
-const express = require("express");
-const expressHandlebars = require("express-handlebars");
-const addNameByCompareHelper = require("./lib/coreVendor/handlebars/helpers/addNameByCompareHelper");
-const path = require("path");
-const directoryWalkerSync = require("./lib/core/fs/directoryWalkerSync");
+var express = require("express");
+var expressHandlebars = require("express-handlebars");
+var addNameByCompareHelper = require("./lib/coreVendor/handlebars/helpers/addNameByCompareHelper");
+var favicon = require('serve-favicon');
+var path = require("path");
+var directoryWalkerSync = require("./lib/core/fs/directoryWalkerSync");
 
-const app = express();
-const port = process.env.PORT || 3000;
+var app = express();
+var port = process.env.PORT || 3000;
 
-const handlebars = expressHandlebars.create({
+var handlebars = expressHandlebars.create({
     extname: ".hbs",
     layoutsDir: "server/app/layouts/",
     partialsDir: "server/app/partials/",
@@ -23,6 +24,8 @@ const handlebars = expressHandlebars.create({
 app.engine("hbs", handlebars.engine);
 app.set("view engine", "hbs");
 app.set("views", "server/app");
+
+app.use(favicon(path.join(__dirname, '../assets/images', 'favicon.ico')));
 
 app.use("/assets", express.static("./assets"));
 app.use("/assets/vendor/bootstrap/4.3.1/", express.static("./node_modules/bootstrap/dist"));
