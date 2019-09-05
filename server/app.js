@@ -2,67 +2,22 @@
 require('dotenv').config();
 
 var express = require("express");
-var session = require("express-session");
-var expressHandlebars = require("express-handlebars");
-var addNameByCompareHelper = require("./lib/coreVendor/handlebars/helpers/addNameByCompareHelper");
-var favicon = require('serve-favicon');
-var path = require("path");
-var directoryWalkerSync = require("./lib/core/fs/directoryWalkerSync");
-
-// TODO:
-// sessions and session store
-// passport
 
 var app = express();
-var port = process.env.PORT || 3000;
 
-app.use(session({
-    secret: 'any word will do',
-    resave: false,
-    saveUninitialized: false,
-}));
+// NOTE: Order of app.use() is important
 
-var handlebars = expressHandlebars.create({
-    extname: ".hbs",
-    layoutsDir: "server/app/layouts/",
-    partialsDir: "server/app/partials/",
-    defaultLayout: "main.layout.hbs",
-    helpers: {
-        [addNameByCompareHelper.name]: addNameByCompareHelper.helper,
-    },
-});
+require("./init/middlewares").initialize(app);
+require("./init/passport").initialize(app);
+require("./init/handlebars").initialize(app);
+require("./init/routes").initialize(app);
 
-app.engine("hbs", handlebars.engine);
-app.set("view engine", "hbs");
-app.set("views", "server/app");
-
-app.use(favicon(path.join(__dirname, '../assets/images', 'favicon.ico')));
-
-app.use("/assets", express.static("./assets"));
-app.use("/assets/vendor/bootstrap/4.3.1/", express.static("./node_modules/bootstrap/dist"));
-app.use("/assets/vendor/fontawesome-free/5.9.0/", express.static("./node_modules/@fortawesome/fontawesome-free"));
-app.use("/assets/vendor/jquery/3.3.1/", express.static("./node_modules/jquery/dist"));
-
-directoryWalkerSync.walkDirectory("./server/app", null, null, function(filePathName, stats) {
-
-    if (filePathName.endsWith(".controller.js")) {
-
-        var absoluteFilePathName = path.resolve(filePathName);
-        var routes = require(absoluteFilePathName);
-
-        if (routes && routes.initialize) {
-
-            var router = express.Router();
-
-            routes.initialize(router);
-            app.use(router);
-        }
-    }
-});
-
+// 404 needs to be set at the very end of the routes
 app.use(function(req, res) {
     res.render("errors/404.template.hbs", { title: "404" });
 });
+
+var port = process.env.PORT || 3000;
 
 app.listen(port, function() {
     console.log(`Server listening on port ${port}.`)
