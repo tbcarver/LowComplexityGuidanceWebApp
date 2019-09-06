@@ -2,6 +2,7 @@
 
 var passport = require("passport");
 var ActiveDirectoryStrategy = require("passport-activedirectory");
+var auth = require("../middlewares/auth");
 
 function initialize(app) {
 
@@ -53,6 +54,8 @@ function initialize(app) {
 
 	app.use(passport.initialize());
 	app.use(passport.session());
+
+	app.use(auth);
 }
 
 

@@ -1,11 +1,12 @@
 
+var express = require("express");
 var favicon = require('serve-favicon');
 var path = require("path");
-var directoryWalkerSync = require("./lib/core/fs/directoryWalkerSync");
+var directoryWalkerSync = require("../lib/core/fs/directoryWalkerSync");
 
 function initialize(app) {
 
-	app.use(favicon(path.join(__dirname, '../assets/images', 'favicon.ico')));
+	app.use(favicon(path.join(__dirname, '../../assets/images', 'favicon.ico')));
 
 	app.use("/assets", express.static("./assets"));
 	app.use("/assets/vendor/bootstrap/4.3.1/", express.static("./node_modules/bootstrap/dist"));

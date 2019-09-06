@@ -1,6 +1,6 @@
 
 var expressHandlebars = require("express-handlebars");
-var addNameByCompareHelper = require("./lib/coreVendor/handlebars/helpers/addNameByCompareHelper");
+var addNameByCompareHelper = require("../lib/coreVendor/handlebars/helpers/addNameByCompareHelper");
 
 function initialize(app) {
 
