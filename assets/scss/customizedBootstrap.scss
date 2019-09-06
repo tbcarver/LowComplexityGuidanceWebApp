@@ -1,13 +1,10 @@
-/*!
- * Bootstrap v4.3.1 (https://getbootstrap.com/)
- * Copyright 2011-2019 The Bootstrap Authors
- * Copyright 2011-2019 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
+
+// This import file is a modified copy of the node_modules/bootstrap/scss/bootstrap.scss
+// It has been copied in order to not change the original bootstrap source.
 
  @import "functions";
  @import "variables";
- @import "customizedBootstrapVariables";
+ @import "customizedBootstrapVariables"; // Customized variables added here after bootstraps variables
  @import "mixins";
  @import "root";
  @import "reboot";
