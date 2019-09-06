@@ -7,8 +7,12 @@
 	<link href="/assets/vendor/fontawesome-free/5.9.0/css/all.min.css" rel="stylesheet" type="text/css" />
 	<link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
 
-	<script src="/assets/vendor/jquery/3.3.1/jquery.min.js"></script>
+	{{!-- jquery is a bootstrap.js dependency, it is not to be used with other development, only dependencies --}}
+	<script src="/assets/vendor/jquery/3.3.1/jquery.min.js"></script> 
 	<script src="/assets/vendor/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+	
+	{{!-- handle bars is needed for client side templates in web components --}}
+	<script src="/assets/vendor/handlebars/4.1.2/handlebars.min.js"></script>
 
 	<title>{{title}}</title>
 </head>

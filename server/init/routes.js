@@ -12,6 +12,9 @@ function initialize(app) {
 	app.use("/assets/vendor/bootstrap/4.3.1/", express.static("./node_modules/bootstrap/dist"));
 	app.use("/assets/vendor/fontawesome-free/5.9.0/", express.static("./node_modules/@fortawesome/fontawesome-free"));
 	app.use("/assets/vendor/jquery/3.3.1/", express.static("./node_modules/jquery/dist"));
+	app.use("/assets/vendor/handlebars/4.1.2/", express.static("./node_modules/handlebars/dist"));	
+
+	app.use("/client", express.static("./client"));	
 
 	directoryWalkerSync.walkDirectory("./server/app", null, null, function(filePathName, stats) {
 
