@@ -1,6 +1,8 @@
 
-node_modules
 .vscode
+assets/js/client
+node_modules
+server/app/layouts/src
 
 .env
 assets/css/customizedBootstrap.css
