@@ -2,7 +2,7 @@
 .vscode
 assets/js/client
 node_modules
-server/app/layouts/src
+server/app/layouts/dist
 
 .env
 assets/css/customizedBootstrap.css

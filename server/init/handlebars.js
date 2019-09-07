@@ -6,7 +6,7 @@ function initialize(app) {
 
 	var handlebars = expressHandlebars.create({
 		extname: ".hbs",
-		layoutsDir: "server/app/layouts/",
+		layoutsDir: "server/app/layouts/dist/",
 		partialsDir: "server/app/partials/",
 		defaultLayout: "main.layout.hbs",
 		helpers: {

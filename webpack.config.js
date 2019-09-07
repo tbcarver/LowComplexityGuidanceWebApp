@@ -21,7 +21,7 @@ module.exports = {
 	},
 	plugins: [new HtmlWebpackPlugin(
 		{
-			filename: '../../../server/app/layouts/main.layout.hbs',
+			filename: '../../../server/app/layouts/dist/main.layout.hbs',
 			template: './server/app/layouts/src/main.layout.hbs',
 			inject: false,
 		}
