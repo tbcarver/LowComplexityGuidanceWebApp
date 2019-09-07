@@ -95,16 +95,19 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_messageBox_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/messageBox.component */ "./client/components/messageBox.component.js");
+/* harmony import */ var _webComponents_messageBoxes_messageBox_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./webComponents/messageBoxes/messageBox.component */ "./client/webComponents/messageBoxes/messageBox.component.js");
+/* harmony import */ var _webComponents_messageBoxes_messageBoxClosable_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./webComponents/messageBoxes/messageBoxClosable.component */ "./client/webComponents/messageBoxes/messageBoxClosable.component.js");
+
+// Import in all client web components
 
 
 
 /***/ }),
 
-/***/ "./client/components/messageBox.component.js":
-/*!***************************************************!*\
-  !*** ./client/components/messageBox.component.js ***!
-  \***************************************************/
+/***/ "./client/webComponents/messageBoxes/messageBox.component.js":
+/*!*******************************************************************!*\
+  !*** ./client/webComponents/messageBoxes/messageBox.component.js ***!
+  \*******************************************************************/
 /*! exports provided: MessageBox */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -120,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // Using require only on handlebars templates with handlebars-loader
-var template = __webpack_require__(/*! ./messageBox.template.hbs */ "./client/components/messageBox.template.hbs");
+var template = __webpack_require__(/*! ./messageBox.template.hbs */ "./client/webComponents/messageBoxes/messageBox.template.hbs");
 
 class MessageBox extends html_parsed_element__WEBPACK_IMPORTED_MODULE_0__["default"] {
 
@@ -169,14 +172,14 @@ customElements.define('message-box', MessageBox);
 
 /***/ }),
 
-/***/ "./client/components/messageBox.template.hbs":
-/*!***************************************************!*\
-  !*** ./client/components/messageBox.template.hbs ***!
-  \***************************************************/
+/***/ "./client/webComponents/messageBoxes/messageBox.template.hbs":
+/*!*******************************************************************!*\
+  !*** ./client/webComponents/messageBoxes/messageBox.template.hbs ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Handlebars = __webpack_require__(/*! ../../node_modules/handlebars/runtime.js */ "./node_modules/handlebars/runtime.js");
+var Handlebars = __webpack_require__(/*! ../../../node_modules/handlebars/runtime.js */ "./node_modules/handlebars/runtime.js");
 function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
 module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
@@ -186,6 +189,102 @@ module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,"
     + "\">\r\n		<div class=\"d-inline-block align-top\">\r\n			"
     + ((stack1 = ((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"message","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\r\n		</div>\r\n	</div>\r\n</div>";
+},"useData":true});
+
+/***/ }),
+
+/***/ "./client/webComponents/messageBoxes/messageBoxClosable.component.js":
+/*!***************************************************************************!*\
+  !*** ./client/webComponents/messageBoxes/messageBoxClosable.component.js ***!
+  \***************************************************************************/
+/*! exports provided: MessageBox */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MessageBox", function() { return MessageBox; });
+/* harmony import */ var html_parsed_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! html-parsed-element */ "./node_modules/html-parsed-element/esm/index.js");
+
+// Using the html parsed element in order to receive innerHTML from the component's use in the HTML
+// i.e. <message-box type="danger">Error message</message-box>
+// StackOverflow 48498581
+
+
+
+// Using require only on handlebars templates with handlebars-loader
+var template = __webpack_require__(/*! ./messageBoxClosable.template.hbs */ "./client/webComponents/messageBoxes/messageBoxClosable.template.hbs");
+
+class MessageBox extends html_parsed_element__WEBPACK_IMPORTED_MODULE_0__["default"] {
+
+	static get observedAttributes() {
+		return ["type"];
+	}
+
+	get type() {
+		return this.getAttribute("type");
+	}
+
+	set type(value) {
+		this.setAttribute("type", value);
+	}
+
+	parsedCallback() {
+		this.message = this.innerHTML;
+		this.render();
+	}
+
+	attributeChangedCallback(name, oldValue, newValue) {
+
+		if (this.parsed) {
+			this.render();
+		}
+	}
+
+	render() {
+
+		if (this.message) {
+
+			var data = {
+				type: this.type,
+				message: this.message
+			};
+
+			this.innerHTML = template(data);
+
+			this.querySelector(".messageBoxCloseLink").addEventListener("click", function onClose(event) {
+
+				event.preventDefault();
+				this.innerHTML = "";
+
+			}.bind(this));
+		}
+	}
+}
+
+customElements.define('message-box-closable', MessageBox);
+
+
+
+
+/***/ }),
+
+/***/ "./client/webComponents/messageBoxes/messageBoxClosable.template.hbs":
+/*!***************************************************************************!*\
+  !*** ./client/webComponents/messageBoxes/messageBoxClosable.template.hbs ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Handlebars = __webpack_require__(/*! ../../../node_modules/handlebars/runtime.js */ "./node_modules/handlebars/runtime.js");
+function __default(obj) { return obj && (obj.__esModule ? obj["default"] : obj); }
+module.exports = (Handlebars["default"] || Handlebars).template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "<div class=\"text-center\">\r\n	<div class=\"alert alert-"
+    + container.escapeExpression(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"type","hash":{},"data":data}) : helper)))
+    + " d-inline-block\">\r\n		<div class=\"d-inline-block align-top\">\r\n			"
+    + ((stack1 = ((helper = (helper = helpers.message || (depth0 != null ? depth0.message : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"message","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\r\n		</div>\r\n		<div class=\"d-inline-block align-top\">\r\n			<a href=\"#\" class=\"ml-3 messageBoxCloseLink\"><i class=\"fa fa-times\"></i></a>\r\n		</div>\r\n	</div>\r\n</div>";
 },"useData":true});
 
 /***/ }),
