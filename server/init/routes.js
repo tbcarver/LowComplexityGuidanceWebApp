@@ -8,13 +8,12 @@ function initialize(app) {
 
 	app.use(favicon(path.join(__dirname, '../../assets/images', 'favicon.ico')));
 
-	app.use("/assets", express.static("./assets"));
-	app.use("/assets/vendor/bootstrap/4.3.1/", express.static("./node_modules/bootstrap/dist"));
-	app.use("/assets/vendor/fontawesome-free/5.9.0/", express.static("./node_modules/@fortawesome/fontawesome-free"));
-	app.use("/assets/vendor/jquery/3.3.1/", express.static("./node_modules/jquery/dist"));
-	app.use("/assets/vendor/handlebars/4.1.2/", express.static("./node_modules/handlebars/dist"));	
+	var oneYearInMilliseconds = 60 * 1000 * 60 * 24 * 365; // 31536000
 
-	app.use("/client", express.static("./client"));	
+	app.use("/assets", express.static("./assets", { maxAge: oneYearInMilliseconds }));
+	app.use("/assets/vendor/bootstrap/4.3.1/", express.static("./node_modules/bootstrap/dist", { maxAge: oneYearInMilliseconds }));
+	app.use("/assets/vendor/fontawesome-free/5.9.0/", express.static("./node_modules/@fortawesome/fontawesome-free", { maxAge: oneYearInMilliseconds }));
+	app.use("/assets/vendor/jquery/3.3.1/", express.static("./node_modules/jquery/dist", { maxAge: oneYearInMilliseconds }));
 
 	directoryWalkerSync.walkDirectory("./server/app", null, null, function(filePathName, stats) {
 

@@ -14,6 +14,7 @@ require("./init/routes").initialize(app);
 
 // 404 needs to be set at the very end of the routes
 app.use(function(req, res) {
+    res.status(404);
     res.render("errors/404.template.hbs", { title: "404" });
 });
 

@@ -1,6 +1,3 @@
-<script type="module">
-	import { MessageBox } from "/client/components/messageBox.component.js"
-</script>
 
 <div class="jumbotron jumbotron-fluid">
 	<div class="container text-center">
@@ -11,7 +8,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 offset-md-3 col-xs-12">
-			<message-box type="{{messageType}}">{{message}}</message-box>
+			<message-box type="{{messageType}}">{{{message}}}</message-box>
 			<form action="/login" method="post">
 				<div class="form-group">
 					<input type="text" name="username" class="form-control form-control-lg" placeholder="Username"

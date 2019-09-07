@@ -1,22 +1,17 @@
 
-import { TemplateEngine } from "../lib/coreVendor/handlebars/templateEngine.js";
+// Using the html parsed element in order to receive innerHTML from the component's use in the HTML
+// i.e. <message-box type="danger">Error message</message-box>
+// StackOverflow 48498581
 
-var template = new TemplateEngine("/client/components/messageBox.template.hbs");
-var templateClosable = new TemplateEngine("/client/components/messageBox-closable.template.hbs");
+import HTMLParsedElement from "html-parsed-element";
 
-class MessageBox extends HTMLElement {
+// Using require only on handlebars templates with handlebars-loader
+var template = require("./messageBox.template.hbs");
 
-	constructor() {
-		super();
-
-		this.hasConnected = false;
-		this.message = this.innerHTML;
-
-		console.log(this.innerHTML)
-	}
+class MessageBox extends HTMLParsedElement {
 
 	static get observedAttributes() {
-		return ["type", "closable"];
+		return ["type"];
 	}
 
 	get type() {
@@ -27,24 +22,14 @@ class MessageBox extends HTMLElement {
 		this.setAttribute("type", value);
 	}
 
-	get closable() {
-		return Boolean(this.getAttribute("closable"));
-	}
-
-	set closable(value) {
-
-		this.setAttribute("closable", value);
-	}
-
-	connectedCallback() {
-
-		this.hasConnected = true;
+	parsedCallback() {
+		this.message = this.innerHTML;
 		this.render();
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
 
-		if (this.hasConnected) {
+		if (this.parsed) {
 			this.render();
 		}
 	}
@@ -58,31 +43,12 @@ class MessageBox extends HTMLElement {
 				message: this.message
 			};
 
-			if (this.closable) {
-				this.innerHTML = templateClosable.buildHtml(data);
-
-				this.querySelector(".messageBoxCloseLink").addEventListener("click", function onClose(event) {
-
-					event.preventDefault();
-					this.innerHTML = "";
-
-				}.bind(this));
-
-			} else {
-				this.innerHTML = template.buildHtml(data);
-			}
-
-			this.style.visibility = "visible";
+			this.innerHTML = template(data);
 		}
 	}
 }
 
-template.initialize(function() {
-	templateClosable.initialize(function() {
-
-		customElements.define('message-box', MessageBox);
-	});
-});
+customElements.define('message-box', MessageBox);
 
 
 export { MessageBox }
