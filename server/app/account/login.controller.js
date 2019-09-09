@@ -1,5 +1,6 @@
 
 var passport = require("passport");
+var queryStringKeys = require("../../keys/queryStringKeys");
 
 function initialize(router) {
 
@@ -12,6 +13,7 @@ function getLogin(req, res) {
 	res.render("account/login.template.hbs", { title: "Login" });
 };
 
+/** @param { Request } req @param { Response } res */
 function postLogin(req, res, next) {
 
 	var middleware = passport.authenticate('ActiveDirectory', function(err, user, info) {
@@ -19,7 +21,18 @@ function postLogin(req, res, next) {
 		if (err) {
 			next(err);
 		} else if (user) {
-			res.redirect('/');
+
+			req.logIn(user, function(err) {
+
+				if (err) {
+					next(err);
+				} else {
+
+					var redirect = req.query[queryStringKeys.returnUrl] || "/";
+					res.redirect(redirect);
+				}
+			});
+
 		} else {
 
 			var model = {

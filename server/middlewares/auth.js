@@ -1,5 +1,6 @@
 
 var coreString = require("../lib/core/extensions/coreString");
+var queryStringKeys = require("../keys/queryStringKeys");
 
 var publicRoutesExact = ["/login", "/favicon.ico"];
 var publicRoutesStartsWith = ["/assets"];
@@ -27,7 +28,9 @@ function middleware(req, res, next) {
 	} else if (req.isAuthenticated()) {
 		next();
 	} else {
-		res.redirect("/login");
+
+		var returnUrl = encodeURIComponent(req.url);
+		res.redirect(`/login?${queryStringKeys.returnUrl}=${returnUrl}`);
 	}
 }
 

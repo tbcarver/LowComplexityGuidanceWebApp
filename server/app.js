@@ -5,10 +5,12 @@ var express = require("express");
 
 var app = express();
 
+app.set("query parser", "simple");
+
 // NOTE: Order of app.use() is important
 
 require("./init/middlewares").initialize(app);
-require("./init/passport").initialize(app);
+require("./init/passportActiveDirectory").initialize(app);
 require("./init/handlebars").initialize(app);
 require("./init/routes").initialize(app);
 
