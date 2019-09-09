@@ -5,14 +5,11 @@
   "author": "Tyler Carver",
   "license": "MIT",
   "scripts": {
-    "build-dev": "npm run sass & webpack",
-    "build-prod": "npm run sass & webpack",
+    "build": "npm run sass & webpack",
     "dev": "nodemon",
-    "sass": "npm run sass-compile-bootstrap & npm run sass-compile-css",
-    "sass-compile-bootstrap": "sass ./assets/scss/customizedBootstrap.scss ./assets/css/customizedBootstrap.css --load-path=node_modules/bootstrap/scss",
-    "sass-compile-css": "sass ./assets/scss/main.scss ./assets/css/main.css",
+    "sass": "sass ./assets/css/src/main.scss ./assets/css/dist/main.css --load-path=node_modules/bootstrap/scss",
     "start": "node ./server/app.js",
-    "webpack": "webpack --mode development"
+    "webpack": "webpack"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.9.0",

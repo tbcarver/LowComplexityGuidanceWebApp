@@ -1,8 +1,8 @@
 
 .vscode
-assets/js/client
+assets/css/dist
+assets/js/dist
 node_modules
 server/app/layouts/dist
 
 .env
-assets/css/customizedBootstrap.css

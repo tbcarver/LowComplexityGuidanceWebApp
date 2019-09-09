@@ -43,6 +43,20 @@ If you fully understand the meaning behind the guideline and have a good reason 
 
 **Why?** Express is the dominant web server for the server side JavaScript ecosystem and is very simple to use and understand. Express can be ran in production with the use of PM2 (Process Manager) for monitoring and restarting.
 
+## Web Site Optimization
+
+**Do** cache all static resources for the max expiration time (1 year, 31536000 milliseconds).
+
+**Why?** Reduce load times after first web page loading. Reduce server load.
+
+
+**Do** use cache busting for all built resources i.e. sass to css, webpacked js.
+
+**Avoid** any js resources that are not versioned.
+
+**Why?** When caching all static resources for 1 year it is necessary to load static resources that have changed.
+
+
 ## Database
 
 
