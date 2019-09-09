@@ -29,11 +29,26 @@ If you fully understand the meaning behind the guideline and have a good reason 
 
 ## Development Languages
 
-**Do** use HTML, CSS, JavaScript, SQL.
+**Do** use HTML, CSS, SASS, JavaScript, SQL.
 
 **Avoid** any other language with the exception of a very minor amount of SASS to facilitate the minor customization of bootstrap.
 
 **Why?** HTML and CSS are necessary for Web Application User Interface. JavaScript is a single language that can be used both on the server and client. SQL is the language for relational databases. These form the CodeCamp technologies and are the most used of all web programming technologies.
+
+
+## Development Libraries
+
+**Do** use npm modules that do not require compilation.
+
+**Avoid** any modules that require compilation, i.e. *node-sass*, unless it is absolutely required, i.e. *mssql*.
+
+**Why?** When an npm module requires compilation and then during 'yarn install --offline' the OS needs a complex setup to allow for compiling c files into assembly for the target machine. This complex setup may not be able to be achieved.
+
+
+**Do** use dart *sass* 'yarn add sass --offline' instead of *node-sass*.
+
+**Why?** *node-sass* requires a compilation.
+
 
 ## Web Server
 
