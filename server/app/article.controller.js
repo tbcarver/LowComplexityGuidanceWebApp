@@ -1,8 +1,9 @@
 
 var passport = require("passport");
 
-function initialize(router) {
+function initialize(router, acl) {
     
+    acl.allow("InfoNet Admins", "/editor", "*");
     router.get("/editor/:article?", getEditor);
 }
 

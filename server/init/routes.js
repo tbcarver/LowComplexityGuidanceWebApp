@@ -4,12 +4,14 @@ var favicon = require('serve-favicon');
 var path = require("path");
 var directoryWalkerSync = require("../lib/core/fs/directoryWalkerSync");
 
-function initialize(app) {
+function initialize(app, acl) {
 
+    acl.allow('public exact', "/favicon.ico", '*');
 	app.use(favicon(path.join(__dirname, '../../assets/images', 'favicon.ico')));
 
 	var oneYearInMilliseconds = 60 * 1000 * 60 * 24 * 365; // 31536000
-
+	
+    acl.allow('public starts with', "/assets", '*');
 	app.use("/assets", express.static("./assets", { maxAge: oneYearInMilliseconds }));
 	app.use("/assets/vendor/bootstrap/4.3.1/", express.static("./node_modules/bootstrap/dist", { maxAge: oneYearInMilliseconds }));
 	app.use("/assets/vendor/fontawesome-free/5.9.0/", express.static("./node_modules/@fortawesome/fontawesome-free", { maxAge: oneYearInMilliseconds }));
@@ -26,7 +28,7 @@ function initialize(app) {
 
 				var router = express.Router();
 
-				controller.initialize(router);
+				controller.initialize(router, acl);
 				app.use(router);
 			}
 		}

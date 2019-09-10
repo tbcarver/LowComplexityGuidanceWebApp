@@ -4,7 +4,7 @@ var passport = require("passport");
 var ActiveDirectoryStrategy = require("passport-activedirectory");
 var auth = require("../middlewares/auth");
 
-function initialize(app) {
+function initialize(app, acl) {
 
 	passport.use(new ActiveDirectoryStrategy({
 		integrated: false,
@@ -17,6 +17,7 @@ function initialize(app) {
 	}, function(profile, ad, done) {
 
 		var user = {
+			userId: profile._json.sAMAccountName,
 			username: profile._json.sAMAccountName,
 			email: profile._json.userPrincipalName,
 			name: profile._json.givenName + " " + profile._json.sn,
@@ -33,9 +34,18 @@ function initialize(app) {
 
 				if (groups) {
 					user.roles = groups.map(group => group.cn);
-				}
 
-				result = done(null, user);
+					acl.addUserRoles(user.userId, user.roles, function(err) {
+
+						if (err) {
+							result = done(err);
+						} else {
+							result = done(null, user);
+						}
+					});
+				} else {
+					result = done(null, user);
+				}
 			}
 
 			return result;

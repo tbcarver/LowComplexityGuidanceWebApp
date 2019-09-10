@@ -1,8 +1,8 @@
 
-function initialize(router) {
-
+function initialize(router, acl) {
+    
+    acl.allow('public exact', "/", '*');
     router.get("/", getHome);
-    router.get("/index.html", getHome);
 }
 
 function getHome(req, res) {

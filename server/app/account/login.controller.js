@@ -2,10 +2,13 @@
 var passport = require("passport");
 var queryStringKeys = require("../../keys/queryStringKeys");
 
-function initialize(router) {
+function initialize(router, acl) {
 
+    acl.allow('public exact', "/login", '*');
 	router.get("/login", getLogin);
 	router.post("/login", postLogin);
+
+    acl.allow('public exact', "/logout", '*');
 	router.get("/logout", getLogout);
 }
 

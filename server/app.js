@@ -2,17 +2,24 @@
 require('dotenv').config();
 
 var express = require("express");
+var acl = require('acl');
 
 var app = express();
 
 app.set("query parser", "simple");
 
+acl = new acl(new acl.memoryBackend());
+app.use(function(req, res, next) {
+    req.acl = acl;
+    next();
+});
+
 // NOTE: Order of app.use() is important
 
-require("./init/middlewares").initialize(app);
-require("./init/passportActiveDirectory").initialize(app);
-require("./init/handlebars").initialize(app);
-require("./init/routes").initialize(app);
+require("./init/middlewares").initialize(app, acl);
+require("./init/authActiveDirectory").initialize(app, acl);
+require("./init/handlebars").initialize(app, acl);
+require("./init/routes").initialize(app, acl);
 
 // 404 needs to be set at the very end of the routes
 app.use(function(req, res) {
