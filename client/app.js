@@ -7,5 +7,5 @@
 import style from './sass/main.scss';
 
 // Import in all client web components
-import { MessageBox } from "./webComponents/messageBoxes/messageBox.component";
-import { MessageBoxClosable } from "./webComponents/messageBoxes/messageBoxClosable.component";
+import MessageBox from "./webComponents/messageBoxes/messageBox.component";
+import MessageBoxClosable from "./webComponents/messageBoxes/messageBoxClosable.component";
