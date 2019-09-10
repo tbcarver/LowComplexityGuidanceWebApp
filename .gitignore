@@ -1,6 +1,5 @@
 
-assets/css/dist
-assets/js/dist
+assets/dist
 node_modules
 server/app/layouts/dist
 
