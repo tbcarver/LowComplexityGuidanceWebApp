@@ -3,8 +3,8 @@ var passport = require("passport");
 
 function initialize(app, acl) {
     
-    acl.allow("InfoNet Admins", "/editor/:article", "*");
-    app.get("/editor/:article", getEditor);
+    acl.allow(["Tutor Developers", "InfoNet Curriculum Admins"], "/editor/:article?", "*");
+    app.get("/editor/:article?", getEditor);
 }
 
 function getEditor(req, res) {
