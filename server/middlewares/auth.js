@@ -2,6 +2,7 @@
 var coreString = require("../lib/core/extensions/coreString");
 var queryStringKeys = require("../keys/queryStringKeys");
 
+/** @param { Request } req @param { Response } res */
 function middleware(req, res, next) {
 
 	req.acl.whatResources("public exact", function(err, resources) {

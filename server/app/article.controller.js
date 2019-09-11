@@ -7,6 +7,7 @@ function initialize(app, acl) {
     app.get("/editor/:article?", getEditor);
 }
 
+/** @param { Request } req @param { Response } res */
 function getEditor(req, res) {
 
     var model = {

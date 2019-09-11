@@ -5,6 +5,7 @@ function initialize(app, acl) {
     app.get("/", getHome);
 }
 
+/** @param { Request } req @param { Response } res */
 function getHome(req, res) {
 
     var model = {
