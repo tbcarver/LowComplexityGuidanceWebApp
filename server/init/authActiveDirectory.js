@@ -26,10 +26,8 @@ function initialize(app, acl) {
 
 		ad.getGroupMembershipForUser(user.email, function(err, groups) {
 
-			var result;
-
 			if (err) {
-				result = done(err);
+				done(err);
 			} else {
 
 				if (groups) {
@@ -38,17 +36,15 @@ function initialize(app, acl) {
 					acl.addUserRoles(user.userId, user.roles, function(err) {
 
 						if (err) {
-							result = done(err);
+							done(err);
 						} else {
-							result = done(null, user);
+							done(null, user);
 						}
 					});
 				} else {
-					result = done(null, user);
+					done(null, user);
 				}
 			}
-
-			return result;
 		});
 	}));
 
@@ -59,7 +55,14 @@ function initialize(app, acl) {
 
 	passport.deserializeUser(function(user, done) {
 
-		done(null, user);
+		acl.addUserRoles(user.userId, user.roles, function(err) {
+
+			if (err) {
+				done(err);
+			} else {
+				done(null, user);
+			}
+		});
 	});
 
 	app.use(passport.initialize());

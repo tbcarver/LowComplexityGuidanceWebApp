@@ -30,35 +30,28 @@ function middleware(req, res, next) {
 
 					if (req.isAuthenticated()) {
 
-						var segments = req.path.split("/");
-						var currentSegmentIndex = 1; // off by one because of joining index 0 to including index 1
+						var resource = req.path;
 
-						function isAllowed() {
-
-							var path = segments.slice(0, currentSegmentIndex).join("/");
-							if (!path) {
-								path = "/";
+						// Use the route pattern as the resource to check
+						for (var layer of req.app._router.stack) {
+							if (layer.route && layer.match(req.path)) {
+								resource = layer.route.path;
 							}
-
-							req.acl.isAllowed(req.user.userId, path, req.method, function(err, allowed) {
-
-								if (err) {
-									throw err;
-								}
-
-								if (allowed) {
-									next();
-								} else if (currentSegmentIndex < segments.length) {
-									currentSegmentIndex++;
-									isAllowed();
-								} else {
-									// TODO: return the not auth status code 403
-									next(new Error("NO"));
-								}
-							});
 						}
 
-						isAllowed();
+						req.acl.isAllowed(req.user.userId, resource, req.method, function(err, allowed) {
+
+							if (err) {
+								throw err;
+							}
+
+							if (allowed) {
+								next();
+							} else {
+								// TODO: return the not auth status code 403
+								next(new Error("NO"));
+							}
+						});
 
 					} else {
 

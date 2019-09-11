@@ -26,10 +26,7 @@ function initialize(app, acl) {
 
 			if (controller && controller.initialize) {
 
-				var router = express.Router();
-
-				controller.initialize(router, acl);
-				app.use(router);
+				controller.initialize(app, acl);
 			}
 		}
 	});
