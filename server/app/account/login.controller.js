@@ -12,7 +12,9 @@ function initialize(app, acl) {
 	app.get("/logout", getLogout);
 }
 
-function getLogin(req, res) {
+/** @param { Request } req @param { Response } res */
+function getLogin(req, res, next) {
+
 	res.render("account/login.template.hbs", { title: "Login" });
 };
 
@@ -51,6 +53,7 @@ function postLogin(req, res, next) {
 	middleware(req, res, next);
 };
 
+/** @param { Request } req @param { Response } res */
 function getLogout(req, res) {
 	req.logout();
 	res.redirect('/');

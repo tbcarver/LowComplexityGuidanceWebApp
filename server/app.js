@@ -1,14 +1,36 @@
 
 require('dotenv').config();
 
-var express = require("express");
-var acl = require('acl');
+const winston = require('winston');
+const ServerError = require('./serverError');
+const express = require("express");
+const Acl = require('acl');
 
-var app = express();
+const logger = winston.createLogger({
+    format: winston.format.simple(),
+    transports: [
+
+        // Write all logs error and below
+        new winston.transports.File({ filename: './logs/error.log', level: 'error', handleExceptions: true }),
+
+        // Write to all logs
+        new winston.transports.File({ filename: './logs/all.log' }),
+    ],
+});
+
+if (process.env.NODE_ENV !== 'production') {
+    logger.add(new winston.transports.Console({ handleExceptions: true }));
+}
+
+// NOTE: There are 2 globals in this app: logger and ServerError.
+global.logger = logger;
+global.ServerError = ServerError;
+
+const app = express();
 
 app.set("query parser", "simple");
 
-acl = new acl(new acl.memoryBackend());
+const acl = new Acl(new Acl.memoryBackend());
 app.use(function(req, res, next) {
     req.acl = acl;
     next();
@@ -20,12 +42,7 @@ require("./init/middlewares").initialize(app, acl);
 require("./init/authActiveDirectory").initialize(app, acl);
 require("./init/handlebars").initialize(app, acl);
 require("./init/routes").initialize(app, acl);
-
-// 404 needs to be set at the very end of the routes
-app.use(function(req, res) {
-    res.status(404);
-    res.render("errors/404.template.hbs", { title: "404" });
-});
+require("./init/errors").initialize(app, acl);
 
 var port = process.env.PORT || 3000;
 

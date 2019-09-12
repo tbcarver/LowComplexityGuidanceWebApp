@@ -31,7 +31,7 @@ function middleware(req, res, next) {
 
 					if (req.isAuthenticated()) {
 
-						var resource = req.path;
+						var resource;
 
 						// Use the route pattern as the resource to check
 						for (var layer of req.app._router.stack) {
@@ -40,20 +40,23 @@ function middleware(req, res, next) {
 							}
 						}
 
-						req.acl.isAllowed(req.user.userId, resource, req.method, function(err, allowed) {
+						if (resource) {
+							req.acl.isAllowed(req.user.userId, resource, req.method, function(err, allowed) {
 
-							if (err) {
-								throw err;
-							}
+								if (err) {
+									throw err;
+								}
 
-							if (allowed) {
-								next();
-							} else {
-								// TODO: return the not auth status code 403
-								next(new Error("NO"));
-							}
-						});
-
+								if (allowed) {
+									next();
+								} else {
+									// TODO: return the not auth status code 403
+									next(new Error("NO"));
+								}
+							});
+						} else {
+							next(new ServerError("Unknown route", 404));
+						}
 					} else {
 
 						var returnUrl = encodeURIComponent(req.url);
