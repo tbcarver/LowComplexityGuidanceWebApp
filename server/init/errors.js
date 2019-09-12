@@ -5,6 +5,10 @@ function initialize(app) {
 
 	var handler = errorHandler({
 		handlers: {
+			'403': function(err, req, res, next) {
+				res.status(403);
+				res.render("errors/403.template.hbs", { title: "403 Not Found" });
+			},
 			'404': function(err, req, res, next) {
 				logger.info(`404`, getLogData(err, req));
 				res.status(404);

@@ -1,13 +1,11 @@
 
 class ServerError extends Error {
-	constructor(message, httpStatusCode = 500) {
+	constructor(message, status = 500) {
 		super(message);
 
-		this.httpStatusCode = httpStatusCode;
-		this.date = new Date();
-
 		// express-error-handler looks for a status property with the http status code
-		this.status = httpStatusCode;
+		this.status = status;
+		this.date = new Date();
 	}
 }
 

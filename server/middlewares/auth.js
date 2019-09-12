@@ -50,8 +50,7 @@ function middleware(req, res, next) {
 								if (allowed) {
 									next();
 								} else {
-									// TODO: return the not auth status code 403
-									next(new Error("NO"));
+									next(new ServerError("Unauthorized", 403));
 								}
 							});
 						} else {
