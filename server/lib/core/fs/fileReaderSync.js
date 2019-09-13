@@ -2,7 +2,7 @@
 var fs = require('fs');
 var path = require('path');
 
-function readFile(pathName, encoding, readFileExtensions, fileAction) {
+function readFile(pathName, stats, encoding, readFileExtensions, fileAction) {
 
     if (isValidFile(pathName, stats, readFileExtensions)) {
 
@@ -15,7 +15,7 @@ function readFile(pathName, encoding, readFileExtensions, fileAction) {
 
         var data = fs.readFileSync(pathName, options);
 
-        fileAction(data, pathName, fileExtension);
+        fileAction(data, pathName);
     }
 }
 

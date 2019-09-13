@@ -1,5 +1,6 @@
 
 assets/dist
+data
 logs
 node_modules
 server/app/layouts/dist
