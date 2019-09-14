@@ -5,19 +5,32 @@ function initialize(app) {
 
 	var handler = errorHandler({
 		handlers: {
+			'200': function(err, req, res, next) {
+				logger.error(`500`, getLogData(err, req));
+				res.status(500);
+
+				var model = new AppModel(req, "500 Error");
+				res.render("errors/500.template.hbs", model);
+			},
 			'403': function(err, req, res, next) {
 				res.status(403);
-				res.render("errors/403.template.hbs", { title: "403 Not Found" });
+
+				var model = new AppModel(req, "403 Not Found");
+				res.render("errors/403.template.hbs", model);
 			},
 			'404': function(err, req, res, next) {
-				logger.info(`404`, getLogData(err, req));
+				logger.info(`404`, getLogData(null, req));
 				res.status(404);
-				res.render("errors/404.template.hbs", { title: "404 Not Found" });
+
+				var model = new AppModel(req, "404 Not Found");
+				res.render("errors/404.template.hbs", model);
 			},
 			'500': function(err, req, res, next) {
 				logger.error(`500`, getLogData(err, req));
 				res.status(500);
-				res.render("errors/500.template.hbs", { title: "500 Error" });
+
+				var model = new AppModel(req, "500 Error");
+				res.render("errors/500.template.hbs", model);
 			}
 		},
 		// Do not shut down the server on non client errors
@@ -35,7 +48,7 @@ function getLogData(err, req) {
 
 	// TODO: how to get date and error message to the log? default way with winston?
 	if (err) {
-
+		data.message = "\n" + err.stack;
 	}
 
 	if (req.user) {

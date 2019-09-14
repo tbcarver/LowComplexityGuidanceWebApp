@@ -9,7 +9,7 @@
     "dev": "nodemon",
     "sass": "sass ./client/sass/main.scss ./assets/dist/main.css --load-path=node_modules/bootstrap/scss",
     "start": "node ./server/app.js",
-    "create": "node ./sql/createDatabase --force"
+    "createDb": "node ./sql/createDatabase --force"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.9.0",
@@ -28,6 +28,7 @@
     "lodash": "^4.17.15",
     "passport": "^0.4.0",
     "passport-activedirectory": "^1.0.4",
+    "passport-local": "^1.0.0",
     "popper.js": "^1.15.0",
     "serve-favicon": "^2.5.0",
     "winston": "^3.2.1"

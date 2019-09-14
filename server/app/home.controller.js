@@ -8,10 +8,7 @@ function initialize(app, acl) {
 /** @param { Request } req @param { Response } res */
 function getHome(req, res) {
 
-    var model = {
-        title: "conduit",
-        navbarLinkTitle: "Home"
-    }
+    var model = new AppModel(req, "conduit", "Home");
 
     res.render("home.template.hbs", model);
 };

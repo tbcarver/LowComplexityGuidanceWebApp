@@ -4,24 +4,26 @@ var queryStringKeys = require("../../keys/queryStringKeys");
 
 function initialize(app, acl) {
 
-    acl.allow('public exact', "/login", '*');
+	acl.allow('public exact', "/login", '*');
 	app.get("/login", getLogin);
 	app.post("/login", postLogin);
 
-    acl.allow('public exact', "/logout", '*');
+	acl.allow('public exact', "/logout", '*');
 	app.get("/logout", getLogout);
 }
 
 /** @param { Request } req @param { Response } res */
 function getLogin(req, res, next) {
 
-	res.render("account/login.template.hbs", { title: "Login" });
+	var model = new AppModel(req, "Login");
+
+	res.render("account/login.template.hbs", model);
 };
 
 /** @param { Request } req @param { Response } res */
 function postLogin(req, res, next) {
 
-	var middleware = passport.authenticate('ActiveDirectory', function(err, user, info) {
+	var middleware = passport.authenticate('Sqlite', function(err, user, info) {
 
 		if (err) {
 			next(err);
@@ -40,11 +42,10 @@ function postLogin(req, res, next) {
 
 		} else {
 
-			var model = {
-				title: "Login",
-				message: "The username or password was invalid",
-				messageType: "danger",
-			}
+			var model = new AppModel(req, "Login");
+
+			model.message = "The username or password was invalid";
+			model.messageType = "danger";
 
 			res.render("account/login.template.hbs", model);
 		}

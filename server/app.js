@@ -5,6 +5,7 @@ const winston = require('winston');
 const ServerError = require('./serverError');
 const express = require("express");
 const Acl = require('acl');
+const AppModel = require("./appModel");
 
 const logger = winston.createLogger({
     format: winston.format.simple(),
@@ -22,9 +23,10 @@ if (process.env.NODE_ENV !== 'production') {
     logger.add(new winston.transports.Console({ handleExceptions: true }));
 }
 
-// NOTE: There are 2 globals in this app: logger and ServerError.
+// NOTE: Globals should be var minimal and used in about 90% of files.
 global.logger = logger;
 global.ServerError = ServerError;
+global.AppModel = AppModel;
 
 const app = express();
 
@@ -39,7 +41,7 @@ app.use(function(req, res, next) {
 // NOTE: Order of app.use() is important
 
 require("./init/middlewares").initialize(app, acl);
-require("./init/authActiveDirectory").initialize(app, acl);
+require("./init/auth").initialize(app, acl);
 require("./init/handlebars").initialize(app, acl);
 require("./init/routes").initialize(app, acl);
 require("./init/errors").initialize(app, acl);

@@ -16,23 +16,24 @@
 			</ul>
 		</div>
 		<ul class="navbar-nav justify-content-end">
-			<li class="nav-item">
-				<a class="nav-link" href="/"><i class="fa fa-cog"></i>&nbsp;Settings</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="/login"><i class="	fa fa-user"></i>&nbsp;Login</a>
-			</li>
 
+			{{#if isAuthenticated}}
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Tyler Carver
+				<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false">
+					{{userFullName}}
 				</a>
 
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+					<a class="nav-link" href="#todo"><i class="fa fa-cog"></i>&nbsp;Settings</a>
 					<a class="dropdown-item" href="/logout">Logout</a>
 				</div>
 			</li>
+			{{else}}
+			<li class="nav-item">
+				<a class="nav-link" href="/login"><i class="fa fa-user"></i>&nbsp;Login</a>
+			</li>
+			{{/if}}
 
 		</ul>
 	</div>

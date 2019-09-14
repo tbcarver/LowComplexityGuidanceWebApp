@@ -1,8 +1,8 @@
 
 CREATE TABLE UsersRoles (
     usersRolesId INTEGER PRIMARY KEY AUTOINCREMENT,
-    userId INTEGER UNIQUE NOT NULL REFERENCES Users (userId),
-    roleID INTEGER UNIQUE NOT NULL REFERENCES Roles (roleId)
+    userId INTEGER NOT NULL REFERENCES Users (userId),
+    roleID INTEGER NOT NULL REFERENCES Roles (roleId)
 );
 
 INSERT INTO UsersRoles (userId, roleID) VALUES (1, 1);
