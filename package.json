@@ -8,7 +8,8 @@
     "build": "webpack",
     "dev": "nodemon",
     "sass": "sass ./client/sass/main.scss ./assets/dist/main.css --load-path=node_modules/bootstrap/scss",
-    "start": "node ./server/app.js"
+    "start": "node ./server/app.js",
+    "create": "node ./sql/createDatabase --force"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.9.0",

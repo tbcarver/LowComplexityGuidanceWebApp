@@ -42,8 +42,7 @@ if (create) {
 
 			console.log(pathName);
 
-			var statement = db.prepare(data);
-			statement.run();
+			db.exec(data);
 
 			filesRead++;
 		});
