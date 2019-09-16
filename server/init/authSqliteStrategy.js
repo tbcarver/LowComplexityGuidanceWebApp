@@ -1,11 +1,12 @@
 
 var LocalStrategy = require("passport-local");
+var usersRules = require("../rules/usersRules");
 var usersStore = require("../store/usersStore");
 
 var sqliteStrategy = new LocalStrategy(
 	function(username, password, done) {
 
-		var isValid = usersStore.validatePassword(username, password);
+		var isValid = usersRules.validatePassword(username, password);
 
 		if (isValid) {
 

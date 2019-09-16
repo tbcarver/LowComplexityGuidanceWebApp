@@ -1,5 +1,4 @@
 
-var crypto = require("crypto");
 var sql = require("../lib/coreVendor/betterSqlite/sql");
 
 var usersStore = {};
@@ -29,31 +28,14 @@ usersStore.getRoleNames = function(userId) {
 	return result;
 }
 
-usersStore.validatePassword = function(username, password) {
+usersStore.getPasswordHashes = function(username, password) {
 
-	var isValid = false;
 	username = username.toLowerCase();
 
-	var row = sql.executeRow(`
+	var passwordHashes = sql.executeRow(`
 		SELECT passwordHash, passwordHashSalt
 		FROM Users
 		WHERE username = @username`, { username: username });
 
-	if (row) {
-		var hash = crypto.pbkdf2Sync(password, row.passwordHashSalt, 10000, 512, "sha512").toString("hex");
-		isValid = (hash === row.passwordHash);
-	}
-
-	return isValid;
+	return passwordHashes;
 }
-
-usersStore.createUser = function(username, firstName, lastName, password) {
-
-	username = username.toLowerCase();
-
-	var salt = crypto.randomBytes(16).toString("hex");
-	var hash = crypto.pbkdf2Sync(password, salt, 10000, 512, "sha512").toString("hex");
-}
-
-
-module.exports = usersStore;
