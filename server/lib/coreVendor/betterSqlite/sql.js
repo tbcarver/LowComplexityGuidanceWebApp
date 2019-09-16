@@ -10,8 +10,13 @@ sql.db = new Database(filePathName, { fileMustExist: true });
 sql.executeScalar = function(sqlStatement, parameters) {
 
 	var statement = this.db.prepare(sqlStatement);
+	var result = statement.pluck(parameters);
 
-	return statement.pluck(parameters);
+	if (result && result.length > 0) {
+		result = result[0];
+	}
+
+	return result;
 }
 
 sql.executeRow = function(sqlStatement, parameters) {
