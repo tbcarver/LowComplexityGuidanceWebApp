@@ -50,6 +50,8 @@ function getLogData(err, req) {
 		data.stack = err.stack;
 	}
 
+	data.url = req.url.toString();
+
 	if (req.user) {
 		data.user = req.user.username;
 	}
