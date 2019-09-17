@@ -1,5 +1,5 @@
 
-// Using the html parsed element in order to receive innerHTML from the component's use in the HTML
+// Using the html parsed element in order to receive innerHTML from the component"s use in the HTML
 // i.e. <message-box type="danger">Error message</message-box>
 // StackOverflow 48498581
 
@@ -55,7 +55,7 @@ class MessageBox extends HTMLParsedElement {
 	}
 }
 
-customElements.define('message-box-closable', MessageBox);
+customElements.define("message-box-closable", MessageBox);
 
 
 export default MessageBox

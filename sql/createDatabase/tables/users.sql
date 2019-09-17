@@ -5,7 +5,8 @@ CREATE TABLE Users (
     firstName TEXT NOT NULL,
     lastName TEXT NOT NULL,
     passwordHash TEXT NOT NULL,
-    passwordHashSalt TEXT NOT NULL
+    passwordHashSalt TEXT NOT NULL,
+    createdDate TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- tempadmin with password tempAdmin

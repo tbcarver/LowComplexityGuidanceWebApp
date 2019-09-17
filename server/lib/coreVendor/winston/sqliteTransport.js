@@ -1,16 +1,12 @@
 
-var Transport = require('winston-transport');
-const util = require('util');
+var Transport = require("winston-transport");
+var logsStore = require("../../../store/logsStore");
 
 class SqliteTransport extends Transport {
 
   log(info, callback) {
-    setImmediate(() => {
-      this.emit('logged', info);
-    });
 
-    // Perform the writing to the remote service
-
+    logsStore.addLog(info.message, info.url, info.username, info.stack, info.timestamp);
     callback();
   }
 };

@@ -1,6 +1,6 @@
 
 var path = require("path");
-var Database = require('better-sqlite3');
+var Database = require("better-sqlite3");
 
 var sql = {};
 
@@ -31,6 +31,18 @@ sql.executeQuery = function(sqlStatement, parameters) {
 	var statement = this.db.prepare(sqlStatement);
 
 	return statement.all(parameters);
+}
+
+sql.executeNonQuery = function(sqlStatement, parameters) {
+
+	var statement = this.db.prepare(sqlStatement);
+	var info = statement.run(parameters);
+
+	if (info && info.changes === 1) {
+		info = info.lastInsertRowid;
+	}
+
+	return info;
 }
 
 

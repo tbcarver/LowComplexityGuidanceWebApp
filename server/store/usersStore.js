@@ -10,7 +10,8 @@ usersStore.getUserByUsername = function(username) {
 	var user = sql.executeRow(`
 		SELECT userId, username, firstName, lastName
 		FROM Users
-		WHERE username = @username`, { username: username });
+		WHERE username = @username`,
+		{ username });
 
 	return user;
 }
@@ -21,7 +22,8 @@ usersStore.getRoleNames = function(userId) {
 		SELECT roleName
 		FROM UsersRoles
 		INNER JOIN Roles ON UsersRoles.roleId = Roles.roleId		
-		WHERE userId = @userId`, { userId: userId });
+		WHERE userId = @userId`,
+		{ userId });
 
 	result = result.map(element => element.roleName);
 
@@ -35,7 +37,8 @@ usersStore.getPasswordHashes = function(username) {
 	var passwordHashes = sql.executeRow(`
 		SELECT passwordHash, passwordHashSalt
 		FROM Users
-		WHERE username = @username`, { username: username });
+		WHERE username = @username`,
+		{ username });
 
 	return passwordHashes;
 }

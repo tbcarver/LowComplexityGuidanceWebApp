@@ -1,4 +1,52 @@
 
+## General Naming
+
+**Do** use variable name rules. i.e. do not use dashes -.
+
+**Why?** Allows matching the names to object and property names.
+
+
+**Avoid** variable names that are programming language key words.
+
+**Why?** Allows using the name without having to escape it with []. Allows matching the column name to a property name.
+
+
+**Avoid** variable names with spaces.
+
+**Why?** Allows using the name without having to escape it with []. Allows matching the column name to a property name.
+
+
+**Avoid** all abbreviations even those used by a particular library, like req, err, or msg. Well known abbreviations like HTML or HTTP are acceptable. Use wikipedia as a test for well known abbreviations.
+
+**Why?** Reduce cognitive load. English words are easier to understand. No translation or extra training required.
+
+
+
+## Table Names
+
+**Do** use pascal case.
+
+**Why?** Matches class name casing.
+
+**Do** use plural names.
+
+**Why?** A row represents a single item, a table represents a group of these items.
+
+
+
+## Column Names
+
+**Do** use camel case.
+
+**Why?** Distinguish names from table names. Matches object property name casing.
+
+
+**Do** use singular names.
+
+**Why?** A row represents a single item.  The column is a part of that single item.
+
+
+
 ## Primary Keys
 
 **Do** use an INTEGER PRIMARY KEY.
@@ -11,3 +59,11 @@
 **Do** use a primary key for every table.
 
 **Why?** Improves the performance of all tables.
+
+
+
+## Foreign Keys
+
+**Avoid** foreign keys on records that must be inserted with minimal failure. i.e. log records.
+
+**Why?** Reduce the failure of inserting critical records.

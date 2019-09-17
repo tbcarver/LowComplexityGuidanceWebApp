@@ -1,13 +1,13 @@
 
 function initialize(app, acl) {
     
-    acl.allow('public exact', "/test/error/:status?", '*');
+    acl.allow("public exact", "/test/error/:status?", "*");
     app.get("/test/error/:status?", getError);
     
-    acl.allow('public exact', "/test/exception", '*');
+    acl.allow("public exact", "/test/exception", "*");
     app.get("/test/exception", getException);
     
-    acl.allow('public exact', "/test/log/:level?", '*');
+    acl.allow("public exact", "/test/log/:level?", "*");
     app.get("/test/log/:level?", getLog);
 }
 

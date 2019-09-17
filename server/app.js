@@ -20,10 +20,10 @@ const logger = winston.createLogger({
 
 if (process.env.LOG_TO_FILE === "true") {
     // Write errors and below
-    logger.add(new winston.transports.File({ filename: './logs/error.log', level: 'error', handleExceptions: true }));
+    logger.add(new winston.transports.File({ filename: "./logs/error.log", level: "error", handleExceptions: true }));
 
     // Write all
-    logger.add(new winston.transports.File({ filename: './logs/all.log' }));
+    logger.add(new winston.transports.File({ filename: "./logs/all.log" }));
 }
 
 if (process.env.NODE_ENV !== "production") {

@@ -1,6 +1,6 @@
 
-var fs = require('fs');
-var path = require('path');
+var fs = require("fs");
+var path = require("path");
 
 function modifyFile(pathName, encoding, fileExtensionFilters, fileAction) {
 

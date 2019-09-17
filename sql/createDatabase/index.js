@@ -1,7 +1,7 @@
 
 var fs = require("fs");
 var path = require("path");
-var Database = require('better-sqlite3');
+var Database = require("better-sqlite3");
 var directoryWalkerSync = require("../../server/lib/core/fs/directoryWalkerSync");
 var fileReaderSync = require("../../server/lib/core/fs/fileReaderSync");
 
@@ -38,7 +38,7 @@ if (create) {
 
 	var directoryStatistics = directoryWalkerSync.walkDirectory(__dirname, null, null, function(filePathName, stats) {
 
-		fileReaderSync.readFile(filePathName, stats, 'utf8', ['.sql'], function(data, pathName) {
+		fileReaderSync.readFile(filePathName, stats, "utf8", [".sql"], function(data, pathName) {
 
 			console.log(pathName);
 
@@ -49,7 +49,7 @@ if (create) {
 	});
 
 	console.log("");	
-	console.log('Directories found: ' + directoryStatistics.directoriesFound);
-	console.log('Files found: ' + directoryStatistics.filesFound);
-	console.log('Files read: ' + filesRead);
+	console.log("Directories found: " + directoryStatistics.directoriesFound);
+	console.log("Files found: " + directoryStatistics.filesFound);
+	console.log("Files read: " + filesRead);
 }

@@ -1,5 +1,5 @@
-var fs = require('fs');
-var path = require('path');
+var fs = require("fs");
+var path = require("path");
 
 function walkDirectory(pathName, directoryStatistics, directoryAction, fileAction) {
 

@@ -1,6 +1,6 @@
 
-var fs = require('fs-extra');
-var path = require('path');
+var fs = require("fs-extra");
+var path = require("path");
 
 async function walkDirectory(pathName, directoryStatistics, fileAction) {
 

@@ -4,7 +4,7 @@
 
 // Import all sass sources here for use with webpack
 // These are output into a assets/dist/main.css file with a cache busting hash
-import style from './sass/main.scss';
+import style from "./sass/main.scss";
 
 // Import in all client web components
 import MessageBox from "./webComponents/messageBoxes/messageBox.component";

@@ -9,11 +9,11 @@ var matchOperatorsRe = /[|\\{}()[\]^$+*?.]/g;
 
 function escapeRegEx(text) {
 
-	if (typeof text !== 'string') {
-		throw new TypeError('Expected a string');
+	if (typeof text !== "string") {
+		throw new TypeError("Expected a string");
 	}
 
-	return text.replace(matchOperatorsRe, '\\$&');
+	return text.replace(matchOperatorsRe, "\\$&");
 }
 
 

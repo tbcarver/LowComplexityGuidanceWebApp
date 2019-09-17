@@ -1,7 +1,7 @@
 
 function initialize(app, acl) {
     
-    acl.allow('public exact', "/", '*');
+    acl.allow("public exact", "/", "*");
     app.get("/", getHome);
 }
 
