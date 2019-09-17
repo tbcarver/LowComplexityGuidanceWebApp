@@ -1,8 +1,8 @@
 
 function initialize(app, acl) {
     
-    acl.allow('public exact', "/test/error", '*');
-    app.get("/test/error", getError);
+    acl.allow('public exact', "/test/error/:status?", '*');
+    app.get("/test/error/:status?", getError);
     
     acl.allow('public exact', "/test/exception", '*');
     app.get("/test/exception", getException);
@@ -14,7 +14,9 @@ function initialize(app, acl) {
 /** @param { Request } req @param { Response } res */
 function getError(req, res, next) {
 
-	next(new ServerError("Test error handled with next(err)"));
+    var status = req.params.status || 500;
+
+	next(new ServerError("Test error handled with next(err)", status));
 };
 
 /** @param { Request } req @param { Response } res */
