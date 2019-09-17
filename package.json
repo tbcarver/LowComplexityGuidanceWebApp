@@ -31,7 +31,8 @@
     "passport-local": "^1.0.0",
     "popper.js": "^1.15.0",
     "serve-favicon": "^2.5.0",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "winston-transport": "^4.3.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.0",

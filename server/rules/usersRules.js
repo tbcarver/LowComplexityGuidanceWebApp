@@ -4,7 +4,7 @@ var crypto = require("crypto");
 
 var usersRules = {};
 
-usersStore.validatePassword = function(username, password) {
+usersRules.validatePassword = function(username, password) {
 
 	var isValid = false;
 

@@ -28,7 +28,7 @@ usersStore.getRoleNames = function(userId) {
 	return result;
 }
 
-usersStore.getPasswordHashes = function(username, password) {
+usersStore.getPasswordHashes = function(username) {
 
 	username = username.toLowerCase();
 
@@ -39,3 +39,6 @@ usersStore.getPasswordHashes = function(username, password) {
 
 	return passwordHashes;
 }
+
+
+module.exports = usersStore;

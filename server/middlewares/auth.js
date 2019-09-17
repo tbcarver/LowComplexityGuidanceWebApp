@@ -5,42 +5,42 @@ var queryStringKeys = require("../keys/queryStringKeys");
 /** @param { Request } req @param { Response } res */
 function middleware(req, res, next) {
 
-	req.acl.whatResources("public exact", function(err, resources) {
+	var resource;
 
-		if (err) {
-			throw err;
+	// Use the route pattern as the resource to check
+	for (var layer of req.app._router.stack) {
+		if (layer.route && layer.match(req.path)) {
+			resource = layer.route.path;
 		}
+	}
 
-		var publicRoutesExact = Object.keys(resources);
+	if (resource) {
 
-		if (coreString.compareAny(publicRoutesExact, req.path, true)) {
-			next();
-		} else {
+		req.acl.whatResources("public exact", function(err, resources) {
 
-			req.acl.whatResources("public starts with", function(err, resources) {
+			if (err) {
+				throw err;
+			}
 
-				if (err) {
-					throw err;
-				}
+			var publicRoutesExact = Object.keys(resources);
 
-				var publicRoutesStartsWith = Object.keys(resources);
+			if (coreString.compareAny(publicRoutesExact, resource, true)) {
+				next();
+			} else {
 
-				if (coreString.startsWithAny(publicRoutesStartsWith, req.path, true)) {
-					next();
-				} else {
+				req.acl.whatResources("public starts with", function(err, resources) {
 
-					if (req.isAuthenticated()) {
+					if (err) {
+						throw err;
+					}
 
-						var resource;
+					var publicRoutesStartsWith = Object.keys(resources);
 
-						// Use the route pattern as the resource to check
-						for (var layer of req.app._router.stack) {
-							if (layer.route && layer.match(req.path)) {
-								resource = layer.route.path;
-							}
-						}
+					if (coreString.startsWithAny(publicRoutesStartsWith, resource, true)) {
+						next();
+					} else {
+						if (req.isAuthenticated()) {
 
-						if (resource) {
 							req.acl.isAllowed(req.user.userId, resource, req.method, function(err, allowed) {
 
 								if (err) {
@@ -54,17 +54,17 @@ function middleware(req, res, next) {
 								}
 							});
 						} else {
-							next(new ServerError("Unknown route", 404));
-						}
-					} else {
 
-						var returnUrl = encodeURIComponent(req.url);
-						res.redirect(`/login?${queryStringKeys.returnUrl}=${returnUrl}`);
+							var returnUrl = encodeURIComponent(req.url);
+							res.redirect(`/login?${queryStringKeys.returnUrl}=${returnUrl}`);
+						}
 					}
-				}
-			});
-		}
-	});
+				});
+			}
+		});
+	} else {
+		next(new ServerError("Unknown route", 404));
+	}
 }
 
 

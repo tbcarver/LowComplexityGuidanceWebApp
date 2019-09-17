@@ -1,25 +1,32 @@
 
-require('dotenv').config();
+require("dotenv").config();
 
-const winston = require('winston');
-const ServerError = require('./serverError');
-const express = require("express");
-const Acl = require('acl');
-const AppModel = require("./appModel");
+var winston = require("winston");
+var customFormat = require("./lib/coreVendor/winston/customFormat");
+var sqliteTransport = require("./lib/coreVendor/winston/sqliteTransport");
+var ServerError = require("./serverError");
+var express = require("express");
+var Acl = require("acl");
+var AppModel = require("./appModel");
 
 const logger = winston.createLogger({
-    format: winston.format.simple(),
+    format: winston.format.combine(
+        winston.format.timestamp(), 
+        customFormat),
     transports: [
-
-        // Write all logs error and below
-        new winston.transports.File({ filename: './logs/error.log', level: 'error', handleExceptions: true }),
-
-        // Write to all logs
-        new winston.transports.File({ filename: './logs/all.log' }),
+        new sqliteTransport(),
     ],
 });
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.LOG_TO_FILE === "true") {
+    // Write errors and below
+    logger.add(new winston.transports.File({ filename: './logs/error.log', level: 'error', handleExceptions: true }));
+
+    // Write all
+    logger.add(new winston.transports.File({ filename: './logs/all.log' }));
+}
+
+if (process.env.NODE_ENV !== "production") {
     logger.add(new winston.transports.Console({ handleExceptions: true }));
 }
 
@@ -49,5 +56,5 @@ require("./init/errors").initialize(app, acl);
 var port = process.env.PORT || 3000;
 
 app.listen(port, function() {
-    console.log(`Server listening on port ${port}.`)
+    console.log(`Server listening on port ${port}. http://localhost:3000`);
 });

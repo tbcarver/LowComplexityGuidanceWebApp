@@ -34,7 +34,7 @@ function initialize(app) {
 			}
 		},
 		// Do not shut down the server on non client errors
-		shutdown : () => {},
+		shutdown: () => { },
 	});
 
 	// 404 needs to be set at the very end of the routes
@@ -44,11 +44,10 @@ function initialize(app) {
 
 function getLogData(err, req) {
 
-	var data = {}
+	var data = {};
 
-	// TODO: how to get date and error message to the log? default way with winston?
 	if (err) {
-		data.message = "\n" + err.stack;
+		data.stack = err.stack;
 	}
 
 	if (req.user) {
@@ -58,7 +57,7 @@ function getLogData(err, req) {
 	if (req.user) {
 		data.url = req.url.toString();
 	}
-	
+
 	return data;
 }
 
