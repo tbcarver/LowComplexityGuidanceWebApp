@@ -41,7 +41,4 @@ function isValidFile(fileExtension, fileExtensionFilters) {
 }
 
 
-
-if (typeof module != "undefined" && module.exports) {
-	module.exports.modifyFile = modifyFile;
-}
+module.exports.modifyFile = modifyFile;

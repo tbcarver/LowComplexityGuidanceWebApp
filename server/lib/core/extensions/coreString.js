@@ -1,7 +1,9 @@
 
 var escapeRegex = require("../system/escapeRegEx").escapeRegEx;
 
-function compare(value, target, isCaseInsensitive) {
+var coreString = {};
+
+coreString.compare = function(value, target, isCaseInsensitive) {
 
 	if (isCaseInsensitive) {
 		return (value.toLowerCase() === target.toLowerCase());
@@ -10,13 +12,13 @@ function compare(value, target, isCaseInsensitive) {
 	}
 };
 
-function compareAny(values, search, isCaseInsensitive) {
+coreString.compareAny = function(values, search, isCaseInsensitive) {
 
 	var isEqual = false;
 
 	for (var value of values) {
 
-		if (compare(value, search, isCaseInsensitive)) {
+		if (this.compare(value, search, isCaseInsensitive)) {
 
 			isEqual = true;
 			break;
@@ -26,7 +28,7 @@ function compareAny(values, search, isCaseInsensitive) {
 	return isEqual;
 };
 
-function includesAny(values, search) {
+coreString.includesAny = function(values, search) {
 
 	var includes = false;
 
@@ -42,7 +44,7 @@ function includesAny(values, search) {
 	return includes;
 };
 
-function startsWithAny(values, search) {
+coreString.startsWithAny = function(values, search) {
 
 	var startsWith = false;
 
@@ -58,7 +60,7 @@ function startsWithAny(values, search) {
 	return startsWith;
 };
 
-function compressWhiteSpace(value) {
+coreString.compressWhiteSpace = function(value) {
 
 	if (value) {
 
@@ -68,7 +70,7 @@ function compressWhiteSpace(value) {
 	return value;
 }
 
-function trimStartString(value, trimString) {
+coreString.trimStartString = function(value, trimString) {
 
 	if (value) {
 
@@ -84,7 +86,7 @@ function trimStartString(value, trimString) {
 
 const ellipsis = "...";
 
-function truncate(value, length, addEllipsis) {
+coreString.truncate = function(value, length, addEllipsis) {
 
 	if (value) {
 
@@ -107,14 +109,22 @@ function truncate(value, length, addEllipsis) {
 	return value;
 }
 
+coreString.addNumberInString = function(string, number) {
 
-if (typeof module != "undefined" && module.exports) {
+	var result = string.replace(/\d+/, function(value) {
 
-	module.exports.compare = compare;
-	module.exports.compareAny = compareAny;
-	module.exports.includesAny = includesAny;
-	module.exports.startsWithAny = startsWithAny;
-	module.exports.compressWhiteSpace = compressWhiteSpace;
-	module.exports.trimStartString = trimStartString;
-	module.exports.truncate = truncate;
+		var parsedNumber = parseFloat(value);
+
+		if (!isNaN(parsedNumber)) {
+
+			value = parsedNumber + number;
+		}
+
+		return value;
+	});
+
+	return result;
 }
+
+
+module.exports = coreString;

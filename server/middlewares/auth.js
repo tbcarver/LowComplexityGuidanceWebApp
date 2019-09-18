@@ -1,6 +1,9 @@
 
 var coreString = require("../lib/core/extensions/coreString");
+var coreArray = require("../lib/core/extensions/coreArray");
 var queryStringKeys = require("../keys/queryStringKeys");
+
+var rolesAllAllowed = ["administrator"];
 
 /** @param { Request } req @param { Response } res */
 function middleware(req, res, next) {
@@ -18,18 +21,22 @@ function middleware(req, res, next) {
 		authorizePublic(req, res, next, resource, function() {
 			if (req.isAuthenticated()) {
 
-				req.acl.isAllowed(req.user.userId, resource, req.method, function(err, allowed) {
+				if (coreArray.includesAny(rolesAllAllowed, req.user.roles)) {
+					next();
+				} else {
+					req.acl.isAllowed(req.user.userId, resource, req.method, function(err, allowed) {
 
-					if (err) {
-						throw err;
-					}
+						if (err) {
+							throw err;
+						}
 
-					if (allowed) {
-						next();
-					} else {
-						next(new ServerError("Unauthorized", 403));
-					}
-				});
+						if (allowed) {
+							next();
+						} else {
+							next(new ServerError("Unauthorized", 403));
+						}
+					});
+				}
 			} else {
 
 				var returnUrl = encodeURIComponent(req.url);

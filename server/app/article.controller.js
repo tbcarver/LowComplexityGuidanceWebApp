@@ -3,7 +3,7 @@ var passport = require("passport");
 
 function initialize(app, acl) {
     
-    acl.allow(["administrator"], "/editor/:article?", "*");
+    acl.allow(["contributor"], "/editor/:article?", "*");
     app.get("/editor/:article?", getEditor);
 }
 

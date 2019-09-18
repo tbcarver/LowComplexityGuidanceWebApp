@@ -68,7 +68,4 @@ function ensureDirectoryStatistics(directoryStatistics) {
 }
 
 
-
-if (typeof module != "undefined" && module.exports) {
-	module.exports.walkDirectory = walkDirectory;
-}
+module.exports.walkDirectory = walkDirectory;

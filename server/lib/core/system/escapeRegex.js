@@ -17,7 +17,4 @@ function escapeRegEx(text) {
 }
 
 
-if (typeof module != "undefined" && module.exports) {
-
-	module.exports.escapeRegEx = escapeRegEx;
-}
+module.exports.escapeRegEx = escapeRegEx;

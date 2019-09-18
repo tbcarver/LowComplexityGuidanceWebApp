@@ -59,7 +59,4 @@ function htmlEncode(string) {
 }
 
 
-if (typeof module != "undefined" && module.exports) {
-
-	module.exports = htmlEncode;
-}
+module.exports = htmlEncode;

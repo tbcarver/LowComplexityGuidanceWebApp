@@ -47,8 +47,5 @@ function isValidFile(pathName, stats, readFileExtensions) {
 }
 
 
-if (typeof module != "undefined" && module.exports) {
-
-    module.exports.readFile = readFile;
-    module.exports.isValidFile = isValidFile;
-}
+module.exports.readFile = readFile;
+module.exports.isValidFile = isValidFile;
