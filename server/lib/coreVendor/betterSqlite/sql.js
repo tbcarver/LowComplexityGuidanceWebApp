@@ -10,7 +10,13 @@ sql.db = new Database(filePathName, { fileMustExist: true });
 sql.executeScalar = function(sqlStatement, parameters) {
 
 	var statement = this.db.prepare(sqlStatement);
-	var result = statement.pluck(parameters);
+	var result;
+	
+	if (parameters) {
+		result = statement.pluck(parameters);
+	} else {
+		result = statement.pluck();
+	}
 
 	if (result && result.length > 0) {
 		result = result[0];
@@ -22,31 +28,47 @@ sql.executeScalar = function(sqlStatement, parameters) {
 sql.executeRow = function(sqlStatement, parameters) {
 
 	var statement = this.db.prepare(sqlStatement);
+	var result;
+	
+	if (parameters) {
+		result = statement.get(parameters);
+	} else {
+		result = statement.get();
+	}
 
-	return statement.get(parameters);
+	return result;
 }
 
 sql.executeQuery = function(sqlStatement, parameters) {
 
 	var statement = this.db.prepare(sqlStatement);
+	var result;
 	
 	if (parameters) {
-		return statement.all(parameters);
+		result = statement.all(parameters);
 	} else {
-		return statement.all();
+		result = statement.all();
 	}
+
+	return result;
 }
 
 sql.executeNonQuery = function(sqlStatement, parameters) {
 
 	var statement = this.db.prepare(sqlStatement);
-	var info = statement.run(parameters);
-
-	if (info && info.changes === 1) {
-		info = info.lastInsertRowid;
+	var result;
+	
+	if (parameters) {
+		result = statement.run(parameters);
+	} else {
+		result = statement.run();
 	}
 
-	return info;
+	if (result && result.changes === 1) {
+		result = result.lastInsertRowid;
+	}
+
+	return result;
 }
 
 

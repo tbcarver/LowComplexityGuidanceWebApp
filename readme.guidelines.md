@@ -90,7 +90,5 @@ In rare cases an exception should be allowed.
 
 **Do** return from only one place in a function.
 
-**Except** the nearly the entirety of the function is a simple if else.
-
 **Why?** Makes it easier to know where the function is exiting. Allows for easier placement of breakpoints at the exit of the function.
 
