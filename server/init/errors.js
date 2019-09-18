@@ -6,7 +6,7 @@ function initialize(app) {
 	var handler = errorHandler({
 		handlers: {
 			"200": function(err, req, res, next) {
-				logger.error(`500`, getLogData(err, req));
+				logger.error(getLogData(err, req, 500));
 				res.status(500);
 
 				var model = new AppModel(req, "500 Error");
@@ -19,14 +19,14 @@ function initialize(app) {
 				res.render("errors/403.template.hbs", model);
 			},
 			"404": function(err, req, res, next) {
-				logger.info(`404`, getLogData(null, req));
+				logger.info(getLogData(null, req, 404));
 				res.status(404);
 
 				var model = new AppModel(req, "404 Not Found");
 				res.render("errors/404.template.hbs", model);
 			},
 			"500": function(err, req, res, next) {
-				logger.error(`500`, getLogData(err, req));
+				logger.error(getLogData(err, req, 500));
 				res.status(500);
 
 				var model = new AppModel(req, "500 Error");
@@ -42,14 +42,18 @@ function initialize(app) {
 	app.use(handler);
 }
 
-function getLogData(err, req) {
+function getLogData(err, req, status) {
 
 	var data = {};
 
+	data.message = status.toString();
+
 	if (err) {
 		data.stack = err.stack;
+		data.message = err.message;
 	}
 
+	data.status = status;
 	data.url = req.url.toString();
 
 	if (req.user) {

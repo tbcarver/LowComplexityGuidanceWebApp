@@ -1,6 +1,4 @@
 
-var passport = require("passport");
-
 function initialize(app, acl) {
     
     acl.allow(["contributor"], "/editor/:article?", "*");
@@ -12,7 +10,7 @@ function getEditor(req, res) {
     
     var model = new AppModel(req, "New Article", "New Article");
     
-    res.render("article-editor.template.hbs", model);
+    res.render("articleEditor.template.hbs", model);
 };
 
 

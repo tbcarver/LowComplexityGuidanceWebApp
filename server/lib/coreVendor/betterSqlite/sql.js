@@ -29,8 +29,12 @@ sql.executeRow = function(sqlStatement, parameters) {
 sql.executeQuery = function(sqlStatement, parameters) {
 
 	var statement = this.db.prepare(sqlStatement);
-
-	return statement.all(parameters);
+	
+	if (parameters) {
+		return statement.all(parameters);
+	} else {
+		return statement.all();
+	}
 }
 
 sql.executeNonQuery = function(sqlStatement, parameters) {

@@ -1,5 +1,8 @@
 
 var expressHandlebars = require("express-handlebars");
+var addAttributeByBooleanHelper = require("../lib/coreVendor/handlebars/helpers/addAttributeByBooleanHelper");
+var addAttributeByCompareHelper = require("../lib/coreVendor/handlebars/helpers/addAttributeByCompareHelper");
+var addNameByBooleanHelper = require("../lib/coreVendor/handlebars/helpers/addNameByBooleanHelper");
 var addNameByCompareHelper = require("../lib/coreVendor/handlebars/helpers/addNameByCompareHelper");
 
 function initialize(app) {
@@ -10,6 +13,9 @@ function initialize(app) {
 		partialsDir: "server/app/partials/",
 		defaultLayout: "main.layout.hbs",
 		helpers: {
+			[addAttributeByBooleanHelper.name]: addAttributeByBooleanHelper.helper,
+			[addAttributeByCompareHelper.name]: addAttributeByCompareHelper.helper,
+			[addNameByBooleanHelper.name]: addNameByBooleanHelper.helper,
 			[addNameByCompareHelper.name]: addNameByCompareHelper.helper,
 		},
 	});

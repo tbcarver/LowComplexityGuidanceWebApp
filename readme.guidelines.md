@@ -29,6 +29,9 @@ If you fully understand the meaning behind the guideline and have a good reason 
 
 **Avoid** indicates something you should almost never do. Code examples to *avoid* have an unmistakable red header.
 
+**Except** indicates an exception case to the other guidelines.
+In rare cases an exception should be allowed.
+
 **Why?** gives reasons for following the previous recommendations.
 
 
@@ -80,3 +83,14 @@ If you fully understand the meaning behind the guideline and have a good reason 
 **Avoid** any js resources that are not versioned.
 
 **Why?** When caching all static resources for 1 year it is necessary to load static resources that have changed.
+
+
+
+## JavaScript
+
+**Do** return from only one place in a function.
+
+**Except** the nearly the entirety of the function is a simple if else.
+
+**Why?** Makes it easier to know where the function is exiting. Allows for easier placement of breakpoints at the exit of the function.
+
