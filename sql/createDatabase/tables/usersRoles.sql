@@ -6,3 +6,4 @@ CREATE TABLE UsersRoles (
 );
 
 INSERT INTO UsersRoles (userId, roleID) VALUES (1, 1);
+INSERT INTO UsersRoles (userId, roleID) VALUES (2, 2);

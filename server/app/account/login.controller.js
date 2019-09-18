@@ -44,7 +44,7 @@ function postLogin(req, res, next) {
 
 			var model = new AppModel(req, "Login");
 
-			model.message = "The username or password was invalid";
+			model.message = "The username or password was invalid.";
 			model.messageType = "danger";
 
 			res.render("account/login.template.hbs", model);

@@ -6,7 +6,12 @@ var usersStore = require("../store/usersStore");
 var sqliteStrategy = new LocalStrategy(
 	function(username, password, done) {
 
-		var isValid = usersRules.validatePassword(username, password);
+		var isValid = false;
+		var passwordHashes = usersStore.getPasswordHashes(username);
+
+		if (passwordHashes) {
+			isValid = usersRules.validatePassword(password, passwordHashes.passwordHash, passwordHashes.passwordHashSalt);
+		}
 
 		if (isValid) {
 
