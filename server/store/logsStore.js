@@ -25,5 +25,16 @@ logsStore.getLogs = function() {
 	return result;
 }
 
+logsStore.getLog = function(logId) {
+
+	var result = sql.executeRow(`
+		SELECT logId, logLevel, logMessage, httpStatus, requestUrl, username, stack, createdTimestamp
+		FROM Logs
+		WHERE logId = @logId`,
+		{ logId });
+
+	return result;
+}
+
 
 module.exports = logsStore;

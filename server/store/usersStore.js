@@ -18,16 +18,16 @@ usersStore.getUserByUsername = function(username) {
 
 usersStore.getRoleNames = function(userId) {
 
-	var result = sql.executeQuery(`
+	var roleNames = sql.executeQuery(`
 		SELECT roleName
 		FROM UsersRoles
 		INNER JOIN Roles ON UsersRoles.roleId = Roles.roleId		
 		WHERE userId = @userId`,
 		{ userId });
 
-	result = result.map(element => element.roleName);
+	roleNames = roleNames.map(element => element.roleName);
 
-	return result;
+	return roleNames;
 }
 
 usersStore.getPasswordHashes = function(username) {
