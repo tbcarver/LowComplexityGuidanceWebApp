@@ -11,6 +11,7 @@ function getLogs(req, res) {
     
     var model = new AppModel(req, "Logs");
 
+	model.layout = "oneColumn.layout.hbs";
 	model.logs = logsStore.getLogs();
     
     res.render("admin/logs.template.hbs", model);

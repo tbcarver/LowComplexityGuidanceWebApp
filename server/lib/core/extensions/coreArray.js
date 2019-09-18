@@ -31,9 +31,20 @@ coreArray.incrementArrayIndex = function(targetArray, currentIndex) {
 }
 
 coreArray.pushValue = function(array, value) {
-	
+
 	if (value) {
 		array.push(value);
+	}
+}
+
+coreArray.trim = function(array) {
+
+	if (array) {
+		for (var index = 0; index < array.length; index++) {
+			if (typeof array[index] === "string") {
+				array[index] = array[index].trim();
+			}
+		}
 	}
 }
 

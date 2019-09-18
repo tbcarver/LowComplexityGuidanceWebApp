@@ -6,6 +6,7 @@ function AppModel(req, title, navbarLinkTitle) {
 
 	if (req.user) {
 		this.userFullName = req.user.fullName;
+		this.userRoles = req.user.roles;
 	}
 }
 

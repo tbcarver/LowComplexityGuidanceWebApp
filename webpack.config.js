@@ -48,5 +48,10 @@ module.exports = {
 			template: "./server/app/layouts/src/main.layout.hbs",
 			inject: false,
 		}),
+		new HtmlWebpackPlugin({
+			filename: "../../server/app/layouts/dist/oneColumn.layout.hbs",
+			template: "./server/app/layouts/src/oneColumn.layout.hbs",
+			inject: false,
+		}),
 	],
 }

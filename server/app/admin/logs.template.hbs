@@ -1,33 +1,26 @@
-<div class="container mt-3">
-	<div class="row">
-		<div class="col">
+<h1>Logs</h1>
 
-			<h1>Logs</h1>
+<table id="usersMaster" class="table mt-3">
+	<thead>
+		<tr>
+			<th class="">Level</th>
+			<th class="text-center">Message&nbsp;<i class="far fa-comment text-muted"></i></th>
+			<th class="text-center text-muted">Status</th>
+			<th class="text-center text-muted">Url</th>
+			<th class="text-center text-muted"><i class="fa fa-user"></i>&nbsp;Username</th>
+		</tr>
+	</thead>
 
-			<table id="usersMaster" class="table mt-3">
-				<thead>
-					<tr>
-						<th class="">Level</th>
-						<th class="text-center">Message&nbsp;<i class="far fa-comment text-muted"></i></th>
-						<th class="text-center text-muted">Status</th>
-						<th class="text-center text-muted">Url</th>
-						<th class="text-center text-muted"><i class="fa fa-user"></i>&nbsp;Username</th>
-					</tr>
-				</thead>
-
-				<tbody>
-					{{#each logs}}
-					<tr>
-						<td><a href="/logs/{{logId}}" class="{{addNameByCompare "text-danger" "error" logLevel}}">{{logLevel}}</a></td>
-						<td class="" title="{{stack}}">{{logMessage}}</td>
-						<td class="text-center">{{httpStatus}}</td>
-						<td class="text-center">{{requestUrl}}</td>
-						<td class="text-center">{{username}}</td>
-					</tr>
-					{{/each}}
-				</tbody>
-			</table>
-
-		</div>
-	</div>
-</div>
+	<tbody>
+		{{#each logs}}
+		<tr>
+			<td><a href="/logs/{{logId}}" class="{{addNameByCompare "text-danger" "error" logLevel}}">{{logLevel}}</a>
+			</td>
+			<td class="" title="{{stack}}">{{logMessage}}</td>
+			<td class="text-center">{{httpStatus}}</td>
+			<td class="text-center">{{requestUrl}}</td>
+			<td class="text-center">{{username}}</td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
