@@ -7,6 +7,10 @@ helpers.push(require("../lib/coreVendor/handlebars/helpers/addAttributeByBoolean
 helpers.push(require("../lib/coreVendor/handlebars/helpers/addAttributeByCompareHelper"));
 helpers.push(require("../lib/coreVendor/handlebars/helpers/addNameByBooleanHelper"));
 helpers.push(require("../lib/coreVendor/handlebars/helpers/addNameByCompareHelper"));
+helpers.push(require("../lib/coreVendor/handlebars/helpers/formatDateHelper"));
+helpers.push(require("../lib/coreVendor/handlebars/helpers/formatDateShortHelper"));
+helpers.push(require("../lib/coreVendor/handlebars/helpers/formatDateTimeHelper"));
+helpers.push(require("../lib/coreVendor/handlebars/helpers/formatDateTimeShortHelper"));
 helpers.push(require("../lib/coreVendor/handlebars/helpers/hasRoleHelper"));
 
 function initialize(app) {
