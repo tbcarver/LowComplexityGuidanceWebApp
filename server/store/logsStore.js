@@ -25,6 +25,31 @@ logsStore.getLogs = function() {
 	return result;
 }
 
+logsStore.getPagedLogs = function(pageNumber, pageSize) {
+
+	var limitOffset = sql.getLimitOffset(pageNumber, pageSize);
+
+	var result = sql.executeQuery(`
+		SELECT logId, logLevel, logMessage, httpStatus, requestUrl, username, stack, createdTimestamp
+		FROM Logs
+		WHERE logId NOT IN (SELECT logId FROM Logs
+							ORDER BY logId DESC LIMIT @offset)
+		ORDER BY logId DESC LIMIT @limit`,
+		limitOffset);
+
+	var total = 0;
+	if (result.length > 0) {
+		total = this.getCount();
+	}
+
+	result = {
+		total,
+		logs: result,
+	};
+
+	return result;
+}
+
 logsStore.getLog = function(logId) {
 
 	var result = sql.executeRow(`
@@ -34,6 +59,11 @@ logsStore.getLog = function(logId) {
 		{ logId });
 
 	return result;
+}
+
+logsStore.getCount = function() {
+
+	return sql.executeScalar('SELECT COUNT(*) FROM Logs');
 }
 
 

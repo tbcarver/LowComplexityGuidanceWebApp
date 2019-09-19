@@ -92,3 +92,20 @@ In rare cases an exception should be allowed.
 
 **Why?** Makes it easier to know where the function is exiting. Allows for easier placement of breakpoints at the exit of the function.
 
+
+## Database
+
+**Do** Use efficient paging.
+
+-- Reasonably efficient pagination without OFFSET
+-- SQLite version (Adapted from MS SQL syntax)
+-- Source: http://www.phpbuilder.com/board/showpost.php?p=10376515&postcount=6
+
+SELECT foo, bar, baz, quux FROM table
+WHERE oid NOT IN ( SELECT oid FROM table
+                   ORDER BY title ASC LIMIT 50 )
+ORDER BY title ASC LIMIT 10
+
+**Avoid** LIMIT [no of rows] + OFFSET [row num].
+
+**Why?** Offset does a full table scan to the offset number causing major performance issues with large 10,000+ record sets.
