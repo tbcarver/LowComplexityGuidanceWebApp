@@ -43,8 +43,10 @@ logsStore.getPagedLogs = function(pageNumber, pageSize) {
 	}
 
 	result = {
-		total,
+		pageNumber,
+		pageSize,
 		logs: result,
+		total,
 	};
 
 	return result;
