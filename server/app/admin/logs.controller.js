@@ -3,8 +3,9 @@ var logsStore = require("../../store/logsStore");
 
 function initialize(app, acl) {
 
+    // acl noop
     app.get("/logs", getLogs);
-    app.get("/log/:logId", getLog);
+    app.get("/logs/:logId", getLog);
 }
 
 /** @param { Request } req @param { Response } res */

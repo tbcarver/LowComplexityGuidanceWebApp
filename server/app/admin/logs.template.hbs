@@ -14,7 +14,7 @@
 	<tbody>
 		{{#each logs}}
 		<tr>
-			<td><a href="/log/{{logId}}" class="{{addNameByCompare "text-danger" "error" logLevel}}">{{logLevel}}</a>
+			<td><a href="/logs/{{logId}}" class="{{addNameByCompare "text-danger" "error" logLevel}}">{{logLevel}}</a>
 			</td>
 			<td class="text-center">{{formatDateTimeShort createdTimestamp}}</td>
 			<td class="" title="{{stack}}">{{logMessage}}</td>
