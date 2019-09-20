@@ -37,6 +37,8 @@ class MessageBox extends HTMLParsedElement {
 	render() {
 
 		if (this.message) {
+			
+			this.style.display = "block";
 
 			var data = {
 				type: this.type,

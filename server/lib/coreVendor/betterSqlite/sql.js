@@ -71,7 +71,7 @@ sql.getLimitOffset = function(pageNumber, pageSize) {
 
 	var limitOffset = {
 		limit: pageSize,
-		offset: pageNumber * pageSize,
+		offset: (pageNumber - 1) * pageSize,
 	}
 
 	return limitOffset;

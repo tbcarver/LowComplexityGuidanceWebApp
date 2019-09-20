@@ -19,7 +19,7 @@ function getLogs(req, res) {
         pageNumber = parseInt(req.params.pageNumber);
     }
 
-    model.pagedLogs = logsStore.getPagedLogs(pageNumber, 5);
+    model.pagedLogs = logsStore.getPagedLogs(pageNumber, 10);
 
     res.render("admin/logsMaster.template.hbs", model);
 };
