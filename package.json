@@ -13,7 +13,7 @@
     "sass": "sass ./client/sass/main.scss ./assets/dist/main.css --load-path=node_modules/bootstrap/scss"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.9.0",
+    "@fortawesome/fontawesome-free": "5.9.0",
     "acl": "^0.4.11",
     "better-sqlite3": "^5.4.3",
     "body-parser": "^1.19.0",
@@ -23,7 +23,7 @@
     "express": "^4.17.1",
     "express-error-handler": "^1.1.0",
     "express-handlebars": "^3.0.0",
-    "handlebars": "^4.1.2",
+    "handlebars": "^4.2.1",
     "html-parsed-element": "^0.4.0",
     "jquery": "^3.3.1",
     "lodash": "^4.17.15",
@@ -45,13 +45,13 @@
     "handlebars-loader": "^1.7.1",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
-    "mocha": "^6.1.4",
+    "mocha": "^6.2.0",
     "nodemon": "^1.18.9",
-    "sass": "^1.22.10",
+    "sass": "^1.22.12",
     "sass-loader": "^8.0.0",
     "simple-mock": "^0.8.0",
     "style-loader": "^1.0.0",
-    "webpack": "^4.39.3",
-    "webpack-cli": "^3.3.8"
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9"
   }
 }
