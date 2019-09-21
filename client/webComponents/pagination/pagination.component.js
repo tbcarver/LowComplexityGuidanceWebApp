@@ -2,7 +2,9 @@
 // Using require only on handlebars templates with handlebars-loader
 var template = require("./pagination.template.hbs");
 
-class MessageBox extends HTMLElement {
+import { unescape } from "lodash";
+
+class Pagination extends HTMLElement {
 
 	constructor() {
 		super();
@@ -11,39 +13,16 @@ class MessageBox extends HTMLElement {
 	}
 
 	static get observedAttributes() {
-		return ["page-number", "page-size", "total", "display-numbers"];
+		return ["pagination-data"];
 	}
 
-	get pageNumber() {
-		return this.getAttribute("page-number");
-	}
+	get paginationData() {
 
-	set pageNumber(value) {
-		this.setAttribute("page-number", value);
-	}
+		var paginationData = this.getAttribute("pagination-data");
+		paginationData = unescape(paginationData);
+		paginationData = JSON.parse(paginationData);
 
-	get pageSize() {
-		return this.getAttribute("page-size");
-	}
-
-	set pageSize(value) {
-		this.setAttribute("page-size", value);
-	}
-
-	get total() {
-		return this.getAttribute("total");
-	}
-
-	set total(value) {
-		this.setAttribute("total", value);
-	}
-
-	get displayNumbers() {
-		return this.getAttribute("display-numbers");
-	}
-
-	set displayNumbers(value) {
-		this.setAttribute("display-numbers", value);
+		return paginationData;
 	}
 
 	connectedCallback() {
@@ -61,25 +40,50 @@ class MessageBox extends HTMLElement {
 
 	render() {
 
-		if (this.pageNumber && this.pageSize && (this.total || this.total === 0)) {
+		debugger
+		var paginationData = this.paginationData;
 
-			var pageNumber = parseInt(this.pageNumber);
-			var pageSize = parseInt(this.pageSize);
-			var total = parseInt(this.total);
-
-			var totalPages = pageSize * total;
+		if (paginationData.pageNumber && paginationData.pageSize && (paginationData.total || paginationData.total === 0)) {
+			var pageNumber = parseInt(paginationData.pageNumber);
+			var pageSize = parseInt(paginationData.pageSize);
+			var total = parseInt(paginationData.total);
+			var totalPages = (pageSize > 0) ? Math.ceil(total / pageSize) : 1;
+			var url = paginationData.url;
 
 			var data = {
-				type: this.type,
-				message: this.message
+				startNumber: ((pageNumber - 1) * pageSize) + 1,
+				throughNumber: ((pageNumber - 1) * pageSize) + paginationData.pageTotal,
+				total: total,
+				firstDisabled: "",
+				firstUrl: url.replace("%d", 1),
+				backDisabled: "",
+				backUrl: url.replace("%d", pageNumber - 1),
+				nextDisabled: "",
+				nextUrl: url.replace("%d", pageNumber + 1),
+				lastDisabled: "",
+				lastUrl: url.replace("%d", totalPages),
 			};
+
+			if (pageNumber === 1) {
+				data.firstDisabled = "disabled";
+				data.backUrl = "";
+				data.backDisabled = "disabled";
+				data.firstUrl = "";
+			}
+
+			if (pageNumber === totalPages) {
+				data.nextDisabled = "disabled";
+				data.nextUrl = "";
+				data.lastDisabled = "disabled";
+				data.lastUrl = "";
+			}
 
 			this.innerHTML = template(data);
 		}
 	}
 }
 
-customElements.define("core-pagination", MessageBox);
+customElements.define("core-pagination", Pagination);
 
 
-export default MessageBox
+export default Pagination

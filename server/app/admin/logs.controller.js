@@ -20,6 +20,7 @@ function getLogs(req, res) {
     }
 
     model.pagedLogs = logsStore.getPagedLogs(pageNumber, 10);
+    model.pagedLogs.metadata.url = "/logs/%d";
 
     res.render("admin/logsMaster.template.hbs", model);
 };

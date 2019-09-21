@@ -1,14 +1,12 @@
-<nav class="mt-3">
+<nav class="mt-4">
 	<ul class="pagination">
-		<li class="page-item"><a class="page-link" href="#"><i class="fa fa-arrow-left"></i></a></li>
-		{{#each displayNumbers}}
-		<li class="page-item"><a class="page-link" href="#">{{this}}</a></li>
-		{{/each}}
-		<li class="page-item"><a class="page-link" href="#"><i class="fa fa-arrow-right"></i></a></li>
+		<li class="page-item {{firstDisabled}}"><a class="page-link" href="{{firstUrl}}"><i class="fas fa-angle-double-left"></i></a></li>
+		<li class="page-item {{backDisabled}}"><a class="page-link" href="{{backUrl}}"><i class="fas fa-angle-left"></i></a></li>
+		{{!-- {{#each pageNumbers}}
+		<li class="page-item"><a class="page-link" href="{{pageNumbers.url}}">{{pageNumbers.number}}</a></li>
+		{{/each}} --}}
+		<li class="page-item {{nextDisabled}}"><a class="page-link" href="{{nextUrl}}"><i class="fas fa-angle-right"></i></a></li>
+		<li class="page-item {{lastDisabled}}"><a class="page-link" href="{{lastUrl}}"><i class="fas fa-angle-double-right"></i></a></li>
+		<li class="page-item disabled"><span class="page-link">{{startNumber}} - {{throughNumber}} of {{total}}</span></a></li>
 	</ul>
 </nav>
-
-
-
-<core-pagination page-number={{pagedLogs.pageNumber}} page-size="{{pagedLogs.pageSize}}" total="{{pagedLogs.total}}" display-numbers="5">
-</core-pagination>
