@@ -1,9 +1,10 @@
 
 var sql = require("../lib/coreVendor/betterSqlite/sql");
+var usersRules = require("../rules/usersRules");
 
 var usersStore = {};
 
-usersStore.getUserByUsername = function(username) {
+usersStore.getUserByUsername = function (username) {
 
 	username = username.toLowerCase();
 
@@ -16,7 +17,7 @@ usersStore.getUserByUsername = function(username) {
 	return user;
 }
 
-usersStore.getRoleNames = function(userId) {
+usersStore.getRoleNames = function (userId) {
 
 	var roleNames = sql.executeQuery(`
 		SELECT roleName
@@ -30,7 +31,7 @@ usersStore.getRoleNames = function(userId) {
 	return roleNames;
 }
 
-usersStore.getPasswordHashes = function(username) {
+usersStore.getPasswordHashes = function (username) {
 
 	username = username.toLowerCase();
 
@@ -43,5 +44,22 @@ usersStore.getPasswordHashes = function(username) {
 	return passwordHashes;
 }
 
+
+usersStore.addUser = function (user) {
+	var passwordHashes = usersRules.buildPasswordHashes(user.password)
+
+	var userId = sql.executeNonQuery(`
+	INSERT INTO Users (username, firstName, lastName, passwordHash, passwordHashSalt) 
+	VALUES (@username, @firstName, @lastName, @passwordHash, @passwordHashSalt)`,
+		{ username: user.userName, firstName: user.firstName, lastName: user.lastName,  passwordHash: passwordHashes.passwordHash, passwordHashSalt: passwordHashes.passwordHashSalt });
+
+	for (var roleId of user.roles) {
+
+		sql.executeNonQuery(`
+		INSERT INTO UsersRoles (userId, roleId) 
+		VALUES (@userId, @roleId) `,
+			{ userId, roleId });
+	}
+}
 
 module.exports = usersStore;
