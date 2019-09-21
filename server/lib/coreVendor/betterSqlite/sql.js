@@ -13,13 +13,9 @@ sql.executeScalar = function(sqlStatement, parameters) {
 	var result;
 	
 	if (parameters) {
-		result = statement.pluck(parameters);
+		result = statement.pluck().get(parameters);
 	} else {
-		result = statement.pluck();
-	}
-
-	if (result && result.length > 0) {
-		result = result[0];
+		result = statement.pluck().get();
 	}
 
 	return result;
@@ -69,6 +65,16 @@ sql.executeNonQuery = function(sqlStatement, parameters) {
 	}
 
 	return result;
+}
+
+sql.getLimitOffset = function(pageNumber, pageSize) {
+
+	var limitOffset = {
+		limit: pageSize,
+		offset: pageNumber * pageSize,
+	}
+
+	return limitOffset;
 }
 
 

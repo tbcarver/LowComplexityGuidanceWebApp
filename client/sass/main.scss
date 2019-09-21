@@ -4,11 +4,33 @@
  // Sticky footer from CSS Secrets #41
  
  body {
-    display: flex;
-    flex-flow: column;
-    min-height: 100vh;
+    display: flex; // sticky footer
+    flex-flow: column; // sticky footer
+    min-height: 100vh; // sticky footer    
+    overflow-y: scroll; // stop scroll bar page shift
 }
 
 main {
-    flex: 1;
+    flex: 1; // sticky footer
+}
+
+.table th {
+  border-top: none;
+}
+
+.col-form-label {
+    text-align: right;
+}
+
+// styles from bootstrap's .col-form-label and .form-control
+.form-control-text {
+    display: block;
+    padding-top: calc(#{$input-padding-y} + #{$input-border-width});
+    padding-bottom: calc(#{$input-padding-y} + #{$input-border-width});
+    padding-right: $input-padding-x;
+    padding-left: $input-padding-x;
+    margin-bottom: 0; // Override the `<label>/<legend>` default
+    @include font-size(inherit); // Override the `<legend>` default
+    line-height: $input-line-height;
+    background: $secondary-lightest;
 }

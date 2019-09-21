@@ -55,7 +55,7 @@ class MessageBox extends HTMLParsedElement {
 	}
 }
 
-customElements.define("message-box-closable", MessageBox);
+customElements.define("core-message-box-closable", MessageBox);
 
 
 export default MessageBox

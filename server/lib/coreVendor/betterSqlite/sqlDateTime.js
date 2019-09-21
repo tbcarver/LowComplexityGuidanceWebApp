@@ -2,6 +2,7 @@
 var sqlDateTime = {};
 
 var isoToSqlDateRegex = /([^T]+)T([^.]+)/;
+var sqlDateToDateRegex = /(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2})/;
 
 sqlDateTime.toSqlDate = function(date) {
 
@@ -23,6 +24,25 @@ sqlDateTime.toSqlDate = function(date) {
 	}
 
 	return sqlDate;
+}
+
+
+sqlDateTime.toDate = function(timestamp) {
+
+	var date;
+
+	if (typeof timestamp === "string") {
+
+		var matches = timestamp.match(sqlDateToDateRegex);
+
+		if (matches.length === 3) {
+			timestamp = matches[1] + "T" + matches[2] + ".000Z";
+		}
+
+		date = new Date(timestamp);
+	}
+
+	return date;
 }
 
 
