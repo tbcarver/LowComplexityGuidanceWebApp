@@ -24,6 +24,7 @@ class MessageBox extends HTMLParsedElement {
 
 	parsedCallback() {
 		this.message = this.innerHTML;
+		this.style.display = "block";
 		this.render();
 	}
 
@@ -35,6 +36,8 @@ class MessageBox extends HTMLParsedElement {
 	}
 
 	render() {
+			
+		this.style.display = "block";
 
 		if (this.message) {
 
@@ -48,7 +51,7 @@ class MessageBox extends HTMLParsedElement {
 	}
 }
 
-customElements.define("message-box", MessageBox);
+customElements.define("core-message-box", MessageBox);
 
 
 export default MessageBox

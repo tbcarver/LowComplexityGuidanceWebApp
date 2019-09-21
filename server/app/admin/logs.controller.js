@@ -4,8 +4,8 @@ var logsStore = require("../../store/logsStore");
 function initialize(app, acl) {
 
     // acl noop
-    app.get("/logs", getLogs);
-    app.get("/logs/:logId", getLog);
+    app.get("/logs/:pageNumber?", getLogs);
+    app.get("/log/:logId", getLog);
 }
 
 /** @param { Request } req @param { Response } res */
@@ -14,9 +14,15 @@ function getLogs(req, res) {
     var model = new AppModel(req, "Logs");
     model.layout = "oneColumn.layout.hbs";
 
-    model.logs = logsStore.getLogs();
+    var pageNumber = 1;
+    if (req.params.pageNumber) {
+        pageNumber = parseInt(req.params.pageNumber);
+    }
 
-    res.render("admin/logs.template.hbs", model);
+    model.pagedLogs = logsStore.getPagedLogs(pageNumber, 5);
+    model.pagedLogs.pagination.url = "/logs/%d";
+
+    res.render("admin/logsMaster.template.hbs", model);
 };
 
 /** @param { Request } req @param { Response } res */
