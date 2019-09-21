@@ -2,7 +2,8 @@
 // Using require only on handlebars templates with handlebars-loader
 var template = require("./pagination.template.hbs");
 
-import { unescape } from "lodash";
+// NOTE: Import only individual libraries from lodash.
+import unescape from "lodash/unescape";
 
 class Pagination extends HTMLElement {
 
@@ -28,6 +29,7 @@ class Pagination extends HTMLElement {
 	connectedCallback() {
 
 		this.hasConnected = true;
+		this.style.display = "block";
 		this.render();
 	}
 
@@ -40,7 +42,6 @@ class Pagination extends HTMLElement {
 
 	render() {
 
-		debugger
 		var paginationData = this.paginationData;
 
 		if (paginationData.pageNumber && paginationData.pageSize && (paginationData.total || paginationData.total === 0)) {
@@ -76,6 +77,44 @@ class Pagination extends HTMLElement {
 				data.nextUrl = "";
 				data.lastDisabled = "disabled";
 				data.lastUrl = "";
+			}
+
+			if (totalPages > 0) {
+
+				var startRange;
+				var endRange;
+
+				if (totalPages <= 5) {
+					startRange = 1;
+					endRange = totalPages;
+				} else if (pageNumber <= 3) {
+					startRange = 1;
+					endRange = 5;
+				} else if (pageNumber >= 4 && totalPages >= pageNumber + 2) {
+					startRange = pageNumber - 2;
+					endRange = pageNumber + 2;
+				} else {
+					startRange = totalPages - 5;
+					endRange = totalPages;
+				}
+
+				var numbers = [];
+				for (var range = startRange; range <= endRange; range++) {
+					numbers.push(range);
+				}
+
+				data.pageNumbers = [];
+
+				for (var index = 0; index < numbers.length; index++) {
+
+					var number = numbers[index];
+
+					data.pageNumbers.push({
+						number: number,
+						url: url.replace("%d", number),
+						active: (number === pageNumber) ? "active" : undefined,
+					});
+				}
 			}
 
 			this.innerHTML = template(data);

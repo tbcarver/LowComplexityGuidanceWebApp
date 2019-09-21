@@ -109,3 +109,9 @@ ORDER BY title ASC LIMIT 10
 **Avoid** LIMIT [no of rows] + OFFSET [row num].
 
 **Why?** Offset does a full table scan to the offset number causing major performance issues with large 10,000+ record sets.
+
+## Lodash
+
+**Avoid** using client side lodash for anything that is in the web api or language. Also, when the task of writing the function is relatively easy i.e. _.range().
+
+**Why?** Client side lodash can contain a lot of code that needs to be parsed on each page load. For web components the parsing must happen before the page is rendered.

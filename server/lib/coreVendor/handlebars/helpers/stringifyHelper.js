@@ -1,6 +1,4 @@
 
-var Handlebars = require("Handlebars");
-var htmlEncode = require("../../../core/web/htmlEncode");
 var _ = require("lodash");
 
 var stringifyHelper = {

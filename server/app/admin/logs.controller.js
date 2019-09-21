@@ -19,8 +19,8 @@ function getLogs(req, res) {
         pageNumber = parseInt(req.params.pageNumber);
     }
 
-    model.pagedLogs = logsStore.getPagedLogs(pageNumber, 10);
-    model.pagedLogs.metadata.url = "/logs/%d";
+    model.pagedLogs = logsStore.getPagedLogs(pageNumber, 5);
+    model.pagedLogs.pagination.url = "/logs/%d";
 
     res.render("admin/logsMaster.template.hbs", model);
 };

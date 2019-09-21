@@ -43,7 +43,7 @@ logsStore.getPagedLogs = function(pageNumber, pageSize) {
 	}
 
 	result = {
-		metadata: {
+		pagination: {
 			pageNumber,
 			pageSize,
 			pageTotal: result.length,
