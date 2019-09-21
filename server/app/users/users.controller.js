@@ -44,7 +44,7 @@ function addUser(req, res) {
 
 function getUserEdit(req, res) {
 
-    res.render("user/editUser.hbs")
+    res.render("users/newUser.template.hbs", user)
 }
 
 function postUserEdit() {
