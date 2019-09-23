@@ -49,9 +49,9 @@ usersStore.addUser = function (user) {
 	var passwordHashes = usersRules.buildPasswordHashes(user.password)
 
 	var userId = sql.executeNonQuery(`
-	INSERT INTO Users (username, firstName, lastName, passwordHash, passwordHashSalt) 
-	VALUES (@username, @firstName, @lastName, @passwordHash, @passwordHashSalt)`,
-		{ username: user.userName, firstName: user.firstName, lastName: user.lastName,  passwordHash: passwordHashes.passwordHash, passwordHashSalt: passwordHashes.passwordHashSalt });
+		INSERT INTO Users (username, firstName, lastName, passwordHash, passwordHashSalt) 
+		VALUES (@username, @firstName, @lastName, @passwordHash, @passwordHashSalt)`,
+			{ username: user.userName, firstName: user.firstName, lastName: user.lastName, passwordHash: passwordHashes.passwordHash, passwordHashSalt: passwordHashes.passwordHashSalt });
 
 	for (var roleId of user.roles) {
 
@@ -60,6 +60,15 @@ usersStore.addUser = function (user) {
 		VALUES (@userId, @roleId) `,
 			{ userId, roleId });
 	}
+}
+
+usersStore.getUsers = function () {
+
+	var users = sql.executeQuery(`
+		SELECT Users.userId, username, firstName, lastName
+		FROM Users`);
+
+	return users;
 }
 
 module.exports = usersStore;
