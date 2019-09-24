@@ -3,8 +3,8 @@ var articlesStore = require("../store/articlesStore");
 
 function initialize(app, acl) {
     
-    acl.allow("public exact", "/:articleId?", "*");
-    app.get("/:articleId?", getHome);
+    acl.allow("public exact", "/:pageNumber?", "*");
+    app.get("/:pageNumber?", getHome);
 }
 
 /** @param { Request } req @param { Response } res */

@@ -6,7 +6,7 @@
 **Why?** Allows matching the names to object and property names.
 
 
-**Avoid** variable names that are programming language key words. For sqlite: [http://advanced.brickhousecodecamp.org/docs/sqlite/www.sqlite.org/lang_keywords.html].
+**Avoid** names that are programming language key words (SQL, JavaScript) including common HTML tags, i.e. title, body.
 
 **Do** use VS Code SQL language mode syntax highlighting of key words to avoid key words. Prefix a key word with the singular table name.
 

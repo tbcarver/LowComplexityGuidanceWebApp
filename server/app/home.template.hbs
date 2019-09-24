@@ -33,16 +33,17 @@
             <i class="ion-heart"></i> 29
           </button>
         </div>
-        <a href="" class="preview-link">
-          <h1><i class="far fa-grimace"></i>&nbsp;{{title}}</h1>
-          <p>{{articleDescription}}</p>
-          <span>Read more...</span>
-        </a>
+
+        <h1><a href="/article/{{articleId}}"><i class="far fa-grimace"></i>&nbsp;{{articleTitle}}</a></h1>
+        <p>{{articleDescription}}</p>
+        <a href="/article/{{articleId}}"><span>Read more...</span></a>
       </div>
 
       {{/each}}
 
 
+
+      <core-pagination pagination-data="{{stringify pagedArticles.pagination}}"></core-pagination>
 
     </div>
 

@@ -3,12 +3,12 @@ var sql = require("../lib/coreVendor/betterSqlite/sql");
 
 var articlesStore = {};
 
-articlesStore.addArticle = function(title, articleDescription, body, authorId) {
+articlesStore.addArticle = function(articleTitle, articleDescription, articleBody, authorId) {
 
 	var id = sql.executeNonQuery(`
-		INSERT INTO Articles (title, articleDescription, body, authorId)
-		VALUES (@title, @articleDescription, @body, @authorId)`,
-		{ title, articleDescription, body, authorId });
+		INSERT INTO Articles (articleTitle, articleDescription, articleBody, authorId)
+		VALUES (@articleTitle, @articleDescription, @articleBody, @authorId)`,
+		{ articleTitle, articleDescription, articleBody, authorId });
 
 	return id;
 }
@@ -18,7 +18,7 @@ articlesStore.getDescendingPagedArticles = function(pageNumber, pageSize) {
 	var limitOffset = sql.getLimitOffset(pageNumber, pageSize);
 
 	var result = sql.executeQuery(`
-		SELECT articleId, title, articleDescription, body, authorId, createdTimestamp, updatedTimestamp
+		SELECT articleId, articleTitle, articleDescription, articleBody, authorId, createdTimestamp, updatedTimestamp
 		FROM Articles
 		WHERE articleId NOT IN (SELECT articleId FROM Articles
 							ORDER BY articleId DESC LIMIT @offset)
@@ -46,7 +46,7 @@ articlesStore.getDescendingPagedArticles = function(pageNumber, pageSize) {
 articlesStore.getArticle = function(articleId) {
 
 	var result = sql.executeRow(`
-		SELECT articleId, title, articleDescription, body, authorId, createdTimestamp, updatedTimestamp
+		SELECT articleId, articleTitle, articleDescription, articleBody, authorId, createdTimestamp, updatedTimestamp
 		FROM Articles
 		WHERE articleId = @articleId`,
 		{ articleId });
