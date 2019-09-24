@@ -4,6 +4,17 @@ var usersRules = require("../rules/usersRules");
 
 var usersStore = {};
 
+usersStore.getUser = function (userId) {	
+
+	var user = sql.executeRow(`
+		SELECT userId, username, firstName, lastName
+		FROM Users
+		WHERE userId = @userId`,
+		{ userId });
+
+	return user;
+}
+
 usersStore.getUserByUsername = function (username) {
 
 	username = username.toLowerCase();

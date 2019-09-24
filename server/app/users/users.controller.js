@@ -10,7 +10,7 @@ function initialize(app, acl) {
     app.get("/users", getUsers);
     app.get("/user/new", getUserNew);
     app.post("/users", addUser);
-    app.get("/user/edit", editUser);
+    app.get("/user/edit/:userId", editUser);
     // app.post("/user/edit", postUserEdit);
 
 }
@@ -21,7 +21,7 @@ function getUserNew(req, res) {
     var model = new AppModel(req, "New User");
     model.layout = "oneColumn.layout.hbs";
     // var model = new AppModel(req, "New Article", "New Article");
-    res.render("users/newUser.template.hbs", model);
+    res.render("users/usersDetails.template.hbs", model);
 };
 
 /** @param { Request } req @param { Response } res */
@@ -44,7 +44,7 @@ function addUser(req, res) {
     }
     model.users = usersStore.addUser(user);
 
-    res.render("users/newUser.template.hbs", model);
+    res.render("users/usersDetails.template.hbs", model);
 };
 
 /** @param { Request } req @param { Response } res */
@@ -55,16 +55,16 @@ function getUsers(req, res) {
 
     model.users = usersStore.getUsers();
 
-    res.render("users/viewUser.template.hbs", model);
+    res.render("users/usersMaster.template.hbs", model);
 };
 
 /** @param { Request } req @param { Response } res */
 function editUser(req, res) {
     var model = new AppModel(req, "Edit");
     model.layout = "oneColumn.layout.hbs";
-    var username = req.query
-    model.users = usersStore.getUserByUsername(username);
-    res.render("users/newUser.template.hbs", model)
+
+    model.user = usersStore.getUser(req.params.userId);
+    res.render("users/usersDetails.template.hbs", model)
 
 }
 
