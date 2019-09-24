@@ -53,7 +53,7 @@ function postEdit(req, res) {
 
 function getArticle(req, res) {
 
-    var article = articlesStore.getArticle(req.params.articleId);
+    var article = articlesStore.getRelationalArticle(req.params.articleId);
     var pageTitle = coreString.truncate(article.title, 10, true);
 
     var model = new AppModel(req, pageTitle);

@@ -1,14 +1,12 @@
-<div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid bg-dark text-light">
 	<div class="container">
 
-		<h1><i class="far fa-grimace"></i>{{articleTitle}}</h1>
+		<h1><i class="far fa-grimace"></i> {{article.articleTitle}}</h1>
 
-		<div class="article-meta">
-			{{!-- <a href=""><img src="http://i.imgur.com/Qr71crq.jpg" /></a> --}}
-			<div class="info">
-				{{!-- <a href="" class="author">Eric Simons</a> --}}
-				<span class="date">{{formatDate updatedTimestamp}}</span>
-			</div>
+      <div class="font-size-sm">
+        <a href="">{{article.firstName}} {{article.lastName}}</a>
+        <span class="text-muted float-right">{{formatDate article.updatedTimestamp}}</span>
+      </div>
 
 
 			{{#is authorId user.userId }}
@@ -38,7 +36,6 @@
 
 
 
-		</div>
 
 	</div>
 </div>

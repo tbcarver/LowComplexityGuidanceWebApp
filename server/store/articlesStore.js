@@ -13,13 +13,14 @@ articlesStore.addArticle = function(articleTitle, articleDescription, articleBod
 	return id;
 }
 
-articlesStore.getDescendingPagedArticles = function(pageNumber, pageSize) {
+articlesStore.getDescendingPagedRelationalArticles = function(pageNumber, pageSize) {
 
 	var limitOffset = sql.getLimitOffset(pageNumber, pageSize);
 
 	var result = sql.executeQuery(`
-		SELECT articleId, articleTitle, articleDescription, articleBody, authorId, createdTimestamp, updatedTimestamp
+		SELECT articleId, articleTitle, articleDescription, articleBody, authorId, createdTimestamp, updatedTimestamp, firstName, lastName
 		FROM Articles
+			INNER JOIN Users ON Articles.authorId = Users.userId
 		WHERE articleId NOT IN (SELECT articleId FROM Articles
 							ORDER BY articleId DESC LIMIT @offset)
 		ORDER BY articleId DESC LIMIT @limit`,
@@ -48,6 +49,18 @@ articlesStore.getArticle = function(articleId) {
 	var result = sql.executeRow(`
 		SELECT articleId, articleTitle, articleDescription, articleBody, authorId, createdTimestamp, updatedTimestamp
 		FROM Articles
+		WHERE articleId = @articleId`,
+		{ articleId });
+
+	return result;
+}
+
+articlesStore.getRelationalArticle = function(articleId) {
+
+	var result = sql.executeRow(`
+		SELECT articleId, articleTitle, articleDescription, articleBody, authorId, createdTimestamp, updatedTimestamp, firstName, lastName
+		FROM Articles
+			INNER JOIN Users ON Articles.authorId = Users.userId
 		WHERE articleId = @articleId`,
 		{ articleId });
 

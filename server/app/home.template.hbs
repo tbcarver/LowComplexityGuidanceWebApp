@@ -9,7 +9,7 @@
   <div class="row">
 
     <div class="col-md-9">
-      <div class="feed-toggle">
+      <div class="feed-toggle mb-3">
         <ul class="nav nav-tabs outline-active">
           <li class="nav-item">
             <a class="nav-link" href="">Your Feed</a>
@@ -22,22 +22,19 @@
 
       {{#each pagedArticles.articles}}
 
-      <div class="article-preview">
-        <div class="article-meta">
-          {{!-- <a href="profile.html"><img src="http://i.imgur.com/Qr71crq.jpg" /></a> --}}
-          <div class="info">
-            {{!-- <a href="" class="author">Eric Simons</a> --}}
-            <span class="date">{{formatDate updatedTimestamp}}</span>
-          </div>
-          <button class="btn btn-outline-primary btn-sm pull-xs-right">
-            <i class="ion-heart"></i> 29
-          </button>
-        </div>
+      <button class="btn btn-outline-primary btn-sm float-right">
+        <i class="fa fa-heart"></i> 29
+      </button>
 
-        <h1><a href="/article/{{articleId}}"><i class="far fa-grimace"></i>{{articleTitle}}</a></h1>
-        <p>{{articleDescription}}</p>
-        <a href="/article/{{articleId}}"><span>Read more...</span></a>
+      <h2 class="mb-3"><a href="/article/{{articleId}}"><i class="far fa-grimace"></i> {{articleTitle}}</a></h2>
+      <p>{{articleDescription}}</p>
+
+      <div class="font-size-sm">
+        <a href="">{{firstName}} {{lastName}}</a>
+        <span class="text-muted float-right">{{formatDate updatedTimestamp}}</span>
       </div>
+
+      <hr>
 
       {{/each}}
 
