@@ -6,7 +6,9 @@
 **Why?** Allows matching the names to object and property names.
 
 
-**Avoid** variable names that are programming language key words.
+**Avoid** names that are programming language key words (SQL, JavaScript) including common HTML tags, i.e. title, body.
+
+**Do** use VS Code SQL language mode syntax highlighting of key words to avoid key words. Prefix a key word with the singular table name.
 
 **Why?** Allows using the name without having to escape it with []. Allows matching the column name to a property name.
 
@@ -59,6 +61,13 @@
 **Do** use a primary key for every table.
 
 **Why?** Improves the performance of all tables.
+
+
+**Do** use the table name as a singular followed by Id. For naming the id column.
+
+**Avoid** using just the word id.
+
+**Why?** When joining tables, the id columns have to become fully qualified adding to the overhead of creating queries.
 
 
 
