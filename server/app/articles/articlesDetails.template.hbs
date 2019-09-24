@@ -1,7 +1,7 @@
 <div class="jumbotron jumbotron-fluid">
 	<div class="container">
 
-		<h1><i class="far fa-grimace"></i>&nbsp;{{articleTitle}}</h1>
+		<h1><i class="far fa-grimace"></i>{{articleTitle}}</h1>
 
 		<div class="article-meta">
 			{{!-- <a href=""><img src="http://i.imgur.com/Qr71crq.jpg" /></a> --}}
@@ -9,17 +9,35 @@
 				{{!-- <a href="" class="author">Eric Simons</a> --}}
 				<span class="date">{{formatDate updatedTimestamp}}</span>
 			</div>
+
+
+			{{#is authorId user.userId }}
+
+			<span>
+				<a href="/editor/ias-incidunt-labore-pariatur-q-s0xeh7" class="btn btn-sm btn-outline-secondary">
+					<i class="fa fa-pencil"></i> Edit Article
+				</a>
+				<button class="btn btn-sm btn-outline-danger">
+					<i class="fa fa-trash"></i> Delete Article
+				</button>
+			</span>
+
+			{{else}}
+
 			<button class="btn btn-sm btn-outline-secondary">
 				<i class="ion-plus-round"></i>
-				&nbsp;
+
 				Follow Eric Simons <span class="counter">(10)</span>
 			</button>
-			&nbsp;&nbsp;
+
 			<button class="btn btn-sm btn-outline-primary">
-				<i class="ion-heart"></i>
-				&nbsp;
-				Favorite Post <span class="counter">(29)</span>
+				<i class="fa fa-heart"></i>Favorite Post <span class="counter">(29)</span>
 			</button>
+
+			{{/is}}
+
+
+
 		</div>
 
 	</div>
@@ -45,13 +63,13 @@
 
 			<button class="btn btn-sm btn-outline-secondary">
 				<i class="ion-plus-round"></i>
-				&nbsp;
+
 				Follow Eric Simons <span class="counter">(10)</span>
 			</button>
-			&nbsp;
+
 			<button class="btn btn-sm btn-outline-primary">
 				<i class="ion-heart"></i>
-				&nbsp;
+
 				Favorite Post <span class="counter">(29)</span>
 			</button>
 		</div>
@@ -81,7 +99,7 @@
 					<a href="" class="comment-author">
 						<img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
 					</a>
-					&nbsp;
+
 					<a href="" class="comment-author">Jacob Schmidt</a>
 					<span class="date-posted">Dec 29th</span>
 				</div>
@@ -95,7 +113,7 @@
 					<a href="" class="comment-author">
 						<img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img" />
 					</a>
-					&nbsp;
+
 					<a href="" class="comment-author">Jacob Schmidt</a>
 					<span class="date-posted">Dec 29th</span>
 					<span class="mod-options">

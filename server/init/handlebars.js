@@ -11,6 +11,8 @@ helpers.push(require("../lib/coreVendor/handlebars/helpers/formatDateHelper"));
 helpers.push(require("../lib/coreVendor/handlebars/helpers/formatDateShortHelper"));
 helpers.push(require("../lib/coreVendor/handlebars/helpers/formatDateTimeHelper"));
 helpers.push(require("../lib/coreVendor/handlebars/helpers/formatDateTimeShortHelper"));
+helpers.push(require("../lib/coreVendor/handlebars/helpers/isHelper"));
+helpers.push(require("../lib/coreVendor/handlebars/helpers/isNotHelper"));
 helpers.push(require("../lib/coreVendor/handlebars/helpers/hasRoleHelper"));
 helpers.push(require("../lib/coreVendor/handlebars/helpers/stringifyHelper"));
 
