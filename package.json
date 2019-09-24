@@ -8,6 +8,7 @@
     "createDb": "node ./sql/createDatabase --force",
     "build": "webpack",
     "dev": "nodemon",
+    "pm2": "pm2 start ./server/app.js",
     "start": "node ./server/app.js",
     "test": "mocha --recursive",
     "sass": "sass ./client/sass/main.scss ./assets/dist/main.css --load-path=node_modules/bootstrap/scss"

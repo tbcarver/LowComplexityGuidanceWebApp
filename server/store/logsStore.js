@@ -25,7 +25,7 @@ logsStore.getLogs = function() {
 	return result;
 }
 
-logsStore.getPagedLogs = function(pageNumber, pageSize) {
+logsStore.getDescendingPagedLogs = function(pageNumber, pageSize) {
 
 	var limitOffset = sql.getLimitOffset(pageNumber, pageSize);
 
