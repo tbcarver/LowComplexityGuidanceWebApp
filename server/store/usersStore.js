@@ -7,7 +7,7 @@ var usersStore = {};
 usersStore.getUser = function (userId) {	
 
 	var user = sql.executeRow(`
-		SELECT userId, username, firstName, lastName
+		SELECT username, firstName, lastName
 		FROM Users
 		WHERE userId = @userId`,
 		{ userId });
@@ -76,7 +76,7 @@ usersStore.addUser = function (user) {
 usersStore.getUsers = function () {
 
 	var users = sql.executeQuery(`
-		SELECT Users.userId, username, firstName, lastName
+		SELECT userId, username, firstName, lastName
 		FROM Users`);
 
 	return users;
