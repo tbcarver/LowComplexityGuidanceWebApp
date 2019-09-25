@@ -1,5 +1,6 @@
 
 var expressHandlebars = require("express-handlebars");
+var handlebarsHelpers = require('handlebars-helpers');
 
 var helpers = [];
 
@@ -29,6 +30,8 @@ function initialize(app) {
 	for (var helper of helpers) {
 		handlebars.helpers[helper.name] = helper.helper;
 	}
+
+	handlebarsHelpers.markdown({ handlebars: handlebars.handlebars });
 
 	app.engine("hbs", handlebars.engine);
 	app.set("view engine", "hbs");

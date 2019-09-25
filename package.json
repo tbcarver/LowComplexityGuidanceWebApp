@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "createDb": "node ./sql/createDatabase --force",
+    "createMockData": "node ./sql/createDatabase/createMockData.js",
     "build": "webpack",
     "dev": "nodemon",
     "pm2": "pm2 start ./server/app.js",
@@ -25,6 +26,7 @@
     "express-error-handler": "^1.1.0",
     "express-handlebars": "^3.0.0",
     "handlebars": "^4.2.1",
+    "handlebars-helpers": "^0.10.0",
     "html-parsed-element": "^0.4.0",
     "jquery": "^3.3.1",
     "lodash": "^4.17.15",

@@ -7,7 +7,7 @@ articlesStore.addArticle = function(articleTitle, articleDescription, articleBod
 
 	var id = sql.executeNonQuery(`
 		INSERT INTO Articles (articleTitle, articleDescription, articleBody, iconCssClass, authorId)
-		VALUES (@articleTitle, @articleDescription, @articleBody, iconCssClass, @authorId)`,
+		VALUES (@articleTitle, @articleDescription, @articleBody, @iconCssClass, @authorId)`,
 		{ articleTitle, articleDescription, articleBody, iconCssClass, authorId });
 
 	return id;

@@ -3,8 +3,11 @@ var articlesStore = require("../store/articlesStore");
 
 function initialize(app, acl) {
     
-    acl.allow("public exact", "/:pageNumber?", "*");
-    app.get("/:pageNumber?", getHome);
+    acl.allow("public exact", "/", "*");
+    app.get("/", getHome);
+    
+    acl.allow("public exact", "/articles/:pageNumber?", "*");
+    app.get("/articles/:pageNumber?", getHome);
 }
 
 /** @param { Request } req @param { Response } res */
@@ -18,7 +21,7 @@ function getHome(req, res) {
     }
 
     model.pagedArticles = articlesStore.getDescendingPagedRelationalArticles(pageNumber, 10);
-    model.pagedArticles.pagination.url = "/%d";
+    model.pagedArticles.pagination.url = "/articles/%d";
 
     res.render("home.template.hbs", model);
 };

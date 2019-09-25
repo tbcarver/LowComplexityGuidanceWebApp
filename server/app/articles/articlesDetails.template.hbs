@@ -1,7 +1,7 @@
 <div class="jumbotron jumbotron-fluid bg-dark text-light">
 	<div class="container">
 
-		<h1><i class="far fa-grimace"></i> {{article.articleTitle}}</h1>
+		<h1><i class="{{article.iconCssClass}}"></i> {{article.articleTitle}}</h1>
 
       <div class="font-size-sm">
         <a href="">{{article.firstName}} {{article.lastName}}</a>
@@ -44,7 +44,7 @@
 
 	<div class="row article-content">
 		<div class="col-md-12">
-			{{articleBody}}
+			{{#markdown}}{{article.articleBody}}{{/markdown}}
 		</div>
 	</div>
 

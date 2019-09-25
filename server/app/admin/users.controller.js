@@ -1,6 +1,7 @@
 
 
-var usersStore = require("../../store/usersStore")
+var usersStore = require("../../store/usersStore");
+var usersRules = require("../../rules/usersRules");
 var _ = require("lodash");
 
 function initialize(app, acl) {
@@ -20,7 +21,7 @@ function getUsers(req, res) {
     model.layout = "oneColumn.layout.hbs";
     model.users = usersStore.getUsers();
 
-    res.render("users/usersMaster.template.hbs", model);
+    res.render("admin/usersMaster.template.hbs", model);
 };
 
 function getNew(req, res) {
@@ -28,7 +29,7 @@ function getNew(req, res) {
     var model = new AppModel(req, "New User");
     model.layout = "oneColumn.layout.hbs";
     
-    res.render("users/usersDetailsEdit.template.hbs", model);
+    res.render("admin/usersDetailsEdit.template.hbs", model);
 };
 
 function getEdit(req, res) {
@@ -37,7 +38,7 @@ function getEdit(req, res) {
     model.layout = "oneColumn.layout.hbs";
     model.user = usersStore.getUser(req.params.userId);
 
-    res.render("users/usersDetailsEdit.template.hbs", model)
+    res.render("admin/usersDetailsEdit.template.hbs", model)
 }
 
 function postEdit(req, res) {
@@ -53,7 +54,14 @@ function postEdit(req, res) {
         }
     }
 
-    req.params.userId = usersStore.addUser(user);
+    if (user.userId) {
+        usersStore.updateUser(user.firstName, user.lastName);
+    } else {
+        var passwordHashes = usersRules.buildPasswordHashes(user.password);
+        user.userId = usersStore.addUser(user.username, user.firstName, user.lastName, passwordHashes.passwordHash, passwordHashes.passwordHashSalt);
+    }
+    
+    req.params.userId = user.userId;
     getEdit(req, res);
 };
 
