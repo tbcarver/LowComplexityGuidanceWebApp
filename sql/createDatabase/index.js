@@ -33,6 +33,10 @@ if (fs.existsSync(fileNamePath)){
 if (create) {
 	
 	var db = new Database(fileNamePath, { verbose: console.log });
+
+	// Use write-ahead logging for better performance: http://advanced.brickhousecodecamp.org/docs/sqlite/www.sqlite.org/wal.html
+	db.pragma("journal_mode = WAL");
+
 	var filesRead = 0;
 
 

@@ -11,7 +11,6 @@ function initialize(app, acl) {
     app.get("/test/log/:level?", getLog);
 }
 
-/** @param { Request } req @param { Response } res */
 function getError(req, res, next) {
 
     var status = req.params.status || 500;
@@ -19,13 +18,11 @@ function getError(req, res, next) {
 	next(new ServerError("Test error handled with next(err)", status));
 };
 
-/** @param { Request } req @param { Response } res */
 function getException(req, res) {
 
 	throw new ServerError("Thrown test error");
 };
 
-/** @param { Request } req @param { Response } res */
 function getLog(req, res) {
 
 	var level = req.params.level || "info";

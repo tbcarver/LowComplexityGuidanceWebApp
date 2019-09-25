@@ -12,7 +12,6 @@ function initialize(app, acl) {
 	app.get("/logout", getLogout);
 }
 
-/** @param { Request } req @param { Response } res */
 function getLogin(req, res, next) {
 
 	var model = new AppModel(req, "Login");
@@ -20,7 +19,6 @@ function getLogin(req, res, next) {
 	res.render("account/login.template.hbs", model);
 };
 
-/** @param { Request } req @param { Response } res */
 function postLogin(req, res, next) {
 
 	var middleware = passport.authenticate("Sqlite", function(err, user, info) {
@@ -54,7 +52,6 @@ function postLogin(req, res, next) {
 	middleware(req, res, next);
 };
 
-/** @param { Request } req @param { Response } res */
 function getLogout(req, res) {
 	req.logout();
 	res.redirect("/");

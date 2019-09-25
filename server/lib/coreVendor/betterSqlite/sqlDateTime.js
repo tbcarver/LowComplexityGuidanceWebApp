@@ -35,7 +35,7 @@ sqlDateTime.toDate = function(timestamp) {
 
 		var matches = timestamp.match(sqlDateToDateRegex);
 
-		if (matches.length === 3) {
+		if (matches && matches.length === 3) {
 			timestamp = matches[1] + "T" + matches[2] + ".000Z";
 		}
 

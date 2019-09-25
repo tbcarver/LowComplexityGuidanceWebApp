@@ -10,7 +10,6 @@ function initialize(app, acl) {
     app.get("/articles/:pageNumber?", getHome);
 }
 
-/** @param { Request } req @param { Response } res */
 function getHome(req, res) {
 
     var model = new AppModel(req, "conduit", "Home");

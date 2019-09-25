@@ -18,16 +18,16 @@ main {
   border-top: none;
 }
 
+.form-commands {
+    margin-top: map-get($spacers, 4);
+}
+
 .col-form-label {
     text-align: right;
 }
 
-.form-control {
-    background: $secondary-lightest;
-}
-
 // styles from bootstrap's .col-form-label and .form-control
-.form-control-text {
+.form-control-text, .form-check {
     display: block;
     padding-top: calc(#{$input-padding-y} + #{$input-border-width});
     padding-bottom: calc(#{$input-padding-y} + #{$input-border-width});
@@ -39,6 +39,10 @@ main {
     background: $secondary-lightest;
 }
 
+.form-check-input {
+    position: static;
+    margin: 0;
+}
 
 .font-size-sm {
     @include font-size($font-size-sm);

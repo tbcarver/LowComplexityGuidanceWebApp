@@ -1,0 +1,24 @@
+<h1>Profiles</h1>
+
+<table id="" class="table mt-3">
+	<thead>
+		<tr>
+			<th class="text-center">Name</th>
+			<th class="text-center">Title</th>
+			<th class="text-center">Job Type</th>
+			<th class="text-center text-muted">City</th>
+			<th class="text-center text-muted">State</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each profiles}}
+		<tr>
+			<td class="text-center"><a href="/guideline/{{profileId}}">{{name}}</a></td>
+			<td class="text-center">{{profileTitle}}</td>
+			<td class="text-center">{{jobType}}</td>
+			<td class="text-center">{{city}}</td>
+			<td class="text-center">{{state}}</td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>

@@ -8,7 +8,6 @@ function initialize(app, acl) {
     app.get("/log/:logId", getLog);
 }
 
-/** @param { Request } req @param { Response } res */
 function getLogs(req, res) {
 
     var model = new AppModel(req, "Logs");
@@ -25,7 +24,6 @@ function getLogs(req, res) {
     res.render("admin/logsMaster.template.hbs", model);
 };
 
-/** @param { Request } req @param { Response } res */
 function getLog(req, res) {
 
     var model = new AppModel(req, "Logs");

@@ -1,5 +1,6 @@
 
 require("dotenv").config();
+
 var articlesStore = require("../../server/store/articlesStore");
 var usersStore = require("../../server/store/usersStore");
 var usersRules = require("../../server/rules/usersRules");
@@ -9,12 +10,13 @@ var totalRows = 125;
 
 initialize();
 
+var passwordHashes = usersRules.buildPasswordHashes("1234");
+
 for (var count = 1; count <= totalRows; count++) {
 
 	var firstName = faker.name.firstName();
 	var lastName = faker.name.lastName();
 	var username = firstName + lastName;
-	var passwordHashes = usersRules.buildPasswordHashes("1234");
 
 	var userId = usersStore.addUser(username, firstName, lastName, passwordHashes.passwordHash, passwordHashes.passwordHashSalt);
 	console.log("Added userId: " + userId);

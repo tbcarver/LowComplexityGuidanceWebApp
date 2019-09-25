@@ -5,13 +5,16 @@ var Database = require("better-sqlite3");
 var sql = {};
 
 var filePathName = path.resolve(process.env.CONNECTION_STRING);
-sql.db = new Database(filePathName, { fileMustExist: true });
+db = new Database(filePathName, { fileMustExist: true });
+
+// Use write-ahead logging for better performance: http://advanced.brickhousecodecamp.org/docs/sqlite/www.sqlite.org/wal.html
+db.pragma("journal_mode = WAL");
 
 sql.executeScalar = function(sqlStatement, parameters) {
 
-	var statement = this.db.prepare(sqlStatement);
+	var statement = db.prepare(sqlStatement);
 	var result;
-	
+
 	if (parameters) {
 		result = statement.pluck().get(parameters);
 	} else {
@@ -23,9 +26,9 @@ sql.executeScalar = function(sqlStatement, parameters) {
 
 sql.executeRow = function(sqlStatement, parameters) {
 
-	var statement = this.db.prepare(sqlStatement);
+	var statement = db.prepare(sqlStatement);
 	var result;
-	
+
 	if (parameters) {
 		result = statement.get(parameters);
 	} else {
@@ -37,9 +40,9 @@ sql.executeRow = function(sqlStatement, parameters) {
 
 sql.executeQuery = function(sqlStatement, parameters) {
 
-	var statement = this.db.prepare(sqlStatement);
+	var statement = db.prepare(sqlStatement);
 	var result;
-	
+
 	if (parameters) {
 		result = statement.all(parameters);
 	} else {
@@ -51,9 +54,9 @@ sql.executeQuery = function(sqlStatement, parameters) {
 
 sql.executeNonQuery = function(sqlStatement, parameters) {
 
-	var statement = this.db.prepare(sqlStatement);
+	var statement = db.prepare(sqlStatement);
 	var result;
-	
+
 	if (parameters) {
 		result = statement.run(parameters);
 	} else {
