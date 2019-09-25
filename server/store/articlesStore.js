@@ -3,12 +3,12 @@ var sql = require("../lib/coreVendor/betterSqlite/sql");
 
 var articlesStore = {};
 
-articlesStore.addArticle = function(articleTitle, articleDescription, articleBody, authorId) {
+articlesStore.addArticle = function(articleTitle, articleDescription, articleBody, iconCssClass, authorId) {
 
 	var id = sql.executeNonQuery(`
-		INSERT INTO Articles (articleTitle, articleDescription, articleBody, authorId)
-		VALUES (@articleTitle, @articleDescription, @articleBody, @authorId)`,
-		{ articleTitle, articleDescription, articleBody, authorId });
+		INSERT INTO Articles (articleTitle, articleDescription, articleBody, iconCssClass, authorId)
+		VALUES (@articleTitle, @articleDescription, @articleBody, iconCssClass, @authorId)`,
+		{ articleTitle, articleDescription, articleBody, iconCssClass, authorId });
 
 	return id;
 }
@@ -18,7 +18,7 @@ articlesStore.getDescendingPagedRelationalArticles = function(pageNumber, pageSi
 	var limitOffset = sql.getLimitOffset(pageNumber, pageSize);
 
 	var result = sql.executeQuery(`
-		SELECT articleId, articleTitle, articleDescription, articleBody, authorId, createdTimestamp, updatedTimestamp, firstName, lastName
+		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId, createdTimestamp, updatedTimestamp, firstName, lastName
 		FROM Articles
 			INNER JOIN Users ON Articles.authorId = Users.userId
 		WHERE articleId NOT IN (SELECT articleId FROM Articles
@@ -47,7 +47,7 @@ articlesStore.getDescendingPagedRelationalArticles = function(pageNumber, pageSi
 articlesStore.getArticle = function(articleId) {
 
 	var result = sql.executeRow(`
-		SELECT articleId, articleTitle, articleDescription, articleBody, authorId, createdTimestamp, updatedTimestamp
+		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId, createdTimestamp, updatedTimestamp
 		FROM Articles
 		WHERE articleId = @articleId`,
 		{ articleId });
@@ -58,7 +58,7 @@ articlesStore.getArticle = function(articleId) {
 articlesStore.getRelationalArticle = function(articleId) {
 
 	var result = sql.executeRow(`
-		SELECT articleId, articleTitle, articleDescription, articleBody, authorId, createdTimestamp, updatedTimestamp, firstName, lastName
+		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId, createdTimestamp, updatedTimestamp, firstName, lastName
 		FROM Articles
 			INNER JOIN Users ON Articles.authorId = Users.userId
 		WHERE articleId = @articleId`,

@@ -1,60 +1,115 @@
 
 require("dotenv").config();
 var articlesStore = require("../../server/store/articlesStore");
-var coreMath = require("../../server/lib/core/extensions/coreMath");
+var usersStore = require("../../server/store/usersStore");
+var faker = require("faker");
+
+var totalRows = 125;
 
 
-// TODO get a generator
+for (var count = 1; count <= totalRows; count++) {
 
-var words = ['exercitationem', 'perferendis', 'perspiciatis', 'laborum', 'eveniet',
-	'sunt', 'iure', 'nam', 'nobis', 'eum', 'cum', 'officiis', 'excepturi',
-	'odio', 'consectetur', 'quasi', 'aut', 'quisquam', 'vel', 'eligendi',
-	'itaque', 'non', 'odit', 'tempore', 'quaerat', 'dignissimos',
-	'facilis', 'neque', 'nihil', 'expedita', 'vitae', 'vero', 'ipsum',
-	'nisi', 'animi', 'cumque', 'pariatur', 'velit', 'modi', 'natus',
-	'iusto', 'eaque', 'sequi', 'illo', 'sed', 'ex', 'et', 'voluptatibus',
-	'tempora', 'veritatis', 'ratione', 'assumenda', 'incidunt', 'nostrum',
-	'placeat', 'aliquid', 'fuga', 'provident', 'praesentium', 'rem',
-	'necessitatibus', 'suscipit', 'adipisci', 'quidem', 'possimus',
-	'voluptas', 'debitis', 'sint', 'accusantium', 'unde', 'sapiente',
-	'voluptate', 'qui', 'aspernatur', 'laudantium', 'soluta', 'amet',
-	'quo', 'aliquam', 'saepe', 'culpa', 'libero', 'ipsa', 'dicta',
-	'reiciendis', 'nesciunt', 'doloribus', 'autem', 'impedit', 'minima',
-	'maiores', 'repudiandae', 'ipsam', 'obcaecati', 'ullam', 'enim',
-	'totam', 'delectus', 'ducimus', 'quis', 'voluptates', 'dolores',
-	'molestiae', 'harum', 'dolorem', 'quia', 'voluptatem', 'molestias',
-	'magni', 'distinctio', 'omnis', 'illum', 'dolorum', 'voluptatum', 'ea',
-	'quas', 'quam', 'corporis', 'quae', 'blanditiis', 'atque', 'deserunt',
-	'laboriosam', 'earum', 'consequuntur', 'hic', 'cupiditate',
-	'quibusdam', 'accusamus', 'ut', 'rerum', 'error', 'minus', 'eius',
-	'ab', 'ad', 'nemo', 'fugit', 'officia', 'at', 'in', 'id', 'quos',
-	'reprehenderit', 'numquam', 'iste', 'fugiat', 'sit', 'inventore',
-	'beatae', 'repellendus', 'magnam', 'recusandae', 'quod', 'explicabo',
-	'doloremque', 'aperiam', 'consequatur', 'asperiores', 'commodi',
-	'optio', 'dolor', 'labore', 'temporibus', 'repellat', 'veniam',
-	'architecto', 'est', 'esse', 'mollitia', 'nulla', 'a', 'similique',
-	'eos', 'alias', 'dolore', 'tenetur', 'deleniti', 'porro', 'facere',
-	'maxime', 'corrupti'];
+	var userId = faker.random.number({ min: 1, max: Math.floor(totalRows / 3) });
 
-	
-for (var count = 1; count <= 100; count++) {
+	articlesStore.addArticle(getWords(2, 4), getWords(6, 8), getParagraphs(1, 4), getIconCssClass(), userId);
 
-	console.log(getWords(2, 4));
-	articlesStore.addArticle(getWords(2, 4), getWords(6, 8), getWords(10, 30), coreMath.randomInteger(1, 2));
+	faker.lorem.words()
 }
 
 
 function getWords(min, max) {
 
-	var amount = coreMath.randomInteger(min, max);
-	var randomWords = [];
+	var number = faker.random.number({ min: min, max: max });
 
-	for (var count = 0; count <= amount; count++) {
+	return faker.lorem.words(number);
+}
 
-		var randomIndex = coreMath.randomInteger(0, words.length - 1);
+function getParagraphs(min, max) {
 
-		randomWords.push(words[randomIndex]);
-	}
+	var number = faker.random.number({ min: min, max: max });
 
-	return randomWords.join(" ");
+	return faker.lorem.paragraphs(number);
+}
+
+var iconsCssClasses = [
+	"fas fa-angry",
+	"far fa-angry",
+	"fas fa-dizzy",
+	"far fa-dizzy",
+	"fas fa-flushed",
+	"far fa-flushed",
+	"fas fa-frown",
+	"far fa-frown",
+	"fas fa-frown-open",
+	"far fa-frown-open",
+	"fas fa-grimace",
+	"far fa-grimace",
+	"fas fa-grin",
+	"far fa-grin",
+	"fas fa-grin-alt",
+	"far fa-grin-alt",
+	"fas fa-grin-beam",
+	"far fa-grin-beam",
+	"fas fa-grin-beam-sweat",
+	"far fa-grin-beam-sweat",
+	"fas fa-grin-hearts",
+	"far fa-grin-hearts",
+	"fas fa-grin-squint",
+	"far fa-grin-squint",
+	"fas fa-grin-squint-tears",
+	"far fa-grin-squint-tears",
+	"fas fa-grin-stars",
+	"far fa-grin-stars",
+	"fas fa-grin-tears",
+	"far fa-grin-tears",
+	"fas fa-grin-tongue",
+	"far fa-grin-tongue",
+	"fas fa-grin-tongue-squint",
+	"far fa-grin-tongue-squint",
+	"fas fa-grin-tongue-wink",
+	"far fa-grin-tongue-wink",
+	"fas fa-grin-wink",
+	"far fa-grin-wink",
+	"fas fa-kiss",
+	"far fa-kiss",
+	"fas fa-kiss-beam",
+	"far fa-kiss-beam",
+	"fas fa-kiss-wink-heart",
+	"far fa-kiss-wink-heart",
+	"fas fa-laugh",
+	"far fa-laugh",
+	"fas fa-laugh-beam",
+	"far fa-laugh-beam",
+	"fas fa-laugh-squint",
+	"far fa-laugh-squint",
+	"fas fa-laugh-wink",
+	"far fa-laugh-wink",
+	"fas fa-meh",
+	"far fa-meh",
+	"fas fa-meh-blank",
+	"far fa-meh-blank",
+	"fas fa-meh-rolling-eyes",
+	"far fa-meh-rolling-eyes",
+	"fas fa-sad-cry",
+	"far fa-sad-cry",
+	"fas fa-sad-tear",
+	"far fa-sad-tear",
+	"fas fa-smile",
+	"far fa-smile",
+	"fas fa-smile-beam",
+	"far fa-smile-beam",
+	"fas fa-smile-wink",
+	"far fa-smile-wink",
+	"fas fa-surprise",
+	"far fa-surprise",
+	"fas fa-tired",
+	"far fa-tired",
+];
+
+
+function getIconCssClass() {
+
+	var index = faker.random.number({ min: 0, max: iconsCssClasses.length - 1 });
+
+	return iconsCssClasses[index];
 }
