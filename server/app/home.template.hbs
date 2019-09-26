@@ -31,7 +31,7 @@
 
       <div class="font-size-sm">
         <a href="">{{firstName}} {{lastName}}</a>
-        <span class="text-muted d-block">{{formatDate updatedTimestamp}}</span>
+        <span class="text-muted d-block">{{Date updatedTimestamp}}</span>
       </div>
 
       <hr>
@@ -40,7 +40,7 @@
 
 
 
-      <core-pagination pagination-data="{{stringify pagedArticles.pagination}}"></core-pagination>
+      <core-pagination pagination-data="{{JSONstringify pagedArticles.pagination}}"></core-pagination>
 
     </div>
 

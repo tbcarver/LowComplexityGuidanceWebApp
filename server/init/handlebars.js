@@ -1,21 +1,13 @@
 
 var expressHandlebars = require("express-handlebars");
-var handlebarsHelpers = require('handlebars-helpers');
+var handlebarsHelpers = require("handlebars-helpers");
+var _ = require("lodash");
 
-var helpers = [];
+var helpersList = [];
 
-helpers.push(require("../lib/coreVendor/handlebars/helpers/addAttributeByBooleanHelper"));
-helpers.push(require("../lib/coreVendor/handlebars/helpers/addAttributeByCompareHelper"));
-helpers.push(require("../lib/coreVendor/handlebars/helpers/addNameByBooleanHelper"));
-helpers.push(require("../lib/coreVendor/handlebars/helpers/addNameByCompareHelper"));
-helpers.push(require("../lib/coreVendor/handlebars/helpers/formatDateHelper"));
-helpers.push(require("../lib/coreVendor/handlebars/helpers/formatDateShortHelper"));
-helpers.push(require("../lib/coreVendor/handlebars/helpers/formatDateTimeHelper"));
-helpers.push(require("../lib/coreVendor/handlebars/helpers/formatDateTimeShortHelper"));
-helpers.push(require("../lib/coreVendor/handlebars/helpers/isHelper"));
-helpers.push(require("../lib/coreVendor/handlebars/helpers/isNotHelper"));
-helpers.push(require("../lib/coreVendor/handlebars/helpers/hasRoleHelper"));
-helpers.push(require("../lib/coreVendor/handlebars/helpers/stringifyHelper"));
+helpersList.push(require("../lib/coreVendor/handlebars/helpers/authHelpers"));
+helpersList.push(require("../lib/coreVendor/handlebars/helpers/comparisonHelpers"));
+helpersList.push(require("../lib/coreVendor/handlebars/helpers/dateHelpers"));
 
 function initialize(app) {
 
@@ -27,11 +19,17 @@ function initialize(app) {
 		helpers: {},
 	});
 
-	for (var helper of helpers) {
-		handlebars.helpers[helper.name] = helper.helper;
-	}
-
+	handlebarsHelpers.comparison({ handlebars: handlebars.handlebars });
 	handlebarsHelpers.markdown({ handlebars: handlebars.handlebars });
+	handlebarsHelpers.object({ handlebars: handlebars.handlebars });
+
+	// NOTE: Order is important. coreVender helpers may override handlebars-helpers.
+
+	for (var helpers of helpersList) {
+		_.forEach(helpers, function(helper, helperName) {
+			handlebars.helpers[helperName] = helper;
+		});
+	}
 
 	app.engine("hbs", handlebars.engine);
 	app.set("view engine", "hbs");
