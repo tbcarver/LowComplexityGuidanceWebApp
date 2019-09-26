@@ -1,123 +1,77 @@
 <div class="form-group row">
-    <label class="col-2 col-form-label">Level</label>
+    <label class="col-2 col-form-label">Name</label>
     <div class="col-10">
         <span class="form-control-text">{{profile.name}}</span>
     </div>
 </div>
 <div class="form-group row">
-    <label class="col-2 col-form-label">Date</label>
+    <label class="col-2 col-form-label">Title</label>
     <div class="col-10">
-        <span class="form-control-text">{{Date profile.createdTimestamp}}</span>
+        <input type="text" name="profileTitle" class="form-control" value="{{profile.profileTitle}}">
     </div>
 </div>
-<div class="form-group row">
-    <label class="col-2 col-form-label">Level</label>
-    <div class="col-10">
-        <span class="form-control-text">{{profile.profileTitle}}</span>
-    </div>
-</div>
-<div class="form-group row">
-    <label class="col-2 col-form-label">Status</label>
-    <div class="col-10">
-        <span class="form-control-text">{{profile.jobType}}</span>
-
-    </div>
-</div>
-
-<div class="form-group row">
-    <div class="col-2 col-form-label">Checkbox</div>
-    <div class="col-10">
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck1">
-            <label class="form-check-label" for="gridCheck1">
-                Example checkbox
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck1">
-            <label class="form-check-label" for="gridCheck1">
-                Example checkbox
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck1">
-            <label class="form-check-label" for="gridCheck1">
-                Example checkbox
-            </label>
-        </div>
-    </div>
-</div>
-
-
-<div class="form-group row">
-    <label for="firstName" class="col-2 col-form-label">First Name</label>
-    <div class="col-10">
-        <input type="text" name="firstName" class="form-control" value="{{user.firstName}}">
-    </div>
-</div>
-<div class="form-group row">
-    <label for="lastName" class="col-2 col-form-label">Last Name</label>
-    <div class="col-10">
-        <input type="text" name="lastName" class="form-control" value="{{user.lastName}}">
-    </div>
-</div>
-<div class="form-group row">
-    <label for="password" class="col-2 col-form-label">Password</label>
-    <div class="col-10">
-        <input type="text" name="password" class="form-control" value="{{user.password}}">
-    </div>
-</div>
-
-
 <fieldset class="form-group">
     <div class="row">
-        <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+        <legend class="col-form-label col-sm-2 pt-0">Departments</legend>
         <div class="col-sm-10">
+            {{#each departments}}
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                <label class="form-check-label" for="gridRadios1">
-                    First radio
+                <input type="radio" name="departments" id="department-{{departmentId}}" value="{{departmentId}}"
+                    class="form-check-input" {{is ../profile.departmentId departmentId "checked"}}>
+                <label for="department-{{departmentId}}" class="form-check-label">
+                    {{departmentName}}
                 </label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                <label class="form-check-label" for="gridRadios2">
-                    Second radio
-                </label>
-            </div>
-            <div class="form-check disabled">
-                <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3"
-                    disabled>
-                <label class="form-check-label" for="gridRadios3">
-                    Third disabled radio
-                </label>
-            </div>
+            {{/each}}
         </div>
     </div>
 </fieldset>
-
 <div class="form-group row">
-    <label class="col-2 col-form-label">Url</label>
+    <div class="col-2 col-form-label">Job Types</div>
     <div class="col-10">
-        <span class="form-control-text">{{profile.streetAddress}}</span>
+        {{#each jobTypes}}
+        <div class="form-check">
+            <input id="jobType-{{jobTypeId}}" name="jobTypes" type="checkbox" value="{{jobTypeId}}"
+                class="form-check-input" {{includes ../profile.jobTypeIds jobTypeId "checked"}}>
+            <label for="jobType-{{jobTypeId}}" class="form-check-label">
+                {{jobTypeName}}
+            </label>
+        </div>
+        {{/each}}
     </div>
 </div>
 <div class="form-group row">
-    <label class="col-2 col-form-label">Username</label>
+    <label for="firstName" class="col-2 col-form-label">Street</label>
     <div class="col-10">
-        <span class="form-control-text">{{profile.city}}</span>
+        <input type="text" name="firstName" class="form-control" value="{{profile.streetAddress}}">
     </div>
 </div>
 <div class="form-group row">
-    <label class="col-2 col-form-label">Username</label>
+    <label for="lastName" class="col-2 col-form-label">City</label>
     <div class="col-10">
-        <span class="form-control-text">{{profile.state}}</span>
+        <input type="text" name="lastName" class="form-control" value="{{profile.city}}">
     </div>
 </div>
 <div class="form-group row">
-    <label class="col-2 col-form-label">Username</label>
+    <label for="password" class="col-2 col-form-label">State</label>
     <div class="col-10">
-        <span class="form-control-text">{{profile.zipCode}}</span>
+        <select id="states" class="form-control">
+            {{#each states}}
+            <option value="{{this}}" {{is ../profile.state this "selected"}}>{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="password" class="col-2 col-form-label">Zip Code</label>
+    <div class="col-10">
+        <input type="text" name="password" class="form-control" value="{{profile.zipCode}}">
+    </div>
+</div>
+<div class="form-group row">
+    <label class="col-2 col-form-label">Created Date</label>
+    <div class="col-10">
+        <span class="form-control-text">{{date profile.createdTimestamp}}</span>
     </div>
 </div>
 
@@ -125,14 +79,15 @@
 <div class="form-group row form-commands">
     <label class="col-2 col-form-label"></label>
     <div class="col-10">
-        <button class="btn btn-sm btn-outline-secondary">
-            <i class="ion-plus-round"></i>
-
-            Edit
+        <button class="btn btn-sm btn-primary">
+            <i class="fa fa-check"></i> Save
+        </button>
+        <button class="btn btn-sm btn-outline-danger">
+            <i class="fa fa-times"></i> Cancel</span>
         </button>
 
-        <button class="btn btn-sm btn-outline-primary">
-            <i class="fa fa-heart"></i> Delete</span>
+        <button class="btn btn-sm btn-outline-danger float-right">
+            <i class="fa fa-trash-o"></i> Delete</span>
         </button>
     </div>
 </div>

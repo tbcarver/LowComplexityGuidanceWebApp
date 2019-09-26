@@ -25,6 +25,7 @@
     "express": "^4.17.1",
     "express-error-handler": "^1.1.0",
     "express-handlebars": "^3.0.0",
+    "font-awesome": "^4.7.0",
     "handlebars": "^4.2.1",
     "handlebars-helpers": "^0.10.0",
     "html-parsed-element": "^0.4.0",

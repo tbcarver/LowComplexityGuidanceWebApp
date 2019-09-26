@@ -27,11 +27,20 @@ function getGuideline(req, res) {
     model.layout = "oneColumn.layout.hbs";
 
     model.profile = buildProfile();
+    model.departments = buildDepartments();
     model.jobTypes = buildJobTypes();
+    model.states = faker.definitions.address.state;
 
-    var jobTypeIds = Object.keys(model.jobTypes);
-    var index = faker.random.number({ min: 0, max: jobTypeIds.length - 1 });
-    model.profile.jobTypeId = jobTypeIds[index];
+    var index = faker.random.number({ min: 0, max: model.departments.length - 1 });
+    model.profile.departmentId = model.departments[index].departmentId;
+    
+    model.profile.jobTypeIds = [];
+
+    index = faker.random.number({ min: 0, max: model.jobTypes.length - 1 });
+    model.profile.jobTypeIds.push(model.jobTypes[index].jobTypeId);
+
+    index = faker.random.number({ min: 0, max: model.jobTypes.length - 1 });
+    model.profile.jobTypeIds.push(model.jobTypes[index].jobTypeId);
 
     res.render("guidelines/guidelinesDetailsEdit.template.hbs", model);
 };
@@ -43,6 +52,7 @@ function buildProfile() {
     profile.profileId = faker.random.number();
     profile.name = faker.name.firstName() + " " + faker.name.lastName();
     profile.profileTitle = faker.name.title();
+    profile.department = faker.commerce.department();
     profile.jobType = faker.name.jobType();
     profile.streetAddress = faker.address.streetAddress();
     profile.city = faker.address.city();
@@ -53,13 +63,31 @@ function buildProfile() {
     return profile;
 }
 
-function buildJobTypes() {
+function buildDepartments() {
 
-    var jobTypes = {};
+    var departments = [];
     var number = faker.random.number({ min: 2, max: 5 });
 
     for (var count = 1; count <= number; count++) {
-        jobTypes[faker.random.number] = faker.name.jobType();
+        departments.push({
+            departmentId: faker.random.number(),
+            departmentName: faker.commerce.department(),
+        });
+    }
+
+    return departments;
+}
+
+function buildJobTypes() {
+
+    var jobTypes = [];
+    var number = faker.random.number({ min: 2, max: 5 });
+
+    for (var count = 1; count <= number; count++) {
+        jobTypes.push({
+            jobTypeId: faker.random.number(),
+            jobTypeName: faker.name.jobType(),
+        });
     }
 
     return jobTypes;
