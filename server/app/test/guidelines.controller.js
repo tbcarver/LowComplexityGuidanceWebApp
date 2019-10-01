@@ -4,8 +4,8 @@ var faker = require("faker");
 function initialize(app, acl) {
 
     // acl noop
-    app.get("/guidelines/:pageNumber?", getGuidelines);
-    app.get("/guideline/:guidelineId", getGuideline);
+    app.get("/test/guidelines/:pageNumber?", getGuidelines);
+    app.get("/test/guideline/:guidelineId", getGuideline);
 }
 
 function getGuidelines(req, res) {
@@ -18,7 +18,7 @@ function getGuidelines(req, res) {
         model.profiles.push(buildProfile());
     }
 
-    res.render("guidelines/guidelinesMaster.template.hbs", model);
+    res.render("test/guidelinesMaster.template.hbs", model);
 };
 
 function getGuideline(req, res) {
@@ -42,7 +42,7 @@ function getGuideline(req, res) {
     index = faker.random.number({ min: 0, max: model.jobTypes.length - 1 });
     model.profile.jobTypeIds.push(model.jobTypes[index].jobTypeId);
 
-    res.render("guidelines/guidelinesDetailsEdit.template.hbs", model);
+    res.render("test/guidelinesDetailsEdit.template.hbs", model);
 };
 
 function buildProfile() {
