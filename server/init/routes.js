@@ -17,6 +17,7 @@ function initialize(app, acl) {
 	app.use("/assets/vendor/fontawesome-free/5.9.0/", express.static("./node_modules/@fortawesome/fontawesome-free", { maxAge: oneYearInMilliseconds }));
 	app.use("/assets/vendor/fontawesome/4.7.0/", express.static("./node_modules/font-awesome", { maxAge: oneYearInMilliseconds }));
 	app.use("/assets/vendor/jquery/3.3.1/", express.static("./node_modules/jquery/dist", { maxAge: oneYearInMilliseconds }));
+	app.use("/assets/vendor/typeahead.js/0.11.1/", express.static("./node_modules/typeahead.js/dist", { maxAge: oneYearInMilliseconds }));
 
 	directoryWalkerSync.walkDirectory("./server/app", null, null, function(filePathName, stats) {
 

@@ -18,7 +18,6 @@ function initialize(app, acl) {
 function getUsers(req, res) {
 
     var model = new AppModel(req, "Users");
-    model.layout = "oneColumn.layout.hbs";
     model.users = usersStore.getUsers();
 
     res.render("admin/usersMaster.template.hbs", model);
