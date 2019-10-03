@@ -52,6 +52,7 @@ function initialize(app, acl, callback) {
 				publicPath: webpackConfig.output.publicPath
 			}));
 
+			acl.allow("public exact", "/__webpack_hmr", "*");
 			app.use(webpackHotMiddleware(webpackCompiler));
 
 			callback();
