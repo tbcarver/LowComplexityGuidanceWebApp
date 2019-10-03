@@ -16,6 +16,27 @@
 			"name": "Nodemon",
 			"runtimeExecutable": "${workspaceFolder}/node_modules/nodemon/bin/nodemon.js",
 			"program": "${workspaceFolder}/server/app.js",
+			"args": [
+				"--watch",
+				"server"
+			],
+			"restart": true,
+			"console": "integratedTerminal",
+			"internalConsoleOptions": "neverOpen"
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Nodemon Client",
+			"runtimeExecutable": "${workspaceFolder}/node_modules/nodemon/bin/nodemon.js",
+			"env": {
+				"NODE_ENV_CLIENT": "development"
+			},
+			"args": [
+				"--watch",
+				"server"
+			],
+			"program": "${workspaceFolder}/server/app.js",
 			"restart": true,
 			"console": "integratedTerminal",
 			"internalConsoleOptions": "neverOpen"

@@ -9,6 +9,7 @@
     "createMockData": "node ./sql/createDatabase/createMockData.js",
     "build": "webpack",
     "dev": "nodemon",
+    "dev-client": "cross-env NODE_ENV_CLIENT=development nodemon",
     "pm2": "pm2 start ./server/app.js",
     "start": "node ./server/app.js",
     "test": "mocha --recursive",
@@ -21,6 +22,7 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "cookie-session": "^2.0.0-beta.3",
+    "cross-env": "^5.2.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-error-handler": "^1.1.0",
@@ -60,6 +62,8 @@
     "simple-mock": "^0.8.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.40.2",
-    "webpack-cli": "^3.3.9"
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-middleware": "^3.7.1",
+    "webpack-hot-middleware": "^2.25.0"
   }
 }

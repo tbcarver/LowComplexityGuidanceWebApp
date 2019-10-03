@@ -11,7 +11,7 @@ var AppModel = require("./appModel");
 
 const logger = winston.createLogger({
     format: winston.format.combine(
-        winston.format.timestamp(), 
+        winston.format.timestamp(),
         customFormat),
     transports: [
         new sqliteTransport(),
@@ -45,16 +45,19 @@ app.use(function(req, res, next) {
     next();
 });
 
-// NOTE: Order of app.use() is important
+
+// NOTE: Order of initialize is important
 
 require("./init/middlewares").initialize(app, acl);
 require("./init/auth").initialize(app, acl);
 require("./init/handlebars").initialize(app, acl);
-require("./init/routes").initialize(app, acl);
-require("./init/errors").initialize(app, acl);
+require("./init/development").initialize(app, acl, function() {
+    require("./init/routes").initialize(app, acl);
+    require("./init/errors").initialize(app, acl);
 
-var port = process.env.PORT || 3000;
+    var port = process.env.PORT || 3000;
 
-app.listen(port, function() {
-    console.log(`Server listening on port ${port}. http://localhost:3000`);
+    app.listen(port, function() {
+        console.log(`Server listening on port ${port}. http://localhost:3000`);
+    });
 });

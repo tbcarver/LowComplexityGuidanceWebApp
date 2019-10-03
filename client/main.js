@@ -10,3 +10,5 @@ import style from "./sass/main.scss";
 import MessageBox from "./webComponents/messageBoxes/messageBox.component";
 import MessageBoxClosable from "./webComponents/messageBoxes/messageBoxClosable.component";
 import Pagination from "./webComponents/pagination/pagination.component";
+
+console.log("TEST")
