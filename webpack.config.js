@@ -9,7 +9,7 @@ module.exports = {
 	entry: "./client/main.js",
 	output: {
 		path: __dirname + "/assets/dist",
-		publicPath: "/assets/dist",
+		publicPath: "/assets/dist/",  // Final slash is important for hot reloading webpack-dev-server/issues/252
 		filename: "main-[contenthash].js",
 	},
 	devtool: "source-map",

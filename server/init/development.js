@@ -33,10 +33,13 @@ function initialize(app, acl, callback) {
 		var oneTimeCompilerConfig = _.cloneDeep(webpackConfig);
 		oneTimeCompilerConfig.plugins = plugins;
 
+		console.log("Client development webpack one time compile started...");
+
 		webpack(oneTimeCompilerConfig, function() {
 			console.log("Client development webpack one time compile complete.");
 
 			var devConfig = _.cloneDeep(webpackConfig);
+			
 			devConfig.plugins.push(miniCssExtractPlugin);
 
 			// NOTE: This expects one entry point and should be changed in more entry points are added.
