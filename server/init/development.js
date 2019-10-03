@@ -12,7 +12,17 @@ function initialize(app, acl, callback) {
 
 		webpackConfig.output.filename = webpackConfig.output.filename.replace("[contenthash]", "development");
 
-		var index = webpackConfig.plugins.findIndex(function(plugin) {
+		// Remove the mini-css-extract-plugin to allow for css injection for hot reloading
+		var sassRule = _.find(webpackConfig.module.rules, { "test": /\.scss$/ });
+		var index = sassRule.use.findIndex(function(use) {
+			return use.includes("mini-css-extract-plugin");
+		});
+
+		if (index !== -1) {
+			sassRule.use.splice(index, 1);
+		}
+
+		index = webpackConfig.plugins.findIndex(function(plugin) {
 			return MiniCssExtractPlugin.prototype.isPrototypeOf(plugin);
 		});
 
@@ -39,7 +49,7 @@ function initialize(app, acl, callback) {
 			console.log("Client development webpack one time compile complete.");
 
 			var devConfig = _.cloneDeep(webpackConfig);
-			
+
 			devConfig.plugins.push(miniCssExtractPlugin);
 
 			// NOTE: This expects one entry point and should be changed in more entry points are added.
