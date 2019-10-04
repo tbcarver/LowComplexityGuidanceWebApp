@@ -88,22 +88,41 @@ class Typeahead extends HTMLParsedElement {
 		var suggestionName = this.getAttribute("suggestion-name");
 
 		var typeaheadDataset = {
-			name: 'value',
-			displayKey: 'value',
+			name: "value",
+			displayKey: "value",
 			source: bloodhound.ttAdapter(),
 			templates: {
 				empty: `
-					<div class="tt-suggestion">
+					<div class="tt-item">
 						${suggestionName} not found
 					</div>`,
 				pending: `
-					<div class="tt-suggestion">
+					<div class="tt-item">
 					<i class="fas fa-circle-notch fa-spin text-primary"></i> Updating...
 					</div>`,
 			}
 		};
 
-		$(input).typeahead(typeaheadOptions, typeaheadDataset);
+		var $input = $(input);
+
+		$input.typeahead(typeaheadOptions, typeaheadDataset);
+
+		$input.bind("typeahead:render", function(event) {
+			selectWhenOneSuggestion(event.target.parentElement);
+		});
+
+		$input.bind("typeahead:open", function(event) {
+			selectWhenOneSuggestion(event.target.parentElement);
+		});
+	}
+}
+
+function selectWhenOneSuggestion(parentElement) {
+
+	var suggestionElements = parentElement.querySelectorAll(".tt-suggestion");
+
+	if (suggestionElements.length === 1) {
+		suggestionElements[0].classList.add("tt-cursor");
 	}
 }
 

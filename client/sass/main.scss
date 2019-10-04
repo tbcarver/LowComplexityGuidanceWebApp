@@ -80,9 +80,13 @@ core-typeahead.form-control {
     border-radius: $input-border-radius;
 }
 
-.tt-suggestion {
+.tt-suggestion, .tt-item {
     padding-top: $dropdown-item-padding-y;
     padding-right: $dropdown-item-padding-x;
     padding-bottom: $dropdown-item-padding-y;
     padding-left: $input-padding-x;
+}
+
+.tt-cursor {
+    @include gradient-bg($dropdown-link-hover-bg);
 }
