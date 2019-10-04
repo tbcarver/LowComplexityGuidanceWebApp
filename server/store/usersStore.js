@@ -74,4 +74,15 @@ usersStore.getUsers = function() {
 	return users;
 }
 
+usersStore.findUsers = function(searchTerm) {
+
+	var users = sql.executeQuery(`
+		SELECT userId, username, firstName, lastName
+		FROM Users
+		WHERE userId || ' ' || firstName || ' ' || lastName LIKE @searchTerm `,
+		{ searchTerm: `%${searchTerm}%` });
+
+	return users;
+}
+
 module.exports = usersStore;

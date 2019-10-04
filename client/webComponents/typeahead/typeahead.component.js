@@ -41,6 +41,9 @@ class Typeahead extends HTMLParsedElement {
 
 		this.appendChild(input);
 
+		// Datums is an array of objects with properties id and value
+		// [{"id":21,"value":"21 Penelope Grant"},{"id":22,"value":"22 Rudolph Goodwin"}]
+
 		var bloodhound
 		var bloodhoundOptions = {
 			limit: 10,
@@ -49,7 +52,7 @@ class Typeahead extends HTMLParsedElement {
 			identify: function(datum) {
 				return datum.id;
 			},
-			sufficient: 5,
+			sufficient: 1,
 		};
 
 		var prefetchUrl = this.getAttribute("prefetch-url");
@@ -65,7 +68,7 @@ class Typeahead extends HTMLParsedElement {
 		if (remoteUrl) {
 			bloodhoundOptions.remote = {
 				url: remoteUrl,
-				wildcard: "query",
+				wildcard: "searchTerm",
 				transform: function(datum) {
 					bloodhound.add(datum);
 					return datum;
@@ -89,9 +92,14 @@ class Typeahead extends HTMLParsedElement {
 			displayKey: 'value',
 			source: bloodhound.ttAdapter(),
 			templates: {
-				empty: `<div class="tt-suggestion">
-							${suggestionName} not found
-						</div>`,
+				empty: `
+					<div class="tt-suggestion">
+						${suggestionName} not found
+					</div>`,
+				pending: `
+					<div class="tt-suggestion">
+					<i class="fas fa-circle-notch fa-spin text-primary"></i> Updating...
+					</div>`,
 			}
 		};
 

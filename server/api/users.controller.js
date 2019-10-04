@@ -1,36 +1,40 @@
 
 
 var usersStore = require("../store/usersStore");
-var usersRules = require("../rules/usersRules");
+var queryStringKeys = require("../keys/queryStringKeys");
 var _ = require("lodash");
 
 function initialize(app, acl) {
 
     // acl noop
-    app.get("/api/users/search/prefetch", getUsersSearchPrefetch);
-    app.get("/api/users/search/:query", getUsersSearch);
+    app.get("/api/users/typeahead/prefetch", getUsersTypeaheadPrefetch);
+    app.get("/api/users/typeahead/remote", getUsersTypeaheadRemote);
 }
 
-function getUsersSearchPrefetch(req, res) {
+function getUsersTypeaheadPrefetch(req, res) {
 
     var users = usersStore.getUsers();
 
     users = users.map(function(user) {
-
         return { id: user.userId, value: `${user.userId} ${user.firstName} ${user.lastName}` };
     });
 
-    res.json(users.slice(20));
+    res.json(users);
 };
 
-function getUsersSearch(req, res) {
+function getUsersTypeaheadRemote(req, res) {
 
-    var users = usersStore.getUsers();
+    var searchTerm = req.query[queryStringKeys.searchTerm];
+    var users;
 
-    users = users.map(function(user) {
+    if (searchTerm) {
 
-        return { id: user.userId, value: `${user.userId} ${user.firstName} ${user.lastName}` };
-    });
+        users = usersStore.findUsers(searchTerm);
+
+        users = users.map(function(user) {    
+            return { id: user.userId, value: `${user.userId} ${user.firstName} ${user.lastName}` };
+        });
+    }
 
     res.json(users);
 };

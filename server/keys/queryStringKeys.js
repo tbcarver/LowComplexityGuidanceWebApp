@@ -1,6 +1,7 @@
 
 var queryStringKeys = {
-	returnUrl: "return"
+	returnUrl: "return",
+	searchTerm: "q",
 };
 
 
