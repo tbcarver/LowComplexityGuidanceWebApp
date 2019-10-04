@@ -71,18 +71,18 @@ $colors: map-merge(
 );
 
 $primary:       $blue;
-$primary-lighter:       rgba(lighten($primary, 20%), .15) ;
-$primary-lightest:      rgba(lighten($primary, 40%), .15) ;
+$primary-lighter:       lighten($primary, 20%);
+$primary-lightest:      lighten($primary, 40%);
 $secondary:     $tan;
-$secondary-lighter:       rgba(lighten($secondary, 10%), .15) ;
-$secondary-lightest:      rgba(lighten($secondary, 15%), .15) ;
+$secondary-lighter:       lighten($secondary, 10%);
+$secondary-lightest:      lighten($secondary, 15%);
 $success:       $green;
 $info:          $cyan;
 $warning:       $yellow;
 $danger:        $red;
 $light:         $beige;
-$lighter:       rgba(lighten($light, 16%), .50) ;
-$lightest:      rgba(lighten($light, 18%), .10) ;
+$lighter:       lighten($light, 16%);
+$lightest:      lighten($light, 18%);
 $dark:          $gray-800;
 $darker:        darken($dark, 5%);
 $darkest:       darken($dark, 10%);

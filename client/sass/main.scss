@@ -50,3 +50,38 @@ main {
 .font-size-lg {
     @include font-size($font-size-lg);
 }
+
+core-typeahead.form-control {
+    padding: 0;
+}
+
+.form-control > .twitter-typeahead {
+    width: 100%;
+    margin-top: -$input-border-width;
+    margin-left: -$input-border-width;
+}
+
+.form-control.tt-hint {
+    border-color: transparent;
+}
+
+.form-control.tt-input {
+    border-color: transparent;
+}
+
+.tt-suggestion {
+    background-color: $dropdown-bg;
+    border-color: $dropdown-border-color;
+    border-width:$dropdown-border-width;
+    color: $dropdown-color;
+    padding-top: $dropdown-padding-y;
+    padding-bottom: $dropdown-padding-y;
+    box-shadow: $dropdown-box-shadow;
+}
+
+.tt-suggestion {
+    padding-top: $dropdown-item-padding-y;
+    padding-right: $dropdown-item-padding-x;
+    padding-bottom: $dropdown-item-padding-y;
+    padding-left: $input-padding-x;
+}
