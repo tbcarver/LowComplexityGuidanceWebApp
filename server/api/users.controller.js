@@ -1,7 +1,7 @@
 
 
-var usersStore = require("../../store/usersStore");
-var usersRules = require("../../rules/usersRules");
+var usersStore = require("../store/usersStore");
+var usersRules = require("../rules/usersRules");
 var _ = require("lodash");
 
 function initialize(app, acl) {

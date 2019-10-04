@@ -18,6 +18,20 @@ function initialize(app, acl) {
 	app.use("/assets/vendor/fontawesome/4.7.0/", express.static("./node_modules/font-awesome", { maxAge: oneYearInMilliseconds }));
 	app.use("/assets/vendor/jquery/3.3.1/", express.static("./node_modules/jquery/dist", { maxAge: oneYearInMilliseconds }));
 	app.use("/assets/vendor/typeahead.js/0.11.1/", express.static("./node_modules/typeahead.js/dist", { maxAge: oneYearInMilliseconds }));
+	
+	directoryWalkerSync.walkDirectory("./server/api", null, null, function(filePathName, stats) {
+
+		if (filePathName.endsWith(".controller.js")) {
+
+			var absoluteFilePathName = path.resolve(filePathName);
+			var controller = require(absoluteFilePathName);
+
+			if (controller && controller.initialize) {
+
+				controller.initialize(app, acl);
+			}
+		}
+	});
 
 	directoryWalkerSync.walkDirectory("./server/app", null, null, function(filePathName, stats) {
 

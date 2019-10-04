@@ -7,7 +7,7 @@ var sqliteTransport = require("./lib/coreVendor/winston/sqliteTransport");
 var ServerError = require("./serverError");
 var express = require("express");
 var Acl = require("acl");
-var AppModel = require("./appModel");
+var AppModel = require("./app/appModel");
 
 const logger = winston.createLogger({
     format: winston.format.combine(
