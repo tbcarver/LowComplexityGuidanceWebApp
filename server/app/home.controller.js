@@ -20,7 +20,7 @@ function getHome(req, res) {
     }
 
     model.pagedArticles = articlesStore.getDescendingPagedRelationalArticles(pageNumber, 10);
-    model.pagedArticles.pagination.url = "/articles/%d";
+    model.pagedArticles.pagination.url = "/articles/%s";
 
     res.render("home.template.hbs", model);
 };

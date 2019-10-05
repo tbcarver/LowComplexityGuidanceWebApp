@@ -56,13 +56,13 @@ class Pagination extends HTMLElement {
 				throughNumber: ((pageNumber - 1) * pageSize) + paginationData.pageTotal,
 				total: total,
 				firstDisabled: "",
-				firstUrl: url.replace("%d", 1),
+				firstUrl: url.replace("%s", 1),
 				backDisabled: "",
-				backUrl: url.replace("%d", pageNumber - 1),
+				backUrl: url.replace("%s", pageNumber - 1),
 				nextDisabled: "",
-				nextUrl: url.replace("%d", pageNumber + 1),
+				nextUrl: url.replace("%s", pageNumber + 1),
 				lastDisabled: "",
-				lastUrl: url.replace("%d", totalPages),
+				lastUrl: url.replace("%s", totalPages),
 			};
 
 			if (pageNumber === 1) {
@@ -111,7 +111,7 @@ class Pagination extends HTMLElement {
 
 					data.pageNumbers.push({
 						number: number,
-						url: url.replace("%d", number),
+						url: url.replace("%s", number),
 						active: (number === pageNumber) ? "active" : undefined,
 					});
 				}

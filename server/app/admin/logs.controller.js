@@ -19,7 +19,7 @@ function getLogs(req, res) {
     }
 
     model.pagedLogs = logsStore.getDescendingPagedLogs(pageNumber, 20);
-    model.pagedLogs.pagination.url = "/logs/%d";
+    model.pagedLogs.pagination.url = "/logs/%s";
 
     res.render("admin/logsMaster.template.hbs", model);
 };
