@@ -3,6 +3,7 @@
 // StackOverflow 48498581
 
 import HTMLParsedElement from "html-parsed-element";
+import PrefetchDataAdditionalStorage from "./prefetchDataAdditionalStorage";
 // Typeahead.js must be included as a script link on the webpage not imported
 
 // NOTE: The type="form" has a known issue when the users clicks away from the typeahead thereby losing
@@ -70,10 +71,16 @@ class Typeahead extends HTMLParsedElement {
 		};
 
 		var prefetchUrl = this.getAttribute("prefetch-url");
+		var prefetchDataAdditionalStorage = new PrefetchDataAdditionalStorage();
 
 		if (prefetchUrl) {
+			prefetchDataAdditionalStorage.dataKey = `__${prefetchUrl}__data__additional`;
 			bloodhoundOptions.prefetch = {
 				url: prefetchUrl,
+				prepare: function(settings) {
+					prefetchDataAdditionalStorage.clear();
+					return settings;
+				},
 			}
 		}
 
@@ -83,15 +90,20 @@ class Typeahead extends HTMLParsedElement {
 			bloodhoundOptions.remote = {
 				url: remoteUrl,
 				wildcard: "searchTerm",
-				transform: function(datum) {
-					bloodhound.add(datum);
-					return datum;
+				transform: function(datums) {
+					bloodhound.add(datums);
+					prefetchDataAdditionalStorage.add(datums);
+					return datums;
 				},
 			};
 		}
 
 		var bloodhound = new Bloodhound(bloodhoundOptions);
-		bloodhound.initialize();
+		bloodhound.initialize()
+			.done(function() {
+				var datums = prefetchDataAdditionalStorage.get();
+				bloodhound.add(datums);
+			});
 
 		var typeaheadOptions = {
 			hint: true,

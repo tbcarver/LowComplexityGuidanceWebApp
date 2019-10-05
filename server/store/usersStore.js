@@ -3,6 +3,38 @@ var sql = require("../lib/coreVendor/betterSqlite/sql");
 
 var usersStore = {};
 
+
+usersStore.addUser = function(username, firstName, lastName, passwordHash, passwordHashSalt) {
+
+	var id = sql.executeNonQuery(`
+		INSERT INTO Users (username, firstName, lastName, passwordHash, passwordHashSalt) 
+		VALUES (@username, @firstName, @lastName, @passwordHash, @passwordHashSalt)`,
+		{ username, firstName, lastName, passwordHash, passwordHashSalt });
+
+	return id;
+}
+
+usersStore.getUsers = function() {
+
+	var users = sql.executeQuery(`
+		SELECT userId, username, firstName, lastName
+		FROM Users`);
+
+		// TEMP!!
+	return users.splice(20);
+}
+
+usersStore.findUsers = function(searchTerm) {
+
+	var users = sql.executeQuery(`
+		SELECT userId, username, firstName, lastName
+		FROM Users
+		WHERE userId || ' ' || firstName || ' ' || lastName LIKE @searchTerm `,
+		{ searchTerm: `%${searchTerm}%` });
+
+	return users;
+}
+
 usersStore.getUser = function(userId) {
 
 	var user = sql.executeRow(`
@@ -54,35 +86,5 @@ usersStore.getPasswordHashes = function(username) {
 	return passwordHashes;
 }
 
-
-usersStore.addUser = function(username, firstName, lastName, passwordHash, passwordHashSalt) {
-
-	var id = sql.executeNonQuery(`
-		INSERT INTO Users (username, firstName, lastName, passwordHash, passwordHashSalt) 
-		VALUES (@username, @firstName, @lastName, @passwordHash, @passwordHashSalt)`,
-		{ username, firstName, lastName, passwordHash, passwordHashSalt });
-
-	return id;
-}
-
-usersStore.getUsers = function() {
-
-	var users = sql.executeQuery(`
-		SELECT userId, username, firstName, lastName
-		FROM Users`);
-
-	return users;
-}
-
-usersStore.findUsers = function(searchTerm) {
-
-	var users = sql.executeQuery(`
-		SELECT userId, username, firstName, lastName
-		FROM Users
-		WHERE userId || ' ' || firstName || ' ' || lastName LIKE @searchTerm `,
-		{ searchTerm: `%${searchTerm}%` });
-
-	return users;
-}
 
 module.exports = usersStore;
