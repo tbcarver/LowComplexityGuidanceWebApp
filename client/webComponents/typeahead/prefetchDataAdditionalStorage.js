@@ -2,6 +2,8 @@
 // NOTE: bloodhound.add() only adds to memory, not to prefetched local storage.
 //  This storage is to augment the prefetch local storage.
 
+import coreObject from "../../lib/core/extensions/coreObject";
+
 function PrefetchDataAdditionalStorage() {
 	this.dataKey = null;
 }
@@ -10,14 +12,19 @@ PrefetchDataAdditionalStorage.prototype.add = function(datums) {
 
 	if (this.dataKey && datums && datums.length > 0) {
 
-		var storage = this.get();
+		var storage = localStorage[this.dataKey];
+
+		if (storage) {
+			storage = JSON.parse(storage);
+		} else {
+			storage = {};
+		}
 
 		for (var datum of datums) {
-			storage.push(datum);
+			storage[datum.id] = datum;
 		}
 
 		storage = JSON.stringify(storage);
-
 		localStorage[this.dataKey] = storage;
 	}
 }
@@ -31,7 +38,8 @@ PrefetchDataAdditionalStorage.prototype.get = function() {
 		var storage = localStorage[this.dataKey];
 
 		if (storage) {
-			datums = JSON.parse(storage);
+			storage = JSON.parse(storage);
+			datums = coreObject.valuesToArray(storage);
 		}
 	}
 

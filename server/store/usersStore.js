@@ -20,8 +20,7 @@ usersStore.getUsers = function() {
 		SELECT userId, username, firstName, lastName
 		FROM Users`);
 
-		// TEMP!!
-	return users.splice(20);
+	return users;
 }
 
 usersStore.findUsers = function(searchTerm) {
