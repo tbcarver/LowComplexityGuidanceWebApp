@@ -34,6 +34,18 @@ class Typeahead extends HTMLParsedElement {
 
 	render() {
 
+		var form;
+
+		if (this.getAttribute("type") === "form") {
+
+			form = this.closest("form");
+			if (form) {
+				form.addEventListener("submit", function(event) {
+					event.preventDefault();
+				});
+			}
+		}
+
 		var input = document.createElement("input");
 		input.type = "text";
 		input.className = this.getAttribute("class");
@@ -100,6 +112,9 @@ class Typeahead extends HTMLParsedElement {
 					<div class="tt-item">
 					<i class="fas fa-circle-notch fa-spin text-primary"></i> Updating...
 					</div>`,
+				suggestion: function(context) {
+					return `<div data-id="${context.id}">${context.value}</div>`;
+				}
 			}
 		};
 
@@ -108,21 +123,45 @@ class Typeahead extends HTMLParsedElement {
 		$input.typeahead(typeaheadOptions, typeaheadDataset);
 
 		$input.bind("typeahead:render", function(event) {
-			selectWhenOneSuggestion(event.target.parentElement);
+			setCursor(event.target.parentElement);
 		});
 
-		$input.bind("typeahead:open", function(event) {
-			selectWhenOneSuggestion(event.target.parentElement);
+		$input.bind("typeahead:open", function() {
+			setCursor(event.target.parentElement);
+		});
+
+		$input.bind("typeahead:select", function(event, suggestion) {
+			submitForm(form, suggestion);
 		});
 	}
 }
 
-function selectWhenOneSuggestion(parentElement) {
+function setCursor(typeaheadJsElement) {
 
-	var suggestionElements = parentElement.querySelectorAll(".tt-suggestion");
+	var suggestionElements = typeaheadJsElement.querySelectorAll(".tt-suggestion");
 
 	if (suggestionElements.length === 1) {
+
 		suggestionElements[0].classList.add("tt-cursor");
+
+	} else if (suggestionElements.length > 0) {
+
+		var hintInputElement = typeaheadJsElement.querySelector(".tt-hint");
+
+		for (var suggestion of suggestionElements) {
+
+			if (suggestion.textContent === hintInputElement.value) {
+
+				suggestion.classList.add("tt-cursor");
+			}
+		}
+	}
+}
+
+function submitForm(form, suggestion) {
+
+	if (form && suggestion.id) {
+		location.href = form.action.replace("%d", suggestion.id);
 	}
 }
 
