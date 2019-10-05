@@ -87,6 +87,11 @@ core-typeahead.form-control {
     padding-left: $input-padding-x;
 }
 
+.tt-suggestion:hover {
+    @include gradient-bg($dropdown-link-hover-bg);
+    cursor: pointer;
+}
+
 .tt-cursor {
     @include gradient-bg($dropdown-link-hover-bg);
 }
