@@ -72,10 +72,14 @@ $colors: map-merge(
 
 $primary:       $blue;
 $primary-lighter:       lighten($primary, 20%);
-$primary-lightest:      lighten($primary, 40%);
+$primary-lightest:      lighten($primary, 35%);
+$primary-darker:       darken($primary, 20%);
+$primary-darkest:      darken($primary, 35%);
 $secondary:     $tan;
 $secondary-lighter:       lighten($secondary, 10%);
-$secondary-lightest:      lighten($secondary, 15%);
+$secondary-lightest:      lighten($secondary, 20%);
+$secondary-darker:       darken($secondary, 20%);
+$secondary-darkest:      darken($secondary, 35%);
 $success:       $green;
 $info:          $cyan;
 $warning:       $yellow;
@@ -94,9 +98,13 @@ $theme-colors: map-merge(
     "primary":            $primary,
     "primary-lighter":    $primary-lighter,
     "primary-lightest":   $primary-lightest,
+    "primary-darker":    $primary-darker,
+    "primary-darkest":   $primary-darkest,
     "secondary":  $secondary,
     "secondary-lighter":    $secondary-lighter,
     "secondary-lightest":   $secondary-lightest,
+    "secondary-darker":    $secondary-darker,
+    "secondary-darkest":   $secondary-darkest,
     "success":    $success,
     "info":       $info,
     "warning":    $warning,
@@ -832,7 +840,7 @@ $pagination-disabled-border-color:  $gray-300 !default;
 
 $jumbotron-padding:                 2rem !default;
 $jumbotron-color:                   null !default;
-$jumbotron-bg:                      $gray-200 !default;
+$jumbotron-bg:                      $primary-lighter !default;
 
 
 // Cards

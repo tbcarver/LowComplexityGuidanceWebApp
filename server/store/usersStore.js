@@ -28,7 +28,7 @@ usersStore.findUsers = function(searchTerm) {
 	var users = sql.executeQuery(`
 		SELECT userId, username, firstName, lastName
 		FROM Users
-		WHERE userId || ' ' || firstName || ' ' || lastName LIKE @searchTerm `,
+		WHERE (userId LIKE @searchTerm) OR (firstName LIKE @searchTerm) OR (lastName LIKE @searchTerm)`,
 		{ searchTerm: `%${searchTerm}%` });
 
 	return users;
