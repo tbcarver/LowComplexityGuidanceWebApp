@@ -2,7 +2,6 @@
 
 var passport = require("passport");
 var authStrategy = require("./authSqliteStrategy");
-var auth = require("../middlewares/auth");
 
 function initialize(app, acl) {
 
@@ -26,8 +25,6 @@ function initialize(app, acl) {
 
 	app.use(passport.initialize());
 	app.use(passport.session());
-
-	app.use(auth);
 }
 
 
