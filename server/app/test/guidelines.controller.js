@@ -48,7 +48,8 @@ function getGuideline(req, res) {
 
 function postGuidelineDelete(req, res) {
 
-    res.redirect("/test/guidelines");
+    req.flash("error", "profile deleted", false);
+    req.flash("success", "profile again", "/test/guidelines");
 }
 
 function buildProfile() {
