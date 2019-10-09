@@ -12,7 +12,7 @@ function initialize(app, acl) {
 
 function getHome(req, res) {
 
-    var model = new AppModel(req, "conduit", "Home");
+    var model = { title: "conduit", navbarLinkTitle: "Home" };
 
     var pageNumber = 1;
     if (req.params.pageNumber) {

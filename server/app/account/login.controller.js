@@ -14,7 +14,7 @@ function initialize(app, acl) {
 
 function getLogin(req, res, next) {
 
-	var model = new AppModel(req, "Login");
+	var model = { title: "Login" };
 
 	res.render("account/login.template.hbs", model);
 };
@@ -40,7 +40,7 @@ function postLogin(req, res, next) {
 
 		} else {
 
-			var model = new AppModel(req, "Login");
+			var model = { title: "Login" };
 
 			model.message = "The username or password was invalid.";
 			model.messageType = "danger";

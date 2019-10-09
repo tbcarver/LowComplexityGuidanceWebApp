@@ -7,7 +7,6 @@ var sqliteTransport = require("./lib/coreVendor/winston/sqliteTransport");
 var ServerError = require("./serverError");
 var express = require("express");
 var Acl = require("acl");
-var AppModel = require("./app/appModel");
 
 const logger = winston.createLogger({
     format: winston.format.combine(
@@ -33,7 +32,6 @@ if (process.env.NODE_ENV !== "production") {
 // NOTE: Globals should be var minimal and used in about 90% of files.
 global.logger = logger;
 global.ServerError = ServerError;
-global.AppModel = AppModel;
 
 const app = express();
 
@@ -48,10 +46,11 @@ app.use(function(req, res, next) {
 
 // NOTE: Order of initialize is important
 
-require("./init/middlewares").initialize(app, acl);
+require("./init/vendorMiddlewares").initialize(app, acl);
 require("./init/auth").initialize(app, acl);
 require("./init/handlebars").initialize(app, acl);
 require("./init/development").initialize(app, acl, function() {
+    require("./init/middlewares").initialize(app, acl);
     require("./init/routes").initialize(app, acl);
     require("./init/errors").initialize(app, acl);
 

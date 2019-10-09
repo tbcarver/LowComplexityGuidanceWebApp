@@ -19,7 +19,7 @@ function initialize(app, acl) {
 
 function getNew(req, res) {
 
-    var model = new AppModel(req, "New Article", "New Article");
+    var model = { title: "New Article", navbarLinkTitle: "New Article" };
 
     res.render("articles/articlesDetailsEdit.template.hbs", model);
 };

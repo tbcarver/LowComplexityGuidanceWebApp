@@ -9,27 +9,27 @@ function initialize(app) {
 				logger.error(getLogData(err, req, 500));
 				res.status(500);
 
-				var model = new AppModel(req, "500 Error");
+				var model = { title: "500 Error" };
 				res.render("errors/500.template.hbs", model);
 			},
 			"403": function(err, req, res, next) {
 				res.status(403);
 
-				var model = new AppModel(req, "403 Not Found");
+				var model = { title: "403 Not Found" };
 				res.render("errors/403.template.hbs", model);
 			},
 			"404": function(err, req, res, next) {
 				logger.info(getLogData(null, req, 404));
 				res.status(404);
 
-				var model = new AppModel(req, "404 Not Found");
+				var model = { title: "404 Not Found" };
 				res.render("errors/404.template.hbs", model);
 			},
 			"500": function(err, req, res, next) {
 				logger.error(getLogData(err, req, 500));
 				res.status(500);
 
-				var model = new AppModel(req, "500 Error");
+				var model = { title: "500 Error" };
 				res.render("errors/500.template.hbs", model);
 			}
 		},

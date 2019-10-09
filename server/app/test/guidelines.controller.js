@@ -11,7 +11,7 @@ function initialize(app, acl) {
 
 function getGuidelines(req, res) {
 
-    var model = new AppModel(req, "Guidelines Master");
+    var model = { title: "Guidelines Master" };
     model.layout = "oneColumn.layout.hbs";
     model.profiles = [];
 
@@ -24,7 +24,7 @@ function getGuidelines(req, res) {
 
 function getGuideline(req, res) {
 
-    var model = new AppModel(req, "Guidelines Details Edit");
+    var model = { title: "Guidelines Details Edit" };
     model.layout = "oneColumn.layout.hbs";
 
     model.profile = buildProfile();
@@ -34,7 +34,7 @@ function getGuideline(req, res) {
 
     var index = faker.random.number({ min: 0, max: model.departments.length - 1 });
     model.profile.departmentId = model.departments[index].departmentId;
-    
+
     model.profile.jobTypeIds = [];
 
     index = faker.random.number({ min: 0, max: model.jobTypes.length - 1 });
@@ -48,7 +48,7 @@ function getGuideline(req, res) {
 
 function postGuidelineDelete(req, res) {
 
-    getGuidelines(req, res);
+    res.redirect("/test/guidelines");
 }
 
 function buildProfile() {

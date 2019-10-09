@@ -17,7 +17,7 @@ function initialize(app, acl) {
 
 function getUsers(req, res) {
 
-    var model = new AppModel(req, "Users");
+    var model = { title: "Users" };
     model.users = usersStore.getUsers();
 
     res.render("admin/usersMaster.template.hbs", model);
@@ -25,15 +25,15 @@ function getUsers(req, res) {
 
 function getNew(req, res) {
 
-    var model = new AppModel(req, "New User");
+    var model = { title: "New User" };
     model.layout = "oneColumn.layout.hbs";
-    
+
     res.render("admin/usersDetailsEdit.template.hbs", model);
 };
 
 function getEdit(req, res) {
 
-    var model = new AppModel(req, "Edit");
+    var model = { title: "Edit" };
     model.layout = "oneColumn.layout.hbs";
     model.user = usersStore.getUser(req.params.userId);
 
@@ -59,7 +59,7 @@ function postEdit(req, res) {
         var passwordHashes = usersRules.buildPasswordHashes(user.password);
         user.userId = usersStore.addUser(user.username, user.firstName, user.lastName, passwordHashes.passwordHash, passwordHashes.passwordHashSalt);
     }
-    
+
     req.params.userId = user.userId;
     getEdit(req, res);
 };

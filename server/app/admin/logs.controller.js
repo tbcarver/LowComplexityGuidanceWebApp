@@ -10,7 +10,7 @@ function initialize(app, acl) {
 
 function getLogs(req, res) {
 
-    var model = new AppModel(req, "Logs");
+    var model = { title: "Logs" };
     model.layout = "oneColumn.layout.hbs";
 
     var pageNumber = 1;
@@ -26,7 +26,7 @@ function getLogs(req, res) {
 
 function getLog(req, res) {
 
-    var model = new AppModel(req, "Logs");
+    var model = { title: "Logs" };
     model.layout = "oneColumn.layout.hbs";
 
     var log = logsStore.getLog(req.params.logId);
