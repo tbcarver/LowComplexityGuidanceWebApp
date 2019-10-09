@@ -6,6 +6,7 @@ function initialize(app, acl) {
     // acl noop
     app.get("/test/guidelines/:pageNumber?", getGuidelines);
     app.get("/test/guideline/:guidelineId", getGuideline);
+    app.post("/test/guideline/delete/:guidelineId", postGuidelineDelete);
 }
 
 function getGuidelines(req, res) {
@@ -44,6 +45,11 @@ function getGuideline(req, res) {
 
     res.render("test/guidelinesDetailsEdit.template.hbs", model);
 };
+
+function postGuidelineDelete(req, res) {
+
+    getGuidelines(req, res);
+}
 
 function buildProfile() {
 

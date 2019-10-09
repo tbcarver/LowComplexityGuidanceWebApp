@@ -29,7 +29,6 @@ class Pagination extends HTMLElement {
 	connectedCallback() {
 
 		this.hasConnected = true;
-		this.style.display = "block";
 		this.render();
 	}
 
@@ -42,6 +41,7 @@ class Pagination extends HTMLElement {
 
 	render() {
 
+		this.style.display = "block";
 		var paginationData = this.paginationData;
 
 		if (paginationData.pageNumber && paginationData.pageSize && (paginationData.total || paginationData.total === 0)) {

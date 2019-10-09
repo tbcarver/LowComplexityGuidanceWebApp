@@ -1,0 +1,18 @@
+<div class="modal fade" id="{{modalId}}" tabindex="-1" role="dialog">
+	<div class="modal-dialog modal-dialog-centered" role="document" style="{{style}}">
+		<div class="modal-content">
+			<div class="modal-body">
+				{{{body}}}
+			</div>
+			<div class="modal-footer">
+				{{#if isForm}}
+				<button id="{{yesId}}" type="submit" class="btn btn-primary">{{yesText}}</button>
+				{{else}}
+				<a id="{{yesId}}" href="{{yesHref}}" class="btn btn-primary">{{yesText}}</a>
+				{{/if}}
+
+				<a id="{{noId}}" href="{{noHref}}" class="btn btn-outline-danger" data-dismiss="modal">{{noText}}</a>
+			</div>
+		</div>
+	</div>
+</div>

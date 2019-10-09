@@ -82,12 +82,18 @@
         <button class="btn btn-sm btn-primary">
             <i class="fa fa-check"></i> Save
         </button>
-        <button class="btn btn-sm btn-outline-danger">
+        <button class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#confirm-cancel">
             <i class="fa fa-times"></i> Cancel</span>
         </button>
+        <core-confirm-dialog id="confirm-cancel" yes-text="Yes, cancel" yes-href="/test/guidelines">Are you sure you want to
+            <strong>cancel</strong>?</core-confirm-dialog>
 
-        <button class="btn btn-sm btn-outline-danger float-right">
-            <i class="fa fa-trash-o"></i> Delete</span>
-        </button>
+        <form action="/test/guideline/delete/{{profile.profileId}}" method="POST" class="d-inline">
+            <button type="button" class="btn btn-sm btn-outline-danger float-right" data-toggle="modal" data-target="#confirm-delete">
+                <i class="fa fa-trash-o"></i> Delete</span>
+            </button>
+            <core-confirm-dialog id="confirm-delete" type="form" yes-text="Yes, delete">Are you sure you want to delete
+                <strong>{{profile.name}}</strong>?</core-confirm-dialog>
+        </form>
     </div>
 </div>

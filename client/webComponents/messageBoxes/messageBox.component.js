@@ -24,7 +24,6 @@ class MessageBox extends HTMLParsedElement {
 
 	parsedCallback() {
 		this.message = this.innerHTML;
-		this.style.display = "block";
 		this.render();
 	}
 
