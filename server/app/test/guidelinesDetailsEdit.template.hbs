@@ -15,10 +15,10 @@
         <legend class="col-form-label col-sm-2 pt-0">Departments</legend>
         <div class="col-sm-10">
             {{#each departments}}
-            <div class="form-check">
+            <div class="form-check custom-control custom-radio">
                 <input type="radio" name="departments" id="department-{{departmentId}}" value="{{departmentId}}"
-                    class="form-check-input" {{is ../profile.departmentId departmentId "checked"}}>
-                <label for="department-{{departmentId}}" class="form-check-label">
+                    class="custom-control-input" {{is ../profile.departmentId departmentId "checked"}}>
+                <label for="department-{{departmentId}}" class="custom-control-label">
                     {{departmentName}}
                 </label>
             </div>
@@ -30,10 +30,10 @@
     <div class="col-2 col-form-label">Job Types</div>
     <div class="col-10">
         {{#each jobTypes}}
-        <div class="form-check">
+        <div class="form-check custom-control custom-checkbox">
             <input id="jobType-{{jobTypeId}}" name="jobTypes" type="checkbox" value="{{jobTypeId}}"
-                class="form-check-input" {{includes ../profile.jobTypeIds jobTypeId "checked"}}>
-            <label for="jobType-{{jobTypeId}}" class="form-check-label">
+                class="custom-control-input" {{includes ../profile.jobTypeIds jobTypeId "checked"}}>
+            <label for="jobType-{{jobTypeId}}" class="custom-control-label">
                 {{jobTypeName}}
             </label>
         </div>
@@ -85,13 +85,15 @@
         <button class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#confirm-cancel">
             <i class="fa fa-times"></i> Cancel</span>
         </button>
-        <core-confirm-dialog id="confirm-cancel" yes-text="Yes, cancel" yes-href="/test/guidelines">Are you sure you want to
+        <core-confirm-dialog id="confirm-cancel" yes-text="Yes, cancel" yes-href="/test/guidelines">Are you sure you
+            want to
             <strong>cancel</strong>?</core-confirm-dialog>
 
         <form action="/test/guideline/delete" method="POST" class="d-inline">
             <input type="hidden" name="profileId" value="{{profile.profileId}}">
             <input type="hidden" name="name" value="{{profile.name}}">
-            <button type="button" class="btn btn-sm btn-outline-danger float-right" data-toggle="modal" data-target="#confirm-delete">
+            <button type="button" class="btn btn-sm btn-outline-danger float-right" data-toggle="modal"
+                data-target="#confirm-delete">
                 <i class="fa fa-trash-o"></i> Delete</span>
             </button>
             <core-confirm-dialog id="confirm-delete" type="form" yes-text="Yes, delete">Are you sure you want to delete

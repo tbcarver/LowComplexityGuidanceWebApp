@@ -20,24 +20,62 @@ main {
 }
 
 .form-commands {
-    margin-top: map-get($spacers, 4);
+   margin-top: map-get($spacers, 4);
+
+   button {
+      margin-right: map-get($spacers, 1);
+   }
+   button:last-child {
+      margin-right: 0;
+   }
 }
 
 .col-form-label {
-    text-align: right;
+   text-align: right;
 }
 
+$input-text-bg: $secondary-lightest !default;
+
 // styles from bootstrap's .col-form-label and .form-control
-.form-control-text, .form-check {
-    display: block;
-    padding-top: calc(#{$input-padding-y} + #{$input-border-width});
-    padding-bottom: calc(#{$input-padding-y} + #{$input-border-width});
-    padding-right: $input-padding-x;
-    padding-left: $input-padding-x;
-    margin-bottom: 0; // Override the `<label>/<legend>` default
-    @include font-size(inherit); // Override the `<legend>` default
-    line-height: $input-line-height;
-    background: $secondary-lightest;
+.form-control-text {
+   display: block;
+   padding-top: calc(#{$input-padding-y} + #{$input-border-width});
+   padding-bottom: calc(#{$input-padding-y} + #{$input-border-width});
+   padding-right: $input-padding-x;
+   padding-left: $input-padding-x;
+   margin-bottom: 0; // Override the `<label>/<legend>` default
+   @include font-size(inherit); // Override the `<legend>` default
+   line-height: $input-line-height;
+   background: $input-text-bg;
+   @include border-radius($input-border-radius, 0);
+}
+
+.form-check {
+   display: block;
+   padding-right: $input-padding-x;
+   padding-left: $input-padding-x;
+   margin-bottom: 0; // Override the `<label>/<legend>` default
+   @include font-size(inherit); // Override the `<legend>` default
+   line-height: $input-line-height;
+   background: $input-text-bg;
+}
+
+.form-check .custom-control-label {
+    margin-left: ($custom-control-gutter + $custom-control-indicator-size);
+}
+
+.form-check:first-child {
+   padding-top: calc(#{$input-padding-y} + #{$input-border-width});
+   @include border-radius($input-border-radius, 0);
+   border-bottom-left-radius: 0;
+   border-bottom-right-radius: 0;
+ }
+
+.form-check:last-child {
+   padding-bottom: calc(#{$input-padding-y} + #{$input-border-width});
+   @include border-radius($input-border-radius, 0);
+   border-top-left-radius: 0;
+   border-top-right-radius: 0;
 }
 
 .form-check-input {
