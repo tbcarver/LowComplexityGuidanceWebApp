@@ -5,7 +5,8 @@ function initialize(app, acl) {
 
     // acl noop
     app.get("/test/guidelines/:pageNumber?", getGuidelines);
-    app.get("/test/guideline/:guidelineId", getGuideline);
+    app.get("/test/guideline/edit/:guidelineId", getGuidelineEdit);
+    app.post("/test/guideline/edit", postGuidelineEdit);
     app.post("/test/guideline/delete", postGuidelineDelete);
 }
 
@@ -22,7 +23,7 @@ function getGuidelines(req, res) {
     res.render("test/guidelinesMaster.template.hbs", model);
 };
 
-function getGuideline(req, res) {
+function getGuidelineEdit(req, res) {
 
     var model = { title: "Guidelines Details Edit" };
     model.layout = "oneColumn.layout.hbs";
@@ -45,6 +46,12 @@ function getGuideline(req, res) {
 
     res.render("test/guidelinesDetailsEdit.template.hbs", model);
 };
+
+function postGuidelineEdit(req, res) {
+
+    req.flash.success(`<strong>${req.body.name}</strong> was saved.`);
+    res.redirect("/test/guideline/edit/" + faker.random.number());
+}
 
 function postGuidelineDelete(req, res) {
 

@@ -1,91 +1,100 @@
-<div class="form-group row">
-    <label class="col-2 col-form-label">Name</label>
-    <div class="col-10">
-        <span class="form-control-text">{{profile.name}}</span>
-    </div>
-</div>
-<div class="form-group row">
-    <label class="col-2 col-form-label">Title</label>
-    <div class="col-10">
-        <input type="text" name="profileTitle" class="form-control" value="{{profile.profileTitle}}">
-    </div>
-</div>
-<div class="form-group row">
-    <div class="col-2 col-form-label">Departments</div>
-    <div class="col-sm-10">
-        {{#each departments}}
-        <div class="form-check custom-control custom-radio">
-            <input type="radio" name="departments" id="department-{{departmentId}}" value="{{departmentId}}"
-                class="custom-control-input" {{is ../profile.departmentId departmentId "checked"}}>
-            <label for="department-{{departmentId}}" class="custom-control-label">
-                {{departmentName}}
-            </label>
-        </div>
-        {{/each}}
-    </div>
-</div>
-<div class="form-group row">
-    <div class="col-2 col-form-label">Job Types</div>
-    <div class="col-10">
-        {{#each jobTypes}}
-        <div class="form-check custom-control custom-checkbox">
-            <input id="jobType-{{jobTypeId}}" name="jobTypes" type="checkbox" value="{{jobTypeId}}"
-                class="custom-control-input" {{includes ../profile.jobTypeIds jobTypeId "checked"}}>
-            <label for="jobType-{{jobTypeId}}" class="custom-control-label">
-                {{jobTypeName}}
-            </label>
-        </div>
-        {{/each}}
-    </div>
-</div>
-<div class="form-group row">
-    <label for="firstName" class="col-2 col-form-label">Street</label>
-    <div class="col-10">
-        <input type="text" name="firstName" class="form-control" value="{{profile.streetAddress}}">
-    </div>
-</div>
-<div class="form-group row">
-    <label for="lastName" class="col-2 col-form-label">City</label>
-    <div class="col-10">
-        <input type="text" name="lastName" class="form-control" value="{{profile.city}}">
-    </div>
-</div>
-<div class="form-group row">
-    <label for="password" class="col-2 col-form-label">State</label>
-    <div class="col-10">
-        <select id="states" class="form-control">
-            {{#each states}}
-            <option value="{{this}}" {{is ../profile.state this "selected"}}>{{this}}</option>
-            {{/each}}
-        </select>
-    </div>
-</div>
-<div class="form-group row">
-    <label for="password" class="col-2 col-form-label">Zip Code</label>
-    <div class="col-10">
-        <input type="text" name="password" class="form-control" value="{{profile.zipCode}}">
-    </div>
-</div>
-<div class="form-group row">
-    <label class="col-2 col-form-label">Created Date</label>
-    <div class="col-10">
-        <span class="form-control-text">{{date profile.createdTimestamp}}</span>
+<div class="d-flex justify-content-between">
+    <h1>Guideline Details</h1>
+    <div class="text-right">
+        <a href="/test/guidelines"><i class="fa fa-arrow-left"></i> back to Guidelines</a>
     </div>
 </div>
 
+<form id="editForm" action="/test/guideline/edit" method="POST">
+    <input type="hidden" name="profileId" value="{{profile.profileId}}">
+    <input type="hidden" name="name" value="{{profile.name}}">
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Name</label>
+        <div class="col-10">
+            <span class="form-control-text">{{profile.name}}</span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Title</label>
+        <div class="col-10">
+            <input type="text" name="profileTitle" value="{{profile.profileTitle}}" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Departments</label>
+        <div class="col-sm-10">
+            {{#each departments}}
+            <div class="form-check custom-control custom-radio">
+                <input type="radio" name="departments" id="department-{{departmentId}}" value="{{departmentId}}"
+                    class="custom-control-input" {{is ../profile.departmentId departmentId "checked"}}>
+                <label for="department-{{departmentId}}" class="custom-control-label">
+                    {{departmentName}}
+                </label>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Job Types</label>
+        <div class="col-10">
+            {{#each jobTypes}}
+            <div class="form-check custom-control custom-checkbox">
+                <input id="jobType-{{jobTypeId}}" name="jobTypes" type="checkbox" value="{{jobTypeId}}"
+                    class="custom-control-input" {{includes ../profile.jobTypeIds jobTypeId "checked"}}>
+                <label for="jobType-{{jobTypeId}}" class="custom-control-label">
+                    {{jobTypeName}}
+                </label>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Street</label>
+        <div class="col-10">
+            <input type="text" name="firstName" value="{{profile.streetAddress}}" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">City</label>
+        <div class="col-10">
+            <input type="text" name="lastName" value="{{profile.city}}" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">State</label>
+        <div class="col-10">
+            <select id="states" class="form-control">
+                {{#each states}}
+                <option value="{{this}}" {{is ../profile.state this "selected"}}>{{this}}</option>
+                {{/each}}
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Zip Code</label>
+        <div class="col-10">
+            <input type="text" name="password" value="{{profile.zipCode}}" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Created Date</label>
+        <div class="col-10">
+            <span class="form-control-text">{{date profile.createdTimestamp}}</span>
+        </div>
+    </div>
+</form>
 
 <div class="form-group row form-commands">
     <label class="col-2 col-form-label"></label>
     <div class="col-10">
-        <button class="btn btn-sm btn-primary">
+        <button class="btn btn-sm btn-primary" form="editForm">
             <i class="fa fa-check"></i> Save
         </button>
-        <button class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#confirm-cancel">
+        <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#confirm-cancel">
             <i class="fa fa-times"></i> Cancel</span>
         </button>
         <core-confirm-dialog id="confirm-cancel" yes-text="Yes, cancel" yes-href="/test/guidelines">Are you sure you
-            want to
-            <strong>cancel</strong>?</core-confirm-dialog>
+            want to <strong>cancel</strong>?</core-confirm-dialog>
 
         <form action="/test/guideline/delete" method="POST" class="d-inline">
             <input type="hidden" name="profileId" value="{{profile.profileId}}">
@@ -94,8 +103,8 @@
                 data-target="#confirm-delete">
                 <i class="fa fa-trash-o"></i> Delete</span>
             </button>
-            <core-confirm-dialog id="confirm-delete" type="form" yes-text="Yes, delete">Are you sure you want to delete
-                <strong>{{profile.name}}</strong>?</core-confirm-dialog>
+            <core-confirm-dialog id="confirm-delete" type="form" yes-text="Yes, delete">Are you sure you want to
+                delete <strong>{{profile.name}}</strong>?</core-confirm-dialog>
         </form>
     </div>
 </div>

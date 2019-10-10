@@ -9,23 +9,19 @@ class FlashWrapper {
 	}
 
 	success(message) {
-
-		this.flash("success", message, false);
+		return this.flash("success", message, false);
 	}
 
 	danger(message) {
-
-		this.flash("danger", message, false);
+		return this.flash("danger", message, false);
 	}
 
 	warning(message) {
-
-		this.flash("warning", message, false);
+		return this.flash("warning", message, false);
 	}
 
 	info(message) {
-
-		this.flash("info", message, false);
+		return this.flash("info", message, false);
 	}
 }
 

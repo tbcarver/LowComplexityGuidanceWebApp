@@ -1,92 +1,55 @@
-<form action="/user/new" method="POST">
-    {{!-- <div class="form-group row">
-                        <label for="userId" class="col-2 col-form-label">ID</label>
-                        <div class="col-10">
-                            <span class="form-control-text">{{userId}}</span>
-                            <input type="text" name="userId" class="form-control" value="{{userId}}">
-                        </div>
-                    </div> --}}
-    <div class="form-group row">
-        <label for="userName" class="col-2 col-form-label">User Name</label>
-        <div class="col-10">
-            <input type="text" name="userName" class="form-control" value="{{user.username}}">
-        </div>
+<div class="d-flex justify-content-between">
+    <h1>User</h1>
+    <div class="text-right">
+        <a href="/logs"><i class="fa fa-arrow-left"></i> back to users</a>
     </div>
-    <div class="form-group row">
-        <label for="firstName" class="col-2 col-form-label">First Name</label>
-        <div class="col-10">
-            <input type="text" name="firstName" class="form-control" value="{{user.firstName}}">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="lastName" class="col-2 col-form-label">Last Name</label>
-        <div class="col-10">
-            <input type="text" name="lastName" class="form-control" value="{{user.lastName}}">
-        </div>
-    </div>
-    <div class="form-group row">
-        <label for="password" class="col-2 col-form-label">Password</label>
-        <div class="col-10">
-            <input type="text" name="password" class="form-control" value="{{user.password}}">
-        </div>
-    </div>
+</div>
 
-
+<form action="/user/edit" method="POST">
+    <input type="hidden" name="userId" value="{{userId}}">
     <div class="form-group row">
-        <div class="col-sm-2">Checkbox</div>
-        <div class="col-sm-10">
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="gridCheck1">
-                <label class="form-check-label" for="gridCheck1">
-                    Example checkbox
+        <label class="col-2 col-form-label">Username</label>
+        <div class="col-10">
+            <input type="text" name="userName" value="{{user.username}}" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">First Name</label>
+        <div class="col-10">
+            <input type="text" name="firstName" value="{{user.firstName}}" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Last Name</label>
+        <div class="col-10">
+            <input type="text" name="lastName" value="{{user.lastName}}" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Password</label>
+        <div class="col-10">
+            <input type="text" name="password" value="{{user.password}}" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Confirm Password</label>
+        <div class="col-10">
+            <input type="text" name="confirmPassword" value="{{user.confirmPassword}}" class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Roles</label>
+        <div class="col-10">
+            {{#each roles}}
+            <div class="form-check custom-control custom-checkbox">
+                <input id="jobType-{{roleId}}" name="jobTypes" type="checkbox" value="{{roleId}}"
+                    class="custom-control-input" {{includes ../user.roleIds rolesId "checked"}}>
+                <label for="jobType-{{roleId}}" class="custom-control-label">
+                    {{roleName}}
                 </label>
             </div>
+            {{/each}}
         </div>
     </div>
 
-
-    <fieldset class="form-group">
-        <div class="row">
-            <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-            <div class="col-sm-10">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1"
-                        checked>
-                    <label class="form-check-label" for="gridRadios1">
-                        First radio
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                    <label class="form-check-label" for="gridRadios2">
-                        Second radio
-                    </label>
-                </div>
-                <div class="form-check disabled">
-                    <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3"
-                        disabled>
-                    <label class="form-check-label" for="gridRadios3">
-                        Third disabled radio
-                    </label>
-                </div>
-            </div>
-        </div>
-    </fieldset>
-
-    <div class="form-group row" name="roles">
-        <label class="col-2 col-form-label">Role</label>
-        <div class="col-10">
-            {{!-- this needs to be fixed to show any and all roles --}}
-            <div>
-                <input type="checkbox" id="administrator" name="roles" value="1">
-                <label for="administrator">Administrator</label>
-            </div>
-            <div>
-                <input type="checkbox" id="contributor" name="roles" value="2">
-                <label for="contributor">Contributor</label>
-            </div>
-        </div>
-    </div>
-    <button class="btn btn-primary" type="submit">Save</button>
-    <button class="btn btn-primary" type="button">Cancel</button>
 </form>
