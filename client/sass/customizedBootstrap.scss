@@ -2,6 +2,8 @@
 // This import file is a modified copy of the node_modules/bootstrap/scss/bootstrap.scss
 // It has been copied in order to not change the original bootstrap source.
 
+// Remove the unused parts of bootstrap
+
  @import "functions";
  @import "customizedBootstrapVariablesLight"; // Customized variables added here after bootstraps variables
  @import "mixins";
@@ -22,21 +24,21 @@
  @import "nav";
  @import "navbar";
  @import "card";
- @import "breadcrumb";
+//  @import "breadcrumb";
  @import "pagination";
  @import "badge";
  @import "jumbotron";
  @import "alert";
- @import "progress";
+//  @import "progress";
  @import "media";
  @import "list-group";
  @import "close";
- @import "toasts";
+//  @import "toasts";
  @import "modal";
- @import "tooltip";
+//  @import "tooltip";
  @import "popover";
- @import "carousel";
- @import "spinners";
+//  @import "carousel";
+//  @import "spinners";
  @import "utilities";
  @import "print";
  
