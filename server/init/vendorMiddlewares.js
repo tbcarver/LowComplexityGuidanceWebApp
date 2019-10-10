@@ -1,7 +1,8 @@
 
 var cookieSession = require("cookie-session");
 var bodyParser = require("body-parser");
-const flash = require('express-flash-notification');
+var expressFlashNotification = require("express-flash-notification");
+var FlashWrapper = require("../lib/coreVendor/expressFlashNotification/flashWrapper");
 
 function initialize(app) {
 
@@ -24,21 +25,25 @@ function initialize(app) {
 	app.use(bodyParser.json({ limit: "1mb" }));
 	app.use(bodyParser.urlencoded({ extended: false, limit: "1mb" }));
 
-	app.use(flash(app, {
+	var beforeSingleRenderCount = 0;
+
+	app.use(expressFlashNotification(app, {
 		beforeSingleRender: function(item, callback) {
 			item.layout = false;
+			item.count = beforeSingleRenderCount;
+
+			beforeSingleRenderCount++;
 			callback(null, item);
 		},
-		afterAllRender: function(resultHTML, callback) {
-
-			var data = { body: resultHTML, layout: false };
-
-			app.render("flashLayout.template.hbs", data, function(error, html) {
-				callback(error, html);
-			})
-		},
+		utilityName: "expressFlashNotification",
 		viewName: "flash.template.hbs"
 	}));
+
+	app.use(function(req, res, next) {
+		beforeSingleRenderCount = 0;
+		req.flash = new FlashWrapper(req.expressFlashNotification);
+		next();
+	});
 }
 
 

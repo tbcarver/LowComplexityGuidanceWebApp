@@ -12,6 +12,7 @@
 	<script src="/assets/vendor/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 	<script src="/assets/vendor/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 	<script src="/assets/vendor/typeahead.js/0.11.1/bloodhound.min.js"></script>
+	<script src="/assets/vendor/bootstrap-notify/3.1.3/bootstrap-notify.min.js"></script>
 
 	<script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
 
@@ -21,8 +22,6 @@
 <body>
 
 	{{> navbar.partial }}
-
-	{{{flash}}}
 
 	<main>
 		<div class="container mt-3">
@@ -43,6 +42,8 @@
 			</div>
 		</div>
 	</footer>
+
+	{{{flash}}}
 
 </body>
 

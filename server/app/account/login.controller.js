@@ -33,6 +33,8 @@ function postLogin(req, res, next) {
 					next(err);
 				} else {
 
+					req.flash.info(`Welcome <strong>${user.fullName}</strong> to <strong>conduit</strong>.`);
+
 					var redirect = req.query[queryStringKeys.returnUrl] || "/";
 					res.redirect(redirect);
 				}
@@ -53,6 +55,7 @@ function postLogin(req, res, next) {
 };
 
 function getLogout(req, res) {
+	req.flash.info(`<strong>${req.user.username}</strong> has logged out.`);
 	req.logout();
 	res.redirect("/");
 };

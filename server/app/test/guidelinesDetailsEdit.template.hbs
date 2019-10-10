@@ -88,7 +88,9 @@
         <core-confirm-dialog id="confirm-cancel" yes-text="Yes, cancel" yes-href="/test/guidelines">Are you sure you want to
             <strong>cancel</strong>?</core-confirm-dialog>
 
-        <form action="/test/guideline/delete/{{profile.profileId}}" method="POST" class="d-inline">
+        <form action="/test/guideline/delete" method="POST" class="d-inline">
+            <input type="hidden" name="profileId" value="{{profile.profileId}}">
+            <input type="hidden" name="name" value="{{profile.name}}">
             <button type="button" class="btn btn-sm btn-outline-danger float-right" data-toggle="modal" data-target="#confirm-delete">
                 <i class="fa fa-trash-o"></i> Delete</span>
             </button>

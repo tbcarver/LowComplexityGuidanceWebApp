@@ -6,7 +6,7 @@ function initialize(app, acl) {
     // acl noop
     app.get("/test/guidelines/:pageNumber?", getGuidelines);
     app.get("/test/guideline/:guidelineId", getGuideline);
-    app.post("/test/guideline/delete/:guidelineId", postGuidelineDelete);
+    app.post("/test/guideline/delete", postGuidelineDelete);
 }
 
 function getGuidelines(req, res) {
@@ -48,8 +48,8 @@ function getGuideline(req, res) {
 
 function postGuidelineDelete(req, res) {
 
-    req.flash("error", "profile deleted", false);
-    req.flash("success", "profile again", "/test/guidelines");
+    req.flash.success(`<strong>${req.body.name}</strong> was deleted.`);
+    res.redirect("/test/guidelines");
 }
 
 function buildProfile() {

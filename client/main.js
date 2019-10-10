@@ -12,3 +12,9 @@ import MessageBox from "./webComponents/messageBoxes/messageBox.component";
 import MessageBoxClosable from "./webComponents/messageBoxes/messageBoxClosable.component";
 import Pagination from "./webComponents/pagination/pagination.component";
 import Typeahead from "./webComponents/typeahead/typeahead.component";
+
+// Import globals
+// NOTE: Globals should be var minimal and used in about 90% of files.
+import flash from "./flash";
+
+window.flash = flash;

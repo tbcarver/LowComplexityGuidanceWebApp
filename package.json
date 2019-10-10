@@ -10,7 +10,7 @@
     "build": "webpack",
     "dev": "nodemon --watch server",
     "devClient": "cross-env NODE_ENV_CLIENT=development nodemon --watch server",
-    "pm2": "pm2 start ./server/app.js",
+    "pm2": "cross-env NODE_ENV_CLIENT=production pm2 start ./server/app.js",
     "start": "node ./server/app.js",
     "test": "mocha --recursive",
     "sass": "node-sass ./client/sass/main.scss ./assets/dist/main.css --include-path=node_modules/bootstrap/scss"
@@ -21,6 +21,7 @@
     "better-sqlite3": "^5.4.3",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
+    "bootstrap-notify": "^3.1.3",
     "cookie-session": "^2.0.0-beta.3",
     "cross-env": "^5.2.1",
     "dotenv": "^8.0.0",
