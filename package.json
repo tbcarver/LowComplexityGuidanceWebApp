@@ -13,7 +13,7 @@
     "pm2": "cross-env NODE_ENV_CLIENT=production pm2 start ./server/app.js",
     "start": "node ./server/app.js",
     "test": "mocha --recursive",
-    "sass": "node-sass ./client/sass/main.scss ./assets/dist/main.css --include-path=node_modules/bootstrap/scss"
+    "sass": "node-sass ./client/sass/main.scss ./assets/dist/main.css --include-path=node_modules/bootstrap/scss,node_modules/animate.css/source"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.9.0",
@@ -50,6 +50,7 @@
     "@types/express": "^4.17.0",
     "@types/lodash": "^4.14.138",
     "@types/node": "^10.14.17",
+    "animate.css": "^3.7.2",
     "chai": "^4.2.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",

@@ -8,6 +8,7 @@ function middleware(req, res, next) {
 	res.locals.isAuthenticated = req.isAuthenticated();
 
 	if (req.user) {
+		res.locals.userId = req.user.userId;
 		res.locals.userFullName = req.user.fullName;
 		res.locals.userRoles = req.user.roles;
 	}

@@ -3,36 +3,37 @@
 
 		<h1><i class="{{article.iconCssClass}}"></i> {{article.articleTitle}}</h1>
 
-      <div class="font-size-sm">
-        <a href="">{{article.firstName}} {{article.lastName}}</a>
-        <span class="text-muted float-right">{{date article.updatedTimestamp}}</span>
-      </div>
+		<div class="font-size-sm">
+			<a href="#">{{article.firstName}} {{article.lastName}}</a>
+			<span class="text-muted d-block">{{date article.updatedTimestamp}}</span>
+		</div>
 
+		{{#is article.authorId user.userId}}
 
-			{{#is authorId user.userId }}
-
-			<span>
-				<a href="/editor/ias-incidunt-labore-pariatur-q-s0xeh7" class="btn btn-sm btn-outline-secondary">
-					<i class="fa fa-pencil"></i> Edit Article
-				</a>
-				<button class="btn btn-sm btn-outline-danger">
-					<i class="fa fa-trash"></i> Delete Article
-				</button>
-			</span>
-
-			{{else}}
-
-			<button class="btn btn-sm btn-outline-secondary">
-				<i class="ion-plus-round"></i>
-
-				Follow Eric Simons <span class="counter">(10)</span>
+		<span>
+			<a href="/editor/ias-incidunt-labore-pariatur-q-s0xeh7" class="btn btn-sm btn-outline-secondary">
+				<i class="fa fa-pencil"></i> Edit Article
+			</a>
+			<button class="btn btn-sm btn-outline-danger">
+				<i class="fa fa-trash"></i> Delete Article
 			</button>
+		</span>
 
-			<button class="btn btn-sm btn-outline-primary">
-				<i class="fa fa-heart"></i>Favorite Post <span class="counter">(29)</span>
-			</button>
+		{{else}}
 
-			{{/is}}
+		<hr class="bg-secondary-darkest">
+
+		<button class="btn btn-sm btn-outline-secondary">
+			<i class="ion-plus-round"></i>
+
+			Follow Eric Simons <span class="counter">(10)</span>
+		</button>
+
+		<button class="btn btn-sm btn-outline-primary">
+			<i class="fa fa-heart"></i>Favorite Post <span class="counter">(29)</span>
+		</button>
+
+		{{/is}}
 
 
 

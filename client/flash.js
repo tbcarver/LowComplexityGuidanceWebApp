@@ -1,5 +1,5 @@
 
-var typesIcons = {
+var typesIconCssClasses = {
 	"success": "fas fa-check",
 	"danger": "fas fa-bomb",
 	"warning": "fas fa-exclamation",
@@ -8,7 +8,7 @@ var typesIcons = {
 
 function flash(type, message) {
 
-	notify(typesIcons[type], type, message);
+	notify(typesIconCssClasses[type], type, message);
 }
 
 flash.success = function(message) {
@@ -42,6 +42,13 @@ function notify(icon, type, message) {
 		type: type,
 	}
 
+	if (type === "danger") {
+		settings.animate = {
+			enter: "animated shake",
+			exit: "animated fadeOutRight"
+		};
+	}
+
 	$.notify(options, settings);
 }
 
@@ -64,7 +71,7 @@ $.notifyDefaults({
 	url_target: "_blank",
 	mouse_over: null,
 	animate: {
-		enter: "animated fadeInRight",
+		enter: "animated bounceInRight",
 		exit: "animated fadeOutRight"
 	},
 	onShow: null,

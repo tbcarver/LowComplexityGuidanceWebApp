@@ -11,6 +11,10 @@ function compareAB(a, b, outValue, options, comparedResult, comparisonKey) {
 
 	var result = "";
 
+	if (utils.isOptions(outValue)){
+		options = outValue;
+	}
+
 	if (utils.isOptions(options) && !utils.isBlock(options)) {
 
 		if (comparedResult) {
