@@ -8,6 +8,20 @@ import HTMLParsedElement from "html-parsed-element";
 // Using require only on handlebars templates with handlebars-loader
 var template = require("./messageBox.template.hbs");
 
+var typesCssClasses = {
+	"success": "",
+	"danger": "animated shake",
+	"warning": "",
+	"info": "",
+}
+
+var typesIconCssClasses = {
+	"success": "fas fa-check",
+	"danger": "fas fa-bomb",
+	"warning": "fas fa-exclamation",
+	"info": "fas fa-info",
+}
+
 class MessageBox extends HTMLParsedElement {
 
 	static get observedAttributes() {
@@ -42,8 +56,16 @@ class MessageBox extends HTMLParsedElement {
 
 			var data = {
 				type: this.type,
+				cssClass: typesCssClasses[this.type] || "",
+				iconCssClass: typesIconCssClasses[this.type],
 				message: this.message
 			};
+
+			data.cssClass += " text-center";
+
+			if (data.iconCssClass) {
+				data.iconCssClass += " mr-2";
+			}
 
 			this.innerHTML = template(data);
 		}

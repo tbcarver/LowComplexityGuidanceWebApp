@@ -37,7 +37,7 @@ function getEdit(req, res) {
     var article = articlesStore.getArticle(req.params.articleId);
     var pageTitle = "Edit " + coreString.truncate(article.title, 10, true);
 
-    var model = new AppModel(req, pageTitle);
+    var model = { title: pageTitle };
     model.article = article;
 
     res.render("articles/articlesDetailsEdit.template.hbs", model);
@@ -56,7 +56,7 @@ function getArticle(req, res) {
     var article = articlesStore.getRelationalArticle(req.params.articleId);
     var pageTitle = coreString.truncate(article.title, 10, true);
 
-    var model = new AppModel(req, pageTitle);
+    var model = { title: pageTitle };
     model.article = article;
 
     res.render("articles/articlesDetails.template.hbs", model);
