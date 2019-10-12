@@ -14,7 +14,7 @@ import Pagination from "./webComponents/pagination/pagination.component";
 import Typeahead from "./webComponents/typeahead/typeahead.component";
 
 // Import globals
-// NOTE: Globals should be var minimal and used in about 90% of files.
+// NOTE: Globals should be very minimal and used in about 90% of files.
 import flash from "./flash";
 
 window.flash = flash;

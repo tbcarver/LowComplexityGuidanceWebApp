@@ -29,7 +29,7 @@ if (process.env.NODE_ENV !== "production") {
     logger.add(new winston.transports.Console({ handleExceptions: true }));
 }
 
-// NOTE: Globals should be var minimal and used in about 90% of files.
+// NOTE: Globals should be very minimal and used in about 90% of files.
 global.logger = logger;
 global.ServerError = ServerError;
 
@@ -57,6 +57,6 @@ require("./init/development").initialize(app, acl, function() {
     var port = process.env.PORT || 3000;
 
     app.listen(port, function() {
-        console.log(`Server listening on port ${port}. http://localhost:3000`);
+        console.log(`Server listening on port ${port}. http://localhost:${port}`);
     });
 });
