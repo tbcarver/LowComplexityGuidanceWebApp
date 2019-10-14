@@ -1,10 +1,10 @@
 
 CREATE TABLE UsersRoles (
-    usersRolesId INTEGER PRIMARY KEY AUTOINCREMENT,
+    usersRoleId INTEGER PRIMARY KEY AUTOINCREMENT,
     userId INTEGER NOT NULL REFERENCES Users (userId),
-    roleID INTEGER NOT NULL REFERENCES Roles (roleId),
-    UNIQUE (userId, roleID)
+    roleId INTEGER NOT NULL REFERENCES Roles (roleId),
+    UNIQUE (userId, roleId)
 );
 
-INSERT INTO UsersRoles (userId, roleID) VALUES (1, 1);
-INSERT INTO UsersRoles (userId, roleID) VALUES (2, 2);
+INSERT INTO UsersRoles (userId, roleId) VALUES (1, 1);
+INSERT INTO UsersRoles (userId, roleId) VALUES (2, 2);

@@ -1,5 +1,7 @@
 
 
+var rolesStore = require("../../store/rolesStore");
+var usersRolesStore = require("../../store/usersRolesStore");
 var usersStore = require("../../store/usersStore");
 var usersRules = require("../../rules/usersRules");
 var _ = require("lodash");
@@ -41,8 +43,9 @@ function getNew(req, res) {
 function getEdit(req, res) {
 
     var model = { title: "Edit" };
-    model.layout = "oneColumn.layout.hbs";
     model.user = usersStore.getUser(req.params.userId);
+    model.user.roleIds = usersRolesStore.getRoleIdsByUserId(req.params.userId);
+    model.roles = rolesStore.getRoles();
 
     res.render("admin/usersDetailsEdit.template.hbs", model)
 }

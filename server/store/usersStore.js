@@ -95,20 +95,6 @@ usersStore.getCount = function() {
 	return sql.executeScalar('SELECT COUNT(*) FROM Users');
 }
 
-usersStore.getRoleNames = function(userId) {
-
-	var roleNames = sql.executeQuery(`
-		SELECT roleName
-		FROM UsersRoles
-		INNER JOIN Roles ON UsersRoles.roleId = Roles.roleId		
-		WHERE userId = @userId`,
-		{ userId });
-
-	roleNames = roleNames.map(element => element.roleName);
-
-	return roleNames;
-}
-
 usersStore.getPasswordHashes = function(username) {
 
 	username = username.toLowerCase();
