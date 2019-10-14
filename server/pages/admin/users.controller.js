@@ -18,7 +18,6 @@ function initialize(app, acl) {
 function getUsers(req, res) {
 
     var model = { title: "Users" };
-    model.layout = "oneColumn.layout.hbs";
 
     var pageNumber = 1;
     if (req.params.pageNumber) {
