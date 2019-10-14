@@ -34,7 +34,7 @@ function initialize(app, acl) {
 		}
 	});
 
-	directoryWalkerSync.walkDirectory("./server/app", null, null, function(filePathName, stats) {
+	directoryWalkerSync.walkDirectory("./server/pages", null, null, function(filePathName, stats) {
 
 		if (filePathName.endsWith(".controller.js")) {
 

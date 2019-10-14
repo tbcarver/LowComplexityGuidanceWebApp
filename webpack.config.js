@@ -47,13 +47,13 @@ module.exports = {
 			filename: "main-[contenthash].css",
 		}),
 		new HtmlWebpackPlugin({
-			filename: "../../server/app/layouts/dist/main.layout.hbs",
-			template: "./server/app/layouts/src/main.layout.hbs",
+			filename: "../../server/pages/layouts/dist/main.layout.hbs",
+			template: "./server/pages/layouts/src/main.layout.hbs",
 			inject: false,
 		}),
 		new HtmlWebpackPlugin({
-			filename: "../../server/app/layouts/dist/oneColumn.layout.hbs",
-			template: "./server/app/layouts/src/oneColumn.layout.hbs",
+			filename: "../../server/pages/layouts/dist/oneColumn.layout.hbs",
+			template: "./server/pages/layouts/src/oneColumn.layout.hbs",
 			inject: false,
 		}),
 	],

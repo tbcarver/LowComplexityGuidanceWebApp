@@ -13,8 +13,8 @@ function initialize(app) {
 
 	var handlebars = expressHandlebars.create({
 		extname: ".hbs",
-		layoutsDir: "server/app/layouts/dist/",
-		partialsDir: "server/app/partials/",
+		layoutsDir: "server/pages/layouts/dist/",
+		partialsDir: "server/pages/partials/",
 		defaultLayout: "main.layout.hbs",
 		helpers: {},
 	});
@@ -33,7 +33,7 @@ function initialize(app) {
 
 	app.engine("hbs", handlebars.engine);
 	app.set("view engine", "hbs");
-	app.set("views", "server/app");
+	app.set("views", "server/pages");
 }
 
 
