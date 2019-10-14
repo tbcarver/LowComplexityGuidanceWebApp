@@ -52,7 +52,7 @@ class Pagination extends HTMLElement {
 			var url = paginationData.url;
 
 			var data = {
-				startNumber: ((pageNumber - 1) * pageSize) + 1,
+				startNumber: (total > 0) ? ((pageNumber - 1) * pageSize) + 1 : 0,
 				throughNumber: ((pageNumber - 1) * pageSize) + paginationData.pageTotal,
 				total: total,
 				firstDisabled: "",
@@ -72,7 +72,7 @@ class Pagination extends HTMLElement {
 				data.firstUrl = "";
 			}
 
-			if (pageNumber === totalPages) {
+			if (totalPages === 0 || pageNumber === totalPages) {
 				data.nextDisabled = "disabled";
 				data.nextUrl = "";
 				data.lastDisabled = "disabled";

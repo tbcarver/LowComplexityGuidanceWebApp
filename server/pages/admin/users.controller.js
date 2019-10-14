@@ -7,7 +7,7 @@ var _ = require("lodash");
 function initialize(app, acl) {
 
     // acl noop
-    app.get("/users", getUsers);
+    app.get("/users/:pageNumber?", getUsers);
 
     // acl noop
     app.get("/user/new", getNew);
@@ -18,7 +18,15 @@ function initialize(app, acl) {
 function getUsers(req, res) {
 
     var model = { title: "Users" };
-    model.users = usersStore.getUsers();
+    model.layout = "oneColumn.layout.hbs";
+
+    var pageNumber = 1;
+    if (req.params.pageNumber) {
+        pageNumber = parseInt(req.params.pageNumber);
+    }
+
+    model.pagedUsers = usersStore.getPagedUsers(pageNumber, 20);
+    model.pagedUsers.pagination.url = "/users/%s";    
 
     res.render("admin/usersMaster.template.hbs", model);
 };

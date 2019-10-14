@@ -33,8 +33,10 @@ logsStore.getDescendingPagedLogs = function(pageNumber, pageSize) {
 		SELECT logId, logLevel, logMessage, httpStatus, requestUrl, username, stack, createdTimestamp
 		FROM Logs
 		WHERE logId NOT IN (SELECT logId FROM Logs
-							ORDER BY logId DESC LIMIT @offset)
-		ORDER BY logId DESC LIMIT @limit`,
+							ORDER BY logId DESC
+							LIMIT @offset)
+		ORDER BY logId DESC
+		LIMIT @limit`,
 		limitOffset);
 
 	var total = 0;

@@ -23,6 +23,38 @@ usersStore.getUsers = function() {
 	return users;
 }
 
+usersStore.getPagedUsers = function(pageNumber, pageSize) {
+
+	var limitOffset = sql.getLimitOffset(pageNumber, pageSize);
+
+	var result = sql.executeQuery(`
+		SELECT userId, username, firstName, lastName
+		FROM Users
+		WHERE userId NOT IN (SELECT userId FROM Users
+							 ORDER BY userId
+							 LIMIT @offset)
+		ORDER BY userId
+		LIMIT @limit`,
+		limitOffset);
+
+	var total = 0;
+	if (result.length > 0) {
+		total = this.getCount();
+	}
+
+	result = {
+		pagination: {
+			pageNumber,
+			pageSize,
+			pageTotal: result.length,
+			total,
+		},
+		users: result,
+	};
+
+	return result;
+}
+
 usersStore.findUsers = function(searchTerm) {
 
 	var users = sql.executeQuery(`
@@ -56,6 +88,11 @@ usersStore.getUserByUsername = function(username) {
 		{ username });
 
 	return user;
+}
+
+usersStore.getCount = function() {
+
+	return sql.executeScalar('SELECT COUNT(*) FROM Users');
 }
 
 usersStore.getRoleNames = function(userId) {
