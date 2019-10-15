@@ -7,6 +7,7 @@
 import style from "./sass/main.scss";
 
 // Import in all client web components
+import CompareValidator from "./webComponents/core/validators/compareValidator.component";
 import ConfirmDialog from "./webComponents/core/modalDialogs/confirmDialog.component";
 import MessageBox from "./webComponents/core/messageBoxes/messageBox.component";
 import MessageBoxClosable from "./webComponents/core/messageBoxes/messageBoxClosable.component";

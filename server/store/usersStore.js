@@ -85,7 +85,18 @@ usersStore.getCount = function() {
 	return sql.executeScalar('SELECT COUNT(*) FROM Users');
 }
 
-usersStore.getPasswordHashes = function(username) {
+usersStore.getPasswordHashes = function(userId) {
+
+	var passwordHashes = sql.executeRow(`
+		SELECT passwordHash, passwordHashSalt
+		FROM Users
+		WHERE userId = @userId`,
+		{ userId });
+
+	return passwordHashes;
+}
+
+usersStore.getPasswordHashesByUsername = function(username) {
 
 	username = username.toLowerCase();
 
@@ -115,21 +126,25 @@ usersStore.addUser = function(username, firstName, lastName, passwordHash, passw
 	return id;
 }
 
-usersStore.updateUser = function(username, firstName, lastName, passwordHash, passwordHashSalt, roleIds) {
+usersStore.updateUser = function(userId, username, firstName, lastName, passwordHash, passwordHashSalt, roleIds) {
 
-	var id;
+	if (!passwordHash) {
+		var user = this.getPasswordHashes(userId);
+
+		passwordHash = user.passwordHash;
+		passwordHashSalt = user.passwordHashSalt;
+	}
 
 	sql.transaction(function() {
 
-		var id = sql.executeNonQuery(`
-			INSERT INTO Users (username, firstName, lastName, passwordHash, passwordHashSalt) 
-			VALUES (@username, @firstName, @lastName, @passwordHash, @passwordHashSalt)`,
-			{ username, firstName, lastName, passwordHash, passwordHashSalt });
+		sql.executeNonQuery(`
+			UPDATE Users
+			SET username = @username, firstName = @firstName, lastName = @lastName, passwordHash = @passwordHash, passwordHashSalt = @passwordHashSalt
+			WHERE userId = @userId`,
+			{ userId, username, firstName, lastName, passwordHash, passwordHashSalt });
 
 		usersRolesStore.replaceRoleIdsByUserId(roleIds, userId);
 	});
-
-	return id;
 }
 
 usersStore.deleteUser = function(userId) {
@@ -139,8 +154,7 @@ usersStore.deleteUser = function(userId) {
 		usersRolesStore.deleteRoleIdsByUserId(userId);
 
 		sql.executeNonQuery(`
-			DELETE
-			FROM Users
+			DELETE FROM Users
 			WHERE userId = @userId`,
 			{ userId });
 	});

@@ -65,13 +65,14 @@
                 <div class="form-group row">
                     <label class="col-2 col-form-label">Password</label>
                     <div class="col-10">
-                        <input type="password" name="password" value="{{user.password}}" class="form-control"  {{is isNew true "required"}}>
+                        <input id="password" type="password" name="password" value="{{user.password}}" class="form-control"  {{is isNew true "required"}}>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label">Confirm Password</label>
                     <div class="col-10">
-                        <input type="password" name="confirmPassword" value="{{user.confirmPassword}}" class="form-control" {{is isNew true "required"}}>
+                        <input id="confirmPassword" type="password" name="confirmPassword" value="{{user.confirmPassword}}" class="form-control" {{is isNew true "required"}}>
+                        <core-compare-validator source-id="confirmPassword" target-id="password" message="The passwords must match."></core-compare-validator>
                     </div>
                 </div>
                 <div class="form-group row">

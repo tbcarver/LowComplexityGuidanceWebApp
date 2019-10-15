@@ -80,10 +80,18 @@ function postEdit(req, res) {
         }
     }
 
+    var passwordHashes = {
+        passwordHash: null,
+        passwordHashSalt: null,
+    }
+
+    if (user.password) {
+        passwordHashes = usersRules.buildPasswordHashes(user.password);
+    }
+
     if (user.userId) {
-        usersStore.updateUser(user.firstName, user.lastName);
+        usersStore.updateUser(user.userId, user.username, user.firstName, user.lastName, passwordHashes.passwordHash, passwordHashes.passwordHashSalt, user.roleIds);
     } else {
-        var passwordHashes = usersRules.buildPasswordHashes(user.password);
         user.userId = usersStore.addUser(user.username, user.firstName, user.lastName, passwordHashes.passwordHash, passwordHashes.passwordHashSalt, user.roleIds);
     }
 
