@@ -87,10 +87,10 @@
 <div class="form-group row form-commands">
     <label class="col-2 col-form-label"></label>
     <div class="col-10">
-        <button class="btn btn-sm btn-primary" form="editForm">
+        <button class="btn btn-primary" form="editForm">
             <i class="fa fa-check mr-2"></i>Save
         </button>
-        <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#confirm-cancel">
+        <button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirm-cancel">
             <i class="fa fa-times mr-2"></i>Cancel</span>
         </button>
         <core-confirm-dialog id="confirm-cancel" yes-text="Yes, cancel" yes-href="/test/guidelines">Are you sure you
@@ -99,7 +99,7 @@
         <form action="/test/guideline/delete" method="POST" class="d-inline">
             <input type="hidden" name="profileId" value="{{profile.profileId}}">
             <input type="hidden" name="name" value="{{profile.name}}">
-            <button type="button" class="btn btn-sm btn-outline-danger float-right" data-toggle="modal"
+            <button type="button" class="btn btn-outline-danger float-right" data-toggle="modal"
                 data-target="#confirm-delete">
                 <i class="fa fa-trash-o mr-2"></i>Delete</span>
             </button>

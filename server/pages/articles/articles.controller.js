@@ -6,8 +6,6 @@ function initialize(app, acl) {
 
     acl.allow(["contributor"], "/article/new", "*");
     app.get("/article/new", getNew);
-    app.post("/article/new", postNew);
-
     acl.allow(["contributor"], "/article/edit/:articleId", "*");
     app.get("/article/edit/:articleId", getEdit);
     acl.allow(["contributor"], "/article/edit", "*");
@@ -24,14 +22,6 @@ function getNew(req, res) {
     res.render("articles/articlesDetailsEdit.template.hbs", model);
 };
 
-function postNew(req, res) {
-
-    var articleId = articlesStore.addArticle(req.body.title, req.body.articleDescription, req.body.body, req.user.userId);
-
-    req.params.articleId = articleId;
-    getArticle(req, res);
-};
-
 function getEdit(req, res) {
 
     var article = articlesStore.getArticle(req.params.articleId);
@@ -45,10 +35,14 @@ function getEdit(req, res) {
 
 function postEdit(req, res) {
 
-    var articleId = articlesStore.addArticle(req.body.title, req.body.articleDescription, req.body.body, req.user.userId);
-
-    req.params.articleId = articleId;
-    getArticle(req, res);
+    if (req.body.articleId) {
+        articlesStore.updateArticle(req.body.articleId, req.body.title, req.body.articleDescription, req.body.articleBody, req.body.iconCssClass);
+    } else {
+        req.body.articleId = articlesStore.addArticle(req.body.title, req.body.articleDescription, req.body.articleBody, req.body.iconCssClass, req.user.userId);
+    }
+    
+    req.flash.success(`<strong>${req.body.title}</strong> was saved.`);
+    res.redirect(`/article/edit/${body.articleId}`);
 };
 
 function getArticle(req, res) {

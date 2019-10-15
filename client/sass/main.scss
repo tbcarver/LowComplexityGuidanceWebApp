@@ -22,13 +22,18 @@ main {
 .form-commands {
    margin-top: map-get($spacers, 4);
 
-   button {
+   .btn {
       margin-right: map-get($spacers, 1);
    }
-   button:last-child {
+   .btn:last-child {
       margin-right: 0;
    }
 }
+
+
+.form-commands .btn.float-right {
+    margin-right: 0;
+ }
 
 .col-form-label {
    text-align: right;

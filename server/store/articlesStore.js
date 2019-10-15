@@ -72,5 +72,14 @@ articlesStore.addArticle = function(articleTitle, articleDescription, articleBod
 	return id;
 }
 
+articlesStore.updateArticle = function(articleId, articleTitle, articleDescription, articleBody, iconCssClass) {
+
+	sql.executeNonQuery(`
+		UPDATE Articles
+		SET articleTitle = @articleTitle, articleDescription = @articleDescription, articleBody = @articleBody, iconCssClass = @iconCssClass
+		WHERE articleId = @articleId`,
+		{ articleId, articleTitle, articleDescription, articleBody, iconCssClass });
+}
+
 
 module.exports = articlesStore;
