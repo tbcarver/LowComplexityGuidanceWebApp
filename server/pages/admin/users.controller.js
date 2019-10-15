@@ -8,13 +8,14 @@ var _ = require("lodash");
 
 function initialize(app, acl) {
 
-    // acl noop
+    // Acl noop
     app.get("/users/:pageNumber?", getUsers);
 
-    // acl noop
+    // Acl noop
     app.get("/user/new", getNew);
     app.get("/user/edit/:userId", getEdit);
     app.post("/user/edit", postEdit);
+    app.post("/user/delete", postDelete);
 }
 
 function getUsers(req, res) {
@@ -27,7 +28,7 @@ function getUsers(req, res) {
     }
 
     model.pagedUsers = usersStore.getPagedUsers(pageNumber, 20);
-    model.pagedUsers.pagination.url = "/users/%s";    
+    model.pagedUsers.pagination.url = "/users/%s";
 
     res.render("admin/usersMaster.template.hbs", model);
 };
@@ -44,10 +45,19 @@ function getEdit(req, res) {
 
     var model = { title: "Edit" };
     model.user = usersStore.getUser(req.params.userId);
-    model.user.roleIds = usersRolesStore.getRoleIdsByUserId(req.params.userId);
-    model.roles = rolesStore.getRoles();
 
-    res.render("admin/usersDetailsEdit.template.hbs", model)
+    if (model.user) {
+
+        model.user.roleIds = usersRolesStore.getRoleIdsByUserId(req.params.userId);
+        model.roles = rolesStore.getRoles();
+
+    } else {
+
+        model.message = `No user found for userId: ${req.params.userId}.`;
+        model.messageType = "warning";
+    }
+
+    res.render("admin/usersDetailsEdit.template.hbs", model);
 }
 
 function postEdit(req, res) {
@@ -72,6 +82,14 @@ function postEdit(req, res) {
 
     req.params.userId = user.userId;
     getEdit(req, res);
+};
+
+function postDelete(req, res) {
+
+    usersStore.deleteUser(req.body.userId);
+
+    req.flash.success(`<strong>${req.body.firstName} ${req.body.lastName}</strong> was deleted.`);
+    res.redirect("/users");
 };
 
 

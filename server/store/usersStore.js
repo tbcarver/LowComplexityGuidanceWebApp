@@ -1,5 +1,6 @@
 
 var sql = require("../lib/coreVendor/betterSqlite/sql");
+var usersRolesStore = require("./usersRolesStore");
 
 var usersStore = {};
 
@@ -69,7 +70,7 @@ usersStore.findUsers = function(searchTerm) {
 usersStore.getUser = function(userId) {
 
 	var user = sql.executeRow(`
-		SELECT username, firstName, lastName
+		SELECT userId, username, firstName, lastName
 		FROM Users
 		WHERE userId = @userId`,
 		{ userId });
@@ -106,6 +107,20 @@ usersStore.getPasswordHashes = function(username) {
 		{ username });
 
 	return passwordHashes;
+}
+
+usersStore.deleteUser = function(userId) {
+
+	sql.transaction(function() {
+
+		usersRolesStore.deleteRoleIdsByUserId(userId);
+
+		sql.executeNonQuery(`
+			DELETE
+			FROM Users
+			WHERE userId = @userId`,
+			{ userId });
+	});
 }
 
 

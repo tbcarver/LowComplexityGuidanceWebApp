@@ -3,7 +3,7 @@ var logsStore = require("../../store/logsStore");
 
 function initialize(app, acl) {
 
-    // acl noop
+    // Acl noop
     app.get("/logs/:pageNumber?", getLogs);
     app.get("/log/:logId", getLog);
 }

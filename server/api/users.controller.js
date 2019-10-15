@@ -6,7 +6,7 @@ var _ = require("lodash");
 
 function initialize(app, acl) {
 
-    // acl noop
+    // Acl noop
     app.get("/api/users/typeahead/prefetch", getUsersTypeaheadPrefetch);
     app.get("/api/users/typeahead/remote", getUsersTypeaheadRemote);
 }

@@ -1,7 +1,7 @@
 
 function initialize(app, acl) {
     
-    // acl noop
+    // Acl noop
     app.get("/test/bootstrap", getBootstrap);
 }
 

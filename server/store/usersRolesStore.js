@@ -11,9 +11,18 @@ usersRolesStore.getRoleIdsByUserId = function(userId) {
 		WHERE userId = @userId`,
 		{ userId });
 
-		roleIds = roleIds.map(element => element.roleId);
+	roleIds = roleIds.map(element => element.roleId);
 
 	return roleIds;
+}
+
+usersRolesStore.deleteRoleIdsByUserId = function(userId) {
+
+	sql.executeNonQuery(`
+		DELETE
+		FROM UsersRoles		
+		WHERE userId = @userId`,
+		{ userId });
 }
 
 

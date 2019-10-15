@@ -80,5 +80,12 @@ sql.getLimitOffset = function(pageNumber, pageSize) {
 	return limitOffset;
 }
 
+sql.transaction = function(execute) {
+
+	var newTransaction = db.transaction(execute);
+
+	newTransaction();
+}
+
 
 module.exports = sql;

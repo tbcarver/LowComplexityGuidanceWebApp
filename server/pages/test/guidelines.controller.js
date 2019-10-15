@@ -3,7 +3,7 @@ var faker = require("faker");
 
 function initialize(app, acl) {
 
-    // acl noop
+    // Acl noop
     app.get("/test/guidelines/:pageNumber?", getGuidelines);
     app.get("/test/guideline/edit/:guidelineId", getGuidelineEdit);
     app.post("/test/guideline/edit", postGuidelineEdit);
