@@ -19,3 +19,8 @@ import Typeahead from "./webComponents/core/typeahead/typeahead.component";
 import flash from "./flash";
 
 window.flash = flash;
+
+window.addEventListener("error", function(event) {
+	
+	flash.danger("An error has occurred");
+});
