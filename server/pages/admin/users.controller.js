@@ -35,8 +35,13 @@ function getUsers(req, res) {
 
 function getNew(req, res) {
 
-    var model = { title: "New User" };
-    model.layout = "oneColumn.layout.hbs";
+    var model = {
+        title: "New User",
+        heading: "New user",
+        isNew: true,
+    };
+
+    model.roles = rolesStore.getRoles();
 
     res.render("admin/usersDetailsEdit.template.hbs", model);
 };
@@ -48,11 +53,13 @@ function getEdit(req, res) {
 
     if (model.user) {
 
+        model.heading = `User: ${model.user.firstName} ${model.user.lastName}`;
         model.user.roleIds = usersRolesStore.getRoleIdsByUserId(req.params.userId);
         model.roles = rolesStore.getRoles();
 
     } else {
 
+        model.heading = "User not found";
         model.message = `No user found for userId: ${req.params.userId}.`;
         model.messageType = "warning";
     }
@@ -63,13 +70,13 @@ function getEdit(req, res) {
 function postEdit(req, res) {
 
     var user = _.clone(req.body);
-    user.roles = [];
+    user.roleIds = [];
 
-    if (req.body.roles) {
-        if (typeof req.body.roles === "string") {
-            user.roles.push(req.body.roles)
+    if (req.body.roleIds) {
+        if (typeof req.body.roleIds === "string") {
+            user.roleIds.push(req.body.roleIds)
         } else {
-            user.roles = req.body.roles;
+            user.roleIds = req.body.roleIds;
         }
     }
 
@@ -77,11 +84,11 @@ function postEdit(req, res) {
         usersStore.updateUser(user.firstName, user.lastName);
     } else {
         var passwordHashes = usersRules.buildPasswordHashes(user.password);
-        user.userId = usersStore.addUser(user.username, user.firstName, user.lastName, passwordHashes.passwordHash, passwordHashes.passwordHashSalt);
+        user.userId = usersStore.addUser(user.username, user.firstName, user.lastName, passwordHashes.passwordHash, passwordHashes.passwordHashSalt, user.roleIds);
     }
 
-    req.params.userId = user.userId;
-    getEdit(req, res);
+    req.flash.success(`<strong>${req.body.firstName} ${req.body.lastName}</strong> was saved.`);
+    res.redirect(`/user/edit/${user.userId}`);
 };
 
 function postDelete(req, res) {

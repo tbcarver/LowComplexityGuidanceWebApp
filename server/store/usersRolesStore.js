@@ -16,6 +16,28 @@ usersRolesStore.getRoleIdsByUserId = function(userId) {
 	return roleIds;
 }
 
+usersRolesStore.addUserIdRoleId = function(userId, roleId) {
+
+	var id = sql.executeNonQuery(`
+		INSERT INTO UsersRoles (userId, roleId)
+		VALUES (@userId, @roleId)`,
+		{ userId, roleId });
+
+	return id;
+}
+
+usersRolesStore.replaceRoleIdsByUserId = function(roleIds, userId) {
+
+	sql.transaction(function() {
+
+		usersRolesStore.deleteRoleIdsByUserId();
+
+		for (var roleId of roleIds) {
+			usersRolesStore.addUserIdRoleId(userId, roleId);
+		}
+	});
+}
+
 usersRolesStore.deleteRoleIdsByUserId = function(userId) {
 
 	sql.executeNonQuery(`

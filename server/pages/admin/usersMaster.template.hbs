@@ -1,7 +1,12 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col">
+            <div class="d-flex justify-content-between">
             <h1>Users</h1>
+                <div class="text-right">
+                    <a href="/user/new"><i class="fas fa-plus mr-2"></i>New user</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -19,8 +24,7 @@
                             remote-url="/api/users/typeahead/remote?q=searchTerm"></core-typeahead>
                         <div class="input-group-append">
                             <button class="btn btn-secondary btn-large">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                                <span class="ml-1">Edit</span>
+                                <i class="fa fa-pencil mr-2"></i>Edit
                             </button>
                         </div>
                     </div>

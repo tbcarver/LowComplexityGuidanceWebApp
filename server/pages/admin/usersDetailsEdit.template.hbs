@@ -2,9 +2,9 @@
     <div class="row">
         <div class="col">
             <div class="d-flex justify-content-between">
-                <h1>User: {{user.firstName}} {{user.lastName}}</h1>
+                <h1>{{heading}}</h1>
                 <div class="text-right">
-                    <a href="/users"><i class="fa fa-arrow-left"></i> back to users</a>
+                    <a href="/users"><i class="fa fa-arrow-left mr-2"></i>Back to users</a>
                 </div>
             </div>
             <core-message-box type="{{messageType}}">{{{message}}}</core-message-box>
@@ -25,7 +25,7 @@
                             remote-url="/api/users/typeahead/remote?q=searchTerm"></core-typeahead>
                         <div class="input-group-append">
                             <button class="btn btn-secondary btn-large">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                <i class="fa fa-pencil mr-2"></i>
                                 <span class="ml-1">Edit</span>
                             </button>
                         </div>
@@ -42,38 +42,36 @@
     <div class="row">
         <div class="col">
 
-            <form action="/user/edit" method="POST">
+            <form id="editForm" action="/user/edit" method="POST">
                 <input type="hidden" name="userId" value="{{user.userId}}">
-                <input type="hidden" name="firstName" value="{{user.firstName}}">
-                <input type="hidden" name="lastName" value="{{user.lastName}}">
                 <div class="form-group row">
                     <label class="col-2 col-form-label">Username</label>
                     <div class="col-10">
-                        <input type="text" name="userName" value="{{user.username}}" class="form-control">
+                        <input type="text" name="username" value="{{user.username}}" class="form-control" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label">First Name</label>
                     <div class="col-10">
-                        <input type="text" name="firstName" value="{{user.firstName}}" class="form-control">
+                        <input type="text" name="firstName" value="{{user.firstName}}" class="form-control" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label">Last Name</label>
                     <div class="col-10">
-                        <input type="text" name="lastName" value="{{user.lastName}}" class="form-control">
+                        <input type="text" name="lastName" value="{{user.lastName}}" class="form-control" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label">Password</label>
                     <div class="col-10">
-                        <input type="text" name="password" value="{{user.password}}" class="form-control">
+                        <input type="password" name="password" value="{{user.password}}" class="form-control"  {{is isNew true "required"}}>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label">Confirm Password</label>
                     <div class="col-10">
-                        <input type="text" name="confirmPassword" value="{{user.confirmPassword}}" class="form-control">
+                        <input type="password" name="confirmPassword" value="{{user.confirmPassword}}" class="form-control" {{is isNew true "required"}}>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -81,9 +79,9 @@
                     <div class="col-10">
                         {{#each roles}}
                         <div class="form-check custom-control custom-checkbox">
-                            <input id="jobType-{{roleId}}" name="jobTypes" type="checkbox" value="{{roleId}}"
+                            <input id="roleIds-{{roleId}}" name="roleIds" type="checkbox" value="{{roleId}}"
                                 class="custom-control-input" {{includes ../user.roleIds roleId "checked"}}>
-                            <label for="jobType-{{roleId}}" class="custom-control-label">
+                            <label for="roleIds-{{roleId}}" class="custom-control-label">
                                 {{roleName}}
                             </label>
                         </div>
@@ -97,11 +95,11 @@
                 <label class="col-2 col-form-label"></label>
                 <div class="col-10">
                     <button class="btn btn-sm btn-primary" form="editForm">
-                        <i class="fa fa-check"></i> Save
+                        <i class="fa fa-check mr-2"></i>Save
                     </button>
                     <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal"
                         data-target="#confirm-cancel">
-                        <i class="fa fa-times"></i> Cancel</span>
+                        <i class="fa fa-times mr-2"></i>Cancel</span>
                     </button>
                     <core-confirm-dialog id="confirm-cancel" yes-text="Yes, cancel" yes-href="/users">Are you
                         sure you
@@ -113,7 +111,7 @@
                         <input type="hidden" name="lastName" value="{{user.lastName}}">
                         <button type="button" class="btn btn-sm btn-outline-danger float-right" data-toggle="modal"
                             data-target="#confirm-delete">
-                            <i class="fa fa-trash-o"></i> Delete</span>
+                            <i class="fa fa-trash-o mr-2"></i>Delete</span>
                         </button>
                         <core-confirm-dialog id="confirm-delete" type="form" yes-text="Yes, delete">Are you sure you
                             want to

@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between">
     <h1>Guideline Details</h1>
     <div class="text-right">
-        <a href="/test/guidelines"><i class="fa fa-arrow-left"></i> back to Guidelines</a>
+        <a href="/test/guidelines"><i class="fa fa-arrow-left mr-2"></i>Back to Guidelines</a>
     </div>
 </div>
 
@@ -88,10 +88,10 @@
     <label class="col-2 col-form-label"></label>
     <div class="col-10">
         <button class="btn btn-sm btn-primary" form="editForm">
-            <i class="fa fa-check"></i> Save
+            <i class="fa fa-check mr-2"></i>Save
         </button>
         <button type="button" class="btn btn-sm btn-outline-danger" data-toggle="modal" data-target="#confirm-cancel">
-            <i class="fa fa-times"></i> Cancel</span>
+            <i class="fa fa-times mr-2"></i>Cancel</span>
         </button>
         <core-confirm-dialog id="confirm-cancel" yes-text="Yes, cancel" yes-href="/test/guidelines">Are you sure you
             want to <strong>cancel</strong>?</core-confirm-dialog>
@@ -101,7 +101,7 @@
             <input type="hidden" name="name" value="{{profile.name}}">
             <button type="button" class="btn btn-sm btn-outline-danger float-right" data-toggle="modal"
                 data-target="#confirm-delete">
-                <i class="fa fa-trash-o"></i> Delete</span>
+                <i class="fa fa-trash-o mr-2"></i>Delete</span>
             </button>
             <core-confirm-dialog id="confirm-delete" type="form" yes-text="Yes, delete">Are you sure you want to
                 delete <strong>{{profile.name}}</strong>?</core-confirm-dialog>

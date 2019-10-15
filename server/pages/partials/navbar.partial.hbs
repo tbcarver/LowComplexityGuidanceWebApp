@@ -3,34 +3,33 @@
 		<a class="navbar-brand" href="/">conduit</a>
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item {{is navbarLinkTitle "Home" "active"}}">
-				<a class="nav-link" href="/"><i class="fa fa-home"></i> Home</a>
+				<a class="nav-link" href="/"><i class="fa fa-home mr-2"></i>Home</a>
 			</li>
 			<li class="nav-item  {{is navbarLinkTitle "New Article" "active"}}">
-				<a class="nav-link" href="/editor"><i class="fas fa-align-left"></i> New Article</a>
+				<a class="nav-link" href="/editor"><i class="fas fa-align-left mr-2"></i>New Article</a>
 			</li>
 		</ul>
 		<ul class="navbar-nav justify-content-end">
 
 			{{#if isAuthenticated}}
 			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">
-					<i class="fa fa-user"></i> {{userFullName}}
+				<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown">
+					<i class="fa fa-user mr-2"></i>{{userFullName}}
 				</a>
 
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+				<div class="dropdown-menu">
 					{{#if (hasRole "administrator")}}
 					<a class="dropdown-item" href="/users">Users</a>
 					<a class="dropdown-item" href="/logs">Logs</a>
 					<div class="dropdown-divider"></div>
 					{{/if}}
-					<a class="dropdown-item" href="#todo"><i class="fa fa-cog"></i> Settings</a>
-					<a class="dropdown-item" href="/logout"><i class="fas fa-door-open"></i> Logout</a>
+					<a class="dropdown-item" href="#todo"><i class="fa fa-cog mr-2"></i>Settings</a>
+					<a class="dropdown-item" href="/logout"><i class="fas fa-door-open mr-2"></i>Logout</a>
 				</div>
 			</li>
 			{{else}}
 			<li class="nav-item">
-				<a class="nav-link" href="/login"><i class="fa fa-user"></i> Login</a>
+				<a class="nav-link" href="/login"><i class="fa fa-user mr-2"></i>Login</a>
 			</li>
 			{{/if}}
 

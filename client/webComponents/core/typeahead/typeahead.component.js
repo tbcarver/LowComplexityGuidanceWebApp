@@ -124,7 +124,7 @@ class Typeahead extends HTMLParsedElement {
 					</div>`,
 				pending: `
 					<div class="tt-item">
-					<i class="fas fa-circle-notch fa-spin text-primary"></i> Updating...
+					<i class="fas fa-circle-notch fa-spin mr-2 text-primary"></i>Updating...
 					</div>`,
 				suggestion: function(context) {
 					return `<div data-id="${context.id}">${context.value}</div>`;

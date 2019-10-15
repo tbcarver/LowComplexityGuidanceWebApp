@@ -4,17 +4,6 @@ var usersRolesStore = require("./usersRolesStore");
 
 var usersStore = {};
 
-
-usersStore.addUser = function(username, firstName, lastName, passwordHash, passwordHashSalt) {
-
-	var id = sql.executeNonQuery(`
-		INSERT INTO Users (username, firstName, lastName, passwordHash, passwordHashSalt) 
-		VALUES (@username, @firstName, @lastName, @passwordHash, @passwordHashSalt)`,
-		{ username, firstName, lastName, passwordHash, passwordHashSalt });
-
-	return id;
-}
-
 usersStore.getUsers = function() {
 
 	var users = sql.executeQuery(`
@@ -107,6 +96,40 @@ usersStore.getPasswordHashes = function(username) {
 		{ username });
 
 	return passwordHashes;
+}
+
+usersStore.addUser = function(username, firstName, lastName, passwordHash, passwordHashSalt, roleIds) {
+
+	var id;
+
+	sql.transaction(function() {
+
+		id = sql.executeNonQuery(`
+			INSERT INTO Users (username, firstName, lastName, passwordHash, passwordHashSalt) 
+			VALUES (@username, @firstName, @lastName, @passwordHash, @passwordHashSalt)`,
+			{ username, firstName, lastName, passwordHash, passwordHashSalt });
+
+		usersRolesStore.replaceRoleIdsByUserId(roleIds, id);
+	});
+
+	return id;
+}
+
+usersStore.updateUser = function(username, firstName, lastName, passwordHash, passwordHashSalt, roleIds) {
+
+	var id;
+
+	sql.transaction(function() {
+
+		var id = sql.executeNonQuery(`
+			INSERT INTO Users (username, firstName, lastName, passwordHash, passwordHashSalt) 
+			VALUES (@username, @firstName, @lastName, @passwordHash, @passwordHashSalt)`,
+			{ username, firstName, lastName, passwordHash, passwordHashSalt });
+
+		usersRolesStore.replaceRoleIdsByUserId(roleIds, userId);
+	});
+
+	return id;
 }
 
 usersStore.deleteUser = function(userId) {

@@ -3,16 +3,6 @@ var sql = require("../lib/coreVendor/betterSqlite/sql");
 
 var articlesStore = {};
 
-articlesStore.addArticle = function(articleTitle, articleDescription, articleBody, iconCssClass, authorId) {
-
-	var id = sql.executeNonQuery(`
-		INSERT INTO Articles (articleTitle, articleDescription, articleBody, iconCssClass, authorId)
-		VALUES (@articleTitle, @articleDescription, @articleBody, @iconCssClass, @authorId)`,
-		{ articleTitle, articleDescription, articleBody, iconCssClass, authorId });
-
-	return id;
-}
-
 articlesStore.getDescendingPagedRelationalArticles = function(pageNumber, pageSize) {
 
 	var limitOffset = sql.getLimitOffset(pageNumber, pageSize);
@@ -70,6 +60,16 @@ articlesStore.getRelationalArticle = function(articleId) {
 articlesStore.getCount = function() {
 
 	return sql.executeScalar('SELECT COUNT(*) FROM Articles');
+}
+
+articlesStore.addArticle = function(articleTitle, articleDescription, articleBody, iconCssClass, authorId) {
+
+	var id = sql.executeNonQuery(`
+		INSERT INTO Articles (articleTitle, articleDescription, articleBody, iconCssClass, authorId)
+		VALUES (@articleTitle, @articleDescription, @articleBody, @iconCssClass, @authorId)`,
+		{ articleTitle, articleDescription, articleBody, iconCssClass, authorId });
+
+	return id;
 }
 
 
