@@ -5,24 +5,28 @@ var dateHelpers = {};
 
 var helpersDateStringFormatOptions = {
 	date: {
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric'
+		year: "numeric",
+		month: "long",
+		day: "numeric",
 	},
 	dateShort: {
-		year: '2-digit',
-		month: '2-digit',
-		day: '2-digit'
+		year: "2-digit",
+		month: "2-digit",
+		day: "2-digit",
 	},
 	dateTime: {
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric'
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+		hour: "numeric",
+		minute: "numeric",
 	},
 	dateTimeShort: {
-		year: '2-digit',
-		month: '2-digit',
-		day: '2-digit'
+		year: "2-digit",
+		month: "2-digit",
+		day: "2-digit",
+		hour: "2-digit",
+		minute: "2-digit",
 	},
 };
 
@@ -36,7 +40,7 @@ function renderDate(date, dateStringFormatOptions) {
 			date = sqlDateTime.toDate(date);
 		}
 
-		formattedDate = date.toLocaleDateString('en-US', dateStringFormatOptions);
+		formattedDate = date.toLocaleDateString("en-US", dateStringFormatOptions);
 	}
 
 	return formattedDate;
@@ -45,9 +49,10 @@ function renderDate(date, dateStringFormatOptions) {
 for (var dateHelperKey in helpersDateStringFormatOptions) {
 	
 	dateHelpers[dateHelperKey] = function(date) {
+		
+		return renderDate(date, this);
 
-		return renderDate(date, helpersDateStringFormatOptions[dateHelperKey]);
-	}
+	}.bind(helpersDateStringFormatOptions[dateHelperKey]);
 }
 
 
