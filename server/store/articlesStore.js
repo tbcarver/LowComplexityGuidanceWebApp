@@ -81,5 +81,13 @@ articlesStore.updateArticle = function(articleId, articleTitle, articleDescripti
 		{ articleId, articleTitle, articleDescription, articleBody, iconCssClass });
 }
 
+articlesStore.deleteArticle = function(articleId) {
+
+	sql.executeNonQuery(`
+		DELETE FROM Articles
+		WHERE articleId = @articleId`,
+		{ articleId });
+}
+
 
 module.exports = articlesStore;

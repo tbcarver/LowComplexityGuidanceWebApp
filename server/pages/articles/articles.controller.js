@@ -39,7 +39,7 @@ function getNew(req, res) {
 function getEdit(req, res) {
 
     var article = articlesStore.getArticle(req.params.articleId);
-    var pageTitle = "Edit " + coreString.truncate(article.title, 10, true);
+    var pageTitle = "Edit " + coreString.truncate(article.articleTitle, 10, true);
 
     var model = { title: pageTitle };
     model.article = article;
@@ -56,7 +56,7 @@ function postEdit(req, res) {
     }
     
     req.flash.success(`<strong>${req.body.articleTitle}</strong> was saved.`);
-    res.redirect(`/article/edit/${body.articleId}`);
+    res.redirect(`/article/edit/${req.body.articleId}`);
 };
 
 function postDelete(req, res) {
@@ -64,7 +64,7 @@ function postDelete(req, res) {
     articlesStore.deleteArticle(req.body.articleId);
 
     req.flash.success(`<strong>${req.body.articleTitle}</strong> was deleted.`);
-    res.redirect("/users");
+    res.redirect("/");
 };
 
 

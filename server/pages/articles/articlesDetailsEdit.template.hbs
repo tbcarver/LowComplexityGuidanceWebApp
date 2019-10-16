@@ -15,8 +15,8 @@
 						class="form-control" placeholder="What's this article about?" required>
 				</div>
 				<div class="form-group">
-					<textarea name="articleBody" value="{{article.articleBody}}" class="form-control" rows="8"
-						placeholder="Write your article (in markdown)" required></textarea>
+					<textarea name="articleBody" class="form-control" rows="8"
+						placeholder="Write your article (in markdown)" required>{{article.articleBody}}</textarea>
 				</div>
 				<div class="form-group">
 					<input name="iconCssClass" type="text" value="{{article.iconCssClass}}" class="form-control"
@@ -28,19 +28,19 @@
 				</button>
 			</form>
 
-				{{#if article.articleId}}
-                    <form action="/article/delete" method="POST" class="d-inline">
-                        <input type="hidden" name="userId" value="{{../article.articleId}}">
-                        <input type="hidden" name="articleTitle" value="{{../article.articleTitle}}">
-                        <button type="button" class="btn btn-outline-danger float-right" data-toggle="modal"
-                            data-target="#confirm-delete">
-                            <i class="fa fa-trash-o mr-2"></i>Delete</span>
-                        </button>
-                        <core-confirm-dialog id="confirm-delete" type="form" yes-text="Yes, delete">Are you sure you
-                            want to
-                            delete <strong>{{../article.articleTitle}}</strong>?</core-confirm-dialog>
-                    </form>
-				{{/if}}
+			{{#if article.articleId}}
+			<form action="/article/delete" method="POST" class="d-inline">
+				<input type="hidden" name="articleId" value="{{article.articleId}}">
+				<input type="hidden" name="articleTitle" value="{{article.articleTitle}}">
+				<button type="button" class="btn btn-outline-danger float-right" data-toggle="modal"
+					data-target="#confirm-delete">
+					<i class="fa fa-trash-o mr-2"></i>Delete</span>
+				</button>
+				<core-confirm-dialog id="confirm-delete" type="form" yes-text="Yes, delete">Are you sure you
+					want to
+					delete <strong>{{article.articleTitle}}</strong>?</core-confirm-dialog>
+			</form>
+			{{/if}}
 		</div>
 	</div>
 </div>
