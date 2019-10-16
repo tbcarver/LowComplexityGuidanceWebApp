@@ -20,9 +20,9 @@ var helpersDateStringFormatOptions = {
 		day: 'numeric'
 	},
 	dateTimeShort: {
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric'
+		year: '2-digit',
+		month: '2-digit',
+		day: '2-digit'
 	},
 };
 
@@ -36,30 +36,18 @@ function renderDate(date, dateStringFormatOptions) {
 			date = sqlDateTime.toDate(date);
 		}
 
-		formattedDate = date.toLocaleDateString('us-EN', dateStringFormatOptions);
+		formattedDate = date.toLocaleDateString('en-US', dateStringFormatOptions);
 	}
 
 	return formattedDate;
 }
 
-dateHelpers.date = function(date) {
+for (var dateHelperKey in helpersDateStringFormatOptions) {
+	
+	dateHelpers[dateHelperKey] = function(date) {
 
-	return renderDate(date, helpersDateStringFormatOptions["date"]);
-}
-
-dateHelpers.dateShort = function(date) {
-
-	return renderDate(date, helpersDateStringFormatOptions["dateShort"]);
-}
-
-dateHelpers.dateTime = function(date) {
-
-	return renderDate(date, helpersDateStringFormatOptions["dateTime"]);
-}
-
-dateHelpers.dateTimeShort = function(date) {
-
-	return renderDate(date, helpersDateStringFormatOptions["dateTimeShort"]);
+		return renderDate(date, helpersDateStringFormatOptions[dateHelperKey]);
+	}
 }
 
 
