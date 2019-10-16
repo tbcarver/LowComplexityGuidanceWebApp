@@ -4,6 +4,9 @@ var coreString = require("../../lib/core/extensions/coreString");
 
 function initialize(app, acl) {
 
+    acl.allow("public exact", "/article/:articleId", "*");
+    app.get("/article/:articleId", getArticle);
+
     acl.allow(["contributor"], "/article/new", "*");
     app.get("/article/new", getNew);
     acl.allow(["contributor"], "/article/edit/:articleId", "*");
@@ -11,9 +14,20 @@ function initialize(app, acl) {
     acl.allow(["contributor"], "/article/edit", "*");
     app.post("/article/edit", postEdit);
 
-    acl.allow("public exact", "/article/:articleId", "*");
-    app.get("/article/:articleId", getArticle);
+    acl.allow(["contributor"], "/article/delete", "*");
+    app.post("/article/delete", postDelete);
 }
+
+function getArticle(req, res) {
+
+    var article = articlesStore.getRelationalArticle(req.params.articleId);
+    var pageTitle = coreString.truncate(article.title, 10, true);
+
+    var model = { title: pageTitle };
+    model.article = article;
+
+    res.render("articles/articlesDetails.template.hbs", model);
+};
 
 function getNew(req, res) {
 
@@ -36,24 +50,21 @@ function getEdit(req, res) {
 function postEdit(req, res) {
 
     if (req.body.articleId) {
-        articlesStore.updateArticle(req.body.articleId, req.body.title, req.body.articleDescription, req.body.articleBody, req.body.iconCssClass);
+        articlesStore.updateArticle(req.body.articleId, req.body.articleTitle, req.body.articleDescription, req.body.articleBody, req.body.iconCssClass);
     } else {
-        req.body.articleId = articlesStore.addArticle(req.body.title, req.body.articleDescription, req.body.articleBody, req.body.iconCssClass, req.user.userId);
+        req.body.articleId = articlesStore.addArticle(req.body.articleTitle, req.body.articleDescription, req.body.articleBody, req.body.iconCssClass, req.user.userId);
     }
     
-    req.flash.success(`<strong>${req.body.title}</strong> was saved.`);
+    req.flash.success(`<strong>${req.body.articleTitle}</strong> was saved.`);
     res.redirect(`/article/edit/${body.articleId}`);
 };
 
-function getArticle(req, res) {
+function postDelete(req, res) {
 
-    var article = articlesStore.getRelationalArticle(req.params.articleId);
-    var pageTitle = coreString.truncate(article.title, 10, true);
+    articlesStore.deleteArticle(req.body.articleId);
 
-    var model = { title: pageTitle };
-    model.article = article;
-
-    res.render("articles/articlesDetails.template.hbs", model);
+    req.flash.success(`<strong>${req.body.articleTitle}</strong> was deleted.`);
+    res.redirect("/users");
 };
 
 

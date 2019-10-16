@@ -10,10 +10,10 @@
 
 		<hr class="bg-secondary-darkest">
 
-		{{#is article.authorId user.userId}}
+		{{#is article.authorId loggedInUser.userId}}
 
 		<span>
-			<a href="/editor/ias-incidunt-labore-pariatur-q-s0xeh7" class="btn btn-sm btn-outline-secondary">
+			<a href="/article/edit/{{../article.articleId}}" class="btn btn-sm btn-outline-secondary mr-1">
 				<i class="fa fa-pencil mr-2"></i>Edit Article
 			</a>
 			<button class="btn btn-sm btn-outline-danger">

@@ -36,7 +36,7 @@ function getUsers(req, res) {
 function getNew(req, res) {
 
     var model = {
-        title: "New User",
+        title: "New user",
         heading: "New user",
         isNew: true,
     };

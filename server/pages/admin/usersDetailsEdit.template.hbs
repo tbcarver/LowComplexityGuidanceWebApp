@@ -96,7 +96,7 @@
                 <label class="col-2 col-form-label"></label>
                 <div class="col-10">
                     <button class="btn btn-primary" form="editForm">
-                        <i class="fa fa-check mr-2"></i>Save
+                        <i class="fa fa-check mr-2"></i>{{#if user.userId}} Save {{else}} Create {{/if}} user
                     </button>
                     <button type="button" class="btn btn-outline-danger" data-toggle="modal"
                         data-target="#confirm-cancel">
@@ -106,10 +106,11 @@
                         sure you
                         want to <strong>cancel</strong>?</core-confirm-dialog>
 
+				{{#if user.userId}}
                     <form action="/user/delete" method="POST" class="d-inline">
-                        <input type="hidden" name="userId" value="{{user.userId}}">
-                        <input type="hidden" name="firstName" value="{{user.firstName}}">
-                        <input type="hidden" name="lastName" value="{{user.lastName}}">
+                        <input type="hidden" name="userId" value="{{../user.userId}}">
+                        <input type="hidden" name="firstName" value="{{../user.firstName}}">
+                        <input type="hidden" name="lastName" value="{{../user.lastName}}">
                         <button type="button" class="btn btn-outline-danger float-right" data-toggle="modal"
                             data-target="#confirm-delete">
                             <i class="fa fa-trash-o mr-2"></i>Delete</span>
@@ -118,6 +119,7 @@
                             want to
                             delete <strong>{{user.firstName}} {{user.lastName}}</strong>?</core-confirm-dialog>
                     </form>
+				{{/if}}
                 </div>
             </div>
 

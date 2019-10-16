@@ -15,7 +15,7 @@ authHelpers.hasRole = function(roles, options) {
 	roles = roles.split(",");
 	coreArray.trim(roles);
 
-	return coreArray.includesAny(roles, this.userRoles);
+	return coreArray.includesAny(roles, this.loggedInUser.roles);
 }
 
 
