@@ -16,6 +16,20 @@ usersRolesStore.getRoleIdsByUserId = function(userId) {
 	return roleIds;
 }
 
+usersRolesStore.getRoleNamesByUserId = function(userId) {
+
+	var roleNames = sql.executeQuery(`
+		SELECT roleName
+		FROM UsersRoles
+			INNER JOIN Roles ON UsersRoles.roleId = Roles.roleId
+		WHERE userId = @userId`,
+		{ userId });
+
+		roleNames = roleNames.map(element => element.roleName);
+
+	return roleNames;
+}
+
 usersRolesStore.addUserIdRoleId = function(userId, roleId) {
 
 	var id = sql.executeNonQuery(`

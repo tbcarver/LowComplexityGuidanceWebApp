@@ -19,7 +19,9 @@ function getHome(req, res) {
         pageNumber = parseInt(req.params.pageNumber);
     }
 
-    model.pagedArticles = articlesStore.getDescendingPagedExtendedArticles(pageNumber, 10);
+    var userId = req.user ? req.user.userId : null;
+
+    model.pagedArticles = articlesStore.getDescendingPagedExtendedArticles(pageNumber, 10, userId);
     model.pagedArticles.pagination.url = "/articles/%s";
 
     res.render("home.template.hbs", model);

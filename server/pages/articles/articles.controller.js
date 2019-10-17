@@ -4,7 +4,7 @@ var coreString = require("../../lib/core/extensions/coreString");
 
 function initialize(app, acl) {
 
-    acl.allow("public exact", "/article/:articleId", "*");
+    acl.allow("public exact", "/article/view/:articleId", "*");
     app.get("/article/view/:articleId", getView);
 
     acl.allow(["contributor"], "/article/new", "*");
@@ -20,7 +20,9 @@ function initialize(app, acl) {
 
 function getView(req, res) {
 
-    var article = articlesStore.getExtendedArticle(req.params.articleId);
+    var userId = req.user ? req.user.userId : null;
+
+    var article = articlesStore.getExtendedArticle(req.params.articleId, userId);
     var pageTitle = coreString.truncate(article.title, 10, true);
 
     var model = { title: pageTitle };

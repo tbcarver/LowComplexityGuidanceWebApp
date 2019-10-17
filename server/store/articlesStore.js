@@ -16,7 +16,7 @@ articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize
 		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
 			Articles.createdDate, Articles.updatedDate, firstName, lastName,
 			(SELECT COUNT(*) FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId) as countFavorites,
-			(SELECT 1 FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId AND UsersFavoriteArticles.userId = 20) as isUserFavorite
+			(SELECT 1 FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId AND UsersFavoriteArticles.userId = @favoriteUserId) as isUserFavorite
 		FROM Articles
 			INNER JOIN Users ON Articles.authorId = Users.userId
 		WHERE articleId NOT IN (SELECT articleId FROM Articles
@@ -53,17 +53,21 @@ articlesStore.getArticle = function(articleId) {
 	return result;
 }
 
-articlesStore.getExtendedArticle = function(articleId) {
+articlesStore.getExtendedArticle = function(articleId, favoriteUserId) {
+
+	if (!favoriteUserId) {
+		favoriteUserId = 0;
+	}
 
 	var result = sql.executeRow(`
 		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
 			Articles.createdDate, Articles.updatedDate, firstName, lastName,
 			(SELECT COUNT(*) FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId) as countFavorites,
-			(SELECT 1 FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId AND UsersFavoriteArticles.userId = 20) as isUserFavorite
+			(SELECT 1 FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId AND UsersFavoriteArticles.userId = @favoriteUserId) as isUserFavorite
 		FROM Articles
 			INNER JOIN Users ON Articles.authorId = Users.userId
 		WHERE articleId = @articleId`,
-		{ articleId });
+		{ articleId, favoriteUserId });
 
 	return result;
 }

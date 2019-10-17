@@ -2,6 +2,7 @@
 var LocalStrategy = require("passport-local");
 var usersRules = require("../rules/usersRules");
 var usersStore = require("../store/usersStore");
+var usersRolesStore = require("../store/usersRolesStore");
 
 var sqliteStrategy = new LocalStrategy(
 	function(username, password, done) {
@@ -23,7 +24,7 @@ var sqliteStrategy = new LocalStrategy(
 				roles: [],
 			}
 
-			var roles = usersStore.getRoleNames(user.userId);
+			var roles = usersRolesStore.getRoleNamesByUserId(user.userId);
 
 			if (roles) {
 				userProfile.roles = roles;

@@ -18,9 +18,8 @@
 
 		{{else}}
 
-		<button class="btn btn-sm btn-outline-primary">
-			<i class="fa fa-heart mr-2"></i>Favorite Post <span class="counter">(29)</span>
-		</button>
+		<article-favorite class="btn-sm" count-favorites="{{../article.countFavorites}}"
+			is-favorite="{{../article.isUserFavorite}}" display-text="true"></article-favorite>
 
 		{{/is}}
 

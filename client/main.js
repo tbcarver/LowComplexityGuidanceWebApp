@@ -6,7 +6,10 @@
 // These are output into a assets/dist/main.css file with a cache busting hash
 import style from "./sass/main.scss";
 
-// Import in all client web components
+// Import in all app web components
+import ArticleFavorite from "./webComponents/app/articleFavorite/articleFavorite.component";
+
+// Import in all core web components
 import CompareValidator from "./webComponents/core/validators/compareValidator.component";
 import ConfirmDialog from "./webComponents/core/modalDialogs/confirmDialog.component";
 import MessageBox from "./webComponents/core/messageBoxes/messageBox.component";

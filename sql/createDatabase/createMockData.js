@@ -18,6 +18,7 @@ for (var count = 1; count <= totalRows; count++) {
 	var firstName = faker.name.firstName();
 	var lastName = faker.name.lastName();
 	var username = firstName + lastName;
+	username = username.toLowerCase();
 
 	var userId = usersStore.addUser(username, firstName, lastName, passwordHashes.passwordHash, passwordHashes.passwordHashSalt);
 	console.log("Added userId: " + userId);
