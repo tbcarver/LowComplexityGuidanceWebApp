@@ -49,7 +49,7 @@ function getUsersTypeaheadRemote(req, res) {
 function addFavoriteArticle(req, res) {
 
     if (req.body.userId) {
-		usersFavoriteArticlesStore.addUserIdArticleId(req.body.userId, req.body.articleId);
+		usersFavoriteArticlesStore.replaceUserIdArticleId(req.body.userId, req.body.articleId);
         res.send("Favorite added.");
 	} else {
         res.send(400, "UserId or articleId invalid.");
