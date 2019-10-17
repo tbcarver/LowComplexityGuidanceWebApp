@@ -30,7 +30,7 @@ usersRolesStore.replaceRoleIdsByUserId = function(roleIds, userId) {
 
 	sql.transaction(function() {
 
-		usersRolesStore.deleteRoleIdsByUserId(userId);
+		usersRolesStore.removeRoleIdsByUserId(userId);
 
 		for (var roleId of roleIds) {
 			usersRolesStore.addUserIdRoleId(userId, roleId);
@@ -38,7 +38,7 @@ usersRolesStore.replaceRoleIdsByUserId = function(roleIds, userId) {
 	});
 }
 
-usersRolesStore.deleteRoleIdsByUserId = function(userId) {
+usersRolesStore.removeRoleIdsByUserId = function(userId) {
 
 	sql.executeNonQuery(`
 		DELETE FROM UsersRoles		

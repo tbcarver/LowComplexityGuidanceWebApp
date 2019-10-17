@@ -120,7 +120,9 @@ usersStore.addUser = function(username, firstName, lastName, passwordHash, passw
 			VALUES (@username, @firstName, @lastName, @passwordHash, @passwordHashSalt)`,
 			{ username, firstName, lastName, passwordHash, passwordHashSalt });
 
-		usersRolesStore.replaceRoleIdsByUserId(roleIds, id);
+		if (roleIds) {
+			usersRolesStore.replaceRoleIdsByUserId(roleIds, id);
+		}
 	});
 
 	return id;
@@ -143,15 +145,17 @@ usersStore.updateUser = function(userId, username, firstName, lastName, password
 			WHERE userId = @userId`,
 			{ userId, username, firstName, lastName, passwordHash, passwordHashSalt });
 
-		usersRolesStore.replaceRoleIdsByUserId(roleIds, userId);
+		if (roleIds) {
+			usersRolesStore.replaceRoleIdsByUserId(roleIds, userId);
+		}
 	});
 }
 
-usersStore.deleteUser = function(userId) {
+usersStore.removeUser = function(userId) {
 
 	sql.transaction(function() {
 
-		usersRolesStore.deleteRoleIdsByUserId(userId);
+		usersRolesStore.removeRoleIdsByUserId(userId);
 
 		sql.executeNonQuery(`
 			DELETE FROM Users

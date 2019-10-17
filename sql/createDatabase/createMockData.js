@@ -2,6 +2,7 @@
 require("dotenv").config();
 
 var articlesStore = require("../../server/store/articlesStore");
+var usersFavoriteArticlesStore = require("../../server/store/usersFavoriteArticlesStore");
 var usersStore = require("../../server/store/usersStore");
 var usersRules = require("../../server/rules/usersRules");
 var faker = require("faker");
@@ -29,6 +30,20 @@ for (var count = 1; count <= totalRows; count++) {
 	console.log("Added articleId: " + articleId);
 }
 
+for (var count = 1; count <= totalRows; count++) {
+
+	var numberOfFavorites = faker.random.number({ min: 0, max: totalRows / 2 });
+	var articleId = count;
+	var userIdStartDifferential  = faker.random.number({ min: 1, max: totalRows / 2 });
+
+	for (var countFavorites = 1; countFavorites <= numberOfFavorites; countFavorites++) {
+
+		var userId = countFavorites + userIdStartDifferential;
+		usersFavoriteArticlesStore.addUserIdArticleId(userId, articleId);
+	}
+
+	console.log("Added article favorites: ", articleId, countFavorites);
+}
 
 function getWords(min, max) {
 

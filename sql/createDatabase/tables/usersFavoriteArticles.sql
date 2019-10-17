@@ -5,6 +5,3 @@ CREATE TABLE UsersFavoriteArticles (
     articleId INTEGER NOT NULL REFERENCES Articles (articleId),
     UNIQUE (userId, articleId)
 );
-
-INSERT INTO UsersRoles (userId, roleId) VALUES (1, 1);
-INSERT INTO UsersRoles (userId, roleId) VALUES (2, 2);

@@ -101,7 +101,7 @@ function postEdit(req, res) {
 
 function postDelete(req, res) {
 
-    usersStore.deleteUser(req.body.userId);
+    usersStore.removeUser(req.body.userId);
 
     req.flash.success(`<strong>${req.body.firstName} ${req.body.lastName}</strong> was deleted.`);
     res.redirect("/users");
