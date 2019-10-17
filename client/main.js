@@ -27,3 +27,8 @@ window.addEventListener("error", function(event) {
 	
 	flash.danger("An error has occurred");
 });
+
+window.addEventListener("unhandledrejection", function(event) {
+	
+	flash.danger("An error has occurred");
+});

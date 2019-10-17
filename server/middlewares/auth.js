@@ -18,62 +18,63 @@ function middleware(req, res, next) {
 	}
 
 	if (resource) {
-		authorizePublic(req, res, next, resource, function() {
+		nonAclAuthorize(req, res, next, "public", resource, function() {
 			if (req.isAuthenticated()) {
+				nonAclAuthorize(req, res, next, "authenticated", resource, function() {
 
-				if (coreArray.includesAny(rolesAllAllowed, req.user.roles)) {
-					next();
-				} else {
-					req.acl.isAllowed(req.user.userId, resource, req.method, function(err, allowed) {
+					if (coreArray.includesAny(rolesAllAllowed, req.user.roles)) {
+						next();
+					} else {
+						req.acl.isAllowed(req.user.userId, resource, req.method, function(err, allowed) {
 
-						if (err) {
-							throw err;
-						}
+							if (err) {
+								throw err;
+							}
 
-						if (allowed) {
-							next();
-						} else {
-							next(new ServerError("Unauthorized", 403));
-						}
-					});
-				}
+							if (allowed) {
+								next();
+							} else {
+								next(new ServerError("Unauthorized", 403));
+							}
+						});
+					}
+				});
 			} else {
-
 				var returnUrl = encodeURIComponent(req.url);
 				res.redirect(`/login?${queryStringKeys.returnUrl}=${returnUrl}`);
 			}
 		});
 	} else {
 
-		authorizePublic(req, res, next, req.path, function() {
+		nonAclAuthorize(req, res, next, "public", req.path, function() {
 			next(new ServerError("Unknown route", 404));
 		});
 	}
 }
 
-function authorizePublic(req, res, next, path, callback) {
+function nonAclAuthorize(req, res, next, type, path, callback) {
 
-	req.acl.whatResources("public exact", function(err, resources) {
+	req.acl.whatResources(type + " exact", function(err, resources) {
 
 		if (err) {
 			throw err;
 		}
 
-		var publicRoutesExact = Object.keys(resources);
+		var routesExact = Object.keys(resources);
 
-		if (coreString.compareAny(publicRoutesExact, path, true)) {
+		if (coreString.compareAny(routesExact, path, true)) {
 			next();
 		} else {
 
-			req.acl.whatResources("public starts with", function(err, resources) {
+			req.acl.whatResources(type + " starts with", function(err, resources) {
 
 				if (err) {
 					throw err;
 				}
 
-				var publicRoutesStartsWith = Object.keys(resources);
+				var routesStartsWith = Object.keys(resources);
 
-				if (coreString.startsWithAny(publicRoutesStartsWith, path, true)) {
+				if (coreString.startsWithAny(routesStartsWith, path, true)) {
 					next();
 				} else {
 					callback();

@@ -11,9 +11,12 @@
 
       {{#each pagedArticles.articles}}
 
-      <article-favorite class="btn-sm float-right" count-favorites="{{countFavorites}}" is-favorite="{{isUserFavorite}}"></article-favorite>
+      <article-favorite class="btn-sm float-right" count-favorites="{{countFavorites}}"
+        is-favorite="{{isUserFavorite}}" article-id="{{articleId}}" user-id="{{../loggedInUser.userId}}">
+      </article-favorite>
 
-      <h2 class="mb-3"><a href="/article/view/{{articleId}}"><i class="{{iconCssClass}} mr-2"></i>{{articleTitle}}</a></h2>
+      <h2 class="mb-3"><a href="/article/view/{{articleId}}"><i class="{{iconCssClass}} mr-2"></i>{{articleTitle}}</a>
+      </h2>
       <p>{{articleDescription}}</p>
 
       <div class="font-size-sm">

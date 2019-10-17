@@ -19,7 +19,9 @@
 		{{else}}
 
 		<article-favorite class="btn-sm" count-favorites="{{../article.countFavorites}}"
-			is-favorite="{{../article.isUserFavorite}}" display-text="true"></article-favorite>
+			is-favorite="{{../article.isUserFavorite}}" display-text="true" article-id="{{../article.articleId}}"
+			user-id="{{../loggedInUser.userId}}">
+		</article-favorite>
 
 		{{/is}}
 
