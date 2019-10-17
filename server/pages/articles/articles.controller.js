@@ -5,7 +5,7 @@ var coreString = require("../../lib/core/extensions/coreString");
 function initialize(app, acl) {
 
     acl.allow("public exact", "/article/:articleId", "*");
-    app.get("/article/:articleId", getArticle);
+    app.get("/article/view/:articleId", getView);
 
     acl.allow(["contributor"], "/article/new", "*");
     app.get("/article/new", getNew);
@@ -18,7 +18,7 @@ function initialize(app, acl) {
     app.post("/article/delete", postDelete);
 }
 
-function getArticle(req, res) {
+function getView(req, res) {
 
     var article = articlesStore.getRelationalArticle(req.params.articleId);
     var pageTitle = coreString.truncate(article.title, 10, true);
