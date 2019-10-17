@@ -7,7 +7,7 @@ var logsStore = {};
 logsStore.getLogs = function() {
 
 	var result = sql.executeQuery(`
-		SELECT logId, logLevel, logMessage, httpStatus, requestUrl, username, stack, createdTimestamp
+		SELECT logId, logLevel, logMessage, httpStatus, requestUrl, username, stack, createdDate
 		FROM Logs`);
 
 	return result;
@@ -18,7 +18,7 @@ logsStore.getDescendingPagedLogs = function(pageNumber, pageSize) {
 	var limitOffset = sql.getLimitOffset(pageNumber, pageSize);
 
 	var result = sql.executeQuery(`
-		SELECT logId, logLevel, logMessage, httpStatus, requestUrl, username, stack, createdTimestamp
+		SELECT logId, logLevel, logMessage, httpStatus, requestUrl, username, stack, createdDate
 		FROM Logs
 		WHERE logId NOT IN (SELECT logId FROM Logs
 							ORDER BY logId DESC
@@ -48,7 +48,7 @@ logsStore.getDescendingPagedLogs = function(pageNumber, pageSize) {
 logsStore.getLog = function(logId) {
 
 	var result = sql.executeRow(`
-		SELECT logId, logLevel, logMessage, httpStatus, requestUrl, username, stack, createdTimestamp
+		SELECT logId, logLevel, logMessage, httpStatus, requestUrl, username, stack, createdDate
 		FROM Logs
 		WHERE logId = @logId`,
 		{ logId });
@@ -61,16 +61,16 @@ logsStore.getCount = function() {
 	return sql.executeScalar('SELECT COUNT(*) FROM Logs');
 }
 
-/** @param createdTimestamp required. Must be a Date or iso date string. */
-logsStore.addLog = function(logLevel, logMessage, httpStatus, requestUrl, username, stack, createdTimestamp) {
+/** @param createdDate required. Must be a Date or iso date string. */
+logsStore.addLog = function(logLevel, logMessage, httpStatus, requestUrl, username, stack, createdDate) {
 
 	username = username ? username.toLowerCase() : undefined;
-	createdTimestamp = sqlDateTime.toSqlDate(createdTimestamp);
+	createdDate = sqlDateTime.toSqlDate(createdDate);
 
 	sql.executeNonQuery(`
-		INSERT INTO Logs (logLevel, logMessage, httpStatus, requestUrl, username, stack, createdTimestamp)
-		VALUES (@logLevel, @logMessage, @httpStatus, @requestUrl, @username, @stack, @createdTimestamp)`,
-		{ logLevel, logMessage, httpStatus, requestUrl, username, stack, createdTimestamp });
+		INSERT INTO Logs (logLevel, logMessage, httpStatus, requestUrl, username, stack, createdDate)
+		VALUES (@logLevel, @logMessage, @httpStatus, @requestUrl, @username, @stack, @createdDate)`,
+		{ logLevel, logMessage, httpStatus, requestUrl, username, stack, createdDate });
 }
 
 

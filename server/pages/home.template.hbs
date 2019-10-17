@@ -12,7 +12,7 @@
       {{#each pagedArticles.articles}}
 
       <button class="btn btn-outline-primary btn-sm float-right">
-        <i class="fa fa-heart mr-2"></i>29
+        <i class="fa fa-heart mr-2"></i>{{countFavorites}} {{isUserFavorite}}
       </button>
 
       <h2 class="mb-3"><a href="/article/view/{{articleId}}"><i class="{{iconCssClass}} mr-2"></i>{{articleTitle}}</a></h2>
@@ -20,7 +20,7 @@
 
       <div class="font-size-sm">
         <span class="text-secondary-darker">{{firstName}} {{lastName}}</span>
-        <span class="text-muted d-block">{{date updatedTimestamp}}</span>
+        <span class="text-muted d-block">{{date updatedDate}}</span>
       </div>
 
       <hr>

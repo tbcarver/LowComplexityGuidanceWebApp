@@ -72,7 +72,7 @@ function buildProfile() {
     profile.city = faker.address.city();
     profile.state = faker.address.state();
     profile.zipCode = faker.address.zipCode();
-    profile.createdTimestamp = faker.date.future().toISOString();
+    profile.createdDate = faker.date.future().toISOString();
 
     return profile;
 }

@@ -3,12 +3,20 @@ var sql = require("../lib/coreVendor/betterSqlite/sql");
 
 var articlesStore = {};
 
-articlesStore.getDescendingPagedRelationalArticles = function(pageNumber, pageSize) {
+articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize, favoriteUserId) {
+
+	if (!favoriteUserId) {
+		favoriteUserId = 0;
+	}
 
 	var limitOffset = sql.getLimitOffset(pageNumber, pageSize);
+	limitOffset.favoriteUserId = favoriteUserId;	
 
 	var result = sql.executeQuery(`
-		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId, createdTimestamp, updatedTimestamp, firstName, lastName
+		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
+			Articles.createdDate, Articles.updatedDate, firstName, lastName,
+			(SELECT COUNT(*) FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId) as countFavorites,
+			(SELECT 1 FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId AND UsersFavoriteArticles.userId = 20) as isUserFavorite
 		FROM Articles
 			INNER JOIN Users ON Articles.authorId = Users.userId
 		WHERE articleId NOT IN (SELECT articleId FROM Articles
@@ -37,7 +45,7 @@ articlesStore.getDescendingPagedRelationalArticles = function(pageNumber, pageSi
 articlesStore.getArticle = function(articleId) {
 
 	var result = sql.executeRow(`
-		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId, createdTimestamp, updatedTimestamp
+		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId, createdDate, updatedDate
 		FROM Articles
 		WHERE articleId = @articleId`,
 		{ articleId });
@@ -45,10 +53,13 @@ articlesStore.getArticle = function(articleId) {
 	return result;
 }
 
-articlesStore.getRelationalArticle = function(articleId) {
+articlesStore.getExtendedArticle = function(articleId) {
 
 	var result = sql.executeRow(`
-		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId, createdTimestamp, updatedTimestamp, firstName, lastName
+		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
+			Articles.createdDate, Articles.updatedDate, firstName, lastName,
+			(SELECT COUNT(*) FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId) as countFavorites,
+			(SELECT 1 FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId AND UsersFavoriteArticles.userId = 20) as isUserFavorite
 		FROM Articles
 			INNER JOIN Users ON Articles.authorId = Users.userId
 		WHERE articleId = @articleId`,

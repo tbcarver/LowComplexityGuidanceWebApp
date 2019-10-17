@@ -27,19 +27,19 @@ sqlDateTime.toSqlDate = function(date) {
 }
 
 
-sqlDateTime.toDate = function(timestamp) {
+sqlDateTime.toDate = function(date) {
 
 	var date;
 
-	if (typeof timestamp === "string") {
+	if (typeof date === "string") {
 
-		var matches = timestamp.match(sqlDateToDateRegex);
+		var matches = date.match(sqlDateToDateRegex);
 
 		if (matches && matches.length === 3) {
-			timestamp = matches[1] + "T" + matches[2] + ".000Z";
+			date = matches[1] + "T" + matches[2] + ".000Z";
 		}
 
-		date = new Date(timestamp);
+		date = new Date(date);
 	}
 
 	return date;

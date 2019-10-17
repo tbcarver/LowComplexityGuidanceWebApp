@@ -7,5 +7,5 @@ CREATE TABLE Logs (
     requestUrl TEXT,
     username TEXT,
     stack TEXT,
-	createdTimestamp TEXT NOT NULL
+	createdDate TEXT NOT NULL
 );

@@ -15,7 +15,7 @@
 		{{#each pagedLogs.logs}}
 		<tr>
 			<td><a href="/log/{{logId}}" class="{{is "error" logLevel "text-danger"}}">{{logLevel}}</a></td>
-			<td class="text-center">{{dateTimeShort createdTimestamp}}</td>
+			<td class="text-center">{{dateTimeShort createdDate}}</td>
 			<td class="" title="{{stack}}">{{logMessage}}</td>
 			<td class="text-center">{{httpStatus}}</td>
 			<td class="text-center">{{requestUrl}}</td>

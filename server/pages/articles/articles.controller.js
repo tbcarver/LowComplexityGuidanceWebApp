@@ -20,7 +20,7 @@ function initialize(app, acl) {
 
 function getView(req, res) {
 
-    var article = articlesStore.getRelationalArticle(req.params.articleId);
+    var article = articlesStore.getExtendedArticle(req.params.articleId);
     var pageTitle = coreString.truncate(article.title, 10, true);
 
     var model = { title: pageTitle };
