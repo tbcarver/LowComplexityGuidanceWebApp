@@ -1,17 +1,25 @@
 
 var sql = require("../lib/coreVendor/betterSqlite/sql");
+var WhereClause = require("../lib/core/sql/whereClause");
 var usersFavoriteArticlesStore = require("./usersFavoriteArticlesStore");
 
 var articlesStore = {};
 
-articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize, favoriteUserId) {
+articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize, favoriteUserId, authorIdFilter) {
 
 	if (!favoriteUserId) {
 		favoriteUserId = 0;
 	}
 
-	var limitOffset = sql.getLimitOffset(pageNumber, pageSize);
-	limitOffset.favoriteUserId = favoriteUserId;
+	var parameters = sql.getLimitOffset(pageNumber, pageSize);
+	parameters.favoriteUserId = favoriteUserId;
+
+	var whereClause = new WhereClause();
+	var whereParameters = {};
+	if (authorIdFilter) {
+		whereClause.addAndClause("authorId = @authorId");
+		whereParameters.authorId = authorIdFilter;
+	}
 
 	var result = sql.executeQuery(`
 		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
@@ -21,13 +29,14 @@ articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize
 		FROM Articles
 			INNER JOIN Users ON Articles.authorId = Users.userId
 		WHERE articleId NOT IN (SELECT articleId FROM Articles
-							ORDER BY articleId DESC LIMIT @offset)
+								${whereClause.buildWhere()}
+								ORDER BY articleId DESC LIMIT @offset) ${whereClause.buildAnd()}
 		ORDER BY articleId DESC LIMIT @limit`,
-		limitOffset);
+		Object.assign(parameters, whereParameters));
 
 	var total = 0;
 	if (result.length > 0) {
-		total = this.getCount();
+		total = this.getCount(whereClause, whereParameters);
 	}
 
 	result = {
@@ -73,9 +82,15 @@ articlesStore.getExtendedArticle = function(articleId, favoriteUserId) {
 	return result;
 }
 
-articlesStore.getCount = function() {
+articlesStore.getCount = function(whereClause, whereParameters) {
 
-	return sql.executeScalar('SELECT COUNT(*) FROM Articles');
+	var count = sql.executeScalar(`
+		SELECT COUNT(*)
+		FROM Articles
+		${whereClause.buildWhere()}`,
+		whereParameters);
+
+	return count;
 }
 
 articlesStore.addArticle = function(articleTitle, articleDescription, articleBody, iconCssClass, authorId) {

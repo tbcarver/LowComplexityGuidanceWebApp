@@ -3,6 +3,14 @@ var sql = require("../lib/coreVendor/betterSqlite/sql");
 
 var usersFavoriteArticlesStore = {};
 
+usersFavoriteArticlesStore.addUserIdArticleId = function(userId, articleId) {
+
+	sql.executeNonQuery(`
+		INSERT INTO UsersFavoriteArticles (userId, articleId)
+		VALUES (@userId, @articleId)`,
+		{ userId, articleId });
+}
+
 usersFavoriteArticlesStore.replaceUserIdArticleId = function(userId, articleId) {
 
 	sql.transaction(function() {
@@ -10,8 +18,8 @@ usersFavoriteArticlesStore.replaceUserIdArticleId = function(userId, articleId) 
 		usersFavoriteArticlesStore.removeUserIdArticleId(userId, articleId);
 
 		sql.executeNonQuery(`
-		INSERT INTO UsersFavoriteArticles (userId, articleId)
-		VALUES (@userId, @articleId)`,
+			INSERT INTO UsersFavoriteArticles (userId, articleId)
+			VALUES (@userId, @articleId)`,
 			{ userId, articleId });
 	});
 }

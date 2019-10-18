@@ -26,7 +26,7 @@ for (var count = 1; count <= totalRows; count++) {
 
 for (var count = 1; count <= totalRows; count++) {
 
-	var userId = faker.random.number({ min: 1, max: Math.floor(totalRows / 3) });
+	var userId = faker.random.number({ min: 1, max: Math.floor(totalRows / 10) });
 	var articleId = articlesStore.addArticle(getWords(2, 4), getWords(6, 8), getParagraphs(1, 4), getIconCssClass(), userId);
 	console.log("Added articleId: " + articleId);
 }

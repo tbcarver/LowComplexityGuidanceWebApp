@@ -9,10 +9,19 @@
   <div class="row">
     <div class="col-12">
 
+      <ul class="nav nav-tabs mb-3">
+        <li class="nav-item">
+          <a class="nav-link {{is navTabTitle "Articles" "active"}}" href="/">Articles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{is navTabTitle "My articles" "active"}}" href="/?q=myArticles">My articles</a>
+        </li>
+      </ul>
+
       {{#each pagedArticles.articles}}
 
-      <article-favorite class="btn-sm float-right" count-favorites="{{countFavorites}}"
-        is-favorite="{{isUserFavorite}}" article-id="{{articleId}}" user-id="{{../loggedInUser.userId}}">
+      <article-favorite class="btn-sm float-right" count-favorites="{{countFavorites}}" is-favorite="{{isUserFavorite}}"
+        article-id="{{articleId}}" user-id="{{../loggedInUser.userId}}">
       </article-favorite>
 
       <h2 class="mb-3"><a href="/article/view/{{articleId}}"><i class="{{iconCssClass}} mr-2"></i>{{articleTitle}}</a>

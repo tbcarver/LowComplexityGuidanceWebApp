@@ -58,7 +58,9 @@ logsStore.getLog = function(logId) {
 
 logsStore.getCount = function() {
 
-	return sql.executeScalar('SELECT COUNT(*) FROM Logs');
+	return sql.executeScalar(`
+	SELECT COUNT(*)
+	FROM Logs`);
 }
 
 /** @param createdDate required. Must be a Date or iso date string. */

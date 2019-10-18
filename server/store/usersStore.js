@@ -82,7 +82,9 @@ usersStore.getUserByUsername = function(username) {
 
 usersStore.getCount = function() {
 
-	return sql.executeScalar('SELECT COUNT(*) FROM Users');
+	return sql.executeScalar(`
+	SELECT COUNT(*)
+	FROM Users`);
 }
 
 usersStore.getPasswordHashes = function(userId) {
