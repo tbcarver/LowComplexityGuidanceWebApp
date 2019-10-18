@@ -22,7 +22,7 @@ function initialize(app) {
 			}
 		},
 		// Do not shut down the server on non client errors
-		shutdown: () => { },
+		shutdown: function() { },
 	});
 
 	// 404 needs to be set at the very end of the routes

@@ -11,7 +11,7 @@ var dateStringFormatOptions = {
   hour12: false,
 };
 
-var customFormat = winston.format.printf(({ level, message, timestamp, stack, url, username }) => {
+var customFormat = winston.format.printf(function({ level, message, timestamp, stack, url, username }) {
 
   timestamp = new Date(timestamp).toLocaleDateString("us-EN", dateStringFormatOptions);
   stack = stack ? "\n" + stack : "";

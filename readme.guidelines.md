@@ -57,6 +57,8 @@ In rare cases an exception should be allowed.
 
 **Do** use dart *sass* 'yarn add sass --offline' instead of *node-sass*.
 
+**Except** when other packages require compilation and therefore the compilation threshold has been crossed. *node-sass* is up to 3 times faster than *sass*, thereby reducing development time.
+
 **Why?** *node-sass* requires a compilation.
 
 
@@ -93,18 +95,45 @@ In rare cases an exception should be allowed.
 **Why?** Makes it easier to know where the function is exiting. Allows for easier placement of breakpoints at the exit of the function.
 
 
+**Do** use lambda expressions only when syntax can be reduced.
+
+    var roleIds = roleIds.map(element => element.roleId);
+            
+**Avoid** lambda expressions whenever braces are necessary for the function.
+
+    avoid: var result = _.filter(roleIds, (key, value) => {
+        var filter = false;
+        var constant = getConstant();
+        if (element < constant) {
+            filter = true;
+        }
+        return filter;
+    });
+
+    do: var result = _.filter(roleIds, function(key, value) {
+        var filter = false;
+        var constant = getConstant();
+        if (element < constant) {
+            filter = true;
+        }
+        return filter;
+    });
+
+**Why?** Lambdas are for reducing syntax to improve readability. Removing the function key word only to replace it with a symbol => makes the code more encoded and therefore harder to read and reason about, especially for jr. programmers.
+
+
 ## Database
 
 **Do** Use efficient paging.
 
--- Reasonably efficient pagination without OFFSET
--- SQLite version (Adapted from MS SQL syntax)
--- Source: http://www.phpbuilder.com/board/showpost.php?p=10376515&postcount=6
+    -- Reasonably efficient pagination without OFFSET
+    -- SQLite version (Adapted from MS SQL syntax)
+    -- Source: http://www.phpbuilder.com/board/showpost.php?p=10376515&postcount=6
 
-SELECT foo, bar, baz, quux FROM table
-WHERE oid NOT IN ( SELECT oid FROM table
-                   ORDER BY title ASC LIMIT 50 )
-ORDER BY title ASC LIMIT 10
+    SELECT foo, bar, baz, quux FROM table
+    WHERE oid NOT IN ( SELECT oid FROM table
+                    ORDER BY title ASC LIMIT 50 )
+    ORDER BY title ASC LIMIT 10
 
 **Avoid** LIMIT [no of rows] + OFFSET [row num].
 
