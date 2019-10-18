@@ -33,6 +33,8 @@ if (process.env.NODE_ENV !== "production") {
 global.logger = logger;
 global.ServerError = ServerError;
 
+logger.log("info", `NODE_ENV=${process.env.NODE_ENV}`);
+
 const app = express();
 
 app.set("query parser", "simple");

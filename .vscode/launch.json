@@ -8,7 +8,10 @@
 			"type": "node",
 			"request": "launch",
 			"name": "Launch Program",
-			"program": "${workspaceFolder}/server/app.js"
+			"program": "${workspaceFolder}/server/app.js",
+			"env": {
+				"NODE_ENV": "development",
+			}
 		},
 		{
 			"type": "node",
@@ -16,6 +19,9 @@
 			"name": "Nodemon",
 			"runtimeExecutable": "${workspaceFolder}/node_modules/nodemon/bin/nodemon.js",
 			"program": "${workspaceFolder}/server/app.js",
+			"env": {
+				"NODE_ENV": "development",
+			},
 			"args": [
 				"--watch",
 				"server"
@@ -30,6 +36,7 @@
 			"name": "Nodemon Client",
 			"runtimeExecutable": "${workspaceFolder}/node_modules/nodemon/bin/nodemon.js",
 			"env": {
+				"NODE_ENV": "development",
 				"NODE_ENV_CLIENT": "development"
 			},
 			"args": [

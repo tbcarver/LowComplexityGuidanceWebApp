@@ -10,9 +10,17 @@
 * Caching all assets for one year
 * Cache busting
 * Build step that will prepare all files for production deployment including cache busting
+* Client side dev server with client side script and css watching and auto updating to client
 * Authentication
 * Authorization with ACL for locking down all resources
 * Pattern for MVC with express
 * Pattern for initializing express
 * Logging
 * Error handling
+* Cross request growl type messages
+* Typeahead searching
+* Ajax for live page changes
+* Master page example
+* Details page example
+* Database changes with transactions
+* Database level paging including paging with filtering
