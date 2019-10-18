@@ -23,9 +23,15 @@
 						placeholder="Icon css class" required>
 				</div>
 
-				<button class="btn btn-lg btn-primary">
+				<button class="btn btn-primary">
 					<i class="fa fa-check mr-2"></i>{{#if article.articleId}} Save {{else}} Publish {{/if}} article
 				</button>
+				<button type="button" class="btn btn-outline-danger" data-toggle="modal" data-target="#confirm-cancel">
+					<i class="fa fa-times mr-2"></i>Cancel</span>
+				</button>
+				<core-confirm-dialog id="confirm-cancel" yes-text="Yes, cancel" yes-href="/article/view/{{article.articleId}}">Are you
+					sure you
+					want to <strong>cancel</strong>?</core-confirm-dialog>
 			</form>
 
 			{{#if article.articleId}}

@@ -66,6 +66,9 @@ class ArticleFavorite extends HTMLParsedElement {
 	}
 
 	parsedCallback() {
+		this.initialClassName = this.getAttribute("class");
+		this.setAttribute("class", "");
+
 		this.text = this.innerHTML;
 		this.render();
 	}
@@ -81,7 +84,7 @@ class ArticleFavorite extends HTMLParsedElement {
 
 		var data = {};
 
-		data.className = this.className;
+		data.className = this.initialClassName;
 		data.className += " btn";
 		data.className += this.isFavorite ? " btn-primary" : " btn-outline-primary";
 		data.className += " " + animation;

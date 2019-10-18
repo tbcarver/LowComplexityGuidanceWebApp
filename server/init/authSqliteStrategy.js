@@ -33,7 +33,14 @@ var sqliteStrategy = new LocalStrategy(
 			done(null, userProfile);
 
 		} else {
-			done(null, null);
+
+			var info = "password";
+
+			if (!passwordHashes) {
+				info = "username";
+			}
+
+			done(null, null, info);
 		}
 	}
 );

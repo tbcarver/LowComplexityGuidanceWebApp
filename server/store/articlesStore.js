@@ -1,5 +1,6 @@
 
 var sql = require("../lib/coreVendor/betterSqlite/sql");
+var usersFavoriteArticlesStore = require("./usersFavoriteArticlesStore");
 
 var articlesStore = {};
 
@@ -10,7 +11,7 @@ articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize
 	}
 
 	var limitOffset = sql.getLimitOffset(pageNumber, pageSize);
-	limitOffset.favoriteUserId = favoriteUserId;	
+	limitOffset.favoriteUserId = favoriteUserId;
 
 	var result = sql.executeQuery(`
 		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
@@ -98,10 +99,15 @@ articlesStore.updateArticle = function(articleId, articleTitle, articleDescripti
 
 articlesStore.deleteArticle = function(articleId) {
 
-	sql.executeNonQuery(`
-		DELETE FROM Articles
-		WHERE articleId = @articleId`,
-		{ articleId });
+	sql.transaction(function() {
+
+		usersFavoriteArticlesStore.removeFavoriteArticlesByArticleId(articleId);
+
+		sql.executeNonQuery(`
+			DELETE FROM Articles
+			WHERE articleId = @articleId`,
+			{ articleId });
+	});
 }
 
 

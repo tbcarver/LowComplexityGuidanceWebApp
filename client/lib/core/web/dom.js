@@ -43,5 +43,13 @@ dom.generateUniqueId = function(name) {
 	return uniqueId;
 }
 
+dom.setTextInputFocus = function(selector) {
+
+	var element = document.querySelector(selector);
+
+	element.focus();
+	element.value = element.value;
+}
+
 
 export default dom;
