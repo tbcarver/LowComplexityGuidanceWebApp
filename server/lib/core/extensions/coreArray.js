@@ -6,13 +6,17 @@ coreArray.includesAny = function(values, search) {
 
 	var includes = false;
 
-	for (var value of values) {
+	if (values && search) {
 
-		if (search.includes(value)) {
+		for (var value of values) {
 
-			includes = true;
-			break;
+			if (search.includes(value)) {
+
+				includes = true;
+				break;
+			}
 		}
+
 	}
 
 	return includes;

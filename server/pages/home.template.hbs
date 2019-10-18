@@ -13,9 +13,11 @@
         <li class="nav-item">
           <a class="nav-link {{is navTabTitle "Articles" "active"}}" href="/">Articles</a>
         </li>
+        {{#if (hasRole "contributor")}}
         <li class="nav-item">
           <a class="nav-link {{is navTabTitle "My articles" "active"}}" href="/?q=myArticles">My articles</a>
         </li>
+        {{/if}}
       </ul>
 
       {{#each pagedArticles.articles}}
