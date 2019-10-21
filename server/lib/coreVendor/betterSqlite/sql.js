@@ -8,7 +8,8 @@ var sql = {};
 var filePathName = path.resolve(process.env.CONNECTION_STRING);
 db = new Database(filePathName, { fileMustExist: true });
 
-// Use write-ahead logging for better performance: http://advanced.brickhousecodecamp.org/docs/sqlite/www.sqlite.org/wal.html
+// Use write-ahead logging for better performance:
+//  http://advanced.brickhousecodecamp.org/docs/sqlite/www.sqlite.org/wal.html
 db.pragma("journal_mode = WAL");
 
 sql.executeScalar = function(sqlStatement, parameters) {

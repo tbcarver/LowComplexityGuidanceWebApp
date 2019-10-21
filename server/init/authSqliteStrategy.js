@@ -11,7 +11,8 @@ var sqliteStrategy = new LocalStrategy(
 		var passwordHashes = usersStore.getPasswordHashes(null, username);
 
 		if (passwordHashes) {
-			isValid = usersRules.validatePassword(password, passwordHashes.passwordHash, passwordHashes.passwordHashSalt);
+			isValid = usersRules.validatePassword(password, passwordHashes.passwordHash,
+				passwordHashes.passwordHashSalt);
 		}
 
 		if (isValid) {

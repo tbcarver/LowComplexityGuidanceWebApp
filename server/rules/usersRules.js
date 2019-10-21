@@ -16,7 +16,8 @@ usersRules.buildPasswordHashes = function(password) {
 	var passwordHashes = {};
 
 	passwordHashes.passwordHashSalt = crypto.randomBytes(16).toString("hex");
-	passwordHashes.passwordHash = crypto.pbkdf2Sync(password, passwordHashes.passwordHashSalt, 10000, 512, "sha512").toString("hex");
+	passwordHashes.passwordHash = crypto.pbkdf2Sync(password, passwordHashes.passwordHashSalt, 10000, 512, "sha512");
+	passwordHashes.passwordHash = passwordHashes.passwordHash.toString("hex");
 
 	return passwordHashes;
 }

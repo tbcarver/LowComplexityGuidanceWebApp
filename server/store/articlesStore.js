@@ -8,7 +8,8 @@ var articlesStore = {};
 articlesStore.getArticle = function(articleId) {
 
 	var results = sql.executeRow(`
-		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId, createdDate, updatedDate
+		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId, createdDate,
+			updatedDate
 		FROM Articles
 		WHERE articleId = @articleId`,
 		{ articleId });
@@ -25,8 +26,11 @@ articlesStore.getExtendedArticle = function(articleId, favoriteUserId) {
 	var results = sql.executeRow(`
 		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
 			Articles.createdDate, Articles.updatedDate, firstName, lastName,
-			(SELECT COUNT(*) FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId) as countFavorites,
-			(SELECT 1 FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId AND UsersFavoriteArticles.userId = @favoriteUserId) as isUserFavorite
+			(SELECT COUNT(*) FROM UsersFavoriteArticles
+			 WHERE UsersFavoriteArticles.articleId = Articles.articleId) as countFavorites,
+			(SELECT 1 FROM UsersFavoriteArticles
+			 WHERE UsersFavoriteArticles.articleId = Articles.articleId
+				AND UsersFavoriteArticles.userId = @favoriteUserId) as isUserFavorite
 		FROM Articles
 			INNER JOIN Users ON Articles.authorId = Users.userId
 		WHERE articleId = @articleId`,
@@ -52,8 +56,11 @@ articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize
 	var results = sql.executeQuery(`
 		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
 			Articles.createdDate, Articles.updatedDate, firstName, lastName,
-			(SELECT COUNT(*) FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId) as countFavorites,
-			(SELECT 1 FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId AND UsersFavoriteArticles.userId = @favoriteUserId) as isUserFavorite
+			(SELECT COUNT(*) FROM UsersFavoriteArticles
+			 WHERE UsersFavoriteArticles.articleId = Articles.articleId) as countFavorites,
+			(SELECT 1 FROM UsersFavoriteArticles
+			 WHERE UsersFavoriteArticles.articleId = Articles.articleId
+			 	AND UsersFavoriteArticles.userId = @favoriteUserId) as isUserFavorite
 		FROM Articles
 			INNER JOIN Users ON Articles.authorId = Users.userId
 		WHERE articleId NOT IN (SELECT articleId FROM Articles
@@ -105,7 +112,8 @@ articlesStore.updateArticle = function(articleId, articleTitle, articleDescripti
 
 	sql.executeNonQuery(`
 		UPDATE Articles
-		SET articleTitle = @articleTitle, articleDescription = @articleDescription, articleBody = @articleBody, iconCssClass = @iconCssClass
+		SET articleTitle = @articleTitle, articleDescription = @articleDescription, articleBody = @articleBody,
+			iconCssClass = @iconCssClass
 		WHERE articleId = @articleId`,
 		{ articleId, articleTitle, articleDescription, articleBody, iconCssClass });
 }

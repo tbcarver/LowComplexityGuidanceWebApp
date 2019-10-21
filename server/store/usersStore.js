@@ -130,7 +130,8 @@ usersStore.updateUser = function(userId, username, firstName, lastName, password
 
 		sql.executeNonQuery(`
 			UPDATE Users
-			SET username = @username, firstName = @firstName, lastName = @lastName, passwordHash = @passwordHash, passwordHashSalt = @passwordHashSalt
+			SET username = @username, firstName = @firstName, lastName = @lastName, passwordHash = @passwordHash,
+				passwordHashSalt = @passwordHashSalt
 			WHERE userId = @userId`,
 			{ userId, username, firstName, lastName, passwordHash, passwordHashSalt });
 

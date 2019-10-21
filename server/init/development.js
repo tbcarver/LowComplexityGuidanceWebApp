@@ -28,7 +28,8 @@ function initialize(app, acl, callback) {
 
 		if (index !== -1) {
 			var miniCssExtractPlugin = webpackConfig.plugins[index];
-			miniCssExtractPlugin.options.filename = miniCssExtractPlugin.options.filename.replace("[contenthash]", "development");
+			miniCssExtractPlugin.options.filename = miniCssExtractPlugin.options.filename.replace("[contenthash]",
+				"development");
 
 			miniCssExtractPlugin = new MiniCssExtractPlugin({
 				filename: miniCssExtractPlugin.options.filename,
@@ -55,7 +56,8 @@ function initialize(app, acl, callback) {
 			// NOTE: This expects one entry point and should be changed in more entry points are added.
 			devConfig.entry = [devConfig.entry];
 
-			// Enable auto reloading when changing JS files or content and time in between disconnecting and reconnecting to the server
+			// Enable auto reloading when changing JS files or content and time in between disconnecting and
+			//  reconnecting to the server
 			devConfig.entry.unshift('webpack-hot-middleware/client?reload=true&timeout=1000');
 			devConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 

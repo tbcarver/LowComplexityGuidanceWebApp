@@ -11,7 +11,7 @@ function compareAB(a, b, outValue, options, comparedResult, comparisonKey) {
 
 	var result = "";
 
-	if (utils.isOptions(outValue)){
+	if (utils.isOptions(outValue)) {
 		options = outValue;
 	}
 
@@ -36,7 +36,8 @@ comparisonHelpers.isnt = function(a, b, outValue, options) {
 	return compareAB(a, b, outValue, options, (a == b), "isnt");
 };
 
-// Similar to handlebars-helpers 'contains', however, better named, does allow for objects as the collection, and better use of inline.
+// Similar to handlebars-helpers 'contains', however, better named, does allow for objects as the collection,
+//  and better use of inline.
 comparisonHelpers.includes = function(collection, value, outValue, options) {
 
 	if (utils.isOptions(outValue)) {
