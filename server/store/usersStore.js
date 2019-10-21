@@ -2,7 +2,7 @@
 var sql = require("../lib/coreVendor/betterSqlite/sql");
 var WhereClause = require("../lib/core/sql/whereClause");
 var _ = require("lodash");
-var usersRolesStore = require("./usersRolesStore");
+var usersRolesMapsStore = require("./usersRolesMapsStore");
 
 var usersStore = {};
 
@@ -110,7 +110,7 @@ usersStore.addUser = function(username, firstName, lastName, passwordHash, passw
 			{ username, firstName, lastName, passwordHash, passwordHashSalt });
 
 		if (roleIds) {
-			usersRolesStore.replaceRoleIdsByUserId(roleIds, id);
+			usersRolesMapsStore.replaceRoleIdsByUserId(roleIds, id);
 		}
 	});
 
@@ -136,7 +136,7 @@ usersStore.updateUser = function(userId, username, firstName, lastName, password
 			{ userId, username, firstName, lastName, passwordHash, passwordHashSalt });
 
 		if (roleIds) {
-			usersRolesStore.replaceRoleIdsByUserId(roleIds, userId);
+			usersRolesMapsStore.replaceRoleIdsByUserId(roleIds, userId);
 		}
 	});
 }
@@ -145,7 +145,7 @@ usersStore.removeUser = function(userId) {
 
 	sql.transaction(function() {
 
-		usersRolesStore.removeRoleIdsByUserId(userId);
+		usersRolesMapsStore.removeRoleIdsByUserId(userId);
 
 		sql.executeNonQuery(`
 			DELETE FROM Users

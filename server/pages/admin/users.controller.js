@@ -1,7 +1,7 @@
 
 
 var rolesStore = require("../../store/rolesStore");
-var usersRolesStore = require("../../store/usersRolesStore");
+var usersRolesMapsStore = require("../../store/usersRolesMapsStore");
 var usersStore = require("../../store/usersStore");
 var usersRules = require("../../rules/usersRules");
 var _ = require("lodash");
@@ -54,7 +54,7 @@ function getEdit(req, res) {
     if (model.user) {
 
         model.heading = `User: ${model.user.firstName} ${model.user.lastName}`;
-        model.user.roleIds = usersRolesStore.getRoleIds(req.params.userId);
+        model.user.roleIds = usersRolesMapsStore.getRoleIds(req.params.userId);
         model.roles = rolesStore.getRoles();
 
     } else {
