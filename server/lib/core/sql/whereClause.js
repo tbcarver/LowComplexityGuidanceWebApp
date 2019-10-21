@@ -1,4 +1,6 @@
 
+var _ = require("lodash");
+
 var where = " WHERE ";
 var and = " AND ";
 var or = " OR ";
@@ -8,25 +10,39 @@ class WhereClause {
 	constructor() {
 		this.andClauses = [];
 		this.orClauses = [];
+		this.parameters = {};
 	}
 
-	addAndClause(clause) {
-		this.andClauses.push(` (${clause}) `);
+	addAndClause(clause, key, value) {
+
+		if (!_.isNil(key) && !_.isNil(value)) {
+
+			this.andClauses.push(` (${clause}) `);
+			this.addParameter(key, value);
+		}
 	}
 
 	addOrClause(clause) {
 		this.orClauses.push(` (${clause}) `);
 	}
 
-	buildWhere() { 
+	addParameter(key, value) {
+
+		if (!_.isNil(key) && !_.isNil(value)) {
+
+			this.parameters[key] = value;
+		}
+	}
+
+	buildWhere() {
 		return this.join(where);
 	}
 
-	buildAnd() { 
+	buildAnd() {
 		return this.join(and);
 	}
 
-	buildOr() { 
+	buildOr() {
 		return this.join(or);
 	}
 

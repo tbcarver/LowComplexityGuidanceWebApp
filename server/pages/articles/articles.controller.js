@@ -63,7 +63,7 @@ function postEdit(req, res) {
 
 function postDelete(req, res) {
 
-    articlesStore.deleteArticle(req.body.articleId);
+    articlesStore.removeArticle(req.body.articleId);
 
     req.flash.success(`<strong>${req.body.articleTitle}</strong> was deleted.`);
     res.redirect("/");

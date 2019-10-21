@@ -8,7 +8,7 @@ var sqliteStrategy = new LocalStrategy(
 	function(username, password, done) {
 
 		var isValid = false;
-		var passwordHashes = usersStore.getPasswordHashesByUsername(username);
+		var passwordHashes = usersStore.getPasswordHashes(null, username);
 
 		if (passwordHashes) {
 			isValid = usersRules.validatePassword(password, passwordHashes.passwordHash, passwordHashes.passwordHashSalt);
@@ -16,7 +16,7 @@ var sqliteStrategy = new LocalStrategy(
 
 		if (isValid) {
 
-			var user = usersStore.getUserByUsername(username);
+			var user = usersStore.getUser(null, username);
 			var userProfile = {
 				userId: user.userId,
 				username: user.username,
@@ -24,7 +24,7 @@ var sqliteStrategy = new LocalStrategy(
 				roles: [],
 			}
 
-			var roles = usersRolesStore.getRoleNamesByUserId(user.userId);
+			var roles = usersRolesStore.getRoleNames(user.userId);
 
 			if (roles) {
 				userProfile.roles = roles;

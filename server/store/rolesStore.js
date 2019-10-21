@@ -5,11 +5,11 @@ var rolesStore = {};
 
 rolesStore.getRoles = function() {
 
-	var roles = sql.executeQuery(`
+	var results = sql.executeQuery(`
 		SELECT roleId, roleName
 		FROM Roles`);
 
-	return roles;
+	return results;
 }
 
 module.exports = rolesStore;

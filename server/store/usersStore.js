@@ -1,23 +1,39 @@
 
 var sql = require("../lib/coreVendor/betterSqlite/sql");
+var WhereClause = require("../lib/core/sql/whereClause");
+var _ = require("lodash");
 var usersRolesStore = require("./usersRolesStore");
 
 var usersStore = {};
 
-usersStore.getUsers = function() {
+usersStore.getUsers = function(userId, username) {
 
-	var users = sql.executeQuery(`
+	var whereClause = new WhereClause();
+	whereClause.addAndClause("userId = @userId", "userId", userId);
+	whereClause.addAndClause("username = @username", "username", username);
+
+	var results = sql.executeQuery(`
 		SELECT userId, username, firstName, lastName
-		FROM Users`);
+		FROM Users
+		${whereClause.buildWhere()}`,
+		whereClause.parameters);
 
-	return users;
+	return results;
+}
+
+usersStore.getUser = function(userId, username) {
+
+	var results = this.getUsers(userId, username);
+	results = _.first(results);
+
+	return results;
 }
 
 usersStore.getPagedUsers = function(pageNumber, pageSize) {
 
 	var limitOffset = sql.getLimitOffset(pageNumber, pageSize);
 
-	var result = sql.executeQuery(`
+	var results = sql.executeQuery(`
 		SELECT userId, username, firstName, lastName
 		FROM Users
 		WHERE userId NOT IN (SELECT userId FROM Users
@@ -28,56 +44,51 @@ usersStore.getPagedUsers = function(pageNumber, pageSize) {
 		limitOffset);
 
 	var total = 0;
-	if (result.length > 0) {
+	if (results.length > 0) {
 		total = this.getCount();
 	}
 
-	result = {
+	results = {
 		pagination: {
 			pageNumber,
 			pageSize,
-			pageTotal: result.length,
+			pageTotal: results.length,
 			total,
 		},
-		users: result,
+		users: results,
 	};
 
-	return result;
+	return results;
 }
 
-usersStore.findUsers = function(searchTerm) {
+usersStore.searchUsers = function(searchTerm) {
 
-	var users = sql.executeQuery(`
+	var results = sql.executeQuery(`
 		SELECT userId, username, firstName, lastName
 		FROM Users
 		WHERE (userId LIKE @searchTerm) OR (firstName LIKE @searchTerm) OR (lastName LIKE @searchTerm)`,
 		{ searchTerm: `%${searchTerm}%` });
 
-	return users;
+	return results;
 }
 
-usersStore.getUser = function(userId) {
+usersStore.getPasswordHashes = function(userId, username) {
 
-	var user = sql.executeRow(`
-		SELECT userId, username, firstName, lastName
+	if (username) {
+		username = username.toLowerCase();
+	}
+
+	var whereClause = new WhereClause();
+	whereClause.addAndClause("userId = @userId", "userId", userId);
+	whereClause.addAndClause("username = @username", "username", username);
+
+	var results = sql.executeRow(`
+		SELECT passwordHash, passwordHashSalt
 		FROM Users
-		WHERE userId = @userId`,
-		{ userId });
+		${whereClause.buildWhere()}`,
+		whereClause.parameters);
 
-	return user;
-}
-
-usersStore.getUserByUsername = function(username) {
-
-	username = username.toLowerCase();
-
-	var user = sql.executeRow(`
-		SELECT userId, username, firstName, lastName
-		FROM Users
-		WHERE username = @username`,
-		{ username });
-
-	return user;
+	return results;
 }
 
 usersStore.getCount = function() {
@@ -85,30 +96,6 @@ usersStore.getCount = function() {
 	return sql.executeScalar(`
 	SELECT COUNT(*)
 	FROM Users`);
-}
-
-usersStore.getPasswordHashes = function(userId) {
-
-	var passwordHashes = sql.executeRow(`
-		SELECT passwordHash, passwordHashSalt
-		FROM Users
-		WHERE userId = @userId`,
-		{ userId });
-
-	return passwordHashes;
-}
-
-usersStore.getPasswordHashesByUsername = function(username) {
-
-	username = username.toLowerCase();
-
-	var passwordHashes = sql.executeRow(`
-		SELECT passwordHash, passwordHashSalt
-		FROM Users
-		WHERE username = @username`,
-		{ username });
-
-	return passwordHashes;
 }
 
 usersStore.addUser = function(username, firstName, lastName, passwordHash, passwordHashSalt, roleIds) {

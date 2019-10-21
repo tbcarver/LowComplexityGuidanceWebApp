@@ -3,31 +3,31 @@ var sql = require("../lib/coreVendor/betterSqlite/sql");
 
 var usersRolesStore = {};
 
-usersRolesStore.getRoleIdsByUserId = function(userId) {
+usersRolesStore.getRoleIds = function(userId) {
 
-	var roleIds = sql.executeQuery(`
+	var results = sql.executeQuery(`
 		SELECT roleId
 		FROM UsersRoles		
 		WHERE userId = @userId`,
 		{ userId });
 
-	roleIds = roleIds.map(element => element.roleId);
+	results = results.map(element => element.roleId);
 
-	return roleIds;
+	return results;
 }
 
-usersRolesStore.getRoleNamesByUserId = function(userId) {
+usersRolesStore.getRoleNames = function(userId) {
 
-	var roleNames = sql.executeQuery(`
+	var results = sql.executeQuery(`
 		SELECT roleName
 		FROM UsersRoles
 			INNER JOIN Roles ON UsersRoles.roleId = Roles.roleId
 		WHERE userId = @userId`,
 		{ userId });
 
-		roleNames = roleNames.map(element => element.roleName);
+	results = results.map(element => element.roleName);
 
-	return roleNames;
+	return results;
 }
 
 usersRolesStore.addUserIdRoleId = function(userId, roleId) {

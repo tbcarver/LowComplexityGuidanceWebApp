@@ -5,6 +5,36 @@ var usersFavoriteArticlesStore = require("./usersFavoriteArticlesStore");
 
 var articlesStore = {};
 
+articlesStore.getArticle = function(articleId) {
+
+	var results = sql.executeRow(`
+		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId, createdDate, updatedDate
+		FROM Articles
+		WHERE articleId = @articleId`,
+		{ articleId });
+
+	return results;
+}
+
+articlesStore.getExtendedArticle = function(articleId, favoriteUserId) {
+
+	if (!favoriteUserId) {
+		favoriteUserId = 0;
+	}
+
+	var results = sql.executeRow(`
+		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
+			Articles.createdDate, Articles.updatedDate, firstName, lastName,
+			(SELECT COUNT(*) FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId) as countFavorites,
+			(SELECT 1 FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId AND UsersFavoriteArticles.userId = @favoriteUserId) as isUserFavorite
+		FROM Articles
+			INNER JOIN Users ON Articles.authorId = Users.userId
+		WHERE articleId = @articleId`,
+		{ articleId, favoriteUserId });
+
+	return results;
+}
+
 articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize, favoriteUserId, authorIdFilter) {
 
 	if (!favoriteUserId) {
@@ -15,13 +45,11 @@ articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize
 	parameters.favoriteUserId = favoriteUserId;
 
 	var whereClause = new WhereClause();
-	var whereParameters = {};
 	if (authorIdFilter) {
-		whereClause.addAndClause("authorId = @authorId");
-		whereParameters.authorId = authorIdFilter;
+		whereClause.addAndClause("authorId = @authorId", "authorId", authorIdFilter);
 	}
 
-	var result = sql.executeQuery(`
+	var results = sql.executeQuery(`
 		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
 			Articles.createdDate, Articles.updatedDate, firstName, lastName,
 			(SELECT COUNT(*) FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId) as countFavorites,
@@ -32,63 +60,33 @@ articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize
 								${whereClause.buildWhere()}
 								ORDER BY articleId DESC LIMIT @offset) ${whereClause.buildAnd()}
 		ORDER BY articleId DESC LIMIT @limit`,
-		Object.assign(parameters, whereParameters));
+		Object.assign(parameters, whereClause.parameters));
 
 	var total = 0;
-	if (result.length > 0) {
-		total = this.getCount(whereClause, whereParameters);
+	if (results.length > 0) {
+		total = this.getCount(whereClause);
 	}
 
-	result = {
+	results = {
 		pagination: {
 			pageNumber,
 			pageSize,
-			pageTotal: result.length,
+			pageTotal: results.length,
 			total,
 		},
-		articles: result,
+		articles: results,
 	};
 
-	return result;
+	return results;
 }
 
-articlesStore.getArticle = function(articleId) {
-
-	var result = sql.executeRow(`
-		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId, createdDate, updatedDate
-		FROM Articles
-		WHERE articleId = @articleId`,
-		{ articleId });
-
-	return result;
-}
-
-articlesStore.getExtendedArticle = function(articleId, favoriteUserId) {
-
-	if (!favoriteUserId) {
-		favoriteUserId = 0;
-	}
-
-	var result = sql.executeRow(`
-		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
-			Articles.createdDate, Articles.updatedDate, firstName, lastName,
-			(SELECT COUNT(*) FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId) as countFavorites,
-			(SELECT 1 FROM UsersFavoriteArticles WHERE UsersFavoriteArticles.articleId = Articles.articleId AND UsersFavoriteArticles.userId = @favoriteUserId) as isUserFavorite
-		FROM Articles
-			INNER JOIN Users ON Articles.authorId = Users.userId
-		WHERE articleId = @articleId`,
-		{ articleId, favoriteUserId });
-
-	return result;
-}
-
-articlesStore.getCount = function(whereClause, whereParameters) {
+articlesStore.getCount = function(whereClause) {
 
 	var count = sql.executeScalar(`
 		SELECT COUNT(*)
 		FROM Articles
 		${whereClause.buildWhere()}`,
-		whereParameters);
+		whereClause.parameters);
 
 	return count;
 }
@@ -112,7 +110,7 @@ articlesStore.updateArticle = function(articleId, articleTitle, articleDescripti
 		{ articleId, articleTitle, articleDescription, articleBody, iconCssClass });
 }
 
-articlesStore.deleteArticle = function(articleId) {
+articlesStore.removeArticle = function(articleId) {
 
 	sql.transaction(function() {
 

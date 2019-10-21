@@ -36,7 +36,7 @@ function getUsersTypeaheadRemote(req, res) {
 
     if (searchTerm) {
 
-        users = usersStore.findUsers(searchTerm);
+        users = usersStore.searchUsers(searchTerm);
 
         users = users.map(function(user) {    
             return { id: user.userId, value: `${user.userId} ${user.firstName} ${user.lastName}` };

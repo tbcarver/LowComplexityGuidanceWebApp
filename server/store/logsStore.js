@@ -1,23 +1,38 @@
 
 var sql = require("../lib/coreVendor/betterSqlite/sql");
+var WhereClause = require("../lib/core/sql/whereClause");
+var _ = require("lodash");
 var sqlDateTime = require("../lib/coreVendor/betterSqlite/sqlDateTime");
 
 var logsStore = {};
 
-logsStore.getLogs = function() {
+logsStore.getLogs = function(logId) {
 
-	var result = sql.executeQuery(`
+	var whereClause = new WhereClause();
+	whereClause.addAndClause("logId = @logId", "logId", logId);
+
+	var results = sql.executeQuery(`
 		SELECT logId, logLevel, logMessage, httpStatus, requestUrl, username, stack, createdDate
-		FROM Logs`);
+		FROM Logs
+		${whereClause.buildWhere()}`,
+		whereClause.parameters);
 
-	return result;
+	return results;
+}
+
+logsStore.getLog = function(logId) {
+
+	var results = this.getLogs(logId);
+	results = _.first(results);
+
+	return results;
 }
 
 logsStore.getDescendingPagedLogs = function(pageNumber, pageSize) {
 
 	var limitOffset = sql.getLimitOffset(pageNumber, pageSize);
 
-	var result = sql.executeQuery(`
+	var results = sql.executeQuery(`
 		SELECT logId, logLevel, logMessage, httpStatus, requestUrl, username, stack, createdDate
 		FROM Logs
 		WHERE logId NOT IN (SELECT logId FROM Logs
@@ -28,32 +43,21 @@ logsStore.getDescendingPagedLogs = function(pageNumber, pageSize) {
 		limitOffset);
 
 	var total = 0;
-	if (result.length > 0) {
+	if (results.length > 0) {
 		total = this.getCount();
 	}
 
-	result = {
+	results = {
 		pagination: {
 			pageNumber,
 			pageSize,
-			pageTotal: result.length,
+			pageTotal: results.length,
 			total,
 		},
-		logs: result,
+		logs: results,
 	};
 
-	return result;
-}
-
-logsStore.getLog = function(logId) {
-
-	var result = sql.executeRow(`
-		SELECT logId, logLevel, logMessage, httpStatus, requestUrl, username, stack, createdDate
-		FROM Logs
-		WHERE logId = @logId`,
-		{ logId });
-
-	return result;
+	return results;
 }
 
 logsStore.getCount = function() {

@@ -1,6 +1,7 @@
 
 var path = require("path");
 var Database = require("better-sqlite3");
+var _ = require("lodash");
 
 var sql = {};
 
@@ -15,7 +16,7 @@ sql.executeScalar = function(sqlStatement, parameters) {
 	var statement = db.prepare(sqlStatement);
 	var result;
 
-	if (parameters) {
+	if (!_.isEmpty(parameters)) {
 		result = statement.pluck().get(parameters);
 	} else {
 		result = statement.pluck().get();
@@ -29,7 +30,7 @@ sql.executeRow = function(sqlStatement, parameters) {
 	var statement = db.prepare(sqlStatement);
 	var result;
 
-	if (parameters) {
+	if (!_.isEmpty(parameters)) {
 		result = statement.get(parameters);
 	} else {
 		result = statement.get();
@@ -43,7 +44,7 @@ sql.executeQuery = function(sqlStatement, parameters) {
 	var statement = db.prepare(sqlStatement);
 	var result;
 
-	if (parameters) {
+	if (!_.isEmpty(parameters)) {
 		result = statement.all(parameters);
 	} else {
 		result = statement.all();
@@ -57,7 +58,7 @@ sql.executeNonQuery = function(sqlStatement, parameters) {
 	var statement = db.prepare(sqlStatement);
 	var result;
 
-	if (parameters) {
+	if (!_.isEmpty(parameters)) {
 		result = statement.run(parameters);
 	} else {
 		result = statement.run();
