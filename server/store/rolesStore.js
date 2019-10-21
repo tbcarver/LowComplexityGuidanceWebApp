@@ -12,5 +12,4 @@ rolesStore.getRoles = function() {
 	return roles;
 }
 
-
 module.exports = rolesStore;

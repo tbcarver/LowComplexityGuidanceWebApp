@@ -17,5 +17,4 @@ coreFetch.getPostOptions = function(data) {
 	return options;
 }
 
-
 export default coreFetch

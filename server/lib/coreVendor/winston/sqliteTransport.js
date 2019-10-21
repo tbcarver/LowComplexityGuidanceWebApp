@@ -11,5 +11,4 @@ class SqliteTransport extends Transport {
   }
 };
 
-
 module.exports = SqliteTransport;

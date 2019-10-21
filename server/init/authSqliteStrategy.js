@@ -47,5 +47,4 @@ var sqliteStrategy = new LocalStrategy(
 
 sqliteStrategy.name = "Sqlite";
 
-
 module.exports = sqliteStrategy;

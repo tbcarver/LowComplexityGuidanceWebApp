@@ -52,5 +52,4 @@ coreArray.trim = function(array) {
 	}
 }
 
-
 module.exports = coreArray;

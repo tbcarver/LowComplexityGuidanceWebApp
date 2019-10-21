@@ -51,5 +51,4 @@ dom.setTextInputFocus = function(selector) {
 	element.value = element.value;
 }
 
-
 export default dom;

@@ -166,5 +166,4 @@ usersStore.removeUser = function(userId) {
 	});
 }
 
-
 module.exports = usersStore;

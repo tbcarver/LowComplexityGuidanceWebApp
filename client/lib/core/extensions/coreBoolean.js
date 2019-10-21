@@ -14,5 +14,4 @@ coreBoolean.convert = function(value) {
 	return result;
 }
 
-
 export default coreBoolean

@@ -84,5 +84,4 @@ function nonAclAuthorize(req, res, next, type, path, callback) {
 	});
 }
 
-
 module.exports = middleware;

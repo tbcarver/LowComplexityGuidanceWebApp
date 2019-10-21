@@ -45,5 +45,4 @@ sqlDateTime.toDate = function(date) {
 	return date;
 }
 
-
 module.exports = sqlDateTime;

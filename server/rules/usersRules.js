@@ -21,5 +21,4 @@ usersRules.buildPasswordHashes = function(password) {
 	return passwordHashes;
 }
 
-
 module.exports = usersRules;

@@ -28,5 +28,4 @@ coreObject.forEach = function(object, callback) {
 	});
 }
 
-
 module.exports = coreObject

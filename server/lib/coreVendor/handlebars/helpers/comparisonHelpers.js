@@ -63,5 +63,4 @@ comparisonHelpers.includes = function(collection, value, outValue, options) {
 	return result;
 }
 
-
 module.exports = comparisonHelpers;

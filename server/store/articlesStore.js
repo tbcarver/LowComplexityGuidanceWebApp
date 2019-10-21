@@ -125,5 +125,4 @@ articlesStore.deleteArticle = function(articleId) {
 	});
 }
 
-
 module.exports = articlesStore;

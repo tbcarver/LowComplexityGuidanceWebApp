@@ -87,5 +87,4 @@ sql.transaction = function(execute) {
 	newTransaction();
 }
 
-
 module.exports = sql;

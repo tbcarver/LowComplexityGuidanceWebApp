@@ -25,5 +25,4 @@ class FlashWrapper {
 	}
 }
 
-
 module.exports = FlashWrapper;

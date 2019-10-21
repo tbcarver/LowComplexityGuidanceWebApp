@@ -97,5 +97,4 @@ class ConfirmDialog extends HTMLParsedElement {
 
 customElements.define("core-confirm-dialog", ConfirmDialog);
 
-
 export default ConfirmDialog

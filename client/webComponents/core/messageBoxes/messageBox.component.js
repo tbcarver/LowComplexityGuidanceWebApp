@@ -74,5 +74,4 @@ class MessageBox extends HTMLParsedElement {
 
 customElements.define("core-message-box", MessageBox);
 
-
 export default MessageBox

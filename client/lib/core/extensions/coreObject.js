@@ -28,5 +28,4 @@ coreObject.forEach = function(object, callback) {
 	});
 }
 
-
 export default coreObject

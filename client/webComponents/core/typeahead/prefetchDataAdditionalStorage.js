@@ -51,5 +51,4 @@ PrefetchDataAdditionalStorage.prototype.clear = function() {
 	localStorage.clear(this.dataKey);
 }
 
-
 export default PrefetchDataAdditionalStorage;

@@ -21,5 +21,4 @@ var customFormat = winston.format.printf(function({ level, message, timestamp, s
   return `${timestamp} [${level}]${url}${username} ${message}${stack}`;
 });
 
-
 module.exports = customFormat;

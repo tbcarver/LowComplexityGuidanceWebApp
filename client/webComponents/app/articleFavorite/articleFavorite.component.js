@@ -147,5 +147,4 @@ function onButtonClick(event) {
 
 customElements.define("article-favorite", ArticleFavorite);
 
-
 export default ArticleFavorite

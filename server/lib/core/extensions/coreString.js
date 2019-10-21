@@ -126,5 +126,4 @@ coreString.addNumberInString = function(string, number) {
 	return result;
 }
 
-
 module.exports = coreString;

@@ -4,5 +4,4 @@ var queryStringKeys = {
 	searchTerm: "q",
 };
 
-
 module.exports = queryStringKeys;

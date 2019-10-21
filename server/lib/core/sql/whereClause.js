@@ -55,5 +55,4 @@ class WhereClause {
 	}
 }
 
-
 module.exports = WhereClause;

@@ -18,5 +18,4 @@ authHelpers.hasRole = function(roles, options) {
 	return coreArray.includesAny(roles, this.loggedInUser.roles);
 }
 
-
 module.exports = authHelpers;

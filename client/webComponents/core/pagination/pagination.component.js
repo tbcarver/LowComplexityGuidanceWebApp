@@ -124,5 +124,4 @@ class Pagination extends HTMLElement {
 
 customElements.define("core-pagination", Pagination);
 
-
 export default Pagination

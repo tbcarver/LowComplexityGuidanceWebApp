@@ -26,8 +26,6 @@ class Typeahead extends HTMLParsedElement {
 	}
 
 	parsedCallback() {
-		this.message = this.innerHTML;
-		this.style.display = "block";
 		this.render();
 	}
 
@@ -38,7 +36,18 @@ class Typeahead extends HTMLParsedElement {
 		}
 	}
 
+	focus() {
+		if (this.rendered) {
+			var focusElement = this.querySelector(".tt-input");			
+			if (focusElement){
+				focusElement.focus();
+			}
+		}
+	}
+
 	render() {
+		
+		this.style.display = "block";
 
 		var form;
 
@@ -90,6 +99,7 @@ class Typeahead extends HTMLParsedElement {
 			bloodhoundOptions.remote = {
 				url: remoteUrl,
 				wildcard: "searchTerm",
+				rateLimitBy: "throttle",
 				transform: function(datums) {
 					bloodhound.add(datums);
 					prefetchDataAdditionalStorage.add(datums);
@@ -151,6 +161,8 @@ class Typeahead extends HTMLParsedElement {
 		$input.bind("typeahead:select", function(event, suggestion) {
 			submitForm(form, suggestion.id);
 		});
+
+		this.rendered = true;
 	}
 }
 
@@ -219,6 +231,5 @@ function removeFormCursor(typeaheadJsElement) {
 }
 
 customElements.define("core-typeahead", Typeahead);
-
 
 export default Typeahead

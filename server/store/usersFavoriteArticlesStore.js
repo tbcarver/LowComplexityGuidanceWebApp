@@ -40,5 +40,4 @@ usersFavoriteArticlesStore.removeFavoriteArticlesByArticleId = function(articleI
 		{ articleId });
 }
 
-
 module.exports = usersFavoriteArticlesStore;

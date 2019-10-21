@@ -55,5 +55,4 @@ for (var dateHelperKey in helpersDateStringFormatOptions) {
 	}.bind(helpersDateStringFormatOptions[dateHelperKey]);
 }
 
-
 module.exports = dateHelpers;

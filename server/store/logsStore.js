@@ -75,5 +75,4 @@ logsStore.addLog = function(logLevel, logMessage, httpStatus, requestUrl, userna
 		{ logLevel, logMessage, httpStatus, requestUrl, username, stack, createdDate });
 }
 
-
 module.exports = logsStore;

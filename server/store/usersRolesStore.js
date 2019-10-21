@@ -60,5 +60,4 @@ usersRolesStore.removeRoleIdsByUserId = function(userId) {
 		{ userId });
 }
 
-
 module.exports = usersRolesStore;
