@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col">
             <div class="d-flex justify-content-between">
-            <h1>Users</h1>
+                <h1>Users</h1>
                 <div class="text-right">
                     <a href="/user/new"><i class="fas fa-plus mr-2"></i>New user</a>
                 </div>
@@ -19,8 +19,8 @@
 
                 <form action="/user/edit/%s">
                     <div class="input-group py-3">
-                        <core-typeahead id="usersTypeahead" class="form-control" placeholder="Users" type="form" suggestion-name="User"
-                            prefetch-url="/api/users/typeahead/prefetch"
+                        <core-typeahead id="usersTypeahead" class="form-control" placeholder="Users" type="form"
+                            suggestion-name="User" prefetch-url="/api/users/typeahead/prefetch"
                             remote-url="/api/users/typeahead/remote?q=searchTerm"></core-typeahead>
                         <div class="input-group-append">
                             <button class="btn btn-secondary btn-large">
@@ -51,13 +51,14 @@
                 </thead>
                 <tbody>
                     {{#each pagedUsers.users}}
-                    <tr>
-                        <td class="text-center">{{userId}}</td>
-                        <td class="text-center">{{firstName}}</td>
-                        <td class="text-center">{{lastName}}</td>
-                        <td class="text-center">{{username}}</td>
-                        <td class="text-center"><a href="/user/edit/{{userId}}"><i class="fa fa-pencil"></i></a></td>
-                    </tr>
+                        <tr>
+                            <td class="text-center">{{userId}}</td>
+                            <td class="text-center">{{firstName}}</td>
+                            <td class="text-center">{{lastName}}</td>
+                            <td class="text-center">{{username}}</td>
+                            <td class="text-center"><a href="/user/edit/{{userId}}"><i class="fa fa-pencil"></i></a>
+                            </td>
+                        </tr>
                     {{/each}}
                 </tbody>
             </table>
@@ -69,6 +70,6 @@
 </div>
 
 <script>
-	var focusElement = document.getElementById("usersTypeahead");
-	focusElement.focus();
+    var focusElement = document.getElementById("usersTypeahead");
+    focusElement.focus();
 </script>

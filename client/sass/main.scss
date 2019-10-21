@@ -39,8 +39,6 @@ main {
    text-align: right;
 }
 
-$input-text-bg: $secondary-lightest !default;
-
 // styles from bootstrap's .col-form-label and .form-control
 .form-control-text {
    display: block;
@@ -51,7 +49,7 @@ $input-text-bg: $secondary-lightest !default;
    margin-bottom: 0; // Override the `<label>/<legend>` default
    @include font-size(inherit); // Override the `<legend>` default
    line-height: $input-line-height;
-   background: $input-text-bg;
+   background: $list-group-bg;
    @include border-radius($input-border-radius, 0);
 }
 
@@ -66,7 +64,7 @@ $input-text-bg: $secondary-lightest !default;
    margin-bottom: 0; // Override the `<label>/<legend>` default
    @include font-size(inherit); // Override the `<legend>` default
    line-height: $input-line-height;
-   background: $input-text-bg;
+   background: $secondary-lightest;
 }
 
 .form-check .custom-control-label {
