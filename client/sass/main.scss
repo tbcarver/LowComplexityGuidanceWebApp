@@ -55,6 +55,10 @@ $input-text-bg: $secondary-lightest !default;
    @include border-radius($input-border-radius, 0);
 }
 
+.form-control-text:empty:before {
+    content: "\200b";
+  }
+
 .form-check {
    display: block;
    padding-right: $input-padding-x;
