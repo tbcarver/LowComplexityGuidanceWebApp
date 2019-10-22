@@ -1,14 +1,14 @@
 
+require("dotenv").config();
+
 var fs = require("fs");
 var path = require("path");
 var Database = require("better-sqlite3");
 var directoryWalkerSync = require("../../server/lib/core/fs/directoryWalkerSync");
 var fileReaderSync = require("../../server/lib/core/fs/fileReaderSync");
 
-var directoryName = "data";
-var dataPath = path.join(__dirname, "../../" + directoryName);
-var fileName = "cucfGuidanceWebapp.db";
-var fileNamePath = path.join(dataPath, fileName);
+var fileNamePath = path.resolve(process.env.CONNECTION_STRING);
+var directoryPath = path.dirname(fileNamePath);
 var force = false;
 var create = false;
 
@@ -18,20 +18,20 @@ for (var arg of process.argv) {
 	}
 }
 
-if (fs.existsSync(fileNamePath)){
+if (fs.existsSync(fileNamePath)) {
 	if (force) {
 		fs.unlinkSync(fileNamePath);
 		create = true;
 	} else {
-		console.log(`Warning: The file /${directoryName}/${fileName} already exists. Use -f or --force to overwrite the file.`);
+		console.log(`Warning: The file ${fileNamePath} already exists. Use -f or --force to overwrite the file.`);
 	}
 } else {
-	fs.mkdirSync(dataPath);
+	fs.mkdirSync(directoryPath);
 	create = true;
 }
 
 if (create) {
-	
+
 	var db = new Database(fileNamePath, { verbose: console.log });
 
 	// Use write-ahead logging for better performance: http://advanced.brickhousecodecamp.org/docs/sqlite/www.sqlite.org/wal.html
@@ -52,7 +52,7 @@ if (create) {
 		});
 	});
 
-	console.log("");	
+	console.log("");
 	console.log("Directories found: " + directoryStatistics.directoriesFound);
 	console.log("Files found: " + directoryStatistics.filesFound);
 	console.log("Files read: " + filesRead);

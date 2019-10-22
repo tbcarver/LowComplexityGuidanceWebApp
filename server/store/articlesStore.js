@@ -39,7 +39,7 @@ articlesStore.getExtendedArticle = function(articleId, favoriteUserId) {
 	return results;
 }
 
-articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize, favoriteUserId, authorIdFilter) {
+articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize, favoriteUserId, authorId) {
 
 	if (!favoriteUserId) {
 		favoriteUserId = 0;
@@ -49,9 +49,7 @@ articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize
 	parameters.favoriteUserId = favoriteUserId;
 
 	var whereClause = new WhereClause();
-	if (authorIdFilter) {
-		whereClause.addAndClause("authorId = @authorId", "authorId", authorIdFilter);
-	}
+	whereClause.addAndClause("authorId = @authorId", "authorId", authorId);
 
 	var results = sql.executeQuery(`
 		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
@@ -71,7 +69,7 @@ articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize
 
 	var total = 0;
 	if (results.length > 0) {
-		total = this.getCount(whereClause);
+		total = this.getCount(authorId);
 	}
 
 	results = {
@@ -87,7 +85,10 @@ articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize
 	return results;
 }
 
-articlesStore.getCount = function(whereClause) {
+articlesStore.getCount = function(authorId) {
+
+	var whereClause = new WhereClause();
+	whereClause.addAndClause("authorId = @authorId", "authorId", authorId);
 
 	var count = sql.executeScalar(`
 		SELECT COUNT(*)
