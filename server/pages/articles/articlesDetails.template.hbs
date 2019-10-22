@@ -12,9 +12,9 @@
 
 		{{#is article.authorId loggedInUser.userId}}
 
-		<a href="/article/edit/{{../article.articleId}}" class="btn btn-sm btn-outline-secondary mr-1">
-			<i class="fa fa-pencil mr-2"></i>Edit Article
-		</a>
+			<a href="/article/edit/{{../article.articleId}}" class="btn btn-sm btn-outline-secondary mr-1">
+				<i class="fa fa-pencil mr-2"></i>Edit Article
+			</a>
 
 		{{/is}}
 
@@ -30,7 +30,7 @@
 
 	<div class="row article-content">
 		<div class="col-md-12">
-			{{#markdown}}{{article.articleBody}}{{/markdown}}
+			{{#markdown}}{{{article.articleBody}}}{{/markdown}}
 		</div>
 	</div>
 
