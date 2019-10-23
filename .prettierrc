@@ -1,0 +1,14 @@
+{
+	"insertPragma": true,
+	"overrides": [
+		{
+			"files": ".hbs",
+			"options": {
+				"parser": "html"
+			}
+		}
+	],
+	"printWidth": 120,
+	"trailingComma": "es5",
+	"useTabs": true
+}
