@@ -2,7 +2,7 @@
 	"insertPragma": true,
 	"overrides": [
 		{
-			"files": ".hbs",
+			"files": "*.hbs",
 			"options": {
 				"parser": "html"
 			}

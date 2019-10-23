@@ -65,27 +65,30 @@
                 <div class="form-group row">
                     <label class="col-2 col-form-label">Password</label>
                     <div class="col-10">
-                        <input id="password" type="password" name="password" value="{{user.password}}" class="form-control"  {{is isNew true "required"}}>
+                        <input id="password" type="password" name="password" value="{{user.password}}"
+                            class="form-control" {{is isNew true "required"}}>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label">Confirm Password</label>
                     <div class="col-10">
-                        <input id="confirmPassword" type="password" name="confirmPassword" value="{{user.confirmPassword}}" class="form-control" {{is isNew true "required"}}>
-                        <core-compare-validator source-id="confirmPassword" target-id="password" message="The passwords must match."></core-compare-validator>
+                        <input id="confirmPassword" type="password" name="confirmPassword"
+                            value="{{user.confirmPassword}}" class="form-control" {{is isNew true "required"}}>
+                        <core-compare-validator source-id="confirmPassword" target-id="password"
+                            message="The passwords must match."></core-compare-validator>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-2 col-form-label">Roles</label>
                     <div class="col-10">
                         {{#each roles}}
-                        <div class="form-check custom-control custom-checkbox">
-                            <input id="roleIds-{{roleId}}" name="roleIds" type="checkbox" value="{{roleId}}"
-                                class="custom-control-input" {{includes ../user.roleIds roleId "checked"}}>
-                            <label for="roleIds-{{roleId}}" class="custom-control-label">
-                                {{roleName}}
-                            </label>
-                        </div>
+                            <div class="form-check custom-control custom-checkbox">
+                                <input id="roleIds-{{roleId}}" name="roleIds" type="checkbox" value="{{roleId}}"
+                                    class="custom-control-input" {{includes ../user.roleIds roleId "checked"}}>
+                                <label for="roleIds-{{roleId}}" class="custom-control-label">
+                                    {{roleName}}
+                                </label>
+                            </div>
                         {{/each}}
                     </div>
                 </div>
@@ -100,26 +103,26 @@
                     </button>
                     <button type="button" class="btn btn-outline-danger" data-toggle="modal"
                         data-target="#confirm-cancel">
-                        <i class="fa fa-times mr-2"></i>Cancel</span>
+                        <i class="fa fa-times mr-2"></i>Cancel
                     </button>
                     <core-confirm-dialog id="confirm-cancel" yes-text="Yes, cancel" yes-href="/users">Are you
                         sure you
                         want to <strong>cancel</strong>?</core-confirm-dialog>
 
-				{{#if user.userId}}
-                    <form action="/user/delete" method="POST" class="d-inline">
-                        <input type="hidden" name="userId" value="{{user.userId}}">
-                        <input type="hidden" name="firstName" value="{{user.firstName}}">
-                        <input type="hidden" name="lastName" value="{{user.lastName}}">
-                        <button type="button" class="btn btn-outline-danger float-right" data-toggle="modal"
-                            data-target="#confirm-delete">
-                            <i class="fa fa-trash-o mr-2"></i>Delete</span>
-                        </button>
-                        <core-confirm-dialog id="confirm-delete" type="form" yes-text="Yes, delete">Are you sure you
-                            want to
-                            delete <strong>{{user.firstName}} {{user.lastName}}</strong>?</core-confirm-dialog>
-                    </form>
-				{{/if}}
+                    {{#if user.userId}}
+                        <form action="/user/delete" method="POST" class="d-inline">
+                            <input type="hidden" name="userId" value="{{user.userId}}">
+                            <input type="hidden" name="firstName" value="{{user.firstName}}">
+                            <input type="hidden" name="lastName" value="{{user.lastName}}">
+                            <button type="button" class="btn btn-outline-danger float-right" data-toggle="modal"
+                                data-target="#confirm-delete">
+                                <i class="fa fa-trash-o mr-2"></i>Delete
+                            </button>
+                            <core-confirm-dialog id="confirm-delete" type="form" yes-text="Yes, delete">Are you sure you
+                                want to
+                                delete <strong>{{user.firstName}} {{user.lastName}}</strong>?</core-confirm-dialog>
+                        </form>
+                    {{/if}}
                 </div>
             </div>
 
