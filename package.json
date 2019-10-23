@@ -12,7 +12,7 @@
     "dev": "cross-env NODE_ENV=development nodemon --watch server",
     "devClient": "cross-env NODE_ENV=development NODE_ENV_CLIENT=development nodemon --watch server",
     "pm2": "cross-env NODE_ENV=production pm2 start ./server/app.js",
-    "prettier": "prettier --write \"{client,server,test}/**/*.js\"",
+    "prettier": "prettier --write \"{client,server,test}/**/{*.css,*.js,*.scss}\"",
     "sass": "node-sass ./client/sass/main.scss ./assets/dist/main.css --include-path=node_modules/bootstrap/scss --include-path=node_modules/animate.css/source",
     "start": "cross-env NODE_ENV=production node ./server/app.js",
     "test": "cross-env NODE_ENV=test mocha --recursive"
