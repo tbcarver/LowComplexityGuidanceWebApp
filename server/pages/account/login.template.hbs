@@ -27,10 +27,9 @@
 </div>
 
 <script>
-	var focusTarget = "{{errorInfo}}" || "username";
-	var focusElement = document.getElementById(focusTarget);
-	focusElement.focus();
+	var dom = main.require("./client/lib/core/web/dom");
+	var focusTargetSelector = "{{errorInfo}}" || "username";
+	focusTargetSelector = "#" + focusTargetSelector;
 
-	// Set the cursor to the end of the text
-	focusElement.setSelectionRange(focusElement.value.length, focusElement.value.length);
+	dom.setTextInputFocus(focusTargetSelector);
 </script>

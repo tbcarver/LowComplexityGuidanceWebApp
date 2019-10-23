@@ -47,8 +47,12 @@ dom.setTextInputFocus = function(selector) {
 
 	var element = document.querySelector(selector);
 
-	element.focus();
-	element.value = element.value;
+	if (element) {
+		element.focus();
+
+		// Set the cursor to the end of the text
+		element.setSelectionRange(element.value.length, element.value.length);
+	}
 }
 
 export default dom;

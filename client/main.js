@@ -7,13 +7,16 @@ import ExternalWebpackRequire from "./lib/coreVendor/webpack/externalWebpackRequ
 var mainExternalWebpackRequire = new ExternalWebpackRequire(__webpack_require__);
 
 window.main = {
-	require: mainExternalWebpackRequire.getRequire()
+	require: mainExternalWebpackRequire.getRequire(),
 };
 
 // Import all sass sources here for use with webpack
 // These are output into a assets/dist/main.css file with a cache busting hash in production
 //  and injected directly into the html in development.
 import style from "./sass/main.scss";
+
+// Import all libraries for external use
+import coreLibrary from "./lib/core/library";
 
 // Import in all app web components
 import ArticleFavorite from "./webComponents/app/articleFavorite/articleFavorite.component";
