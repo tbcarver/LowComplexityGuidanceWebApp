@@ -9,12 +9,12 @@ usersRolesMapsStore.getRoleIds = function(userId) {
 		SELECT roleId
 		FROM UsersRolesMaps		
 		WHERE userId = @userId`,
-		{ userId });
+	{ userId });
 
 	results = results.map(element => element.roleId);
 
 	return results;
-}
+};
 
 usersRolesMapsStore.getRoleNames = function(userId) {
 
@@ -23,22 +23,22 @@ usersRolesMapsStore.getRoleNames = function(userId) {
 		FROM UsersRolesMaps
 			INNER JOIN Roles ON UsersRolesMaps.roleId = Roles.roleId
 		WHERE userId = @userId`,
-		{ userId });
+	{ userId });
 
 	results = results.map(element => element.roleName);
 
 	return results;
-}
+};
 
 usersRolesMapsStore.addUserIdRoleId = function(userId, roleId) {
 
 	var id = sql.executeNonQuery(`
 		INSERT INTO UsersRolesMaps (userId, roleId)
 		VALUES (@userId, @roleId)`,
-		{ userId, roleId });
+	{ userId, roleId });
 
 	return id;
-}
+};
 
 usersRolesMapsStore.replaceRoleIdsByUserId = function(roleIds, userId) {
 
@@ -50,14 +50,14 @@ usersRolesMapsStore.replaceRoleIdsByUserId = function(roleIds, userId) {
 			usersRolesMapsStore.addUserIdRoleId(userId, roleId);
 		}
 	});
-}
+};
 
 usersRolesMapsStore.removeRoleIdsByUserId = function(userId) {
 
 	sql.executeNonQuery(`
 		DELETE FROM UsersRolesMaps		
 		WHERE userId = @userId`,
-		{ userId });
-}
+	{ userId });
+};
 
 module.exports = usersRolesMapsStore;

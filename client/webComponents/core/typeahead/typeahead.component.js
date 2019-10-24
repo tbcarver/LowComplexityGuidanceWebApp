@@ -68,7 +68,7 @@ class Typeahead extends HTMLParsedElement {
 		// Datums is an array of objects with properties id and value
 		// [{"id":21,"value":"21 Penelope Grant"},{"id":22,"value":"22 Rudolph Goodwin"}]
 
-		var bloodhound
+		var bloodhound;
 		var bloodhoundOptions = {
 			limit: 10,
 			datumTokenizer: Bloodhound.tokenizers.obj.whitespace("value"),
@@ -90,7 +90,7 @@ class Typeahead extends HTMLParsedElement {
 					prefetchDataAdditionalStorage.clear();
 					return settings;
 				},
-			}
+			};
 		}
 
 		var remoteUrl = this.getAttribute("remote-url");
@@ -196,7 +196,7 @@ function setFormCursor(typeaheadJsElement, id) {
 
 	removeFormCursor(typeaheadJsElement);
 
-	var suggestionElement = typeaheadJsElement.querySelector(`.tt-suggestion[data-id="${id}"]`)
+	var suggestionElement = typeaheadJsElement.querySelector(`.tt-suggestion[data-id="${id}"]`);
 
 	if (suggestionElement) {
 		suggestionElement.classList.add("tt-form-cursor");
@@ -210,7 +210,7 @@ function onFromSubmit(event) {
 	var suggestionElement = event.target.querySelector(".tt-form-cursor");
 
 	if (suggestionElement && suggestionElement.dataset.id) {
-		submitForm(event.target, suggestionElement.dataset.id)
+		submitForm(event.target, suggestionElement.dataset.id);
 	}
 }
 
@@ -232,4 +232,4 @@ function removeFormCursor(typeaheadJsElement) {
 
 customElements.define("core-typeahead", Typeahead);
 
-export default Typeahead
+export default Typeahead;

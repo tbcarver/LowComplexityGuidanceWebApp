@@ -120,7 +120,7 @@ function onButtonClick(event) {
 			var data = {
 				userId: this.userId,
 				articleId: this.articleId,
-			}
+			};
 
 			var options = coreFetch.getPostOptions(data);
 
@@ -136,7 +136,6 @@ function onButtonClick(event) {
 
 			}.bind(this));
 
-
 		} else {
 			flash.danger("Unknown article");
 		}
@@ -147,4 +146,4 @@ function onButtonClick(event) {
 
 customElements.define("article-favorite", ArticleFavorite);
 
-export default ArticleFavorite
+export default ArticleFavorite;

@@ -36,5 +36,4 @@ function initialize(app) {
 	app.set("views", "server/pages");
 }
 
-
 module.exports.initialize = initialize;

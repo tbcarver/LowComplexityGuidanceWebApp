@@ -1,5 +1,5 @@
 
-var coreBoolean = {}
+var coreBoolean = {};
 
 coreBoolean.convert = function(value) {
 
@@ -12,6 +12,6 @@ coreBoolean.convert = function(value) {
 	}
 
 	return result;
-}
+};
 
-export default coreBoolean
+export default coreBoolean;

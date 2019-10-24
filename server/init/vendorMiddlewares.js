@@ -46,5 +46,4 @@ function initialize(app) {
 	});
 }
 
-
 module.exports.initialize = initialize;

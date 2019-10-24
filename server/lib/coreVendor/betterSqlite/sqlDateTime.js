@@ -24,8 +24,7 @@ sqlDateTime.toSqlDate = function(date) {
 	}
 
 	return sqlDate;
-}
-
+};
 
 sqlDateTime.toDate = function(date) {
 
@@ -43,6 +42,6 @@ sqlDateTime.toDate = function(date) {
 	}
 
 	return date;
-}
+};
 
 module.exports = sqlDateTime;

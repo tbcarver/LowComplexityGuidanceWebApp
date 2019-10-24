@@ -27,7 +27,7 @@ PrefetchDataAdditionalStorage.prototype.add = function(datums) {
 		storage = JSON.stringify(storage);
 		localStorage[this.dataKey] = storage;
 	}
-}
+};
 
 PrefetchDataAdditionalStorage.prototype.get = function() {
 
@@ -44,11 +44,11 @@ PrefetchDataAdditionalStorage.prototype.get = function() {
 	}
 
 	return datums;
-}
+};
 
 PrefetchDataAdditionalStorage.prototype.clear = function() {
 
 	localStorage.clear(this.dataKey);
-}
+};
 
 export default PrefetchDataAdditionalStorage;

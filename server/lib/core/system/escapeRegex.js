@@ -16,5 +16,4 @@ function escapeRegEx(text) {
 	return text.replace(matchOperatorsRe, "\\$&");
 }
 
-
 module.exports.escapeRegEx = escapeRegEx;

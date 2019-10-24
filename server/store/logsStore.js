@@ -15,10 +15,10 @@ logsStore.getLogs = function(logId) {
 		SELECT logId, logLevel, logMessage, httpStatus, requestUrl, username, stack, createdDate
 		FROM Logs
 		${whereClause.buildWhere()}`,
-		whereClause.parameters);
+	whereClause.parameters);
 
 	return results;
-}
+};
 
 logsStore.getLog = function(logId) {
 
@@ -26,7 +26,7 @@ logsStore.getLog = function(logId) {
 	results = _.first(results);
 
 	return results;
-}
+};
 
 logsStore.getDescendingPagedLogs = function(pageNumber, pageSize) {
 
@@ -40,7 +40,7 @@ logsStore.getDescendingPagedLogs = function(pageNumber, pageSize) {
 							LIMIT @offset)
 		ORDER BY logId DESC
 		LIMIT @limit`,
-		limitOffset);
+	limitOffset);
 
 	var total = 0;
 	if (results.length > 0) {
@@ -58,14 +58,14 @@ logsStore.getDescendingPagedLogs = function(pageNumber, pageSize) {
 	};
 
 	return results;
-}
+};
 
 logsStore.getCount = function() {
 
 	return sql.executeScalar(`
 	SELECT COUNT(*)
 	FROM Logs`);
-}
+};
 
 /** @param createdDate required. Must be a Date or iso date string. */
 logsStore.addLog = function(logLevel, logMessage, httpStatus, requestUrl, username, stack, createdDate) {
@@ -76,7 +76,7 @@ logsStore.addLog = function(logLevel, logMessage, httpStatus, requestUrl, userna
 	sql.executeNonQuery(`
 		INSERT INTO Logs (logLevel, logMessage, httpStatus, requestUrl, username, stack, createdDate)
 		VALUES (@logLevel, @logMessage, @httpStatus, @requestUrl, @username, @stack, @createdDate)`,
-		{ logLevel, logMessage, httpStatus, requestUrl, username, stack, createdDate });
-}
+	{ logLevel, logMessage, httpStatus, requestUrl, username, stack, createdDate });
+};
 
 module.exports = logsStore;

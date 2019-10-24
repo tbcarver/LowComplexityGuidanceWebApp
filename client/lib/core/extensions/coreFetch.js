@@ -1,5 +1,5 @@
 
-var coreFetch = {}
+var coreFetch = {};
 
 coreFetch.getPostOptions = function(data) {
 
@@ -15,6 +15,6 @@ coreFetch.getPostOptions = function(data) {
 	}
 
 	return options;
-}
+};
 
-export default coreFetch
+export default coreFetch;

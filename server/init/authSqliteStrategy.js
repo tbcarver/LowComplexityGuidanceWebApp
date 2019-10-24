@@ -23,7 +23,7 @@ var sqliteStrategy = new LocalStrategy(
 				username: user.username,
 				fullName: user.firstName + " " + user.lastName,
 				roles: [],
-			}
+			};
 
 			var roles = usersRolesMapsStore.getRoleNames(user.userId);
 

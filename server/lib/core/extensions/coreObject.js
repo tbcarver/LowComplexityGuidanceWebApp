@@ -1,5 +1,5 @@
 
-var coreObject = {}
+var coreObject = {};
 
 coreObject.toArray = function(object) {
 
@@ -15,7 +15,7 @@ coreObject.toArray = function(object) {
 	}
 
 	return values;
-}
+};
 
 coreObject.forEach = function(object, callback) {
 
@@ -26,6 +26,6 @@ coreObject.forEach = function(object, callback) {
 		callback(key, value);
 
 	});
-}
+};
 
-module.exports = coreObject
+module.exports = coreObject;

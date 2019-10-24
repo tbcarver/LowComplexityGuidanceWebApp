@@ -1,6 +1,5 @@
 
-var coreArray = {}
-
+var coreArray = {};
 
 coreArray.includesAny = function(values, search) {
 
@@ -24,7 +23,7 @@ coreArray.includesAny = function(values, search) {
 
 coreArray.incrementArrayIndex = function(targetArray, currentIndex) {
 
-	currentIndex++
+	currentIndex++;
 
 	if (currentIndex >= targetArray.length) {
 
@@ -32,14 +31,14 @@ coreArray.incrementArrayIndex = function(targetArray, currentIndex) {
 	}
 
 	return currentIndex;
-}
+};
 
 coreArray.pushValue = function(array, value) {
 
 	if (value) {
 		array.push(value);
 	}
-}
+};
 
 coreArray.trim = function(array) {
 
@@ -50,6 +49,6 @@ coreArray.trim = function(array) {
 			}
 		}
 	}
-}
+};
 
 module.exports = coreArray;

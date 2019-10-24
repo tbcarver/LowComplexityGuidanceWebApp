@@ -4,48 +4,47 @@ var path = require("path");
 
 function readFile(pathName, stats, encoding, readFileExtensions, fileAction) {
 
-    if (isValidFile(pathName, stats, readFileExtensions)) {
+	if (isValidFile(pathName, stats, readFileExtensions)) {
 
-        var options;
+		var options;
 
-        if (encoding) {
+		if (encoding) {
 
-            options = { encoding: encoding };
-        }
+			options = { encoding: encoding };
+		}
 
-        var data = fs.readFileSync(pathName, options);
+		var data = fs.readFileSync(pathName, options);
 
-        fileAction(data, pathName);
-    }
+		fileAction(data, pathName);
+	}
 }
 
 function isValidFile(pathName, stats, readFileExtensions) {
 
-    var isValidFile = false;
+	var isValidFile = false;
 
-    if (stats && stats.isFile()) {
+	if (stats && stats.isFile()) {
 
-        if (readFileExtensions) {
+		if (readFileExtensions) {
 
-            var fileExtension = path.extname(pathName);
+			var fileExtension = path.extname(pathName);
 
-            for (var readFileExtension of readFileExtensions) {
+			for (var readFileExtension of readFileExtensions) {
 
-                if (fileExtension === readFileExtension) {
+				if (fileExtension === readFileExtension) {
 
-                    isValidFile = true;
-                    break;
-                }
-            }
-        } else {
+					isValidFile = true;
+					break;
+				}
+			}
+		} else {
 
-            isValidFile = true;
-        }
-    }
+			isValidFile = true;
+		}
+	}
 
-    return isValidFile;
+	return isValidFile;
 }
-
 
 module.exports.readFile = readFile;
 module.exports.isValidFile = isValidFile;

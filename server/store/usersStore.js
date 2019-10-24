@@ -16,10 +16,10 @@ usersStore.getUsers = function(userId, username) {
 		SELECT userId, username, firstName, lastName
 		FROM Users
 		${whereClause.buildWhere()}`,
-		whereClause.parameters);
+	whereClause.parameters);
 
 	return results;
-}
+};
 
 usersStore.getUser = function(userId, username) {
 
@@ -27,7 +27,7 @@ usersStore.getUser = function(userId, username) {
 	results = _.first(results);
 
 	return results;
-}
+};
 
 usersStore.getPagedUsers = function(pageNumber, pageSize) {
 
@@ -41,7 +41,7 @@ usersStore.getPagedUsers = function(pageNumber, pageSize) {
 							 LIMIT @offset)
 		ORDER BY userId
 		LIMIT @limit`,
-		limitOffset);
+	limitOffset);
 
 	var total = 0;
 	if (results.length > 0) {
@@ -59,7 +59,7 @@ usersStore.getPagedUsers = function(pageNumber, pageSize) {
 	};
 
 	return results;
-}
+};
 
 usersStore.searchUsers = function(searchTerm) {
 
@@ -67,10 +67,10 @@ usersStore.searchUsers = function(searchTerm) {
 		SELECT userId, username, firstName, lastName
 		FROM Users
 		WHERE (userId LIKE @searchTerm) OR (firstName LIKE @searchTerm) OR (lastName LIKE @searchTerm)`,
-		{ searchTerm: `%${searchTerm}%` });
+	{ searchTerm: `%${searchTerm}%` });
 
 	return results;
-}
+};
 
 usersStore.getPasswordHashes = function(userId, username) {
 
@@ -86,17 +86,17 @@ usersStore.getPasswordHashes = function(userId, username) {
 		SELECT passwordHash, passwordHashSalt
 		FROM Users
 		${whereClause.buildWhere()}`,
-		whereClause.parameters);
+	whereClause.parameters);
 
 	return results;
-}
+};
 
 usersStore.getCount = function() {
 
 	return sql.executeScalar(`
 	SELECT COUNT(*)
 	FROM Users`);
-}
+};
 
 usersStore.addUser = function(username, firstName, lastName, passwordHash, passwordHashSalt, roleIds) {
 
@@ -107,7 +107,7 @@ usersStore.addUser = function(username, firstName, lastName, passwordHash, passw
 		id = sql.executeNonQuery(`
 			INSERT INTO Users (username, firstName, lastName, passwordHash, passwordHashSalt) 
 			VALUES (@username, @firstName, @lastName, @passwordHash, @passwordHashSalt)`,
-			{ username, firstName, lastName, passwordHash, passwordHashSalt });
+		{ username, firstName, lastName, passwordHash, passwordHashSalt });
 
 		if (roleIds) {
 			usersRolesMapsStore.replaceRoleIdsByUserId(roleIds, id);
@@ -115,7 +115,7 @@ usersStore.addUser = function(username, firstName, lastName, passwordHash, passw
 	});
 
 	return id;
-}
+};
 
 usersStore.updateUser = function(userId, username, firstName, lastName, passwordHash, passwordHashSalt, roleIds) {
 
@@ -133,13 +133,13 @@ usersStore.updateUser = function(userId, username, firstName, lastName, password
 			SET username = @username, firstName = @firstName, lastName = @lastName, passwordHash = @passwordHash,
 				passwordHashSalt = @passwordHashSalt
 			WHERE userId = @userId`,
-			{ userId, username, firstName, lastName, passwordHash, passwordHashSalt });
+		{ userId, username, firstName, lastName, passwordHash, passwordHashSalt });
 
 		if (roleIds) {
 			usersRolesMapsStore.replaceRoleIdsByUserId(roleIds, userId);
 		}
 	});
-}
+};
 
 usersStore.removeUser = function(userId) {
 
@@ -150,8 +150,8 @@ usersStore.removeUser = function(userId) {
 		sql.executeNonQuery(`
 			DELETE FROM Users
 			WHERE userId = @userId`,
-			{ userId });
+		{ userId });
 	});
-}
+};
 
 module.exports = usersStore;

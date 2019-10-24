@@ -51,5 +51,4 @@ function getLogData(err, req, status) {
 	return data;
 }
 
-
 module.exports.initialize = initialize;

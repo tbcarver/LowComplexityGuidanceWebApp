@@ -5,13 +5,13 @@ function walkDirectory(pathName, directoryStatistics, directoryAction, fileActio
 
 	directoryStatistics = ensureDirectoryStatistics(directoryStatistics);
 
-    if (fs.existsSync(pathName)) {
+	if (fs.existsSync(pathName)) {
 
 		var stats = fs.statSync(pathName);
 		
-        if (stats.isDirectory()) {
+		if (stats.isDirectory()) {
 
-            directoryStatistics.directoriesFound++;
+			directoryStatistics.directoriesFound++;
 			
 			if (directoryAction) {
 
@@ -20,25 +20,25 @@ function walkDirectory(pathName, directoryStatistics, directoryAction, fileActio
 
 			var entries = fs.readdirSync(pathName);
 			
-            for (var entry of entries) {
+			for (var entry of entries) {
 
 				var subPath = path.join(pathName, entry);
 				
-                walkDirectory(subPath, directoryStatistics, directoryAction, fileAction);
+				walkDirectory(subPath, directoryStatistics, directoryAction, fileAction);
 			}		
-        } else {
+		} else {
 
-            directoryStatistics.filesFound++;
+			directoryStatistics.filesFound++;
 			
 			if (fileAction) {
 
 				fileAction(pathName, stats);
 			}
-        }
+		}
 
-    } else {
+	} else {
 
-        console.log("Path not found: " + pathName);
+		console.log("Path not found: " + pathName);
 	}
 
 	return directoryStatistics;
@@ -51,7 +51,7 @@ function ensureDirectoryStatistics(directoryStatistics) {
 		directoryStatistics = {
 			directoriesFound: 0,
 			filesFound: 0
-		}
+		};
 	}
 
 	if (!directoryStatistics.directoriesFound) {
@@ -66,6 +66,5 @@ function ensureDirectoryStatistics(directoryStatistics) {
 
 	return directoryStatistics;
 }
-
 
 module.exports.walkDirectory = walkDirectory;

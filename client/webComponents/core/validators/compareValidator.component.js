@@ -85,4 +85,4 @@ function validate() {
 
 customElements.define("core-compare-validator", CompareValidator);
 
-export default CompareValidator
+export default CompareValidator;

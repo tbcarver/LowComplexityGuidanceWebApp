@@ -24,7 +24,7 @@ sql.executeScalar = function(sqlStatement, parameters) {
 	}
 
 	return result;
-}
+};
 
 sql.executeRow = function(sqlStatement, parameters) {
 
@@ -38,7 +38,7 @@ sql.executeRow = function(sqlStatement, parameters) {
 	}
 
 	return result;
-}
+};
 
 sql.executeQuery = function(sqlStatement, parameters) {
 
@@ -52,7 +52,7 @@ sql.executeQuery = function(sqlStatement, parameters) {
 	}
 
 	return result;
-}
+};
 
 sql.executeNonQuery = function(sqlStatement, parameters) {
 
@@ -70,23 +70,23 @@ sql.executeNonQuery = function(sqlStatement, parameters) {
 	}
 
 	return result;
-}
+};
 
 sql.getLimitOffset = function(pageNumber, pageSize) {
 
 	var limitOffset = {
 		limit: pageSize,
 		offset: (pageNumber - 1) * pageSize,
-	}
+	};
 
 	return limitOffset;
-}
+};
 
 sql.transaction = function(execute) {
 
 	var newTransaction = db.transaction(execute);
 
 	newTransaction();
-}
+};
 
 module.exports = sql;

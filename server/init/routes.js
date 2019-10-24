@@ -55,5 +55,4 @@ function initialize(app, acl) {
 	});
 }
 
-
 module.exports.initialize = initialize;

@@ -1,7 +1,7 @@
 
 var dom = {
 	uniqueIds: {},
-}
+};
 
 dom.appendHtml = function(element, html) {
 
@@ -9,7 +9,7 @@ dom.appendHtml = function(element, html) {
 	template.innerHTML = html;
 
 	element.appendChild(template.content);
-}
+};
 
 dom.appendScript = function(src, callback) {
 
@@ -21,7 +21,7 @@ dom.appendScript = function(src, callback) {
 	});
 
 	document.body.appendChild(scriptElement);
-}
+};
 
 dom.generateUniqueId = function(name) {
 
@@ -41,7 +41,7 @@ dom.generateUniqueId = function(name) {
 	}
 
 	return uniqueId;
-}
+};
 
 dom.setTextInputFocus = function(selector) {
 
@@ -53,6 +53,6 @@ dom.setTextInputFocus = function(selector) {
 		// Set the cursor to the end of the text
 		element.setSelectionRange(element.value.length, element.value.length);
 	}
-}
+};
 
 export default dom;

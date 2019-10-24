@@ -58,7 +58,7 @@ function initialize(app, acl, callback) {
 
 			// Enable auto reloading when changing JS files or content and time in between disconnecting and
 			//  reconnecting to the server
-			devConfig.entry.unshift('webpack-hot-middleware/client?reload=true&timeout=1000');
+			devConfig.entry.unshift("webpack-hot-middleware/client?reload=true&timeout=1000");
 			devConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 
 			var webpackCompiler = webpack(devConfig);
@@ -77,6 +77,5 @@ function initialize(app, acl, callback) {
 		callback();
 	}
 }
-
 
 module.exports.initialize = initialize;

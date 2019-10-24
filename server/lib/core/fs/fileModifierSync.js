@@ -4,41 +4,40 @@ var path = require("path");
 
 function modifyFile(pathName, encoding, fileExtensionFilters, fileAction) {
 
-    var fileExtension = path.extname(pathName);
+	var fileExtension = path.extname(pathName);
 
-    if (fs.existsSync(pathName) && isValidFile(fileExtension, fileExtensionFilters)) {
+	if (fs.existsSync(pathName) && isValidFile(fileExtension, fileExtensionFilters)) {
 
-        var options;
+		var options;
 
-        if (encoding) {
+		if (encoding) {
 
-            options = { encoding: encoding };
-        }
+			options = { encoding: encoding };
+		}
 
-        var data = fs.readFileSync(pathName, options);
+		var data = fs.readFileSync(pathName, options);
 
-        var modifiedData = fileAction(data, pathName, fileExtension);
+		var modifiedData = fileAction(data, pathName, fileExtension);
         
-        options.flag = "w";
-        fs.writeFileSync(pathName, modifiedData, options);
-    }
+		options.flag = "w";
+		fs.writeFileSync(pathName, modifiedData, options);
+	}
 }
 
 function isValidFile(fileExtension, fileExtensionFilters) {
 
-    var isValidFile = false;
+	var isValidFile = false;
 
-    for (var fileExtensionFilter of fileExtensionFilters) {
+	for (var fileExtensionFilter of fileExtensionFilters) {
 
-        if (fileExtension === fileExtensionFilter) {
+		if (fileExtension === fileExtensionFilter) {
 
-            isValidFile = true;
-            break;
-        }
-    }
+			isValidFile = true;
+			break;
+		}
+	}
 
-    return isValidFile;
+	return isValidFile;
 }
-
 
 module.exports.modifyFile = modifyFile;

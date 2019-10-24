@@ -68,7 +68,7 @@ coreString.compressWhiteSpace = function(value) {
 	}
 
 	return value;
-}
+};
 
 coreString.trimStartString = function(value, trimString) {
 
@@ -82,7 +82,7 @@ coreString.trimStartString = function(value, trimString) {
 	}
 
 	return value;
-}
+};
 
 const ellipsis = "...";
 
@@ -107,7 +107,7 @@ coreString.truncate = function(value, length, addEllipsis) {
 	}
 
 	return value;
-}
+};
 
 coreString.addNumberInString = function(string, number) {
 
@@ -124,6 +124,6 @@ coreString.addNumberInString = function(string, number) {
 	});
 
 	return result;
-}
+};
 
 module.exports = coreString;

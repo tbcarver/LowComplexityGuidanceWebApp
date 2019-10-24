@@ -6,7 +6,7 @@ function ExternalWebpackRequire(__webpack_require__) {
 
 ExternalWebpackRequire.prototype.getRequire = function() {
 	return this.require.bind(this);
-}
+};
 
 ExternalWebpackRequire.prototype.require = function(moduleId) {
 
@@ -27,10 +27,10 @@ ExternalWebpackRequire.prototype.require = function(moduleId) {
 			module = module.default;
 		}
 	} else {
-		throw new Error(`Invalid parameter: moduleId.`);
+		throw new Error("Invalid parameter: moduleId.");
 	}
 
 	return module;
-}
+};
 
 export default ExternalWebpackRequire;

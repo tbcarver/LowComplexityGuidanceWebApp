@@ -9,7 +9,7 @@ usersRules.validatePassword = function(password, passwordHash, passwordHashSalt)
 	var isValid = (hash === passwordHash);
 
 	return isValid;
-}
+};
 
 usersRules.buildPasswordHashes = function(password) {
 
@@ -20,6 +20,6 @@ usersRules.buildPasswordHashes = function(password) {
 	passwordHashes.passwordHash = passwordHashes.passwordHash.toString("hex");
 
 	return passwordHashes;
-}
+};
 
 module.exports = usersRules;

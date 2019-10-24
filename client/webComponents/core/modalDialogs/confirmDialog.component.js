@@ -90,11 +90,11 @@ class ConfirmDialog extends HTMLParsedElement {
 			}
 
 		} else {
-			this.innerHTML = `<strong><span class="text-danger">ERROR: This web component must have an id.</span></strong>`;
+			this.innerHTML = "<strong><span class=\"text-danger\">ERROR: This web component must have an id.</span></strong>";
 		}
 	}
 }
 
 customElements.define("core-confirm-dialog", ConfirmDialog);
 
-export default ConfirmDialog
+export default ConfirmDialog;

@@ -4,7 +4,7 @@ var typesIconCssClasses = {
 	"danger": "fas fa-bomb",
 	"warning": "fas fa-exclamation",
 	"info": "fas fa-info",
-}
+};
 
 function flash(type, message) {
 
@@ -14,22 +14,22 @@ function flash(type, message) {
 flash.success = function(message) {
 
 	flash("success", message);
-}
+};
 
 flash.danger = function(message) {
 
 	flash("danger", message);
-}
+};
 
 flash.warning = function(message) {
 
 	flash("warning", message);
-}
+};
 
 flash.info = function(message) {
 
 	flash("info", message);
-}
+};
 
 function notify(icon, type, message) {
 
@@ -40,7 +40,7 @@ function notify(icon, type, message) {
 
 	var settings = {
 		type: type,
-	}
+	};
 
 	if (type === "danger") {
 		settings.animate = {

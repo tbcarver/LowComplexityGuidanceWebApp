@@ -1,5 +1,4 @@
 
-
 var passport = require("passport");
 var authStrategy = require("./authSqliteStrategy");
 
@@ -26,6 +25,5 @@ function initialize(app, acl) {
 	app.use(passport.initialize());
 	app.use(passport.session());
 }
-
 
 module.exports.initialize = initialize;

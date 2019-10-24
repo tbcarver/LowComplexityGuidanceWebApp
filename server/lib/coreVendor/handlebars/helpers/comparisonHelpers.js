@@ -1,5 +1,5 @@
 
-var utils = require('handlebars-utils');
+var utils = require("handlebars-utils");
 var comparison = require("handlebars-helpers/lib/comparison");
 var _ = require("lodash");
 
@@ -53,7 +53,7 @@ comparisonHelpers.includes = function(collection, value, outValue, options) {
 			result = options.fn(this);
 		} else {
 			result = options.inverse(this);
-		};
+		}
 
 	} else {
 		if (_.includes(collection, value)) {
@@ -62,6 +62,6 @@ comparisonHelpers.includes = function(collection, value, outValue, options) {
 	}
 
 	return result;
-}
+};
 
 module.exports = comparisonHelpers;

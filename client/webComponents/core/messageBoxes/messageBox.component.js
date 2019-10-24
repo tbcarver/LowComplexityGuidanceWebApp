@@ -13,14 +13,14 @@ var typesCssClasses = {
 	"danger": "animated shake",
 	"warning": "",
 	"info": "",
-}
+};
 
 var typesIconCssClasses = {
 	"success": "fas fa-check",
 	"danger": "fas fa-bomb",
 	"warning": "fas fa-exclamation",
 	"info": "fas fa-info",
-}
+};
 
 class MessageBox extends HTMLParsedElement {
 
@@ -74,4 +74,4 @@ class MessageBox extends HTMLParsedElement {
 
 customElements.define("core-message-box", MessageBox);
 
-export default MessageBox
+export default MessageBox;

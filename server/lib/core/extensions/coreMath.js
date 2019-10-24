@@ -18,11 +18,11 @@ coreMath.randomInteger = function(min, max) {
 	max = Math.floor(max) + 1;
 
 	return Math.floor(Math.random() * (max - min)) + min;
-}
+};
 
 coreMath.pythagoreanC = function(a, b) {
 
 	return Math.sqrt((a * a) + (b * b));
-}
+};
 
-module.exports = coreMath
+module.exports = coreMath;

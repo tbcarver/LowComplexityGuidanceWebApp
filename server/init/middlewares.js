@@ -8,5 +8,4 @@ function initialize(app) {
 	app.use(auth);
 }
 
-
 module.exports.initialize = initialize;

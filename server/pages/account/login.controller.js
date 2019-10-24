@@ -17,7 +17,7 @@ function getLogin(req, res, next) {
 	var model = { title: "Login" };
 
 	res.render("account/login.template.hbs", model);
-};
+}
 
 function postLogin(req, res, next) {
 
@@ -59,13 +59,12 @@ function postLogin(req, res, next) {
 	});
 
 	middleware(req, res, next);
-};
+}
 
 function getLogout(req, res) {
 	req.flash.info(`<strong>${req.user.username}</strong> has logged out.`);
 	req.logout();
 	res.redirect("/");
-};
-
+}
 
 module.exports.initialize = initialize;
