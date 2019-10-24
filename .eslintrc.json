@@ -10,7 +10,10 @@
         "SharedArrayBuffer": "readonly"
     },
     "parserOptions": {
-        "ecmaVersion": 6
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+            "impliedStrict": true
+        }
     },
     "rules": {
         "indent": [
@@ -22,6 +25,14 @@
             "windows"
         ],
         "no-multi-spaces": "error",
+        "no-multiple-empty-lines": [
+            "error",
+            {
+                "max": 1,
+                "maxBOF": 1,
+                "maxEOF": 1
+            }
+        ],
         "quotes": [
             "error",
             "double"

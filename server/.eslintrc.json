@@ -1,0 +1,6 @@
+{
+    "globals": {
+        "logger": "readonly",
+        "ServerError": "readonly"
+    }
+}
