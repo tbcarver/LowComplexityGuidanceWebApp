@@ -1,3 +1,4 @@
+/* eslint eqeqeq: ["off"] */
 
 var utils = require("handlebars-utils");
 var comparison = require("handlebars-helpers/lib/comparison");

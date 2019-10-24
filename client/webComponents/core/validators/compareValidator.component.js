@@ -68,11 +68,11 @@ function validate() {
 
 	if (areRequired) {
 		if (this.sourceElement.value && this.targetElement.value) {
-			if (this.sourceElement.value != this.targetElement.value) {
+			if (this.sourceElement.value !== this.targetElement.value) {
 				isValid = false;
 			}
 		}
-	} else if (this.sourceElement.value != this.targetElement.value) {
+	} else if (this.sourceElement.value !== this.targetElement.value) {
 		isValid = false;
 	}
 
