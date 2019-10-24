@@ -50,7 +50,7 @@ function ensureDirectoryStatistics(directoryStatistics) {
 
 		directoryStatistics = {
 			directoriesFound: 0,
-			filesFound: 0
+			filesFound: 0,
 		};
 	}
 

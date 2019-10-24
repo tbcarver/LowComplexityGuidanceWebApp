@@ -1,3 +1,4 @@
+/* global $:readonly */
 
 var typesIconCssClasses = {
 	"success": "fas fa-check",
@@ -45,7 +46,7 @@ function notify(icon, type, message) {
 	if (type === "danger") {
 		settings.animate = {
 			enter: "animated shake",
-			exit: "animated fadeOutRight"
+			exit: "animated fadeOutRight",
 		};
 	}
 
@@ -61,7 +62,7 @@ $.notifyDefaults({
 	showProgressbar: false,
 	placement: {
 		from: "bottom",
-		align: "right"
+		align: "right",
 	},
 	offset: 30, // Bootstrap gutter $grid-gutter-width
 	spacing: 16, // Bootstrap spacing 1rem
@@ -72,7 +73,7 @@ $.notifyDefaults({
 	mouse_over: null,
 	animate: {
 		enter: "animated bounceInRight",
-		exit: "animated fadeOutRight"
+		exit: "animated fadeOutRight",
 	},
 	onShow: null,
 	onShown: null,

@@ -13,7 +13,7 @@ const logger = winston.createLogger({
 		winston.format.timestamp(),
 		customFormat),
 	transports: [
-		new sqliteTransport(),
+		new sqliteTransport()
 	],
 });
 

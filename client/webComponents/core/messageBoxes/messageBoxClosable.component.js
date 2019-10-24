@@ -42,7 +42,7 @@ class MessageBox extends HTMLParsedElement {
 
 			var data = {
 				type: this.type,
-				message: this.message
+				message: this.message,
 			};
 
 			this.innerHTML = template(data);

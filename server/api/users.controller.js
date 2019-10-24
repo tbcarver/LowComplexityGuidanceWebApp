@@ -1,11 +1,8 @@
-
 var usersStore = require("../store/usersStore");
 var usersFavoriteArticlesStore = require("../store/usersFavoriteArticlesStore");
 var queryStringKeys = require("../keys/queryStringKeys");
-var _ = require("lodash");
 
 function initialize(app, acl) {
-
 	// Acl noop
 	app.get("/api/users/typeahead/prefetch", getUsersTypeaheadPrefetch);
 	app.get("/api/users/typeahead/remote", getUsersTypeaheadRemote);
@@ -18,7 +15,6 @@ function initialize(app, acl) {
 }
 
 function getUsersTypeaheadPrefetch(req, res) {
-
 	var users = usersStore.getUsers();
 
 	users = users.map(function(user) {
@@ -29,15 +25,13 @@ function getUsersTypeaheadPrefetch(req, res) {
 }
 
 function getUsersTypeaheadRemote(req, res) {
-
 	var searchTerm = req.query[queryStringKeys.searchTerm];
 	var users;
 
 	if (searchTerm) {
-
 		users = usersStore.searchUsers(searchTerm);
 
-		users = users.map(function(user) {    
+		users = users.map(function(user) {
 			return { id: user.userId, value: `${user.userId} ${user.firstName} ${user.lastName}` };
 		});
 	}
@@ -46,7 +40,6 @@ function getUsersTypeaheadRemote(req, res) {
 }
 
 function addFavoriteArticle(req, res) {
-
 	if (req.body.userId) {
 		usersFavoriteArticlesStore.replaceUserIdArticleId(req.body.userId, req.body.articleId);
 		res.send("Favorite added.");
@@ -56,7 +49,6 @@ function addFavoriteArticle(req, res) {
 }
 
 function removeFavoriteArticle(req, res) {
-
 	if (req.body.userId && req.body.articleId) {
 		usersFavoriteArticlesStore.removeUserIdArticleId(req.body.userId, req.body.articleId);
 		res.send("Favorite removed.");

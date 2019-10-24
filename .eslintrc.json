@@ -16,6 +16,12 @@
         }
     },
     "rules": {
+        "comma-dangle": [
+            "error",
+            {
+                "objects": "always-multiline"
+            }
+        ],
         "indent": [
             "error",
             "tab"
@@ -31,6 +37,12 @@
                 "max": 1,
                 "maxBOF": 1,
                 "maxEOF": 1
+            }
+        ],
+        "no-unused-vars": [
+            "error",
+            {
+                "args": "none"
             }
         ],
         "quotes": [

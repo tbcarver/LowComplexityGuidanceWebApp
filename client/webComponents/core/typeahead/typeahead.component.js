@@ -1,3 +1,4 @@
+/* global $:readonly, Bloodhound:readonly */
 
 // Using the html parsed element in order to receive innerHTML from the component"s use in the HTML
 // StackOverflow 48498581
@@ -12,7 +13,6 @@ import PrefetchDataAdditionalStorage from "./prefetchDataAdditionalStorage";
 //  typeahead cannot be used to clear the tt-form-cursor.
 
 class Typeahead extends HTMLParsedElement {
-
 	static get observedAttributes() {
 		return ["placeholder"];
 	}
@@ -30,7 +30,6 @@ class Typeahead extends HTMLParsedElement {
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
-
 		if (this.parsed) {
 			this.render();
 		}
@@ -38,15 +37,14 @@ class Typeahead extends HTMLParsedElement {
 
 	focus() {
 		if (this.rendered) {
-			var focusElement = this.querySelector(".tt-input");			
-			if (focusElement){
+			var focusElement = this.querySelector(".tt-input");
+			if (focusElement) {
 				focusElement.focus();
 			}
 		}
 	}
 
 	render() {
-		
 		this.style.display = "block";
 
 		var form;
@@ -108,17 +106,16 @@ class Typeahead extends HTMLParsedElement {
 			};
 		}
 
-		var bloodhound = new Bloodhound(bloodhoundOptions);
-		bloodhound.initialize()
-			.done(function() {
-				var datums = prefetchDataAdditionalStorage.get();
-				bloodhound.add(datums);
-			});
+		bloodhound = new Bloodhound(bloodhoundOptions);
+		bloodhound.initialize().done(function() {
+			var datums = prefetchDataAdditionalStorage.get();
+			bloodhound.add(datums);
+		});
 
 		var typeaheadOptions = {
 			hint: true,
 			highlight: true,
-			minLength: 1
+			minLength: 1,
 		};
 
 		var suggestionName = this.getAttribute("suggestion-name");
@@ -138,8 +135,8 @@ class Typeahead extends HTMLParsedElement {
 					</div>`,
 				suggestion: function(context) {
 					return `<div data-id="${context.id}">${context.value}</div>`;
-				}
-			}
+				},
+			},
 		};
 
 		var $input = $(input);
@@ -167,24 +164,18 @@ class Typeahead extends HTMLParsedElement {
 }
 
 function setCursor(typeaheadJsElement) {
-
 	var suggestionElements = typeaheadJsElement.querySelectorAll(".tt-suggestion");
 
 	if (suggestionElements.length === 1) {
-
 		suggestionElements[0].classList.add("tt-cursor");
 		suggestionElements[0].classList.add("tt-form-cursor");
-
 	} else if (suggestionElements.length > 0) {
-
 		removeFormCursor(typeaheadJsElement);
 
 		var hintInputElement = typeaheadJsElement.querySelector(".tt-hint");
 
 		for (var suggestionElement of suggestionElements) {
-
 			if (suggestionElement.textContent === hintInputElement.value) {
-
 				suggestionElement.classList.add("tt-cursor");
 				suggestionElement.classList.add("tt-form-cursor");
 			}
@@ -193,7 +184,6 @@ function setCursor(typeaheadJsElement) {
 }
 
 function setFormCursor(typeaheadJsElement, id) {
-
 	removeFormCursor(typeaheadJsElement);
 
 	var suggestionElement = typeaheadJsElement.querySelector(`.tt-suggestion[data-id="${id}"]`);
@@ -204,7 +194,6 @@ function setFormCursor(typeaheadJsElement, id) {
 }
 
 function onFromSubmit(event) {
-
 	event.preventDefault();
 
 	var suggestionElement = event.target.querySelector(".tt-form-cursor");
@@ -215,14 +204,12 @@ function onFromSubmit(event) {
 }
 
 function submitForm(form, id) {
-
 	if (form && id) {
 		location.href = form.action.replace("%s", id);
 	}
 }
 
 function removeFormCursor(typeaheadJsElement) {
-
 	var suggestionElements = typeaheadJsElement.querySelectorAll(".tt-suggestion");
 
 	for (var suggestionElement of suggestionElements) {

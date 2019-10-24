@@ -58,7 +58,7 @@ class MessageBox extends HTMLParsedElement {
 				type: this.type,
 				cssClass: typesCssClasses[this.type] || "",
 				iconCssClass: typesIconCssClasses[this.type],
-				message: this.message
+				message: this.message,
 			};
 
 			data.cssClass += " text-center";

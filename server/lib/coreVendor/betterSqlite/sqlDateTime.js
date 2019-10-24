@@ -1,15 +1,12 @@
-
 var sqlDateTime = {};
 
 var isoToSqlDateRegex = /([^T]+)T([^.]+)/;
 var sqlDateToDateRegex = /(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}:\d{2})/;
 
 sqlDateTime.toSqlDate = function(date) {
-
 	var sqlDate;
 
 	if (date) {
-
 		if (typeof date === "object") {
 			date = date.toISOString();
 		}
@@ -27,11 +24,7 @@ sqlDateTime.toSqlDate = function(date) {
 };
 
 sqlDateTime.toDate = function(date) {
-
-	var date;
-
 	if (typeof date === "string") {
-
 		var matches = date.match(sqlDateToDateRegex);
 
 		if (matches && matches.length === 3) {

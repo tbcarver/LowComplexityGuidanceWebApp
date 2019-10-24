@@ -1,4 +1,3 @@
-
 var path = require("path");
 var Database = require("better-sqlite3");
 var _ = require("lodash");
@@ -6,14 +5,13 @@ var _ = require("lodash");
 var sql = {};
 
 var filePathName = path.resolve(process.env.CONNECTION_STRING);
-db = new Database(filePathName, { fileMustExist: true });
+var db = new Database(filePathName, { fileMustExist: true });
 
 // Use write-ahead logging for better performance:
 //  http://advanced.brickhousecodecamp.org/docs/sqlite/www.sqlite.org/wal.html
 db.pragma("journal_mode = WAL");
 
 sql.executeScalar = function(sqlStatement, parameters) {
-
 	var statement = db.prepare(sqlStatement);
 	var result;
 
@@ -27,7 +25,6 @@ sql.executeScalar = function(sqlStatement, parameters) {
 };
 
 sql.executeRow = function(sqlStatement, parameters) {
-
 	var statement = db.prepare(sqlStatement);
 	var result;
 
@@ -41,7 +38,6 @@ sql.executeRow = function(sqlStatement, parameters) {
 };
 
 sql.executeQuery = function(sqlStatement, parameters) {
-
 	var statement = db.prepare(sqlStatement);
 	var result;
 
@@ -55,7 +51,6 @@ sql.executeQuery = function(sqlStatement, parameters) {
 };
 
 sql.executeNonQuery = function(sqlStatement, parameters) {
-
 	var statement = db.prepare(sqlStatement);
 	var result;
 
@@ -73,7 +68,6 @@ sql.executeNonQuery = function(sqlStatement, parameters) {
 };
 
 sql.getLimitOffset = function(pageNumber, pageSize) {
-
 	var limitOffset = {
 		limit: pageSize,
 		offset: (pageNumber - 1) * pageSize,
@@ -83,7 +77,6 @@ sql.getLimitOffset = function(pageNumber, pageSize) {
 };
 
 sql.transaction = function(execute) {
-
 	var newTransaction = db.transaction(execute);
 
 	newTransaction();

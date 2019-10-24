@@ -11,7 +11,7 @@ function initialize(app) {
 	//  and go to express-session with storage like sql.
 	app.use(cookieSession({
 		keys: [process.env.SESSION_SECRET],
-		maxAge: 24 * 60 * 60 * 1000 // 24 hours
+		maxAge: 24 * 60 * 60 * 1000, // 24 hours
 	}));
 
 	app.use(function(req, res, next) {
@@ -36,7 +36,7 @@ function initialize(app) {
 			callback(null, item);
 		},
 		utilityName: "expressFlashNotification",
-		viewName: "flash.template.hbs"
+		viewName: "flash.template.hbs",
 	}));
 
 	app.use(function(req, res, next) {

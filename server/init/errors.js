@@ -19,7 +19,7 @@ function initialize(app) {
 			"500": function(err, req, res, next) {
 				logger.error(getLogData(err, req, 500));
 				res.redirect("/error/500");
-			}
+			},
 		},
 		// Do not shut down the server on non client errors
 		shutdown: function() { },

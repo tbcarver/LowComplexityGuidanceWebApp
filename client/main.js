@@ -1,3 +1,5 @@
+/* global __webpack_require__:readonly */
+/* eslint no-unused-vars: off */
 
 // NOTE: This file is for client features that should be available on every server side served webpage.
 //  Features that are for a single page should have there own js entry point file and webpack configuration.
@@ -35,11 +37,9 @@ import flash from "./flash";
 window.flash = flash;
 
 window.addEventListener("error", function(event) {
-
 	flash.danger("An error has occurred");
 });
 
 window.addEventListener("unhandledrejection", function(event) {
-
 	flash.danger("An error has occurred");
 });
