@@ -1,5 +1,5 @@
 
-var sql = require("../lib/coreVendor/betterSqlite/sql");
+var sql = require("../../lib/coreVendor/betterSqlite/sql");
 
 var usersRolesMapsStore = {};
 

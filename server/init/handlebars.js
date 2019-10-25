@@ -5,9 +5,9 @@ var _ = require("lodash");
 
 var helpersList = [];
 
-helpersList.push(require("../lib/coreVendor/handlebars/helpers/authHelpers"));
-helpersList.push(require("../lib/coreVendor/handlebars/helpers/comparisonHelpers"));
-helpersList.push(require("../lib/coreVendor/handlebars/helpers/dateHelpers"));
+helpersList.push(require("../../lib/coreVendor/handlebars/helpers/authHelpers"));
+helpersList.push(require("../../lib/coreVendor/handlebars/helpers/comparisonHelpers"));
+helpersList.push(require("../../lib/coreVendor/handlebars/helpers/dateHelpers"));
 
 function initialize(app) {
 

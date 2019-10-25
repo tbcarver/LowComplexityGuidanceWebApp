@@ -2,7 +2,7 @@
 var express = require("express");
 var favicon = require("serve-favicon");
 var path = require("path");
-var directoryWalkerSync = require("../lib/core/fs/directoryWalkerSync");
+var directoryWalkerSync = require("../../lib/core/fs/directoryWalkerSync");
 
 function initialize(app, acl) {
 

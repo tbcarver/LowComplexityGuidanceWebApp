@@ -2,8 +2,8 @@
 require("dotenv").config();
 
 var winston = require("winston");
-var customFormat = require("./lib/coreVendor/winston/customFormat");
-var sqliteTransport = require("./lib/coreVendor/winston/sqliteTransport");
+var customFormat = require("../lib/coreVendor/winston/customFormat");
+var sqliteTransport = require("../lib/coreVendor/winston/sqliteTransport");
 var ServerError = require("./serverError");
 var express = require("express");
 var Acl = require("acl");

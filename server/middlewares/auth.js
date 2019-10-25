@@ -1,6 +1,6 @@
 
-var coreString = require("../lib/core/extensions/coreString");
-var coreArray = require("../lib/core/extensions/coreArray");
+var coreString = require("../../lib/core/extensions/coreString");
+var coreArray = require("../../lib/core/extensions/coreArray");
 var queryStringKeys = require("../keys/queryStringKeys");
 
 var rolesAllAllowed = ["administrator"];

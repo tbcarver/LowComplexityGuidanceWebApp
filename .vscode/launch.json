@@ -24,6 +24,8 @@
 			},
 			"args": [
 				"--watch",
+				"lib",
+				"--watch",
 				"server"
 			],
 			"restart": true,
@@ -40,6 +42,8 @@
 				"NODE_ENV_CLIENT": "development"
 			},
 			"args": [
+				"--watch",
+				"lib",
 				"--watch",
 				"server"
 			],

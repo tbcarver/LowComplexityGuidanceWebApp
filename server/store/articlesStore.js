@@ -1,6 +1,6 @@
 
-var sql = require("../lib/coreVendor/betterSqlite/sql");
-var WhereClause = require("../lib/core/sql/whereClause");
+var sql = require("../../lib/coreVendor/betterSqlite/sql");
+var WhereClause = require("../../lib/core/sql/whereClause");
 var usersFavoriteArticlesStore = require("./usersFavoriteArticlesStore");
 
 var articlesStore = {};

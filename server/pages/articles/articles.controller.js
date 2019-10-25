@@ -1,6 +1,6 @@
 
 var articlesStore = require("../../store/articlesStore");
-var coreString = require("../../lib/core/extensions/coreString");
+var coreString = require("../../../lib/core/extensions/coreString");
 
 function initialize(app, acl) {
 
@@ -56,7 +56,7 @@ function postEdit(req, res) {
 	} else {
 		req.body.articleId = articlesStore.addArticle(req.body.articleTitle, req.body.articleDescription, req.body.articleBody, req.body.iconCssClass, req.user.userId);
 	}
-    
+
 	req.flash.success(`<strong>${req.body.articleTitle}</strong> was saved.`);
 	res.redirect(`/article/edit/${req.body.articleId}`);
 }

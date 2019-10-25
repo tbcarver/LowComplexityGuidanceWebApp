@@ -2,7 +2,7 @@
 var cookieSession = require("cookie-session");
 var bodyParser = require("body-parser");
 var expressFlashNotification = require("express-flash-notification");
-var FlashWrapper = require("../lib/coreVendor/expressFlashNotification/flashWrapper");
+var FlashWrapper = require("../../lib/coreVendor/expressFlashNotification/flashWrapper");
 
 function initialize(app) {
 

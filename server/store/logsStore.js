@@ -1,8 +1,8 @@
 
-var sql = require("../lib/coreVendor/betterSqlite/sql");
-var WhereClause = require("../lib/core/sql/whereClause");
+var sql = require("../../lib/coreVendor/betterSqlite/sql");
+var WhereClause = require("../../lib/core/sql/whereClause");
 var _ = require("lodash");
-var sqlDateTime = require("../lib/coreVendor/betterSqlite/sqlDateTime");
+var sqlDateTime = require("../../lib/coreVendor/betterSqlite/sqlDateTime");
 
 var logsStore = {};
 
