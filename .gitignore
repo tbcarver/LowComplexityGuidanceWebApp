@@ -1,8 +1,8 @@
 
-assets/dist
-data
-logs
-node_modules
-server/pages/layouts/dist
+/assets/dist
+/data
+/logs
+/node_modules
+/server/pages/layouts/dist
 
 .env
