@@ -92,4 +92,4 @@ $.notifyDefaults({
 		</div>`,
 });
 
-export default flash;
+module.exports = flash;

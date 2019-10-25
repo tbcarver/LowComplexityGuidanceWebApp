@@ -1,9 +1,8 @@
 
-// Using require only on handlebars templates with handlebars-loader
 var template = require("./pagination.template.hbs");
 
-// NOTE: Import only individual libraries from lodash.
-import unescape from "lodash/unescape";
+// NOTE: Require only minimal individual libraries from lodash.
+var unescape = require("lodash/unescape");
 
 class Pagination extends HTMLElement {
 
@@ -124,4 +123,4 @@ class Pagination extends HTMLElement {
 
 customElements.define("core-pagination", Pagination);
 
-export default Pagination;
+module.exports = Pagination;

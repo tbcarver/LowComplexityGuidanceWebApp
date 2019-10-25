@@ -3,8 +3,8 @@
 // Using the html parsed element in order to receive innerHTML from the component"s use in the HTML
 // StackOverflow 48498581
 
-import HTMLParsedElement from "html-parsed-element";
-import PrefetchDataAdditionalStorage from "./prefetchDataAdditionalStorage";
+var HTMLParsedElement = require("html-parsed-element/cjs");
+var PrefetchDataAdditionalStorage = require("./prefetchDataAdditionalStorage");
 // Typeahead.js must be included as a script link on the webpage not imported
 
 // NOTE: The type="form" has a known issue when the users clicks away from the typeahead thereby losing
@@ -219,4 +219,4 @@ function removeFormCursor(typeaheadJsElement) {
 
 customElements.define("core-typeahead", Typeahead);
 
-export default Typeahead;
+module.exports = Typeahead;

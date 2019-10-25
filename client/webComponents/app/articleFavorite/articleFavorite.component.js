@@ -3,11 +3,9 @@
 // i.e. <message-box type="danger">Error message</message-box>
 // StackOverflow 48498581
 
-import HTMLParsedElement from "html-parsed-element";
-import coreBoolean from "../../../lib/core/extensions/coreBoolean";
-import coreFetch from "../../../lib/core/extensions/coreFetch";
-
-// Using require only on handlebars templates with handlebars-loader
+var HTMLParsedElement = require("html-parsed-element/cjs");
+var coreBoolean = require("../../../../lib/core/extensions/coreBoolean");
+var coreFetch = require("../../../../lib/core/extensions/coreFetch");
 var template = require("./articleFavorite.template.hbs");
 
 class ArticleFavorite extends HTMLParsedElement {
@@ -146,4 +144,4 @@ function onButtonClick(event) {
 
 customElements.define("article-favorite", ArticleFavorite);
 
-export default ArticleFavorite;
+module.exports = ArticleFavorite;

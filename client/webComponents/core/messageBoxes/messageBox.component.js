@@ -3,9 +3,7 @@
 // i.e. <message-box type="danger">Error message</message-box>
 // StackOverflow 48498581
 
-import HTMLParsedElement from "html-parsed-element";
-
-// Using require only on handlebars templates with handlebars-loader
+var HTMLParsedElement = require("html-parsed-element/cjs");
 var template = require("./messageBox.template.hbs");
 
 var typesCssClasses = {
@@ -49,7 +47,7 @@ class MessageBox extends HTMLParsedElement {
 	}
 
 	render() {
-			
+
 		this.style.display = "block";
 
 		if (this.message) {
@@ -74,4 +72,4 @@ class MessageBox extends HTMLParsedElement {
 
 customElements.define("core-message-box", MessageBox);
 
-export default MessageBox;
+module.exports = MessageBox;

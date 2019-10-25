@@ -3,9 +3,7 @@
 // i.e. <message-box type="danger">Error message</message-box>
 // StackOverflow 48498581
 
-import HTMLParsedElement from "html-parsed-element";
-
-// Using require only on handlebars templates with handlebars-loader
+var HTMLParsedElement = require("html-parsed-element/cjs");
 var template = require("./confirmDialog.template.hbs");
 
 class ConfirmDialog extends HTMLParsedElement {
@@ -97,4 +95,4 @@ class ConfirmDialog extends HTMLParsedElement {
 
 customElements.define("core-confirm-dialog", ConfirmDialog);
 
-export default ConfirmDialog;
+module.exports = ConfirmDialog;

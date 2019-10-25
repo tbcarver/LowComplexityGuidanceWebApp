@@ -2,7 +2,7 @@
 // NOTE: bloodhound.add() only adds to memory, not to prefetched local storage.
 //  This storage is to augment the prefetch local storage.
 
-import coreObject from "../../../lib/core/extensions/coreObject";
+var coreObject = require("../../../../lib/core/extensions/coreObject");
 
 function PrefetchDataAdditionalStorage() {
 	this.dataKey = null;
@@ -51,4 +51,4 @@ PrefetchDataAdditionalStorage.prototype.clear = function() {
 	localStorage.clear(this.dataKey);
 };
 
-export default PrefetchDataAdditionalStorage;
+module.exports = PrefetchDataAdditionalStorage;
