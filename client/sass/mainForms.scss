@@ -1,0 +1,88 @@
+
+.form-commands {
+	margin-top: map-get($spacers, 4);
+ 
+	.btn {
+	   margin-right: map-get($spacers, 1);
+	}
+	.btn:last-child {
+	   margin-right: 0;
+	}
+ }
+  
+ .form-commands .btn.float-right {
+	 margin-right: 0;
+  }
+ 
+ .col-form-label {
+	text-align: right;
+ }
+ 
+ // styles from bootstrap's .col-form-label and .form-control
+ .form-control-text {
+	display: block;
+	padding-top: calc(#{$input-padding-y} + #{$input-border-width});
+	padding-bottom: calc(#{$input-padding-y} + #{$input-border-width});
+	padding-right: $input-padding-x;
+	padding-left: $input-padding-x;
+	margin-bottom: 0; // Override the `<label>/<legend>` default
+	@include font-size(inherit); // Override the `<legend>` default
+	line-height: $input-line-height;
+	background: $list-group-bg;
+	@include border-radius($input-border-radius, 0);
+ }
+ 
+ .form-control-text:empty:before {
+	 content: "\200b";
+   }
+ 
+ .form-check {
+	display: block;
+	padding-right: $input-padding-x;
+	padding-left: $input-padding-x;
+	margin-bottom: 0; // Override the `<label>/<legend>` default
+	@include font-size(inherit); // Override the `<legend>` default
+	line-height: $input-line-height;
+	background: $secondary-lightest;
+ }
+ 
+ .form-check .custom-control-label {
+	 margin-left: ($custom-control-gutter + $custom-control-indicator-size);
+ }
+ 
+ .form-check:first-child {
+	padding-top: calc(#{$input-padding-y} + #{$input-border-width});
+	@include border-radius($input-border-radius, 0);
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+  }
+ 
+ .form-check:last-child {
+	padding-bottom: calc(#{$input-padding-y} + #{$input-border-width});
+	@include border-radius($input-border-radius, 0);
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+ }
+ 
+ .form-check-input {
+	 position: static;
+	 margin: 0;
+ }
+
+ core-typeahead.form-control {
+	 padding: 0;
+ }
+ 
+ .form-control > .twitter-typeahead {
+	 width: 100%;
+	 margin-top: -$input-border-width;
+	 margin-left: -$input-border-width;
+ }
+ 
+ .form-control.tt-hint {
+	 border-color: transparent;
+ }
+ 
+ .form-control.tt-input {
+	 border-color: transparent;
+ }

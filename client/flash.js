@@ -61,7 +61,7 @@ $.notifyDefaults({
 	newest_on_top: true,
 	showProgressbar: false,
 	placement: {
-		from: "bottom",
+		from: "top",
 		align: "right",
 	},
 	offset: 30, // Bootstrap gutter $grid-gutter-width

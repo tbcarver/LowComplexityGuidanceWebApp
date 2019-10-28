@@ -1,0 +1,38 @@
+
+.tt-menu {
+    background-color: $dropdown-bg;
+    border-color: $dropdown-border-color;
+    border-width:$dropdown-border-width;
+    color: $dropdown-link-color;
+    padding-top: $dropdown-padding-y;
+    padding-bottom: $dropdown-padding-y;
+    @include border-radius($dropdown-border-radius);
+    box-shadow: $dropdown-box-shadow;
+}
+
+.tt-suggestion, .tt-item {
+    padding-top: $dropdown-item-padding-y;
+    padding-right: $dropdown-item-padding-x;
+    padding-bottom: $dropdown-item-padding-y;
+    padding-left: $input-padding-x;
+}
+
+.tt-suggestion:hover {
+    color: $dropdown-link-hover-color;
+    text-decoration: none;
+    @include gradient-bg($dropdown-link-hover-bg);
+    cursor: pointer;
+}
+
+.tt-suggestion:active {
+    color: $dropdown-link-active-color;
+    text-decoration: none;
+    @include gradient-bg($dropdown-link-active-bg);
+    cursor: pointer;
+}
+
+.tt-cursor {
+    color: $dropdown-link-hover-color;
+    text-decoration: none;
+    @include gradient-bg($dropdown-link-hover-bg);
+}

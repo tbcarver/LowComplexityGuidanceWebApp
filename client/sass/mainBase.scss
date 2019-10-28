@@ -1,0 +1,33 @@
+
+ // Sticky footer from CSS Secrets #41
+ 
+ body {
+    display: flex; // sticky footer
+    flex-flow: column; // sticky footer
+    min-height: 100vh; // sticky footer    
+    overflow-y: scroll; // stop scroll bar page shift
+}
+
+main {
+    flex: 1; // sticky footer
+}
+
+.table th {
+  border-top: none;
+}
+
+.font-size-sm {
+    @include font-size($font-size-sm);
+}
+
+.font-size-lg {
+    @include font-size($font-size-lg);
+}
+
+.dropdown-menu {    
+    box-shadow: $dropdown-box-shadow;
+}
+
+.dropdown.link-group {
+    margin-left: map-get($spacers, 1);
+}
