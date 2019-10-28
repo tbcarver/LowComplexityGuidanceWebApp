@@ -16,6 +16,10 @@ main {
   border-top: none;
 }
 
+.table-hover-clickable td {
+    cursor: pointer;
+}
+
 .font-size-sm {
     @include font-size($font-size-sm);
 }

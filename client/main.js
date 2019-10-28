@@ -20,6 +20,9 @@ require("./sass/main.scss");
 require("./externalLibraries/coreLibrary");
 require("./externalLibraries/webComponentsLibrary");
 
+// Scripts
+require("./bootstrapCustomizations");
+
 // Globals
 // NOTE: Globals should be very minimal and used in about 90% of files.
 window.flash = require("./flash");
