@@ -7,16 +7,7 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Launch Program",
-			"program": "${workspaceFolder}/server/app.js",
-			"env": {
-				"NODE_ENV": "development",
-			}
-		},
-		{
-			"type": "node",
-			"request": "launch",
-			"name": "Nodemon",
+			"name": "dev",
 			"runtimeExecutable": "${workspaceFolder}/node_modules/nodemon/bin/nodemon.js",
 			"program": "${workspaceFolder}/server/app.js",
 			"env": {
@@ -35,7 +26,7 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"name": "Nodemon Client",
+			"name": "devClient",
 			"runtimeExecutable": "${workspaceFolder}/node_modules/nodemon/bin/nodemon.js",
 			"env": {
 				"NODE_ENV": "development",
@@ -51,6 +42,21 @@
 			"restart": true,
 			"console": "integratedTerminal",
 			"internalConsoleOptions": "neverOpen"
-		}
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "start",
+			"program": "${workspaceFolder}/server/app.js",
+			"env": {
+				"NODE_ENV": "development",
+			}
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "createMockData",
+			"program": "${workspaceFolder}/sql/createDatabaseMockData/index.js"
+		},
 	]
 }
