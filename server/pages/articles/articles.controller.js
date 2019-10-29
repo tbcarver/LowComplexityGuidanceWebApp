@@ -5,20 +5,20 @@ var coreString = require("../../../lib/core/extensions/coreString");
 function initialize(app, acl) {
 
 	acl.allow("public exact", "/article/view/:articleId", "*");
-	app.get("/article/view/:articleId", getView);
+	app.get("/article/view/:articleId", getArticleView);
 
 	acl.allow(["contributor"], "/article/new", "*");
-	app.get("/article/new", getNew);
+	app.get("/article/new", getArticleNew);
 	acl.allow(["contributor"], "/article/edit/:articleId", "*");
-	app.get("/article/edit/:articleId", getEdit);
+	app.get("/article/edit/:articleId", getArticleEdit);
 	acl.allow(["contributor"], "/article/edit", "*");
-	app.post("/article/edit", postEdit);
+	app.post("/article/edit", postArticleEdit);
 
 	acl.allow(["contributor"], "/article/delete", "*");
-	app.post("/article/delete", postDelete);
+	app.post("/article/delete", postArticleDelete);
 }
 
-function getView(req, res) {
+function getArticleView(req, res) {
 
 	var userId = req.user ? req.user.userId : null;
 
@@ -31,14 +31,14 @@ function getView(req, res) {
 	res.render("articles/articlesDetails.template.hbs", model);
 }
 
-function getNew(req, res) {
+function getArticleNew(req, res) {
 
 	var model = { title: "New article", navbarLinkTitle: "New article" };
 
 	res.render("articles/articlesDetailsEdit.template.hbs", model);
 }
 
-function getEdit(req, res) {
+function getArticleEdit(req, res) {
 
 	var article = articlesStore.getArticle(req.params.articleId);
 	var pageTitle = "Edit " + coreString.truncate(article.articleTitle, 10, true);
@@ -49,7 +49,7 @@ function getEdit(req, res) {
 	res.render("articles/articlesDetailsEdit.template.hbs", model);
 }
 
-function postEdit(req, res) {
+function postArticleEdit(req, res) {
 
 	if (req.body.articleId) {
 		articlesStore.updateArticle(req.body.articleId, req.body.articleTitle, req.body.articleDescription, req.body.articleBody, req.body.iconCssClass);
@@ -61,7 +61,7 @@ function postEdit(req, res) {
 	res.redirect(`/article/edit/${req.body.articleId}`);
 }
 
-function postDelete(req, res) {
+function postArticleDelete(req, res) {
 
 	articlesStore.removeArticle(req.body.articleId);
 

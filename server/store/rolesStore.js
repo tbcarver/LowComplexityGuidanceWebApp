@@ -5,8 +5,8 @@ var rolesStore = {};
 
 rolesStore.getRoles = function() {
 
-	var results = sql.executeQuery(`
-		SELECT roleId, roleName
+	var results = sql.executeQuery(
+		`SELECT roleId, roleName
 		FROM Roles`);
 
 	return results;

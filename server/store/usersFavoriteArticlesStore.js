@@ -5,10 +5,10 @@ var usersFavoriteArticlesStore = {};
 
 usersFavoriteArticlesStore.addUserIdArticleId = function(userId, articleId) {
 
-	sql.executeNonQuery(`
-		INSERT INTO UsersFavoriteArticles (userId, articleId)
+	sql.executeNonQuery(
+		`INSERT INTO UsersFavoriteArticles (userId, articleId)
 		VALUES (@userId, @articleId)`,
-	{ userId, articleId });
+		{ userId, articleId });
 };
 
 usersFavoriteArticlesStore.replaceUserIdArticleId = function(userId, articleId) {
@@ -17,27 +17,27 @@ usersFavoriteArticlesStore.replaceUserIdArticleId = function(userId, articleId) 
 
 		usersFavoriteArticlesStore.removeUserIdArticleId(userId, articleId);
 
-		sql.executeNonQuery(`
-			INSERT INTO UsersFavoriteArticles (userId, articleId)
+		sql.executeNonQuery(
+			`INSERT INTO UsersFavoriteArticles (userId, articleId)
 			VALUES (@userId, @articleId)`,
-		{ userId, articleId });
+			{ userId, articleId });
 	});
 };
 
 usersFavoriteArticlesStore.removeUserIdArticleId = function(userId, articleId) {
 
-	sql.executeNonQuery(`
-		DELETE FROM UsersFavoriteArticles		
+	sql.executeNonQuery(
+		`DELETE FROM UsersFavoriteArticles		
 		WHERE userId = @userId AND articleId = @articleId`,
-	{ userId, articleId });
+		{ userId, articleId });
 };
 
 usersFavoriteArticlesStore.removeFavoriteArticlesByArticleId = function(articleId) {
 
-	sql.executeNonQuery(`
-		DELETE FROM UsersFavoriteArticles		
+	sql.executeNonQuery(
+		`DELETE FROM UsersFavoriteArticles		
 		WHERE articleId = @articleId`,
-	{ articleId });
+		{ articleId });
 };
 
 module.exports = usersFavoriteArticlesStore;

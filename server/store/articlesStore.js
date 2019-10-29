@@ -7,12 +7,12 @@ var articlesStore = {};
 
 articlesStore.getArticle = function(articleId) {
 
-	var results = sql.executeRow(`
-		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId, createdDate,
+	var results = sql.executeRow(
+		`SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId, createdDate,
 			updatedDate
 		FROM Articles
 		WHERE articleId = @articleId`,
-	{ articleId });
+		{ articleId });
 
 	return results;
 };
@@ -23,8 +23,8 @@ articlesStore.getExtendedArticle = function(articleId, favoriteUserId) {
 		favoriteUserId = 0;
 	}
 
-	var results = sql.executeRow(`
-		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
+	var results = sql.executeRow(
+		`SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
 			Articles.createdDate, Articles.updatedDate, firstName, lastName,
 			(SELECT COUNT(*) FROM UsersFavoriteArticles
 			 WHERE UsersFavoriteArticles.articleId = Articles.articleId) as countFavorites,
@@ -34,7 +34,7 @@ articlesStore.getExtendedArticle = function(articleId, favoriteUserId) {
 		FROM Articles
 			INNER JOIN Users ON Articles.authorId = Users.userId
 		WHERE articleId = @articleId`,
-	{ articleId, favoriteUserId });
+		{ articleId, favoriteUserId });
 
 	return results;
 };
@@ -51,8 +51,8 @@ articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize
 	var whereClause = new WhereClause();
 	whereClause.addAndClause("authorId = @authorId", "authorId", authorId);
 
-	var results = sql.executeQuery(`
-		SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
+	var results = sql.executeQuery(
+		`SELECT articleId, articleTitle, articleDescription, articleBody, iconCssClass, authorId,
 			Articles.createdDate, Articles.updatedDate, firstName, lastName,
 			(SELECT COUNT(*) FROM UsersFavoriteArticles
 			 WHERE UsersFavoriteArticles.articleId = Articles.articleId) as countFavorites,
@@ -65,11 +65,11 @@ articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize
 								${whereClause.buildWhere()}
 								ORDER BY articleId DESC LIMIT @offset) ${whereClause.buildAnd()}
 		ORDER BY articleId DESC LIMIT @limit`,
-	Object.assign(parameters, whereClause.parameters));
+		Object.assign(parameters, whereClause.parameters));
 
 	var total = 0;
 	if (results.length > 0) {
-		total = this.getCount(authorId);
+		total = this.getCount(whereClause);
 	}
 
 	results = {
@@ -85,38 +85,39 @@ articlesStore.getDescendingPagedExtendedArticles = function(pageNumber, pageSize
 	return results;
 };
 
-articlesStore.getCount = function(authorId) {
+articlesStore.getCount = function(whereClause) {
 
-	var whereClause = new WhereClause();
-	whereClause.addAndClause("authorId = @authorId", "authorId", authorId);
+	if (!whereClause) {
+		whereClause = new WhereClause();
+	}
 
-	var count = sql.executeScalar(`
-		SELECT COUNT(*)
+	var count = sql.executeScalar(
+		`SELECT COUNT(*)
 		FROM Articles
 		${whereClause.buildWhere()}`,
-	whereClause.parameters);
+		whereClause.parameters);
 
 	return count;
 };
 
 articlesStore.addArticle = function(articleTitle, articleDescription, articleBody, iconCssClass, authorId) {
 
-	var id = sql.executeNonQuery(`
-		INSERT INTO Articles (articleTitle, articleDescription, articleBody, iconCssClass, authorId)
+	var id = sql.executeNonQuery(
+		`INSERT INTO Articles (articleTitle, articleDescription, articleBody, iconCssClass, authorId)
 		VALUES (@articleTitle, @articleDescription, @articleBody, @iconCssClass, @authorId)`,
-	{ articleTitle, articleDescription, articleBody, iconCssClass, authorId });
+		{ articleTitle, articleDescription, articleBody, iconCssClass, authorId });
 
 	return id;
 };
 
 articlesStore.updateArticle = function(articleId, articleTitle, articleDescription, articleBody, iconCssClass) {
 
-	sql.executeNonQuery(`
-		UPDATE Articles
+	sql.executeNonQuery(
+		`UPDATE Articles
 		SET articleTitle = @articleTitle, articleDescription = @articleDescription, articleBody = @articleBody,
 			iconCssClass = @iconCssClass
 		WHERE articleId = @articleId`,
-	{ articleId, articleTitle, articleDescription, articleBody, iconCssClass });
+		{ articleId, articleTitle, articleDescription, articleBody, iconCssClass });
 };
 
 articlesStore.removeArticle = function(articleId) {
@@ -125,10 +126,10 @@ articlesStore.removeArticle = function(articleId) {
 
 		usersFavoriteArticlesStore.removeFavoriteArticlesByArticleId(articleId);
 
-		sql.executeNonQuery(`
-			DELETE FROM Articles
+		sql.executeNonQuery(
+			`DELETE FROM Articles
 			WHERE articleId = @articleId`,
-		{ articleId });
+			{ articleId });
 	});
 };
 

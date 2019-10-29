@@ -11,10 +11,10 @@ function initialize(app, acl) {
 	app.get("/users/:pageNumber?", getUsers);
 
 	// Acl noop
-	app.get("/user/new", getNew);
-	app.get("/user/edit/:userId", getEdit);
-	app.post("/user/edit", postEdit);
-	app.post("/user/delete", postDelete);
+	app.get("/user/new", getUserNew);
+	app.get("/user/edit/:userId", getUserEdit);
+	app.post("/user/edit", postUserEdit);
+	app.post("/user/delete", postUserDelete);
 }
 
 function getUsers(req, res) {
@@ -32,7 +32,7 @@ function getUsers(req, res) {
 	res.render("admin/usersMaster.template.hbs", model);
 }
 
-function getNew(req, res) {
+function getUserNew(req, res) {
 
 	var model = {
 		title: "New user",
@@ -45,7 +45,7 @@ function getNew(req, res) {
 	res.render("admin/usersDetailsEdit.template.hbs", model);
 }
 
-function getEdit(req, res) {
+function getUserEdit(req, res) {
 
 	var model = { title: "Edit" };
 	model.user = usersStore.getUser(req.params.userId);
@@ -66,7 +66,7 @@ function getEdit(req, res) {
 	res.render("admin/usersDetailsEdit.template.hbs", model);
 }
 
-function postEdit(req, res) {
+function postUserEdit(req, res) {
 
 	var user = _.clone(req.body);
 	user.roleIds = [];
@@ -98,7 +98,7 @@ function postEdit(req, res) {
 	res.redirect(`/user/edit/${user.userId}`);
 }
 
-function postDelete(req, res) {
+function postUserDelete(req, res) {
 
 	usersStore.removeUser(req.body.userId);
 
