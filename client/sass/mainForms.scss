@@ -1,4 +1,8 @@
 
+.form-control option{
+	color: $input-color;
+}
+
 .form-commands {
 	margin-top: map-get($spacers, 4);
  

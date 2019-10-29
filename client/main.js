@@ -21,7 +21,7 @@ require("./externalLibraries/coreLibrary");
 require("./externalLibraries/webComponentsLibrary");
 
 // Scripts
-require("./bootstrapCustomizations");
+require("./customizedBootstrap");
 
 // Globals
 // NOTE: Globals should be very minimal and used in about 90% of files.

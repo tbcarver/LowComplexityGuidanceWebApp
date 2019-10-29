@@ -48,7 +48,7 @@ PrefetchDataAdditionalStorage.prototype.get = function() {
 
 PrefetchDataAdditionalStorage.prototype.clear = function() {
 
-	localStorage.clear(this.dataKey);
+	localStorage.removeItem(this.dataKey);
 };
 
 module.exports = PrefetchDataAdditionalStorage;
