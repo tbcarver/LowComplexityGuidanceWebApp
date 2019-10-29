@@ -5,6 +5,10 @@
 
 var HTMLParsedElement = require("html-parsed-element/cjs");
 var PrefetchDataAdditionalStorage = require("./prefetchDataAdditionalStorage");
+// NOTE: Require only minimal individual libraries from lodash.
+var escape = require("lodash/escape");
+var unescape = require("lodash/unescape");
+
 // Typeahead.js must be included as a script link on the webpage not imported
 
 // NOTE: The type="form" has a known issue when the users clicks away from the typeahead thereby losing
@@ -76,10 +80,20 @@ class Typeahead extends HTMLParsedElement {
 		input.placeholder = this.placeholder;
 		this.appendChild(input);
 
+		var namePrefix = this.getAttribute("name");
+		if (!namePrefix) {
+			namePrefix = this.id;
+		}
+
 		var idInput = document.createElement("input");
 		idInput.type = "hidden";
-		idInput.name = this.getAttribute("name");
+		idInput.name = namePrefix ? namePrefix + "Id" : "";
 		this.appendChild(idInput);
+
+		var valueInput = document.createElement("input");
+		valueInput.type = "hidden";
+		valueInput.name = namePrefix ? namePrefix + "Value" : "";
+		this.appendChild(valueInput);
 
 		// Datums is an array of objects with properties id and value
 		// [{"id":21,"value":"21 Penelope Grant"},{"id":22,"value":"22 Rudolph Goodwin"}]
@@ -152,7 +166,8 @@ class Typeahead extends HTMLParsedElement {
 					<i class="fas fa-circle-notch fa-spin mr-2 text-primary"></i>Updating...
 					</div>`,
 				suggestion: function(context) {
-					return `<div data-id="${context.id}">${context.value}</div>`;
+					var value = escape(context.value);
+					return `<div data-id="${context.id}" data-value="${value}">${value}</div>`;
 				},
 			},
 		};
@@ -163,59 +178,75 @@ class Typeahead extends HTMLParsedElement {
 
 		$input.bind("typeahead:cursorchange", function(event, suggestion) {
 			if (suggestion) {
-				setFormCursor(event.target.parentElement, suggestion.id, idInput);
+				setFormCursor(event.target.parentElement, suggestion.id, idInput, valueInput);
 			}
 		});
 
 		$input.bind("typeahead:open", function() {
-			setCursor(event.target.parentElement, idInput);
+			setCursor(event.target.parentElement, idInput, valueInput);
 		});
 
 		$input.bind("typeahead:render", function(event) {
-			setCursor(event.target.parentElement, idInput);
+			setCursor(event.target.parentElement, idInput, valueInput);
 		});
 
 		$input.bind("typeahead:select", function(event, suggestion) {
 			if (suggestion) {
 				idInput.value = suggestion.id;
+				valueInput.value = suggestion.value;
 				submitForm(form, suggestion.id);
 			}
 		});
+
+		var value = this.getAttribute("value");
+		if (value) {
+			value = unescape(value);
+			$input.typeahead("val", value);
+		}
 
 		this.rendered = true;
 	}
 }
 
-function setCursor(typeaheadJsElement, idInput) {
+function setCursor(typeaheadJsElement, idInput, valueInput) {
+
 	var suggestionElements = typeaheadJsElement.querySelectorAll(".tt-suggestion");
 
 	if (suggestionElements.length === 1) {
+
 		suggestionElements[0].classList.add("tt-cursor");
 		suggestionElements[0].classList.add("tt-form-cursor");
 		idInput.value = suggestionElements[0].dataset.id;
+		valueInput.value = unescape(suggestionElements[0].dataset.value);
+
 	} else if (suggestionElements.length > 0) {
-		removeFormCursor(typeaheadJsElement, idInput);
+
+		removeFormCursor(typeaheadJsElement, idInput, valueInput);
 
 		var hintInputElement = typeaheadJsElement.querySelector(".tt-hint");
 
 		for (var suggestionElement of suggestionElements) {
 			if (suggestionElement.textContent === hintInputElement.value) {
+
 				suggestionElement.classList.add("tt-cursor");
 				suggestionElement.classList.add("tt-form-cursor");
 				idInput.value = suggestionElement.dataset.id;
+				valueInput.value = unescape(suggestionElement.dataset.value);
 			}
 		}
 	}
 }
 
-function setFormCursor(typeaheadJsElement, id, idInput) {
-	removeFormCursor(typeaheadJsElement, idInput);
+function setFormCursor(typeaheadJsElement, id, idInput, valueInput) {
+
+	removeFormCursor(typeaheadJsElement, idInput, valueInput);
 
 	var suggestionElement = typeaheadJsElement.querySelector(`.tt-suggestion[data-id="${id}"]`);
 
 	if (suggestionElement) {
 		suggestionElement.classList.add("tt-form-cursor");
 		idInput.value = suggestionElement.dataset.id;
+		valueInput.value = unescape(suggestionElement.dataset.value);
 	}
 }
 
@@ -235,7 +266,8 @@ function submitForm(form, id) {
 	}
 }
 
-function removeFormCursor(typeaheadJsElement, idInput) {
+function removeFormCursor(typeaheadJsElement, idInput, valueInput) {
+
 	var suggestionElements = typeaheadJsElement.querySelectorAll(".tt-suggestion");
 
 	for (var suggestionElement of suggestionElements) {
@@ -243,6 +275,7 @@ function removeFormCursor(typeaheadJsElement, idInput) {
 	}
 
 	idInput.value = "";
+	valueInput.value = "";
 }
 
 customElements.define("core-typeahead", Typeahead);
