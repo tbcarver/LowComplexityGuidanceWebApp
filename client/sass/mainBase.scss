@@ -28,6 +28,10 @@ main {
     @include font-size($font-size-lg);
 }
 
+.text-placeholder {
+    color: $input-placeholder-color !important;
+}
+
 .dropdown-menu {    
     box-shadow: $dropdown-box-shadow;
 }
