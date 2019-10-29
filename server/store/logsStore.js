@@ -51,7 +51,7 @@ logsStore.getDescendingPagedLogs = function(pageNumber, pageSize, logLevel, http
 
 	var total = 0;
 	if (results.length > 0) {
-		total = this.getCount();
+		total = this.getCount(whereClause);
 	}
 
 	results = {

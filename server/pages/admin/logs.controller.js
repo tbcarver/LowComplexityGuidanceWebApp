@@ -7,7 +7,7 @@ function initialize(app, acl) {
 
 	// Acl noop
 	app.get("/logs/:pageNumber?", getLogs);
-	app.post("/logs", postLog);
+	app.post("/logs/:pageNumber?", postLog);
 	app.get("/log/:logId", getLog);
 }
 

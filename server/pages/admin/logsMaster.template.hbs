@@ -11,7 +11,7 @@
 		<div class="row">
 			<div class="col">
 
-				<form action="/logs" method="POST">
+				<form id="searchForm" action="/logs" method="POST">
 					<div class="form-row py-3">
 						<div class="col">
 							<input type="text" name="message" class="form-control d-inline-block" placeholder="Message"
@@ -91,7 +91,8 @@
 				</tbody>
 			</table>
 
-			<core-pagination pagination-data="{{JSONstringify pagedLogs.pagination}}"></core-pagination>
+			<core-pagination pagination-data="{{JSONstringify pagedLogs.pagination}}" form="searchForm">
+			</core-pagination>
 
 		</div>
 	</div>

@@ -1,5 +1,6 @@
 
 var template = require("./pagination.template.hbs");
+var dom = require("../../../../lib/core/web/dom");
 
 // NOTE: Require only minimal individual libraries from lodash.
 var unescape = require("lodash/unescape");
@@ -117,6 +118,36 @@ class Pagination extends HTMLElement {
 			}
 
 			this.innerHTML = template(data);
+
+			var form = this.getAttribute("form");
+			if (form) {
+
+				var formElement = document.getElementById(form);
+				if (formElement) {
+
+					this.addEventListener("click", function(event) {
+
+						if (dom.hasTagNameOrChild(event.target, "a")) {
+
+							var link = event.target;
+
+							event.preventDefault();
+							event.stopPropagation();
+
+							if (event.target.tagName.toLowerCase() !== "a") {
+								link = event.target.closest("a");
+							}
+
+							if (link && link.href) {
+								formElement.action = link.href;
+								formElement.submit();
+							}
+						}
+					});
+				} else {
+					throw new Error(`Form for id '${form}' not found.`);
+				}
+			}
 		}
 	}
 }
