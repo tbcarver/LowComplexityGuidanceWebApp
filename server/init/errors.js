@@ -45,6 +45,7 @@ function getLogData(err, req, status) {
 	data.url = req.url.toString();
 
 	if (req.user) {
+		data.userId = req.user.userId;
 		data.username = req.user.username;
 	}
 

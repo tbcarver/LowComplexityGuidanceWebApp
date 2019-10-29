@@ -18,7 +18,7 @@ function getUsersTypeaheadPrefetch(req, res) {
 	var users = usersStore.getUsers();
 
 	users = users.map(function(user) {
-		return { id: user.userId, value: `${user.userId} ${user.firstName} ${user.lastName}` };
+		return { id: user.userId, value: `${user.lastName}, ${user.firstName}, ${user.username} ${user.userId}` };
 	});
 
 	res.json(users);
@@ -32,7 +32,7 @@ function getUsersTypeaheadRemote(req, res) {
 		users = usersStore.searchUsers(searchTerm);
 
 		users = users.map(function(user) {
-			return { id: user.userId, value: `${user.userId} ${user.firstName} ${user.lastName}` };
+			return { id: user.userId, value: `${user.lastName}, ${user.firstName}, ${user.username} ${user.userId}` };
 		});
 	}
 

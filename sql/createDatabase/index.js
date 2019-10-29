@@ -4,8 +4,8 @@ require("dotenv").config();
 var fs = require("fs");
 var path = require("path");
 var Database = require("better-sqlite3");
-var directoryWalkerSync = require("../../server/lib/core/fs/directoryWalkerSync");
-var fileReaderSync = require("../../server/lib/core/fs/fileReaderSync");
+var directoryWalkerSync = require("../../lib/core/fs/directoryWalkerSync");
+var fileReaderSync = require("../../lib/core/fs/fileReaderSync");
 
 var fileNamePath = path.resolve(process.env.CONNECTION_STRING);
 var directoryPath = path.dirname(fileNamePath);

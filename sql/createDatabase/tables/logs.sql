@@ -5,7 +5,8 @@ CREATE TABLE Logs (
     logMessage TEXT NOT NULL,
     httpStatus INTEGER,
     requestUrl TEXT,
-    username TEXT,
+    userId INTEGER, -- No foreign key to allow user delete
+    username TEXT, -- No foreign key to allow user delete
     stack TEXT,
 	createdDate TEXT NOT NULL
 );
