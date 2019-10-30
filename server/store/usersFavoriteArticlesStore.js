@@ -32,6 +32,14 @@ usersFavoriteArticlesStore.removeUserIdArticleId = function(userId, articleId) {
 		{ userId, articleId });
 };
 
+usersFavoriteArticlesStore.removeFavoriteArticlesByUserId = function(userId) {
+
+	sql.executeNonQuery(
+		`DELETE FROM UsersFavoriteArticles		
+		WHERE userId = @userId`,
+		{ userId });
+};
+
 usersFavoriteArticlesStore.removeFavoriteArticlesByArticleId = function(articleId) {
 
 	sql.executeNonQuery(

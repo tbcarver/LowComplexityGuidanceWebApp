@@ -36,7 +36,7 @@ function getUserNew(req, res) {
 
 	var model = {
 		title: "New user",
-		heading: "New user",
+		heading: "new",
 		isNew: true,
 	};
 
@@ -52,13 +52,13 @@ function getUserEdit(req, res) {
 
 	if (model.user) {
 
-		model.heading = `User: ${model.user.firstName} ${model.user.lastName}`;
+		model.heading = `${model.user.firstName} ${model.user.lastName}`;
 		model.user.roleIds = usersRolesMapsStore.getRoleIds(req.params.userId);
 		model.roles = rolesStore.getRoles();
 
 	} else {
 
-		model.heading = "User not found";
+		model.heading = "not found";
 		model.message = `No user found for userId: ${req.params.userId}.`;
 		model.messageType = "warning";
 	}

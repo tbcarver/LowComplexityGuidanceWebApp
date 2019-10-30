@@ -3,6 +3,7 @@ var sql = require("../../lib/coreVendor/betterSqlite/sql");
 var WhereClause = require("../../lib/core/sql/whereClause");
 var _ = require("lodash");
 var usersRolesMapsStore = require("./usersRolesMapsStore");
+var usersFavoriteArticlesStore = require("./usersFavoriteArticlesStore");
 
 var usersStore = {};
 
@@ -154,6 +155,7 @@ usersStore.removeUser = function(userId) {
 	sql.transaction(function() {
 
 		usersRolesMapsStore.removeRoleIdsByUserId(userId);
+		usersFavoriteArticlesStore.removeFavoriteArticlesByUserId(userId);
 
 		sql.executeNonQuery(
 			`DELETE FROM Users
