@@ -28,9 +28,9 @@
 							<select name="level" class="form-control" data-empty-class="text-placeholder">
 								<option value="" class="text-placeholder">Level</option>
 								{{#each levels}}
-								<option value="{{this}}" {{is this ../search.level 'selected'}}>
-									{{this}}
-								</option>
+									<option value="{{this}}" {{is this ../search.level 'selected'}}>
+										{{this}}
+									</option>
 								{{/each}}
 							</select>
 						</div>
@@ -38,9 +38,9 @@
 							<select name="status" class="form-control" data-empty-class="text-placeholder">
 								<option value="" class="text-placeholder">Status</option>
 								{{#each status}}
-								<option value="{{this}}" {{is this ../search.status 'selected'}}>
-									{{this}}
-								</option>
+									<option value="{{this}}" {{is this ../search.status 'selected'}}>
+										{{this}}
+									</option>
 								{{/each}}
 							</select>
 						</div>
@@ -80,18 +80,19 @@
 				</thead>
 				<tbody>
 					{{#each pagedLogs.logs}}
-					<tr>
-						<td>
-							<a href="/log/{{logId}}" class="{{is "error" logLevel "text-danger"}} table-hover-click">
-								{{logLevel}}
-							</a>
-						</td>
-						<td class="text-center">{{toDateTimeShort createdDate}}</td>
-						<td class="" title="{{stack}}">{{logMessage}}</td>
-						<td class="text-center">{{httpStatus}}</td>
-						<td class="text-center">{{requestUrl}}</td>
-						<td class="text-center">{{username}}</td>
-					</tr>
+						<tr>
+							<td>
+								<a href="/log/{{logId}}"
+									class="{{is "error" logLevel "text-danger"}} table-hover-click">
+									{{logLevel}}
+								</a>
+							</td>
+							<td class="text-center">{{toDateTimeShort createdDate}}</td>
+							<td class="" title="{{stack}}">{{logMessage}}</td>
+							<td class="text-center">{{httpStatus}}</td>
+							<td class="text-center">{{requestUrl}}</td>
+							<td class="text-center">{{username}}</td>
+						</tr>
 					{{/each}}
 				</tbody>
 			</table>

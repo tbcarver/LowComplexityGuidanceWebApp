@@ -200,7 +200,7 @@ class Typeahead extends HTMLParsedElement {
 
 		// NOTE: Internal typeahead menu event found in src/typeahead/typeahead.js line 57.
 		$input.data("tt-typeahead").menu.bind()
-			.onSync('datasetCleared', function() {
+			.onSync("datasetCleared", function() {
 				idInput.value = "";
 				valueInput.value = "";
 			}, this);

@@ -81,13 +81,13 @@
 					<label class="col-2 col-form-label">Roles</label>
 					<div class="col-10">
 						{{#each roles}}
-						<div class="form-check custom-control custom-checkbox">
-							<input id="roleIds-{{roleId}}" name="roleIds" type="checkbox" value="{{roleId}}"
-								class="custom-control-input" {{includes ../user.roleIds roleId "checked"}}>
-							<label for="roleIds-{{roleId}}" class="custom-control-label">
-								{{roleName}}
-							</label>
-						</div>
+							<div class="form-check custom-control custom-checkbox">
+								<input id="roleIds-{{roleId}}" name="roleIds" type="checkbox" value="{{roleId}}"
+									class="custom-control-input" {{includes ../user.roleIds roleId "checked"}}>
+								<label for="roleIds-{{roleId}}" class="custom-control-label">
+									{{roleName}}
+								</label>
+							</div>
 						{{/each}}
 					</div>
 				</div>
@@ -109,18 +109,18 @@
 						want to <strong>cancel</strong>?</core-confirm-dialog>
 
 					{{#if user.userId}}
-					<form action="/user/delete" method="POST" class="d-inline">
-						<input type="hidden" name="userId" value="{{user.userId}}">
-						<input type="hidden" name="firstName" value="{{user.firstName}}">
-						<input type="hidden" name="lastName" value="{{user.lastName}}">
-						<button type="button" class="btn btn-outline-danger float-right" data-toggle="modal"
-							data-target="#confirm-delete">
-							<i class="fa fa-trash-o mr-2"></i>Delete
-						</button>
-						<core-confirm-dialog id="confirm-delete" type="form" yes-text="Yes, delete">Are you sure you
-							want to
-							delete <strong>{{user.firstName}} {{user.lastName}}</strong>?</core-confirm-dialog>
-					</form>
+						<form action="/user/delete" method="POST" class="d-inline">
+							<input type="hidden" name="userId" value="{{user.userId}}">
+							<input type="hidden" name="firstName" value="{{user.firstName}}">
+							<input type="hidden" name="lastName" value="{{user.lastName}}">
+							<button type="button" class="btn btn-outline-danger float-right" data-toggle="modal"
+								data-target="#confirm-delete">
+								<i class="fa fa-trash-o mr-2"></i>Delete
+							</button>
+							<core-confirm-dialog id="confirm-delete" type="form" yes-text="Yes, delete">Are you sure you
+								want to
+								delete <strong>{{user.firstName}} {{user.lastName}}</strong>?</core-confirm-dialog>
+						</form>
 					{{/if}}
 				</div>
 			</div>

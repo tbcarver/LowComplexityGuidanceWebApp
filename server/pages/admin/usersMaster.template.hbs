@@ -50,15 +50,17 @@
 				</thead>
 				<tbody>
 					{{#each pagedUsers.users}}
-					<tr>
-						<td class="text-center">{{userId}}</td>
-						<td class="text-center">{{firstName}}</td>
-						<td class="text-center">{{lastName}}</td>
-						<td class="text-center">{{username}}</td>
-						<td class="text-center">
-							<a href="/user/edit/{{userId}}" class="table-hover-click"><i class="fa fa-pencil"></i></a>
-						</td>
-					</tr>
+						<tr>
+							<td class="text-center">{{userId}}</td>
+							<td class="text-center">{{firstName}}</td>
+							<td class="text-center">{{lastName}}</td>
+							<td class="text-center">{{username}}</td>
+							<td class="text-center">
+								<a href="/user/edit/{{userId}}" class="table-hover-click">
+									<i class="fa fa-pencil"></i>
+								</a>
+							</td>
+						</tr>
 					{{/each}}
 				</tbody>
 			</table>

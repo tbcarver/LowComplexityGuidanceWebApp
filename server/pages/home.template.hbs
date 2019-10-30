@@ -1,46 +1,48 @@
 <div class="jumbotron jumbotron-fluid">
-  <div class="container text-center">
-    <h1 class="display-4">conduit</h1>
-    <p class="lead">A place to share your knowledge.</p>
-  </div>
+	<div class="container text-center">
+		<h1 class="display-4">conduit</h1>
+		<p class="lead">A place to share your knowledge.</p>
+	</div>
 </div>
 
 <div class="container page">
-  <div class="row">
-    <div class="col-12">
+	<div class="row">
+		<div class="col-12">
 
-      <ul class="nav nav-tabs mb-3">
-        <li class="nav-item">
-          <a class="nav-link {{is navTabTitle "Articles" "active"}}" href="/">Articles</a>
-        </li>
-        {{#if (hasRole "contributor")}}
-        <li class="nav-item">
-          <a class="nav-link {{is navTabTitle "My articles" "active"}}" href="/?q=myArticles">My articles</a>
-        </li>
-        {{/if}}
-      </ul>
+			<ul class="nav nav-tabs mb-3">
+				<li class="nav-item">
+					<a class="nav-link {{is navTabTitle "Articles" "active"}}" href="/">Articles</a>
+				</li>
+				{{#if (hasRole "contributor")}}
+					<li class="nav-item">
+						<a class="nav-link {{is navTabTitle "My articles" "active"}}" href="/?q=myArticles">My
+							articles</a>
+					</li>
+				{{/if}}
+			</ul>
 
-      {{#each pagedArticles.articles}}
+			{{#each pagedArticles.articles}}
 
-      <article-favorite class="btn-sm float-right" count-favorites="{{countFavorites}}" is-favorite="{{isUserFavorite}}"
-        article-id="{{articleId}}" user-id="{{../loggedInUser.userId}}">
-      </article-favorite>
+				<article-favorite class="btn-sm float-right" count-favorites="{{countFavorites}}"
+					is-favorite="{{isUserFavorite}}" article-id="{{articleId}}" user-id="{{../loggedInUser.userId}}">
+				</article-favorite>
 
-      <h2 class="mb-3"><a href="/article/view/{{articleId}}"><i class="{{iconCssClass}} mr-2"></i>{{articleTitle}}</a>
-      </h2>
-      <p>{{articleDescription}}</p>
+				<h2 class="mb-3"><a href="/article/view/{{articleId}}"><i
+							class="{{iconCssClass}} mr-2"></i>{{articleTitle}}</a>
+				</h2>
+				<p>{{articleDescription}}</p>
 
-      <div class="font-size-sm">
-        <span class="text-secondary-darker">{{firstName}} {{lastName}}</span>
-        <span class="text-muted d-block">{{toDate updatedDate}}</span>
-      </div>
+				<div class="font-size-sm">
+					<span class="text-secondary-darker">{{firstName}} {{lastName}}</span>
+					<span class="text-muted d-block">{{toDate updatedDate}}</span>
+				</div>
 
-      <hr>
+				<hr>
 
-      {{/each}}
+			{{/each}}
 
-      <core-pagination pagination-data="{{JSONstringify pagedArticles.pagination}}"></core-pagination>
+			<core-pagination pagination-data="{{JSONstringify pagedArticles.pagination}}"></core-pagination>
 
-    </div>
-  </div>
+		</div>
+	</div>
 </div>
