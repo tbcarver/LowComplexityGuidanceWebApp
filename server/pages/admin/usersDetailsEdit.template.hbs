@@ -1,131 +1,130 @@
 <div class="container mt-3">
-    <div class="row">
-        <div class="col">
-            <div class="d-flex justify-content-between">
-                <h1>{{heading}}</h1>
-                <div class="text-right">
-                    <a href="/users"><i class="fa fa-arrow-left mr-2"></i>Back to users</a>
-                </div>
-            </div>
-            <core-message-box type="{{messageType}}">{{{message}}}</core-message-box>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col">
+			<div class="d-flex justify-content-between">
+				<h1>{{heading}}</h1>
+				<div class="text-right">
+					<a href="/users"><i class="fa fa-arrow-left mr-2"></i>Back to users</a>
+				</div>
+			</div>
+			<core-message-box type="{{messageType}}">{{{message}}}</core-message-box>
+		</div>
+	</div>
 </div>
 
 
 <div class="bg-primary">
-    <div class="container">
-        <div class="row">
-            <div class="col">
+	<div class="container">
+		<div class="row">
+			<div class="col">
 
-                <form action="/user/edit/%s">
-                    <div class="input-group py-3">
-                        <core-typeahead class="form-control" placeholder="Users" type="form" suggestion-name="User"
-                            prefetch-url="/api/users/typeahead/prefetch"
-                            remote-url="/api/users/typeahead/remote?q=searchTerm"></core-typeahead>
-                        <div class="input-group-append">
-                            <button class="btn btn-secondary btn-large">
-                                <i class="fa fa-pencil mr-2"></i>
-                                <span class="ml-1">Edit</span>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+				<form action="/user/edit/%s">
+					<div class="input-group py-3">
+						<core-typeahead class="form-control" placeholder="Users" type="form" suggestion-name="User"
+							prefetch-url="/api/users/typeahead/prefetch"
+							remote-url="/api/users/typeahead/remote?q=searchTerm"></core-typeahead>
+						<div class="input-group-append">
+							<button class="btn btn-secondary">
+								<i class="fa fa-pencil mr-2"></i>Edit
+							</button>
+						</div>
+					</div>
+				</form>
 
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 </div>
 
 
 <div class="container mt-5">
-    <div class="row">
-        <div class="col">
+	<div class="row">
+		<div class="col">
 
-            <form id="editForm" action="/user/edit" method="POST">
-                <input type="hidden" name="userId" value="{{user.userId}}">
-                <div class="form-group row">
-                    <label class="col-2 col-form-label">Username</label>
-                    <div class="col-10">
-                        <input type="text" name="username" value="{{user.username}}" class="form-control" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-2 col-form-label">First Name</label>
-                    <div class="col-10">
-                        <input type="text" name="firstName" value="{{user.firstName}}" class="form-control" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-2 col-form-label">Last Name</label>
-                    <div class="col-10">
-                        <input type="text" name="lastName" value="{{user.lastName}}" class="form-control" required>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-2 col-form-label">Password</label>
-                    <div class="col-10">
-                        <input id="password" type="password" name="password" value="{{user.password}}"
-                            class="form-control" {{is isNew true "required"}}>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-2 col-form-label">Confirm Password</label>
-                    <div class="col-10">
-                        <input id="confirmPassword" type="password" name="confirmPassword"
-                            value="{{user.confirmPassword}}" class="form-control" {{is isNew true "required"}}>
-                        <core-compare-validator source-id="confirmPassword" target-id="password"
-                            message="The passwords must match."></core-compare-validator>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-2 col-form-label">Roles</label>
-                    <div class="col-10">
-                        {{#each roles}}
-                            <div class="form-check custom-control custom-checkbox">
-                                <input id="roleIds-{{roleId}}" name="roleIds" type="checkbox" value="{{roleId}}"
-                                    class="custom-control-input" {{includes ../user.roleIds roleId "checked"}}>
-                                <label for="roleIds-{{roleId}}" class="custom-control-label">
-                                    {{roleName}}
-                                </label>
-                            </div>
-                        {{/each}}
-                    </div>
-                </div>
+			<form id="editForm" action="/user/edit" method="POST">
+				<input type="hidden" name="userId" value="{{user.userId}}">
+				<div class="form-group row">
+					<label class="col-2 col-form-label">Username</label>
+					<div class="col-10">
+						<input type="text" name="username" value="{{user.username}}" class="form-control" required>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-2 col-form-label">First Name</label>
+					<div class="col-10">
+						<input type="text" name="firstName" value="{{user.firstName}}" class="form-control" required>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-2 col-form-label">Last Name</label>
+					<div class="col-10">
+						<input type="text" name="lastName" value="{{user.lastName}}" class="form-control" required>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-2 col-form-label">Password</label>
+					<div class="col-10">
+						<input id="password" type="password" name="password" value="{{user.password}}"
+							class="form-control" {{is isNew true "required"}}>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-2 col-form-label">Confirm Password</label>
+					<div class="col-10">
+						<input id="confirmPassword" type="password" name="confirmPassword"
+							value="{{user.confirmPassword}}" class="form-control" {{is isNew true "required"}}>
+						<core-compare-validator source-id="confirmPassword" target-id="password"
+							message="The passwords must match."></core-compare-validator>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label class="col-2 col-form-label">Roles</label>
+					<div class="col-10">
+						{{#each roles}}
+						<div class="form-check custom-control custom-checkbox">
+							<input id="roleIds-{{roleId}}" name="roleIds" type="checkbox" value="{{roleId}}"
+								class="custom-control-input" {{includes ../user.roleIds roleId "checked"}}>
+							<label for="roleIds-{{roleId}}" class="custom-control-label">
+								{{roleName}}
+							</label>
+						</div>
+						{{/each}}
+					</div>
+				</div>
 
-            </form>
+			</form>
 
-            <div class="form-group row form-commands">
-                <label class="col-2 col-form-label"></label>
-                <div class="col-10">
-                    <button class="btn btn-primary" form="editForm">
-                        <i class="fa fa-check mr-2"></i>{{#if user.userId}} Save {{else}} Create {{/if}} user
-                    </button>
-                    <button type="button" class="btn btn-outline-danger" data-toggle="modal"
-                        data-target="#confirm-cancel">
-                        <i class="fa fa-times mr-2"></i>Cancel
-                    </button>
-                    <core-confirm-dialog id="confirm-cancel" yes-text="Yes, cancel" yes-href="/users">Are you
-                        sure you
-                        want to <strong>cancel</strong>?</core-confirm-dialog>
+			<div class="form-group row form-commands">
+				<label class="col-2 col-form-label"></label>
+				<div class="col-10">
+					<button class="btn btn-primary" form="editForm">
+						<i class="fa fa-check mr-2"></i>{{#if user.userId}} Save {{else}} Create {{/if}} user
+					</button>
+					<button type="button" class="btn btn-outline-danger" data-toggle="modal"
+						data-target="#confirm-cancel">
+						<i class="fa fa-times mr-2"></i>Cancel
+					</button>
+					<core-confirm-dialog id="confirm-cancel" yes-text="Yes, cancel" yes-href="/users">Are you
+						sure you
+						want to <strong>cancel</strong>?</core-confirm-dialog>
 
-                    {{#if user.userId}}
-                        <form action="/user/delete" method="POST" class="d-inline">
-                            <input type="hidden" name="userId" value="{{user.userId}}">
-                            <input type="hidden" name="firstName" value="{{user.firstName}}">
-                            <input type="hidden" name="lastName" value="{{user.lastName}}">
-                            <button type="button" class="btn btn-outline-danger float-right" data-toggle="modal"
-                                data-target="#confirm-delete">
-                                <i class="fa fa-trash-o mr-2"></i>Delete
-                            </button>
-                            <core-confirm-dialog id="confirm-delete" type="form" yes-text="Yes, delete">Are you sure you
-                                want to
-                                delete <strong>{{user.firstName}} {{user.lastName}}</strong>?</core-confirm-dialog>
-                        </form>
-                    {{/if}}
-                </div>
-            </div>
+					{{#if user.userId}}
+					<form action="/user/delete" method="POST" class="d-inline">
+						<input type="hidden" name="userId" value="{{user.userId}}">
+						<input type="hidden" name="firstName" value="{{user.firstName}}">
+						<input type="hidden" name="lastName" value="{{user.lastName}}">
+						<button type="button" class="btn btn-outline-danger float-right" data-toggle="modal"
+							data-target="#confirm-delete">
+							<i class="fa fa-trash-o mr-2"></i>Delete
+						</button>
+						<core-confirm-dialog id="confirm-delete" type="form" yes-text="Yes, delete">Are you sure you
+							want to
+							delete <strong>{{user.firstName}} {{user.lastName}}</strong>?</core-confirm-dialog>
+					</form>
+					{{/if}}
+				</div>
+			</div>
 
-        </div>
-    </div>
+		</div>
+	</div>
 </div>

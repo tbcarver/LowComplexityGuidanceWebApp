@@ -13,9 +13,14 @@
 
 				<form id="searchForm" action="/logs" method="POST">
 					<div class="form-row py-3">
-						<div class="col">
+						<div class="col-10">
 							<input type="text" name="message" class="form-control d-inline-block" placeholder="Message"
 								value="{{search.message}}">
+						</div>
+						<div class="col-2">
+							<button class="btn btn-secondary w-100">
+								<i class="fas fa-search mr-2"></i>Search
+							</button>
 						</div>
 					</div>
 					<div class="form-row pb-3">
@@ -46,9 +51,9 @@
 								remote-url="/api/users/typeahead/remote?q=searchTerm"></core-typeahead>
 						</div>
 						<div class="col-2">
-							<button class="btn btn-secondary btn-large form-control">
-								<i class="fas fa-search mr-2"></i>Search
-							</button>
+							<a href="/logs" class="btn btn-outline-primary-darker w-100">
+								<i class="fa fa-times mr-2"></i>Clear
+							</a>
 						</div>
 					</div>
 				</form>

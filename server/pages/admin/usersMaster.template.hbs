@@ -1,75 +1,75 @@
 <div class="container mt-3">
-    <div class="row">
-        <div class="col">
-            <div class="d-flex justify-content-between">
-                <h1>Users</h1>
-                <div class="text-right">
-                    <a href="/user/new"><i class="fas fa-plus mr-2"></i>New user</a>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col">
+			<div class="d-flex justify-content-between">
+				<h1>Users</h1>
+				<div class="text-right">
+					<a href="/user/new"><i class="fas fa-plus mr-2"></i>New user</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="bg-primary">
-    <div class="container">
-        <div class="row">
-            <div class="col">
+	<div class="container">
+		<div class="row">
+			<div class="col">
 
-                <form action="/user/edit/%s">
-                    <div class="input-group py-3">
-                        <core-typeahead id="usersTypeahead" class="form-control" placeholder="Users" type="form"
-                            suggestion-name="User" prefetch-url="/api/users/typeahead/prefetch"
-                            remote-url="/api/users/typeahead/remote?q=searchTerm"></core-typeahead>
-                        <div class="input-group-append">
-                            <button class="btn btn-secondary btn-large">
-                                <i class="fa fa-pencil mr-2"></i>Edit
-                            </button>
-                        </div>
-                    </div>
-                </form>
+				<form action="/user/edit/%s">
+					<div class="input-group py-3">
+						<core-typeahead id="usersTypeahead" class="form-control" placeholder="Users" type="form"
+							suggestion-name="User" prefetch-url="/api/users/typeahead/prefetch"
+							remote-url="/api/users/typeahead/remote?q=searchTerm"></core-typeahead>
+						<div class="input-group-append">
+							<button class="btn btn-secondary">
+								<i class="fa fa-pencil mr-2"></i>Edit
+							</button>
+						</div>
+					</div>
+				</form>
 
-            </div>
-        </div>
-    </div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="container mt-3">
-    <div class="row">
-        <div class="col">
+	<div class="row">
+		<div class="col">
 
-            <table class="table table-striped table-hover table-hover-clickable mt-3">
-                <thead>
-                    <tr>
-                        <th class="text-center">Id</th>
-                        <th class="text-center">First Name</th>
-                        <th class="text-center">Last Name</th>
-                        <th class="text-center">Username</th>
-                        <th class="text-center text-muted">Edit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each pagedUsers.users}}
-                    <tr>
-                        <td class="text-center">{{userId}}</td>
-                        <td class="text-center">{{firstName}}</td>
-                        <td class="text-center">{{lastName}}</td>
-                        <td class="text-center">{{username}}</td>
-                        <td class="text-center">
-                            <a href="/user/edit/{{userId}}" class="table-hover-click"><i class="fa fa-pencil"></i></a>
-                        </td>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+			<table class="table table-striped table-hover table-hover-clickable">
+				<thead>
+					<tr>
+						<th class="text-center">Id</th>
+						<th class="text-center">First Name</th>
+						<th class="text-center">Last Name</th>
+						<th class="text-center">Username</th>
+						<th class="text-center text-muted">Edit</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each pagedUsers.users}}
+					<tr>
+						<td class="text-center">{{userId}}</td>
+						<td class="text-center">{{firstName}}</td>
+						<td class="text-center">{{lastName}}</td>
+						<td class="text-center">{{username}}</td>
+						<td class="text-center">
+							<a href="/user/edit/{{userId}}" class="table-hover-click"><i class="fa fa-pencil"></i></a>
+						</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
 
-            <core-pagination pagination-data="{{JSONstringify pagedUsers.pagination}}"></core-pagination>
+			<core-pagination pagination-data="{{JSONstringify pagedUsers.pagination}}"></core-pagination>
 
-        </div>
-    </div>
+		</div>
+	</div>
 </div>
 
 <script>
-    var focusElement = document.getElementById("usersTypeahead");
-    focusElement.focus();
+	var focusElement = document.getElementById("usersTypeahead");
+	focusElement.focus();
 </script>
