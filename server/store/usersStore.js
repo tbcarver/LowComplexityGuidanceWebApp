@@ -102,6 +102,10 @@ usersStore.addUser = function(username, firstName, lastName, passwordHash, passw
 
 	var id;
 
+	if (username) {
+		username = username.toLowerCase();
+	}
+
 	sql.transaction(function() {
 
 		id = sql.executeNonQuery(
@@ -118,6 +122,10 @@ usersStore.addUser = function(username, firstName, lastName, passwordHash, passw
 };
 
 usersStore.updateUser = function(userId, username, firstName, lastName, passwordHash, passwordHashSalt, roleIds) {
+
+	if (username) {
+		username = username.toLowerCase();
+	}
 
 	if (!passwordHash) {
 		var user = this.getPasswordHashes(userId);
