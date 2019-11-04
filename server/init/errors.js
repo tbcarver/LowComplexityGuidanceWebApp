@@ -37,8 +37,16 @@ function getLogData(err, req, status) {
 	data.message = status.toString();
 
 	if (err) {
-		data.message = err.message;
-		data.stack = err.stack;
+
+		if (typeof err === "string") {
+			data.message = err;
+		} else {
+			if (err.message) {
+				data.message = err.message;
+			}
+
+			data.stack = err.stack;
+		}
 	}
 
 	data.status = status;
