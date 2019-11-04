@@ -9,7 +9,7 @@ logger.log = function(level, message, stack, url) {
 		level: level,
 		message: message,
 		stack: stack,
-		url: url
+		url: url,
 	});
 
 	fetch("/api/logs/add", options).then(function(response) {

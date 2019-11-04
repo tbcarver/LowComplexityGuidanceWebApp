@@ -19,7 +19,7 @@ function setTableHoverClick() {
 					var clickElement = row.querySelector(".table-hover-click");
 					if (clickElement) {
 						if (clickElement instanceof HTMLAnchorElement && event.ctrlKey) {
-							window.open(clickElement.href, '_blank');
+							window.open(clickElement.href, "_blank");
 						} else {
 							clickElement.click();
 						}
