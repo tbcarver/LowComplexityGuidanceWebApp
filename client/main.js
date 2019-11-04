@@ -26,11 +26,20 @@ require("./customizedBootstrap");
 // Globals
 // NOTE: Globals should be very minimal and used in about 90% of files.
 window.flash = require("./flash");
+window.logger = require("./logger");
 
 window.addEventListener("error", function(event) {
+
 	flash.danger("An error has occurred");
+
+	var error = event.error;
+	logger.log("error", error.message, error.stack, location.pathname);
 });
 
 window.addEventListener("unhandledrejection", function(event) {
+
 	flash.danger("An error has occurred");
+
+	var error = event.error;
+	logger.log("error", error.message, error.stack, location.pathname);
 });

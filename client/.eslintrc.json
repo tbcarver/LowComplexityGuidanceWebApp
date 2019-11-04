@@ -1,10 +1,11 @@
 {
-    "env": {
-        "browser": true,
-        "es6": true
-    },
-    "globals": {
-        "main": "readonly",
-        "flash": "readonly"
-    }
+	"env": {
+		"browser": true,
+		"es6": true
+	},
+	"globals": {
+		"flash": "readonly",
+		"logger": "readonly",
+		"main": "readonly"
+	}
 }

@@ -37,8 +37,8 @@ function getLogData(err, req, status) {
 	data.message = status.toString();
 
 	if (err) {
-		data.stack = err.stack;
 		data.message = err.message;
+		data.stack = err.stack;
 	}
 
 	data.status = status;
