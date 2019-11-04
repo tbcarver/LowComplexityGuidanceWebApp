@@ -16,18 +16,12 @@ window.main = {
 //  and injected directly into the html in development.
 require("./sass/main.scss");
 
-// Libraries for external bundle use
-require("./externalLibraries/coreLibrary");
-require("./externalLibraries/webComponentsLibrary");
-
-// Scripts
-require("./customizedBootstrap");
-
 // Globals
 // NOTE: Globals should be very minimal and used in about 90% of files.
 window.flash = require("./flash");
 window.logger = require("./logger");
 
+// Error handling
 window.addEventListener("error", function(event) {
 
 	flash.danger("An error has occurred");
@@ -42,4 +36,16 @@ window.addEventListener("unhandledrejection", function(event) {
 
 	var error = event.error;
 	logger.log("error", error.message, error.stack, location.pathname);
+});
+
+// Libraries for external bundle use
+require("./externalLibraries/coreLibrary");
+require("./externalLibraries/webComponentsLibrary");
+
+window.addEventListener("DOMContentLoaded", function(event) {
+
+	// On load extensions
+	require("./onLoadExtensions/bootstrap/adjustLinkGroupMenus")();
+	require("./onLoadExtensions/bootstrap/setSelectEmptyClassOnChange")();
+	require("./onLoadExtensions/bootstrap/setTableHoverClick")();
 });
