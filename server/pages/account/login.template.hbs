@@ -28,7 +28,7 @@
 
 <script>
 	var dom = main.require("./lib/core/web/dom");
-	var focusTargetSelector = "{{errorInfo}}" || "username";
+	var focusTargetSelector = "{{focusId}}" || "username";
 	focusTargetSelector = "#" + focusTargetSelector;
 
 	dom.setTextInputFocus(focusTargetSelector);

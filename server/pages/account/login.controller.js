@@ -48,7 +48,7 @@ function postLogin(req, res, next) {
 			model.messageType = "danger";
 			model.username = req.body.username;
 			model.password = req.body.password;
-			model.errorInfo = info;
+			model.focusId = info;
 
 			if (info === "password") {
 				model.message = "The password was invalid.";
