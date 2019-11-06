@@ -55,8 +55,19 @@
 		{
 			"type": "node",
 			"request": "launch",
+			"name": "test",
+			"program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+			"args": [
+				"--recursive",
+				"--colors",
+			],
+			"internalConsoleOptions": "openOnSessionStart"
+		},
+		{
+			"type": "node",
+			"request": "launch",
 			"name": "createMockData",
 			"program": "${workspaceFolder}/sql/createDatabaseMockData/index.js"
-		},
+		}
 	]
 }
