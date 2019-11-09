@@ -19,6 +19,7 @@ require("./sass/main.scss");
 // Globals
 // NOTE: Globals should be very minimal and used in about 90% of files.
 window.flash = require("./flash");
+window.flashAddClasses = require("./flashAddClasses");
 window.logger = require("./logger");
 
 // Error handling
