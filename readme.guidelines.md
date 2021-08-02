@@ -1,6 +1,6 @@
-# CUCF Web Application Development Guidelines
+# Low Complexity Web Application Development Guidelines
 
-This is an opinionated coding guideline document for all business application type web applications built at CUCF by inmates.
+This is an opinionated coding guideline document for all business application type web applications built for low complexity of development, deployment, and maintenance.
 These guidelines presents preferred coding technologies, patterns, conventions, and tools.
 
 
@@ -9,7 +9,7 @@ These guidelines presents preferred coding technologies, patterns, conventions, 
 
 Prefer simplicity over all other values. After simplicity value maintainability.
 
-All software development is complex. Reducing this complexity must be the main goal. CUCF has special challenges for software development with a major challenge being the turn over and lack of experience of developers. The code itself should be the best guidance for development.
+All software development is complex. Reducing this complexity must be the main goal. Many businesses have special challenges for software development with a major challenge being the turn over and lack of experience of developers. The code itself should be the best guidance for development.
 
 Reduce coder's fingerprints through disciplined application of the development guidelines. All code should be styled in the same way and the same development techniques should be applied for all similar problems.
 
